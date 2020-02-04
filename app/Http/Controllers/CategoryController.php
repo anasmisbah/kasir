@@ -11,19 +11,19 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return $categories;
+        return view('jenis.index',compact('categories'));
     }
 
     public function show($id)
     {
         $category = Category::findOrFail($id);
 
-        return $category;
+        return view('jenis.detail',compact('category'));
     }
 
     public function create()
     {
-        // TODO return view()
+        return view('jenis.tambah');
     }
 
     public function store(Request $request)
@@ -36,14 +36,14 @@ class CategoryController extends Controller
             'nama'=>$request->nama
         ]);
 
-        return $newCategory;
+        return redirect()->route('jenis.index');
     }
 
     public function edit($id)
     {
         $category = Category::findOrFail($id);
 
-        return $category;
+        return view('jenis.ubah',compact('category'));
     }
 
     public function update(Request $request)
@@ -55,7 +55,7 @@ class CategoryController extends Controller
         $updatedCategory->update([
             'nama'=>$request->nama
         ]);
-        return $updatedCategory;
+        return redirect()->route('jenis.index');
     }
 
     public function search(Request $request)
@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
-        return true;
+        return redirect()->route('jenis.index');
     }
 
 
