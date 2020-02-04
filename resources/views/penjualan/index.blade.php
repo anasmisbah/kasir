@@ -37,6 +37,7 @@
                   <th>Piutang</th>
                   <th>Status</th>
                   <th>Cabang</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,7 @@
                   <td>-</td>
                   <td>LUNAS</td>
                   <td>Samarinda</td>
+                  <td>Aksi</td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -61,6 +63,7 @@
                   <td>-</td>
                   <td>LUNAS</td>
                   <td>Samarinda</td>
+                  <td>Aksi</td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -72,6 +75,7 @@
                   <td>-</td>
                   <td>LUNAS</td>
                   <td>Samarinda</td>
+                  <td>Aksi</td>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -83,6 +87,7 @@
                   <td>-</td>
                   <td>LUNAS</td>
                   <td>Samarinda</td>
+                  <td>Aksi</td>
                 </tr>
                 <tr>
                   <td>5</td>
@@ -94,6 +99,7 @@
                   <td>-</td>
                   <td>LUNAS</td>
                   <td>Samarinda</td>
+                  <td>Aksi</td>
                 </tr>                              
                 </tbody>
                 <tfoot>
@@ -106,6 +112,7 @@
                   <th>Piutang</th>
                   <th>Status</th>
                   <th>Cabang</th>
+                  <td>Aksi</td>
                 </tr>
                 </tfoot>
               </table>

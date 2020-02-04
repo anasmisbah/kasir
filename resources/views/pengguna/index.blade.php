@@ -30,7 +30,7 @@
                 <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Nama lengkap</th>
+                  <th>Nama Lengkap</th>
                   <th>Nama Pengguna</th>
                   <th>Email</th>
                   <th>Level</th>

@@ -10,6 +10,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/beranda', 'AdminController@beranda')->name('beranda');
 
+Route::view('/kasir', 'kasir.index')->name('kasir.index');
 Route::view('/penjualan', 'penjualan.index')->name('penjualan.index');
 Route::view('/penjualan/tambah', 'penjualan.tambah')->name('penjualan.tambah');
 Route::view('/penjualan/ubah', 'penjualan.ubah')->name('penjualan.ubah');

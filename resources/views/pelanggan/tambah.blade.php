@@ -15,15 +15,20 @@
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>
-                    <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Cabang">
+                    <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
                 </div>
                 <div class="form-group">
                     <label>Telepon</label>
-                    <input type="text" class="form-control" name="telepon" placeholder="Masukkan Telepon Cabang">
+                    <input type="text" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
                 </div>
                 <div class="form-group">
-                    <label>Pimpinan</label>
-                    <input type="text" class="form-control" name="pimpinan" placeholder="Masukkan Nama Pimpinan Cabang">
+                    <label>Cabang</label>
+                    <select class="form-control" name="cabang">
+                        <option>Samarinda</option>
+                        <option>Bontang</option>
+                        <option>Sangatta</option>
+                        <option>Tenggarong</option>
+                    </select>
                 </div>
             </div>
 
