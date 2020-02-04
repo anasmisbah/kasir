@@ -85,9 +85,13 @@ Route::put('/jenis/{id}', 'CategoryController@update')->name('jenis.perbarui');
 Route::get('/jenis/detail/{id}','CategoryController@show')->name('jenis.detail');
 Route::delete('/jenis/hapus/{id}','CategoryController@delete')->name('jenis.hapus');
 
-Route::view('/barang', 'barang.index')->name('barang.index');
-Route::view('/barang/tambah', 'barang.tambah')->name('barang.tambah');
-Route::view('/barang/ubah', 'barang.ubah')->name('barang.ubah');
+Route::get('/barang', 'ItemController@index')->name('barang.index');
+Route::get('/barang/tambah', 'ItemController@create')->name('barang.tambah');
+Route::post('/barang/simpan','ItemController@store')->name('barang.simpan');
+Route::get('/barang/ubah/{id}', 'ItemController@edit')->name('barang.ubah');
+Route::put('/barang/{id}', 'ItemController@update')->name('barang.perbarui');
+Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
+Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
 
 Route::view('/stok', 'stok.index')->name('stok.index');
 Route::view('/stok/tambah', 'stok.tambah')->name('stok.tambah');

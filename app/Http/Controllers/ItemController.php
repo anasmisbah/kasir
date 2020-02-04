@@ -12,20 +12,19 @@ class ItemController extends Controller
     {
         $items = Item::all();
 
-        return $items;
+        return view('barang.index',compact('items'));
     }
 
     public function show($id)
     {
         $item = Item::findOrFail($id);
-
-        return $item;
+        return view('barang.detail',compact('item'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        // TODO return view()
+        return view('barang.tambah',compact('categories'));
     }
 
     public function store(Request $request)
@@ -42,14 +41,14 @@ class ItemController extends Controller
             'category_id'=>$request->category_id
         ]);
 
-        return $newItem;
+        return redirect()->route('barang.index');
     }
 
     public function edit($id)
     {
         $item = Item::findOrFail($id);
         $categories = Category::all();
-        return $item;
+        return view('barang.ubah',compact('item','categories'));
     }
 
     public function update(Request $request)
@@ -68,7 +67,7 @@ class ItemController extends Controller
             'category_id'=>$request->category_id
         ]);
 
-        return $updatedItem;
+        return redirect()->route('barang.index');
     }
 
     public function search(Request $request)
@@ -87,7 +86,7 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
         $item->delete();
-        return true;
+        return redirect()->route('barang.index');
     }
 
 

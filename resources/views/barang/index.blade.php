@@ -1,4 +1,8 @@
 @extends('layouts.master')
+@push('css')
+    <!-- DataTables -->
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+@endpush
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,11 +22,18 @@
     </section>
 
     <section class="content">
-      <div class="row">          
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with default features</h3>
+              <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                  <a class="nav-link active" href="{{ route('barang.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -37,33 +48,35 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Barang 1</td>
-                  <td>Jenis 1</td>
-                  <td>Rp. 50.000,-</td>
-                  <td>Aksi</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Barang 1</td>
-                  <td>Jenis 1</td>
-                  <td>Rp. 50.000,-</td>
-                  <td>Aksi</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Barang 1</td>
-                  <td>Jenis 1</td>
-                  <td>Rp. 50.000,-</td>
-                  <td>Aksi</td>
-                </tr> 
+                    @foreach ($items as $item)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->category->nama}}</td>
+                        <td>{{ $item->harga }}</td>
+                        <td>
+                            <form class="d-inline"
+                            onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')"
+                            action="{{route('barang.hapus', $item->id)}}"
+                            method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash"></i></button>
+                            </form>
+                                <a href="{{route('barang.detail',$item->id)}}" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-location-arrow"></i>
+                            </a>
+                        </td>
+                      </tr>
+                    @endforeach
+
                 <tfoot>
                   <th>No.</th>
                   <th>Barang</th>
                   <th>Jenis</th>
                   <th>Harga</th>
-                  <th>Aksi</th>           
+                  <th>Aksi</th>
                 </tfoot>
               </table>
             </div>
