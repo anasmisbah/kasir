@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'utama'=> \App\Http\Middleware\Utama::class,
-        'utama'=> \App\Http\Middleware\Cabang::class,
+        'cabang'=> \App\Http\Middleware\Cabang::class,
     ];
 
     /**
