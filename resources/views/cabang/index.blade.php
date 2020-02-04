@@ -1,4 +1,10 @@
 @extends('layouts.master')
+
+@push('css')
+    <!-- DataTables -->
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+@endpush
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,11 +24,18 @@
     </section>
 
     <section class="content">
-      <div class="row">          
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with default features</h3>
+              <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                  <a class="nav-link active" href="{{ route('cabang.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -38,37 +51,39 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                @foreach ($branches as $branch)
                 <tr>
-                  <td>1</td>
-                  <td>Cabang Samarinda</td>
-                  <td>Jl. Samarinda</td>
-                  <td>081234567890</td>
-                  <td>Pimpinan Samarinda</td>
-                  <td>Aksi</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$branch->nama}}</td>
+                    <td>{{$branch->alamat}}</td>
+                    <td>{{$branch->telepon}}</td>
+                    <td>{{$branch->pimpinan}}</td>
+                    <td>
+                        <form class="d-inline"
+                        onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')"
+                        action="{{route('cabang.hapus', $branch->id)}}"
+                        method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash"></i></button>
+                        </form>
+                        <a href="{{route('cabang.detail',$branch->id)}}" class="btn btn-outline-success btn-sm">
+                        <i class="fa fa-location-arrow"></i>
+                    </a>
+                    </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Cabang Tenggarong</td>
-                  <td>Jl. Tenggarong</td>
-                  <td>081234567890</td>
-                  <td>Pimpinan Tenggarong</td>
-                  <td>Aksi</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Cabang Sangatta</td>
-                  <td>Jl. Sangatta</td>
-                  <td>081234567890</td>
-                  <td>Pimpinan Sangatta</td>
-                  <td>Aksi</td>
-                </tr>   
+                @endforeach
+
+
                 <tfoot>
                   <th>No.</th>
                   <th>Nama</th>
                   <th>Alamat</th>
                   <th>Telepon</th>
                   <th>Pimpinan</th>
-                  <th>Aksi</th>             
+                  <th>Aksi</th>
                 </tfoot>
               </table>
             </div>

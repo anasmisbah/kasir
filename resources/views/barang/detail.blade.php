@@ -37,6 +37,9 @@
                 </div>
                 <a href="{{ route('barang.ubah',$item->id) }}" class="btn btn-primary float-right"><i class="fa fa-edit"></i></a>
                 </div>
+                <div class="card-footer">
+                    <p class="text-right"><b>Di buat pada </b>: tanggal | <a href="">nama</a> / <b>Diperbarui pada:</b> tanggal | <a href="">nama</a></p>
+                </div>
             </form>
             </div>
 </div>

@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,7 +19,7 @@
     </section>
 
     <section class="content">
-      <div class="row">          
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
@@ -57,13 +58,13 @@
                   <td>Jl. Sangatta</td>
                   <td>081234567890</td>
                   <td>Aksi</td>
-                </tr>   
+                </tr>
                 <tfoot>
                   <th>No.</th>
                   <th>Nama</th>
                   <th>Alamat</th>
                   <th>Telepon</th>
-                  <th>Aksi</th>             
+                  <th>Aksi</th>
                 </tfoot>
               </table>
             </div>

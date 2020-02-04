@@ -11,37 +11,39 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-            <form class="form-horizontal" action="{{route('cabang.simpan')}}" method="POST">
-                @csrf
+            <form class="form-horizontal">
                 <div class="card-body">
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="nama" class="form-control" id="inputEmail3" placeholder="Nama">
+                    <input type="text" disabled value="{{$branch->nama}}" name="nama" class="form-control" id="inputEmail3" placeholder="Nama">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Telepon</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="telepon" class="form-control" id="inputEmail3" placeholder="Telepon">
+                    <input type="text" disabled value="{{$branch->telepon}}" name="telepon" class="form-control" id="inputEmail3" placeholder="Telepon">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="pimpinan" class="form-control" id="inputEmail3" placeholder="Pimpinan">
+                    <input type="text" disabled value="{{$branch->pimpinan}}" name="pimpinan" class="form-control" id="inputEmail3" placeholder="Pimpinan">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
+                        <textarea disabled name="alamat" class="form-control" rows="3" placeholder="Alamat">{{$branch->alamat}}</textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary float-right"><i class="fa fa-save"></i></button>
+                <a href="{{ route('cabang.ubah',$branch->id) }}" class="btn btn-primary float-right"><i class="fa fa-edit"></i></a>
+                </div>
+                <div class="card-footer">
+                    <p class="text-right"><b>Di buat pada </b>: tanggal | <a href="">nama</a> / <b>Diperbarui pada:</b> tanggal | <a href="">nama</a></p>
                 </div>
             </form>
         </div>

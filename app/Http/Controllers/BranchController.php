@@ -11,19 +11,19 @@ class BranchController extends Controller
     {
         $branches = Branch::all();
 
-        return $branches;
+        return view('cabang.index',compact('branches'));
     }
 
     public function show($id)
     {
         $branch = Branch::findOrFail($id);
 
-        return $branch;
+        return view('cabang.detail',compact('branch'));
     }
 
     public function create()
     {
-        // TODO return view()
+        return view('cabang.tambah');
     }
 
     public function store(Request $request)
@@ -42,14 +42,14 @@ class BranchController extends Controller
             'pimpinan'=>$request->pimpinan,
         ]);
 
-        return $newBranch;
+        return redirect()->route('cabang.index');
     }
 
     public function edit($id)
     {
         $branch = Branch::findOrFail($id);
 
-        return $branch;
+        return view('cabang.ubah',compact('branch'));
     }
 
     public function update(Request $request)
@@ -70,7 +70,7 @@ class BranchController extends Controller
             'pimpinan'=>$request->pimpinan,
         ]);
 
-        return $updatedBranch;
+        return redirect()->route('cabang.index');
     }
 
     public function search(Request $request)
@@ -92,6 +92,6 @@ class BranchController extends Controller
     {
         $branch = Branch::findOrFail($id);
         $branch->delete();
-        return true;
+        return redirect()->route('cabang.index');
     }
 }

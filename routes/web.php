@@ -73,9 +73,14 @@ Route::view('/pelanggan', 'pelanggan.index')->name('pelanggan.index');
 Route::view('/pelanggan/tambah', 'pelanggan.tambah')->name('pelanggan.tambah');
 Route::view('/pelanggan/ubah', 'pelanggan.ubah')->name('pelanggan.ubah');
 
-Route::view('/cabang', 'cabang.index')->name('cabang.index');
-Route::view('/cabang/tambah', 'cabang.tambah')->name('cabang.tambah');
-Route::view('/cabang/ubah', 'cabang.ubah')->name('cabang.ubah');
+Route::get('/cabang', 'BranchController@index')->name('cabang.index');
+Route::get('/cabang/tambah', 'BranchController@create')->name('cabang.tambah');
+Route::post('/cabang/simpan','BranchController@store')->name('cabang.simpan');
+Route::get('/cabang/ubah/{id}', 'BranchController@edit')->name('cabang.ubah');
+Route::put('/cabang/{id}', 'BranchController@update')->name('cabang.perbarui');
+Route::get('/cabang/detail/{id}','BranchController@show')->name('cabang.detail');
+Route::delete('/cabang/hapus/{id}','BranchController@delete')->name('cabang.hapus');
+
 
 Route::get('/jenis', 'CategoryController@index')->name('jenis.index');
 Route::get('/jenis/tambah', 'CategoryController@create')->name('jenis.tambah');
