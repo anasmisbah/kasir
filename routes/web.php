@@ -69,9 +69,13 @@ Route::view('/piutang', 'piutang.index')->name('piutang.index');
 Route::view('/piutang/tambah', 'piutang.tambah')->name('piutang.tambah');
 Route::view('/piutang/ubah', 'piutang.ubah')->name('piutang.ubah');
 
-Route::view('/pelanggan', 'pelanggan.index')->name('pelanggan.index');
-Route::view('/pelanggan/tambah', 'pelanggan.tambah')->name('pelanggan.tambah');
-Route::view('/pelanggan/ubah', 'pelanggan.ubah')->name('pelanggan.ubah');
+Route::get('/pelanggan', 'CustomerController@index')->name('pelanggan.index');
+Route::get('/pelanggan/tambah', 'CustomerController@create')->name('pelanggan.tambah');
+Route::post('/pelanggan/simpan','CustomerController@store')->name('pelanggan.simpan');
+Route::get('/pelanggan/ubah/{id}', 'CustomerController@edit')->name('pelanggan.ubah');
+Route::put('/pelanggan/{id}', 'CustomerController@update')->name('pelanggan.perbarui');
+Route::get('/pelanggan/detail/{id}','CustomerController@show')->name('pelanggan.detail');
+Route::delete('/pelanggan/hapus/{id}','CustomerController@delete')->name('pelanggan.hapus');
 
 Route::get('/cabang', 'BranchController@index')->name('cabang.index');
 Route::get('/cabang/tambah', 'BranchController@create')->name('cabang.tambah');

@@ -11,40 +11,41 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-
-        return $customer;
+        $branches = Branch::all();
+        return view('pelanggan.index',compact('customers','branches'));
     }
 
     public function show($id)
     {
         $customer = Customer::findOrFail($id);
 
-        return $customer;
+        return view('pelanggan.detail',compact('customer'));
     }
 
     public function create()
     {
         $branches = Branch::all();
+        return view('pelanggan.tambah',compact('branches'));
         // TODO return view()
     }
 
     public function store(Request $request)
     {
-        $user = Auth::user();
         $request->validate([
             'nama'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required'
+            'telepon'=>'required',
+            'branch_id'=>'required'
         ]);
 
         $newCustomer = Customer::create([
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'branch_id'=>$user->employee->branch_id
+            'branch_id'=>$request->branch_id
         ]);
 
-        return $newCustomer;
+        return redirect()->route('pelanggan.index');
     }
 
     public function edit($id)
@@ -52,7 +53,7 @@ class CustomerController extends Controller
         $branches = Branch::all();
         $customer = Customer::findOrFail($id);
 
-        return $customer;
+        return view('pelanggan.edit',compact('customer','branches'));;
     }
 
     public function update(Request $request)
@@ -72,7 +73,7 @@ class CustomerController extends Controller
             'branch_id'=>$request->branch_id
         ]);
 
-        return $updatedCustomer;
+        return  redirect()->route('pelanggan.index');;
     }
 
     public function search(Request $request)
@@ -91,7 +92,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $customer->delete();
-        return true;
+        return redirect()->route('pelanggan.index');
     }
 
     public function filter(Request $request)
