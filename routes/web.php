@@ -111,10 +111,13 @@ Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
 Route::get('/stok/detail/{id}','SupplyItemController@show')->name('stok.detail');
 Route::delete('/stok/hapus/{id}','SupplyItemController@delete')->name('stok.hapus');
 
-
-Route::view('/karyawan', 'karyawan.index')->name('karyawan.index');
-Route::view('/karyawan/tambah', 'karyawan.tambah')->name('karyawan.tambah');
-Route::view('/karyawan/ubah', 'karyawan.ubah')->name('karyawan.ubah');
+Route::get('/karyawan', 'EmployeeController@index')->name('karyawan.index');
+Route::get('/karyawan/tambah', 'EmployeeController@create')->name('karyawan.tambah');
+Route::post('/karyawan/simpan','EmployeeController@store')->name('karyawan.simpan');
+Route::get('/karyawan/ubah/{id}', 'EmployeeController@edit')->name('karyawan.ubah');
+Route::put('/karyawan/{id}', 'EmployeeController@update')->name('karyawan.perbarui');
+Route::get('/karyawan/detail/{id}','EmployeeController@show')->name('karyawan.detail');
+Route::delete('/karyawan/hapus/{id}','EmployeeController@delete')->name('karyawan.hapus');
 
 Route::view('/pengguna', 'pengguna.index')->name('pengguna.index');
 Route::view('/pengguna/tambah', 'pengguna.tambah')->name('pengguna.tambah');

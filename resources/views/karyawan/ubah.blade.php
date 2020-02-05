@@ -8,45 +8,46 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Tambah Karyawan</h3>
+            <h3 class="card-title">Ubah Karyawan</h3>
         </div>
 
-        <form role="form" action="{{route('karyawan.simpan')}}" method="POST" enctype="multipart/form-data">
+        <form role="form" action="{{route('karyawan.perbarui',$employee->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label>Foto</label><br>
-                    <img src="{{asset('img/default.png')}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                    <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
                     <input type="file" id="foto" class="form-control" name="foto">
                 </div>
                 <div class="form-group">
                     <label>Nama</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+                    <input type="text" value="{{$employee->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama">
                 </div>
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
                     <select class="form-control" name="jenis_kelamin">
-                        <option value="laki-laki">Laki-Laki</option>
-                        <option value="perempuan">Perempuan</option>
+                        <option value="laki-laki" {{$employee->jenis_kelamin == "laki-laki"?"selected":""}}>Laki-Laki</option>
+                        <option value="perempuan" {{$employee->jenis_kelamin == "perempuan"?"selected":""}}>Perempuan</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Jabatan</label>
-                    <input type="text" class="form-control" name="jabatan" placeholder="Masukkan Jabatan">
+                    <input type="text" value="{{$employee->jabatan}}" class="form-control" name="jabatan" placeholder="Masukkan Jabatan">
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>
-                    <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                    <input type="text" value="{{$employee->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
                 </div>
                 <div class="form-group">
                     <label>Telepon</label>
-                    <input type="text" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                    <input type="text" value="{{$employee->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
                 </div>
                 <div class="form-group">
                     <label>Cabang</label>
                     <select class="form-control select2" name="branch_id">
                             @foreach ($branches as $branch)
-                                <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                                <option value="{{$branch->id}}" {{$employee->branch_id == $branch->id?"selected":""}} >{{$branch->nama}}</option>
                             @endforeach
                     </select>
                 </div>

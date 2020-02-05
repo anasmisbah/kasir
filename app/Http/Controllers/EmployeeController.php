@@ -15,19 +15,20 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return $employees;
+        $branches = Branch::all();
+        return view('karyawan.index',compact('employees','branches'));
     }
 
-    public function detail($id)
+    public function show($id)
     {
         $employee = Employee::findOrFail($id);
-        return $employee;
+        return view('karyawan.detail',compact('employee'));
     }
 
     public function create()
     {
         $branches = Branch::all();
-        return $branches;
+        return view('karyawan.tambah',compact('branches'));
     }
 
     public function store(Request $request)
@@ -52,16 +53,18 @@ class EmployeeController extends Controller
             'jabatan'=>$request->jabatan,
             'branch_id'=>$request->branch_id,
             'alamat'=>$request->alamat,
-            'telepon'=>$request->telepon
+            'telepon'=>$request->telepon,
+            'foto'=>$foto
         ]);
 
-        return $newEmployee;
+        return redirect()->route('karyawan.index');
     }
 
     public function edit($id)
     {
         $branches = Branch::all();
         $employee = Employee::findOrFail($id);
+        return view('karyawan.ubah',compact('employee','branches'));
     }
 
     public function update(Request $request)
@@ -75,7 +78,7 @@ class EmployeeController extends Controller
             'telepon'=>'required'
         ]);
 
-        $employee = Employee::findOrFail($request->id);
+        $updateEmployee = Employee::findOrFail($request->id);
 
         $updateEmployee->update([
             'nama'=>$request->nama,
@@ -87,7 +90,7 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->file('foto')) {
-            if ($updateEmployee->foto && file_exists(storage_path('app/public/'.$updateEmployee->foto))) {
+            if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists(storage_path('app/public/'.$updateEmployee->foto))) {
                 Storage::delete('public/'.$updateEmployee->foto);
             }
             $updateEmployee->update([
@@ -95,7 +98,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        return $updateEmployee;
+        return redirect()->route('karyawan.index');
     }
 
     public function search(Request $request)
@@ -112,17 +115,17 @@ class EmployeeController extends Controller
 
     public function delete($id)
     {
-        $employee = Employee::fingOrFail($id);
+        $employee = Employee::findOrFail($id);
         $user = $employee->user;
         if ($user) {
             $user->delete();
         }
-        if ($employee->foto && file_exists(storage_path('app/public/'.$employee->foto))) {
+        if (!($employee->foto == "fotos/default.jpg") && file_exists(storage_path('app/public/'.$employee->foto))) {
             Storage::delete('public/'.$employee->foto);
         }
         $employee->delete();
 
-        return true;
+        return redirect()->route('karyawan.index');
     }
 
     public function filter(Request $request)

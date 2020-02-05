@@ -16,44 +16,36 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Foto</label><br>
-                    <img src="{{asset('img/default.png')}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
-                    <input type="file" id="foto" class="form-control" name="foto">
+                    <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
                 </div>
                 <div class="form-group">
                     <label>Nama</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama">
+                    <input type="text" disabled value="{{$employee->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama">
                 </div>
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
-                    <select class="form-control" name="jenis_kelamin">
-                        <option value="laki-laki">Laki-Laki</option>
-                        <option value="perempuan">Perempuan</option>
-                    </select>
+                    <input type="text" disabled value="{{$employee->jenis_kelamin}}" class="form-control" name="nama" placeholder="Masukkan Nama">
                 </div>
                 <div class="form-group">
                     <label>Jabatan</label>
-                    <input type="text" class="form-control" name="jabatan" placeholder="Masukkan Jabatan">
+                    <input type="text" disabled value="{{$employee->jabatan}}" class="form-control" name="jabatan" placeholder="Masukkan Jabatan">
                 </div>
                 <div class="form-group">
                     <label>Alamat</label>
-                    <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                    <input type="text" disabled value="{{$employee->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
                 </div>
                 <div class="form-group">
                     <label>Telepon</label>
-                    <input type="text" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                    <input type="text" disabled value="{{$employee->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
                 </div>
                 <div class="form-group">
                     <label>Cabang</label>
-                    <select class="form-control select2" name="branch_id">
-                            @foreach ($branches as $branch)
-                                <option value="{{$branch->id}}">{{$branch->nama}}</option>
-                            @endforeach
-                    </select>
+                    <input type="text" disabled value="{{$employee->branch->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama">
                 </div>
             </div>
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-lg btn-primary float-right"><i class="fa fa-save"></i></button>
+                <a href="{{route('karyawan.ubah',$employee->id)}}" class="btn btn-lg btn-primary float-right"><i class="fa fa-edit"></i></a>
             </div>
         </form>
     </div>
