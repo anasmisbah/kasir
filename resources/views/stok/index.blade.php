@@ -39,29 +39,31 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio">
-                            <label for="customRadio1" class="custom-control-label">Cabang</label>
+                <form action="{{route('stok.index')}}" method="GET">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
+                                <label for="customRadio1" class="custom-control-label">Cabang</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-md-2">
-                        <select class="form-control select2" name="cabang">
-                            <option value="0">Semua</option>
-                            @foreach ($branches as $branch)
-                                <option value="{{$branch->id}}">{{$branch->nama}}</option>
-                            @endforeach
-                        </select>
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <select class="form-control select2" name="cabang">
+                                <option value="0">Semua</option>
+                                @foreach ($branches as $branch)
+                                    <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                            <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
+                            <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <button type="button" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                        <button type="button" class="btn btn-primary"><i class="nav-icon fas fa-print"></i></button>
-                        <button type="button" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></button>
-                    </div>
-                </div>
+                </form>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

@@ -9,14 +9,51 @@ use App\Branch;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-
+use App\Application;
+use Carbon\Carbon;
+use PDF;
 class EmployeeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::all();
+
+        $user = Auth::user();
         $branches = Branch::all();
-        return view('karyawan.index',compact('employees','branches'));
+        $app = Application::first();
+        $branch = $user->employee->branch;
+        if ($user->level_id == 1 ) {
+            if ($request) {
+                if ($request->filter === "cabang") {
+                    if ($request->cabang == 0) {
+                        $employees = Employee::all();
+                    }else{
+                        $employees = Employee::where('branch_id',$request->cabang)->get();
+                        $branch = Branch::findOrFail($request->cabang);
+                    }
+                }else{
+                    $employees = Employee::all();
+                }
+                if ($request->pdf) {
+                    $data = [
+                        'employees'=>$employees,
+                        'branch'=> $branch,
+                        'app'=>$app,
+                        'date'=>Carbon::now()->format('d F Y')
+                    ];
+                    $pdf = PDF::loadView('pdf.karyawan', $data);
+                    // return $pdf->stream();
+                    return $pdf->download('karyawan.pdf');
+                }
+            }else{
+                $employees = Employee::all();
+            }
+
+            return view('karyawan.index',compact('employees','branches'));
+        }else{
+            $employees = Employee::where('branch_id',$user->employee->branch_id)->get();
+            return view('karyawan.index',compact('employees','branches'));
+        }
+
     }
 
     public function show($id)

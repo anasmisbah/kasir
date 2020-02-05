@@ -5,14 +5,56 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Branch;
-
+use PDF;
+use App\Application;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::all();
+
+        $user = Auth::user();
         $branches = Branch::all();
-        return view('pelanggan.index',compact('customers','branches'));
+        $app = Application::first();
+        $branch = $user->employee->branch;
+        if ($user->level_id == 1) {
+            if($request){
+                if ($request->filter === "cabang") {
+                    if($request->cabang === "0"){
+                        $customers = Customer::all();
+                    }else{
+                        $customers = Customer::where('branch_id',$request->cabang)->get();
+                        $branch = Branch::findOrFail($request->cabang);
+                    }
+                }else{
+                    $customers = Customer::all();
+                }
+
+                if ($request->pdf) {
+
+                    $data = [
+                        'customers'=>$customers,
+                        'branch'=> $branch,
+                        'app'=>$app,
+                        'date'=>Carbon::now()->format('d F Y')
+                    ];
+                    $pdf = PDF::loadView('pdf.pelanggan', $data);
+                    // return $pdf->stream();
+                    return $pdf->download('pelanggan.pdf');
+                }
+            }else{
+                $customers = Customer::all();
+            }
+            return view('pelanggan.index',compact('customers','branches'));
+
+
+
+        } else {
+            $customers = Customer::where('branch_id',$user->employee->branch_id)->get();
+            return view('pelanggan.index',compact('customers','branches'));
+        }
+
     }
 
     public function show($id)

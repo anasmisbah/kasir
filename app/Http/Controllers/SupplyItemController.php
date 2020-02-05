@@ -8,22 +8,47 @@ use App\Item;
 use Illuminate\Support\Facades\Auth;
 use App\Branch;
 use App\User;
-
+use App\APPlication;
+use Carbon\Carbon;
+use PDF;
 class SupplyItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $user = Auth::user();
-
+        $user = Auth::user();
         $branches = Branch::all();
-        // if ($user->level_id == 1 ) {
-        if (true) {
-            $supplies = Supply::all();
+        $app = Application::first();
+        $branch = $user->employee->branch;
+        if ($user->level_id == 1 ) {
+            if ($request) {
+                if ($request->filter === "cabang") {
+                    if($request->cabang === "0"){
+                        $supplies = Supply::all();
+                    }else{
+                        $supplies = Supply::where('branch_id',$request->cabang)->get();
+                        $branch = Branch::findOrFail($request->cabang);
+                    }
+                }else{
+                    $supplies = Supply::all();
+                }
+                if ($request->pdf) {
+                    $data = [
+                        'supplies'=>$supplies,
+                        'branch'=> $branch,
+                        'app'=>$app,
+                        'date'=>Carbon::now()->format('d F Y')
+                    ];
+                    $pdf = PDF::loadView('pdf.stok', $data);
+                    // return $pdf->stream();
+                    return $pdf->download('stok.pdf');
+                }
+            }else{
+                $supplies = Supply::all();
+            }
             return view('stok.index',compact('supplies','branches'));
         }else{
             $supplies = Supply::where('branch_id',$user->employee->branch_id)->get();
             return view('stok.index',compact('supplies','branches'));
-
         }
     }
 

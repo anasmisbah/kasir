@@ -41,30 +41,35 @@
             </div>
         </div>
 
-        <div class="col-md-2">
-            Total
-            <h3>Rp. <span id="total"></span></h3>
-        </div>
-        <div class="col-md-1">
-            <a href="#" class="btn btn-primary btn-block">Cetak Nota</a>
+        <div class="ml-1 col-md-3">
+            <div class="row">
+                <div class="col-6">
+                    <label for="">Total</label>
+                    <h3 class="form-control">Rp. <span id="total"></span></h3>
+                </div>
+                <div class="col-6">
+                    <a href="#" class="btn btn-primary btn-lg btn-block">Cetak Nota</a>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-md-10">
             <div class="row">
                 <div class="col-12">
-                    <div class="form-inline">
+                    <div class="form">
                         <div class="row ">
-                            <div class="col-sm-2">
+                            <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Kode</label>
-                                    <input type="text"  disabled id="kode" class="form-control form-control-sm">
+                                    <input type="text"  disabled id="kode" class="form-control ">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Nama Barang</label>
-                                    <select id="select-barang" class="form-control form-control-sm">
+                                    <select id="select-barang" class="form-control ">
                                         <option value="" disabled>Pilih Barang</option>
                                     </select>
                                 </div>
@@ -72,23 +77,26 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                <input type="text" disabled  id="harga" class="form-control form-control-sm">
+                                <input type="text" disabled  id="harga" class="form-control ">
                                 </div>
                             </div>
-                            <div class="col-1">
+                            <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Qty (Kg)</label>
-                                    <input type="text"  id="qty"  class="form-control form-control-sm">
+                                    <input type="text"  id="qty"  class="form-control ">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input type="text" disabled  id="jumlah" class="form-control form-control-sm">
+                                    <input type="text" disabled  id="jumlah" class="form-control ">
                                 </div>
                             </div>
                             <div class="col-1">
-                                    <button class="btn btn-info" >+</button>
+                                <div class="form-group">
+                                    <label for="">Tambah</label>
+                                    <button type="submit" class="btn btn-primary  form-control" ><i class="fa fa-plus"></i></button>
+                                </div>
                             </div>
                         </div>
 
