@@ -119,9 +119,14 @@ Route::put('/karyawan/{id}', 'EmployeeController@update')->name('karyawan.perbar
 Route::get('/karyawan/detail/{id}','EmployeeController@show')->name('karyawan.detail');
 Route::delete('/karyawan/hapus/{id}','EmployeeController@delete')->name('karyawan.hapus');
 
-Route::view('/pengguna', 'pengguna.index')->name('pengguna.index');
-Route::view('/pengguna/tambah', 'pengguna.tambah')->name('pengguna.tambah');
-Route::view('/pengguna/ubah', 'pengguna.ubah')->name('pengguna.ubah');
+
+Route::get('/pengguna', 'UserController@index')->name('pengguna.index');
+Route::get('/pengguna/tambah', 'UserController@create')->name('pengguna.tambah');
+Route::post('/pengguna/simpan','UserController@store')->name('pengguna.simpan');
+Route::get('/pengguna/ubah/{id}', 'UserController@edit')->name('pengguna.ubah');
+Route::put('/pengguna/{id}', 'UserController@update')->name('pengguna.perbarui');
+Route::get('/pengguna/detail/{id}','UserController@show')->name('pengguna.detail');
+Route::delete('/pengguna/hapus/{id}','UserController@delete')->name('pengguna.hapus');
 
 Route::view('/tentang', 'tentang.index')->name('tentang.index');
 Route::view('/tentang/tambah', 'tentang.tambah')->name('tentang.tambah');

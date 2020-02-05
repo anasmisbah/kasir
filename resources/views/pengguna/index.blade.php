@@ -1,4 +1,10 @@
 @extends('layouts.master')
+
+@push('css')
+    <!-- DataTables -->
+  <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+@endpush
+
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,11 +24,18 @@
     </section>
 
     <section class="content">
-      <div class="row">          
+      <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">DataTable with default features</h3>
+              <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                  <a class="nav-link active" href="{{ route('pengguna.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -39,33 +52,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>larasati</td>
-                  <td>Kirana Larasati</td>
-                  <td>larasati.kirana@email.com</td>
-                  <td>Level I</td>
-                  <td>Samarinda</td>
-                  <td>Aksi</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>larasati</td>
-                  <td>Kirana Larasati</td>
-                  <td>larasati.kirana@email.com</td>
-                  <td>Level I</td>
-                  <td>Samarinda</td>
-                  <td>Aksi</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>larasati</td>
-                  <td>Kirana Larasati</td>
-                  <td>larasati.kirana@email.com</td>
-                  <td>Level I</td>
-                  <td>Samarinda</td>
-                  <td>Aksi</td>
-                </tr>   
+                    @foreach ($users as $user)
+                        <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{ $user->employee->nama }}</td>
+                        <td>{{ $user->username }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->level->nama }}</td>
+                        <td>{{ $user->employee->branch->nama }}</td>
+                        <td><form class="d-inline"
+                            onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')"
+                            action="{{route('pengguna.hapus', $user->id)}}"
+                            method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger btn-sm">
+                                    <i class="fa fa-trash"></i></button>
+                            </form>
+                                <a href="{{route('pengguna.detail',$user->id)}}" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-location-arrow"></i>
+                            </a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
                 <tfoot>
                   <th>No.</th>
                   <th>Nama lengkap</th>
@@ -73,7 +82,7 @@
                   <th>Email</th>
                   <th>Level</th>
                   <th>Cabang</th>
-                  <th>Aksi</th>            
+                  <th>Aksi</th>
                 </tfoot>
               </table>
             </div>

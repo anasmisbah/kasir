@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Employee');
     }
+
+    public function level()
+    {
+        return $this->belongsTo('App\Level');
+    }
 }

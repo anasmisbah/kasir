@@ -11,24 +11,25 @@
             <h3 class="card-title">Tambah Pengguna</h3>
         </div>
 
-        <form role="form" action="{{route('pengguna.simpan')}}" method="POST">
+        <form role="form" action="{{route('pengguna.perbarui',$user->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                     <label>Nama Karyawan</label>
                     <select class="form-control select2" name="employee_id">
                         @foreach ($employees as $employee)
-                            <option value="{{$employee->id}}">{{$employee->nama}}</option>
+                            <option value="{{$employee->id}}" {{ $employee->id === $user->employee_id?"selected":"" }}>{{$employee->nama}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Nama Pengguna</label>
-                    <input type="text" class="form-control" name="username" placeholder="Masukkan Nama Pengguna">
+                    <input type="text" value="{{$user->username}}" class="form-control" name="username" placeholder="Masukkan Nama Pengguna">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Masukkan Email Karyawan">
+                    <input type="email" value="{{$user->email}}" class="form-control" name="email" placeholder="Masukkan Email Karyawan">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -38,7 +39,7 @@
                     <label>Level</label>
                     <select class="form-control select2" name="level_id">
                         @foreach ($levels as $level)
-                            <option value="{{$level->id}}">{{$level->nama}}</option>
+                            <option value="{{$level->id}}" {{ $level->id === $user->level_id?"selected":"" }}>{{$level->nama}}</option>
                         @endforeach
                     </select>
                 </div>
