@@ -87,7 +87,7 @@ class BillController extends Controller
             $bills = Bill::all();
         }
 
-        
+
     }
 
     public function pdf(Request $request)
@@ -130,7 +130,20 @@ class BillController extends Controller
     //Menu Kasir
     public function kasir()
     {
-        $customers = Auth::user()->employee->branch->customer;
+        $branch = Auth::user()->employee->branch;
+        $customers = $branch->customer;
+        $supplies = $branch->supply;
+        $date = Carbon::now();
+        $lastBill = Bill::select('id')->orderBy('id','desc')->first();
+        if (!$lastBill) {
+            $formatnnk = $branch->id."". Auth::user()->employee->id ."0".$date->day."".$date->month."".$date->year;
+
+        }else{
+
+            $formatnnk = $branch->id."". Auth::user()->employee->id."" .$lastBill->id."".$date->day."".$date->month."".$date->year;
+        }
+
+        return view('kasir.index',compact('branch','customers','supplies','formatnnk'));
     }
 
     public function store(Request $request)

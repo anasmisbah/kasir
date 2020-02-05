@@ -58,6 +58,15 @@ class SupplyItemController extends Controller
         return view('stok.detail',compact('supply'));
     }
 
+    public function getJsonSupply(Request $request)
+    {
+        $supply = Supply::findOrFail($request->id);
+
+        return response()->json([
+            'supply'=>$supply
+        ]);
+    }
+
     public function create()
     {
         // $userBranch =  Auth::user()->employee->branch;

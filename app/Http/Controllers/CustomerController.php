@@ -64,6 +64,15 @@ class CustomerController extends Controller
         return view('pelanggan.detail',compact('customer'));
     }
 
+    public function getJsonCustomer(Request $request)
+    {
+        $customer = Customer::findOrFail($request->id);
+
+        return response()->json([
+            'customer'=>$customer
+        ]);
+    }
+
     public function create()
     {
         $branches = Branch::all();

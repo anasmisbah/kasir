@@ -88,11 +88,13 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/pengguna/detail/{id}','UserController@show')->name('pengguna.detail');
     Route::delete('/pengguna/hapus/{id}','UserController@delete')->name('pengguna.hapus');
 
-
     Route::get('/tentang', 'ApplicationController@edit')->name('tentang.index');
     Route::put('/tentang/{id}', 'ApplicationController@update')->name('tentang.perbarui');
 
-    Route::view('/kasir','kasir.index')->name('kasir.index');
+    Route::get('/kasir','BillController@kasir')->name('kasir.index');
+    Route::get('/pelanggan/getjsoncustomer','CustomerController@getJsonCustomer')->name('pelanggan.data');
+    Route::get('/stok/getjsonsupply','SupplyItemController@getJsonSupply')->name('stok.data');
+
 
     Route::view('/pdf/penjualan', 'pdf.penjualan')->name('pdf.penjualan');
     Route::view('/pdf/kas', 'pdf.kas')->name('pdf.kas');
