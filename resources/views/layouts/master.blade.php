@@ -36,91 +36,34 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
+          {{auth()->user()->username}} <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="/adminlte/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="{{asset("/storage/".auth()->user()->employee->foto)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                    {{auth()->user()->employee->nama}}
+                  <span class="float-right text-sm text-danger">{{auth()->user()->level->nama}}</i></span>
                 </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                <p class="text-sm">Cabang :  <b class="text-blue">{{auth()->user()->employee->branch->nama}}</b> </p>
               </div>
             </div>
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/adminlte/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/adminlte/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-th-large"></i>
+        <a class="nav-link" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();" data-slide="true">
+          <i class="fas fa-power-off"></i>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+            </form>
         </a>
       </li>
     </ul>
@@ -145,94 +88,166 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{{ route('beranda') }}" class="nav-link">
-              <i class="nav-icon fas fa-home"></i>
-              <p>
-                Beranda
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('penjualan.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i>
-              <p>
-                Penjualan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('piutang.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-credit-card"></i>
-              <p>
-                Piutang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('pelanggan.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Pelanggan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('cabang.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-flag"></i>
-              <p>
-                Cabang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('jenis.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-barcode"></i>
-              <p>
-                Jenis Barang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('barang.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th-large"></i>
-              <p>
-                Barang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('stok.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>
-                Stok Barang
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('karyawan.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Karyawan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('pengguna.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-user-circle"></i>
-              <p>
-                Pengguna
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('tentang.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-info"></i>
-              <p>
-                Tentang
-              </p>
-            </a>
-          </li>
+               @if (auth()->user()->level->nama == "utama")
+                {{-- Menut Role Utama --}}
+                <li class="nav-item">
+                    <a href="{{ route('beranda') }}" class="nav-link">
+                      <i class="nav-icon fas fa-home"></i>
+                      <p>
+                        Beranda
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('penjualan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-shopping-cart"></i>
+                      <p>
+                        Penjualan
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('piutang.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-credit-card"></i>
+                      <p>
+                        Piutang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('pelanggan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-users"></i>
+                      <p>
+                        Pelanggan
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('cabang.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-flag"></i>
+                      <p>
+                        Cabang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('jenis.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-barcode"></i>
+                      <p>
+                        Jenis Barang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('barang.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-th-large"></i>
+                      <p>
+                        Barang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('stok.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>
+                        Stok Barang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('karyawan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-user"></i>
+                      <p>
+                        Karyawan
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('pengguna.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-user-circle"></i>
+                      <p>
+                        Pengguna
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('tentang.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-info"></i>
+                      <p>
+                        Tentang
+                      </p>
+                    </a>
+                  </li>
+               @elseif(auth()->user()->level->nama == "cabang")
+                {{-- Menut Role Cabang --}}
+                <li class="nav-item">
+                    <a href="{{ route('beranda') }}" class="nav-link">
+                      <i class="nav-icon fas fa-home"></i>
+                      <p>
+                        Beranda
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('penjualan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-shopping-cart"></i>
+                      <p>
+                        Penjualan
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('piutang.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-credit-card"></i>
+                      <p>
+                        Piutang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('pelanggan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-users"></i>
+                      <p>
+                        Pelanggan
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('stok.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>
+                        Stok Barang
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('karyawan.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-user"></i>
+                      <p>
+                        Karyawan
+                      </p>
+                    </a>
+                  </li>
+               @else()
+                {{-- Menut Role Kasir --}}
+                <li class="nav-item">
+                    <a href="{{ route('beranda') }}" class="nav-link">
+                      <i class="nav-icon fas fa-home"></i>
+                      <p>
+                        Beranda
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('kasir.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-shopping-cart"></i>
+                      <p>
+                        Kasir
+                      </p>
+                    </a>
+                  </li>
+               @endif
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
