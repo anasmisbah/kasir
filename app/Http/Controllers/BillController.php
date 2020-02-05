@@ -28,14 +28,14 @@ class BillController extends Controller
 
         $branches = Branch::all();
 
-        return view('penjualan.index',compact('bills','branches'));
+        return view('penjualan.index',compact('bills','branches','bulan','tahun'));
     }
 
     public function show($id)
     {
         $bill = Bill::findOrFail($id);
 
-        return $bill;
+        return view('penjualan.detail',compact('bill'));
     }
 
     public function create()
@@ -123,6 +123,8 @@ class BillController extends Controller
     public function showPiutang($id)
     {
         $bill = Bill::findOrFail($id);
+
+        return view('piutang.detail',compact('bill'));
 
     }
 

@@ -38,26 +38,26 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="hari" checked>
-                                <label for="customRadio1" class="custom-control-label">Per Hari</label>
+                                <input class="custom-control-input" type="radio" id="radiohari" name="filter" value="hari" checked>
+                                <label for="radiohari" class="custom-control-label">Per Hari</label>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="bulan" checked>
-                                <label for="customRadio1" class="custom-control-label">Per Bulan</label>
+                                <input class="custom-control-input" type="radio" id="radiobulan" name="filter" value="bulan" checked>
+                                <label for="radiobulan" class="custom-control-label">Per Bulan</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="tahun" checked>
-                                <label for="customRadio1" class="custom-control-label">Per Tahun</label>
+                                <input class="custom-control-input" type="radio" id="radiotahun" name="filter" value="tahun" checked>
+                                <label for="radiotahun" class="custom-control-label">Per Tahun</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
-                                <label for="customRadio1" class="custom-control-label">Cabang</label>
+                                <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" checked>
+                                <label for="radiocabang" class="custom-control-label">Cabang</label>
                             </div>
                         </div>
                     </div>
@@ -73,26 +73,23 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control select2" name="cabang">
-                                <option value="0">Semua</option>
-                                @foreach ($branches as $branch)
-                                    <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                            <select class="form-control select2" name="bulan">
+                                @foreach ($bulan as $key => $item)
+                                    <option value="">{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-1">
-                            <select class="form-control select2" name="cabang">
-                                <option value="0">Semua</option>
-                                @foreach ($branches as $branch)
-                                    <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                            <select class="form-control select2" name="tahun">
+                                @foreach ($tahun as $key=> $item)
+                                    <option value="">{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-2">
                             <select class="form-control select2" name="cabang">
-                                <option value="0">Semua</option>
-                                @foreach ($branches as $branch)
-                                    <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                                @foreach ($tahun as $key=> $item)
+                                    <option value="">{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -190,6 +187,7 @@
       "info": true,
       "autoWidth": false,
     });
+    $('.select2').select2()
   });
 </script>
 @endpush
