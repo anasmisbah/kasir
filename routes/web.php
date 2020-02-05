@@ -128,9 +128,9 @@ Route::put('/pengguna/{id}', 'UserController@update')->name('pengguna.perbarui')
 Route::get('/pengguna/detail/{id}','UserController@show')->name('pengguna.detail');
 Route::delete('/pengguna/hapus/{id}','UserController@delete')->name('pengguna.hapus');
 
-Route::view('/tentang', 'tentang.index')->name('tentang.index');
-Route::view('/tentang/tambah', 'tentang.tambah')->name('tentang.tambah');
-Route::view('/tentang/ubah', 'tentang.ubah')->name('tentang.ubah');
+
+Route::get('/tentang', 'ApplicationController@edit')->name('tentang.index');
+Route::put('/tentang/{id}', 'ApplicationController@update')->name('tentang.perbarui');
 
 Route::view('/pdf/penjualan', 'pdf.penjualan')->name('pdf.penjualan');
 Route::view('/pdf/kas', 'pdf.kas')->name('pdf.kas');

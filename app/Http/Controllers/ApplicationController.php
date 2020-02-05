@@ -14,17 +14,20 @@ class ApplicationController extends Controller
 
     }
 
-    public function detail()
+    public function edit()
     {
         $app = Application::first();
 
-        return $app;
+        return view('tentang.edit',compact('app'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-
+            'nama'=>'required',
+            'toko'=>'required',
+            'alamat'=>'required',
+            'telepon'=>'required',
         ]);
 
         $foto='';
@@ -40,34 +43,36 @@ class ApplicationController extends Controller
         ]);
 
 
-
-        return $store;
+        return redirect()->route('tentang.edit');
     }
 
     public function update(Request $request)
     {
         $request->validate([
-
+            'nama'=>'required',
+            'toko'=>'required',
+            'alamat'=>'required',
+            'telepon'=>'required',
         ]);
 
         $app = Application::findOrFail($request->id);
 
-        $update = $app->update([
+        $app->update([
             'nama'=>$request->nama,
             'toko'=>$request->toko,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon
         ]);
 
-        if ($request->file('foto')) {
-            if ($update->foto && file_exists(storage_path('app/public/'.$update->foto))) {
-                Storage::delete('public/'.$update->foto);
+        if ($request->file('logo')) {
+            if (!($app->logo == "logo/default.jpg") && file_exists(storage_path('app/public/'.$app->logo))) {
+                Storage::delete('public/'.$app->logo);
             }
-            $update->update([
-                'foto'=> $request->file('foto')->store('fotos','public')
+            $app->update([
+                'logo'=> $request->file('logo')->store('logo','public')
             ]);
         }
 
-        return $update;
+        return redirect()->route('tentang.index');
     }
 }
