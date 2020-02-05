@@ -21,13 +21,12 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/beranda', 'AdminController@beranda')->name('beranda');
 
-    Route::view('/penjualan', 'penjualan.index')->name('penjualan.index');
-    Route::view('/penjualan/tambah', 'penjualan.tambah')->name('penjualan.tambah');
-    Route::view('/penjualan/ubah', 'penjualan.ubah')->name('penjualan.ubah');
+    Route::get('/penjualan', 'BillController@index')->name('penjualan.index');
+    Route::get('/penjualan/detail/{id}','CustomerController@show')->name('penjualan.detail');
 
-    Route::view('/piutang', 'piutang.index')->name('piutang.index');
-    Route::view('/piutang/tambah', 'piutang.tambah')->name('piutang.tambah');
-    Route::view('/piutang/ubah', 'piutang.ubah')->name('piutang.ubah');
+    Route::get('/piutang', 'BillController@piutangAll')->name('piutang.index');
+    Route::get('/piutang/detail/{id}','CustomerController@show')->name('piutang.detail');
+
 
     Route::get('/pelanggan', 'CustomerController@index')->name('pelanggan.index');
     Route::get('/pelanggan/tambah', 'CustomerController@create')->name('pelanggan.tambah');

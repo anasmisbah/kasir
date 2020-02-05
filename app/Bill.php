@@ -24,4 +24,9 @@ class Bill extends Model
     {
         return $this->hasMany('App\Transaction');
     }
+
+    public function branch()
+    {
+        return $this->belongsTo('App\Branch');
+    }
 }

@@ -28,7 +28,7 @@ class BillController extends Controller
 
         $branches = Branch::all();
 
-        return $bills;
+        return view('penjualan.index',compact('bills','branches'));
     }
 
     public function show($id)
@@ -98,9 +98,9 @@ class BillController extends Controller
     //menu Piutang
     public function piutangAll()
     {
-        $billsPiutang = Bill::where('status','piutang')->get();
-
-        return $billsPiutang;
+        $bills = Bill::where('status','piutang')->get();
+        $branches = Branch::all();
+        return view('piutang.index',compact('bills','branches'));
     }
 
     public function piutangFilter(Request $request)
