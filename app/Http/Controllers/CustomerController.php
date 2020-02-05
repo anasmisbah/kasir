@@ -73,6 +73,27 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function storeAjax(Request $request)
+    {
+        $request->validate([
+            'nama'=>'required',
+            'alamat'=>'required',
+            'telepon'=>'required',
+            'branch_id'=>'required'
+        ]);
+
+        $newCustomer = Customer::create([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'telepon'=>$request->telepon,
+            'branch_id'=>$request->branch_id
+        ]);
+
+        return response()->json([
+            'customer'=>$newCustomer
+        ]);
+    }
+
     public function create()
     {
         $branches = Branch::all();

@@ -94,6 +94,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/kasir','BillController@kasir')->name('kasir.index');
     Route::get('/pelanggan/getjsoncustomer','CustomerController@getJsonCustomer')->name('pelanggan.data');
     Route::get('/stok/getjsonsupply','SupplyItemController@getJsonSupply')->name('stok.data');
+    Route::post('customer/storeajax','CustomerController@storeAjax')->name('kasir.pelanggan.simpan');
+    Route::get('/kasir/simpan','BillController@saveBillAjax')->name('kasir.simpan.nota');
 
 
     Route::view('/pdf/penjualan', 'pdf.penjualan')->name('pdf.penjualan');

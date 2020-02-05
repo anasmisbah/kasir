@@ -140,10 +140,42 @@ class BillController extends Controller
 
         }else{
 
-            $formatnnk = $branch->id."". Auth::user()->employee->id."" .$lastBill->id."".$date->day."".$date->month."".$date->year;
+            $formatnnk = $branch->id."". Auth::user()->employee->id."" .($lastBill->id+1)."".$date->day."".$date->month."".$date->year;
         }
 
         return view('kasir.index',compact('branch','customers','supplies','formatnnk'));
+    }
+
+    public function saveBillAjax(Request $request)
+    {
+        $user = Auth::user();
+        $tanggal_nota = Carbon::now();
+        $newBill = Bill::create([
+            'user_id'=>$user->id,
+            'tanggal_nota'=>$tanggal_nota,
+            'diskon'=>$request->data['diskon'],
+            'total_nota'=>$request->data['total_nota'],
+            'jumlah_uang_nota'=>$request->data['jumlah_uang_nota'],
+            'kembalian_nota'=>$request->data['kembalian_nota'],
+            'status'=>strtolower($request->data['status']),
+            'branch_id'=>$user->employee->branch_id,
+            'customer_id'=>$request->data['customer_id'],
+            'no_nota_kas'=>$request->data['no_nota_kas']
+        ]);
+
+        foreach ($request->data['items'] as $key => $item) {
+            $newBill->transaction()->create([
+                'no_urut'=>$item['no_urut'],
+                'total_harga'=>$item['total_harga'],
+                'kuantitas'=>$item['kuantitas'],
+                'supply_id'=>$item['supply_id']
+            ]);
+        }
+
+        return response()->json([
+            'data'=>$newBill,
+            'status'=>true
+        ]);
     }
 
     public function store(Request $request)
