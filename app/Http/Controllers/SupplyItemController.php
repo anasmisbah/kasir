@@ -5,34 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supply;
 use App\Item;
+use Illuminate\Support\Facades\Auth;
+use App\Branch;
+use App\User;
 
 class SupplyItemController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        // $user = Auth::user();
+
         $branches = Branch::all();
-        if ($user->level_id == 1 ) {
+        // if ($user->level_id == 1 ) {
+        if (true) {
             $supplies = Supply::all();
-            return $supplies;
+            return view('stok.index',compact('supplies','branches'));
         }else{
             $supplies = Supply::where('branch_id',$user->employee->branch_id)->get();
-            return $supplies;
-        }
+            return view('stok.index',compact('supplies','branches'));
 
+        }
     }
 
     public function show($id)
     {
-        $user = Supply::findOrFail($id);
-        return $user;
+        $supply = Supply::findOrFail($id);
+        return view('stok.detail',compact('supply'));
     }
 
     public function create()
     {
+        // $userBranch =  Auth::user()->employee->branch;
+        $userBranch = User::find(2);
         $items = Item::all();
-        $branch = Auth::user()->employee->branch;
-        // TODO return view()
+        $branch = $userBranch->employee->branch;
+        return view('stok.tambah',compact('items','branch'));
     }
 
     public function store(Request $request)
@@ -53,15 +60,14 @@ class SupplyItemController extends Controller
             'branch_id'=>$request->branch_id,
         ]);
 
-        return $newSupplyItem;
+        return redirect()->route('stok.index');
     }
 
     public function edit($id)
     {
         $supply = Supply::findOrFail($id);
         $items = Item::all();
-        $branch = Auth::user()->employee->branch;
-        return $supply;
+        return view('stok.ubah',compact('supply','items'));
     }
 
     public function update(Request $request)
@@ -81,7 +87,7 @@ class SupplyItemController extends Controller
             'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
         ]);
-        return $updatedSupplyItem;
+        return redirect()->route('stok.index');
     }
 
     public function search(Request $request)
@@ -99,7 +105,7 @@ class SupplyItemController extends Controller
     {
         $supply = Supply::findOrFail($id);
         $supply->delete();
-        return true;
+        return redirect()->route('stok.index');
     }
 
     public function filter(Request $request)

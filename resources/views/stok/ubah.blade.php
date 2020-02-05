@@ -8,41 +8,42 @@
 <div class="col-12 ">
     <div class="card mt-3">
         <div class="card-header">
-            <h3 class="card-title">Tambah Stok Barang</h3>
+            <h3 class="card-title">Edit Stok Barang</h3>
         </div>
 
-        <form role="form" action="{{route('stok.simpan')}}" method="POST">
+        <form role="form" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group">
                         <label>Barang</label>
                         <select id="barang" class="form-control select2" name="item_id">
                             <option value="0" selected>--Pilih Barang--</option>
                             @foreach ($items as $item)
-                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                <option value="{{$item->id}}" {{$item->id == $supply->item_id?"selected":""}}>{{$item->nama}}</option>
                             @endforeach
                         </select>
                 </div>
                 <div class="form-group">
                     <label>Cabang</label>
-                    <input type="text" value="{{$branch->nama}}" disabled class="form-control" >
-                    <input type="hidden" value="{{$branch->id}}" name="branch_id">
+                    <input type="text" value="{{$supply->branch->nama}}" disabled class="form-control" >
+                    <input type="hidden" value="{{$supply->branch->id}}" name="branch_id">
                 </div>
                 <div class="form-group">
                     <label>Harga Pusat</label>
-                    <input type="text" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat">
+                    <input type="text" value="{{$supply->item->harga}}" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat">
                 </div>
                 <div class="form-group">
                     <label>Harga Cabang</label>
-                    <input type="text" id="harga_cabang" disabled class="form-control inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
+                    <input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
                 </div>
                 <div class="form-group">
                     <label>Selisih</label>
-                    <input type="text" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih">
+                    <input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih">
                 </div>
                 <div class="form-group">
                     <label>Stok</label>
-                    <input type="text" class="form-control" name="stok" placeholder="Masukkan Stok Barang">
+                    <input type="text" value="{{$supply->stok}}" class="form-control" name="stok" placeholder="Masukkan Stok Barang">
                 </div>
             </div>
 
@@ -75,6 +76,8 @@ $(document).on('change', '#barang', function () {
             //Menampilkan Error
             $('#harga_pusat').val(data.data.harga)
             $("#harga_cabang").removeAttr('disabled')
+            $("#harga_cabang").val(0)
+            $("#selisih").val(0)
         },
     });
 });

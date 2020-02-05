@@ -15,6 +15,15 @@ class ItemController extends Controller
         return view('barang.index',compact('items'));
     }
 
+    public function getJsonItem(Request $request)
+    {
+        $items = Item::findOrFail($request->id);
+
+        return response()->json([
+            'data'=>$items
+        ]);
+    }
+
     public function show($id)
     {
         $item = Item::findOrFail($id);

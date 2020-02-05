@@ -101,10 +101,16 @@ Route::get('/barang/ubah/{id}', 'ItemController@edit')->name('barang.ubah');
 Route::put('/barang/{id}', 'ItemController@update')->name('barang.perbarui');
 Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
 Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
+Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
 
-Route::view('/stok', 'stok.index')->name('stok.index');
-Route::view('/stok/tambah', 'stok.tambah')->name('stok.tambah');
-Route::view('/stok/ubah', 'stok.ubah')->name('stok.ubah');
+Route::get('/stok', 'SupplyItemController@index')->name('stok.index');
+Route::get('/stok/tambah', 'SupplyItemController@create')->name('stok.tambah');
+Route::post('/stok/simpan','SupplyItemController@store')->name('stok.simpan');
+Route::get('/stok/ubah/{id}', 'SupplyItemController@edit')->name('stok.ubah');
+Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
+Route::get('/stok/detail/{id}','SupplyItemController@show')->name('stok.detail');
+Route::delete('/stok/hapus/{id}','SupplyItemController@delete')->name('stok.hapus');
+
 
 Route::view('/karyawan', 'karyawan.index')->name('karyawan.index');
 Route::view('/karyawan/tambah', 'karyawan.tambah')->name('karyawan.tambah');
