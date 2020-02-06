@@ -147,7 +147,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$bill->no_nota_kas}}</td>
-                        <td>{{$bill->tanggal_nota}}</td>
+                        <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
                         <td>{{$bill->customer->nama}}</td>
                         <td>Rp.{{$bill->total_nota}},-</td>
                         <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>

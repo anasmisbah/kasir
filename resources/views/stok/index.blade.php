@@ -76,6 +76,7 @@
                   <th>Harga Pusat</th>
                   <th>Harga Cabang</th>
                   <th>Selisih</th>
+                  <th>Stok (kg)</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
@@ -88,6 +89,7 @@
                     <td>Rp.<span class="harga">{{$supply->item->harga}}</span>,-</td>
                     <td>Rp. <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                     <td>Rp.<span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                    <td>{{$supply->stok}}</td>
                     <td>
                         <form class="d-inline"
                         onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')"
@@ -112,6 +114,7 @@
                   <th>Harga Pusat</th>
                   <th>Harga Cabang</th>
                   <th>Selisih</th>
+                  <th>Stok (kg)</th>
                   <th>Aksi</th>
                 </tfoot>
               </table>

@@ -96,14 +96,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('customer/storeajax','CustomerController@storeAjax')->name('kasir.pelanggan.simpan');
     Route::get('/kasir/simpan','BillController@saveBillAjax')->name('kasir.simpan.nota');
 
+    Route::view('pdf/penjualan','pdf.penjualan_nota');
 
-    Route::view('/pdf/penjualan', 'pdf.penjualan')->name('pdf.penjualan');
-    Route::view('/pdf/kas', 'pdf.kas')->name('pdf.kas');
-    Route::view('/pdf/bon', 'pdf.bon')->name('pdf.bon');
-    Route::view('/pdf/piutang', 'pdf.piutang')->name('pdf.piutang');
-    Route::view('/pdf/pelanggan', 'pdf.pelanggan')->name('pdf.pelanggan');
-    Route::view('/pdf/barang', 'pdf.barang')->name('pdf.barang');
-    Route::view('/pdf/karyawan', 'pdf.karyawan')->name('pdf.karyawan');
 
     Route::middleware(['utama'])->group(function (){
 
@@ -117,31 +111,6 @@ Route::middleware(['auth'])->group(function (){
 
 });
 
-use Carbon\Carbon;
-Route::get('/tgl',function(){
-
-    $hari = DB::table('tanggal')->get()->groupBy(function ($val) {
-        return Carbon::parse($val->date)->toDateString();
-    });
-    foreach ($hari as $key => $value) {
-       echo $key." ";
-    }
-    echo "<br>";
-
-    $bulan = DB::table('tanggal')->get()->groupBy(function ($val) {
-        return Carbon::parse($val->date)->localeMonth;
-    });
-    foreach ($bulan as $key => $value) {
-       echo $key." ";
-    }
-    echo "<br>";
-    $tahun = DB::table('tanggal')->get()->groupBy(function ($val) {
-        return Carbon::parse($val->date)->year;
-    });
-    foreach ($tahun as $key => $value) {
-       echo $key;
-    }
-});
 
 
 
