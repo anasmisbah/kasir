@@ -29,28 +29,25 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-        </div>
-        <!-- /.card-header -->
         <div class="card-body">
           <form action="{{route('penjualan.index')}}" method="GET">
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiohari" name="filter" value="hari" checked>
-                  <label for="radiohari" class="custom-control-label">Per Hari</label>
+                  <label for="radiohari" class="custom-control-label">Hari:</label>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiobulan" name="filter" value="bulan" checked>
-                  <label for="radiobulan" class="custom-control-label">Per Bulan</label>
+                  <label for="radiobulan" class="custom-control-label">Bulan:</label>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiotahun" name="filter" value="tahun" checked>
-                  <label for="radiotahun" class="custom-control-label">Per Tahun</label>
+                  <label for="radiotahun" class="custom-control-label">Tahun:</label>
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
@@ -81,11 +78,20 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 <select class="form-control select2" name="bulan">
-                  @foreach ($bulan as $key => $item)
-                  <option value="{{$key}}">{{$item}}</option>
-                  @endforeach
+                  <option value="1">Jan</option>
+                  <option value="2">Feb</option>
+                  <option value="3">Mar</option>
+                  <option value="4">Apr</option>
+                  <option value="5">Mei</option>
+                  <option value="6">Jun</option>
+                  <option value="7">Jul</option>
+                  <option value="8">Agu</option>
+                  <option value="9">Sep</option>
+                  <option value="10">Okt</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Des</option>
                 </select>
               </div>
               <div class="col-md-1">
@@ -121,61 +127,14 @@
               </div>
               @endif
 
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                            <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
-                            <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-                        </div>
-                    </div>
-                </form>
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>No. Nota Kas</th>
-                  <th>Tanggal</th>
-                  <th>Pelanggan</th>
-                  <th>Total</th>
-                  <th>Piutang</th>
-                  <th>Status</th>
-                  <th>Cabang</th>
-                  <th>Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($bills as $bill)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$bill->no_nota_kas}}</td>
-                        <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
-                        <td>{{$bill->customer->nama}}</td>
-                        <td>Rp.{{$bill->total_nota}},-</td>
-                        <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
-                        <td>{{strtoupper($bill->status)}}</td>
-                        <td>{{ $bill->branch->nama }}</td>
-                        <td>
-                            <a href="{{route('penjualan.detail',$bill->id)}}" class="btn btn-outline-success btn-sm">
-                                <i class="fa fa-location-arrow"></i>
-                        </td>
-                      </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>No.</th>
-                  <th>No. Nota Kas</th>
-                  <th>Tanggal</th>
-                  <th>Pelanggan</th>
-                  <th>Total</th>
-                  <th>Piutang</th>
-                  <th>Status</th>
-                  <th>Cabang</th>
-                </tr>
-                </tfoot>
-              </table>
+              <div class="col-md-3">
+                <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
+                <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+              </div>
             </div>
           </form>
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped display compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -216,11 +175,13 @@
             </tfoot>
           </table>
         </div>
-        <!-- /.card-body -->
+        </form>
       </div>
-      <!-- /.card -->
+      <!-- /.card-body -->
     </div>
-    <!-- /.col -->
+    <!-- /.card -->
+  </div>
+  <!-- /.col -->
   </div>
   <!-- /.row -->
 </section>

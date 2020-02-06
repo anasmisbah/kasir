@@ -12,52 +12,52 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group row">
-                    <label>Logo</label><br>
-                    <img src="{{asset("/storage/".$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
-                    <input type="file" id="foto" class="form-control" name="logo">
+                    <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
+                    <label class="col-2">Logo</label><br>
+                    <div class="col-4"><input type="file" id="foto" class="form-control" name="logo"></div>
                 </div>
                 <div class="form-group row">
-                    <label>Nama Aplikasi</label>
-                    <input type="text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama">
+                    <label class="col-2">Nama Aplikasi:</label>
+                    <div class="col-6"><input type=" text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama"></div>
                 </div>
                 <div class="form-group row">
-                    <label>Nama Toko</label>
-                    <input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan">
+                    <label class="col-2">Nama Toko:</label>
+                    <div class="col-6"><input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan"></div>
                 </div>
                 <div class="form-group row">
-                    <label>Alamat</label>
-                    <input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                    <label class="col-2">Alamat:</label>
+                    <div class="col-10"><input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
                 </div>
                 <div class="form-group row">
-                    <label>Telepon</label>
-                    <input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                    <label class="col-2">Telepon</label>
+                    <div class="col-6"><input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
                 </div>
             </div>
-
             <div class="card-footer">
                 <button type="submit" class="btn btn-lg btn-primary float-right"><i class="fa fa-save"></i></button>
             </div>
-        </form>
     </div>
+    </form>
 </div>
 @endsection
 
 @push('script')
-    <script>
+<script>
     //menampilkan foto setiap ada perubahan pada modal tambah
-$('#foto').on('change', function() {
-    readURL(this);
-});
-function readURL(input) {
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    $('#foto').on('change', function() {
+        readURL(this);
+    });
 
-      reader.onload = function (e) {
-          $('#img_foto').attr('src', e.target.result);
-      };
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-      reader.readAsDataURL(input.files[0]);
-  }
-}
-    </script>
+            reader.onload = function(e) {
+                $('#img_foto').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 @endpush

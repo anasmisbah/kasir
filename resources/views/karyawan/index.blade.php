@@ -73,7 +73,6 @@
                 <th>Jabatan</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
-                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -84,17 +83,6 @@
                 <td>{{$employee->jabatan}}</td>
                 <td>{{$employee->alamat}}</td>
                 <td>{{$employee->telepon}}</td>
-                <td>
-                  <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')" action="{{route('karyawan.hapus', $employee->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="fa fa-trash"></i></button>
-                  </form>
-                  <a href="{{route('karyawan.detail',$employee->id)}}" class="btn btn-outline-success btn-sm">
-                    <i class="fa fa-location-arrow"></i>
-                  </a>
-                </td>
               </tr>
               @endforeach
 
@@ -105,7 +93,6 @@
               <th>Alamat</th>
               <th>Jabatan</th>
               <th>Telepon</th>
-              <th>Aksi</th>
             </tfoot>
           </table>
         </div>
