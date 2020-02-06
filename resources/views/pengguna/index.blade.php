@@ -47,7 +47,6 @@
                 <th>Email</th>
                 <th>Level</th>
                 <th>Cabang</th>
-                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -77,7 +76,6 @@
               <th>Email</th>
               <th>Level</th>
               <th>Cabang</th>
-              <th>Aksi</th>
             </tfoot>
           </table>
         </div>

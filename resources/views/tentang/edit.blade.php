@@ -32,54 +32,53 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Logo</label>
-                    <div class="col-sm-10"><img src="{{asset("/storage/".$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
-                        <input type="file"  id="foto" class="btn" name="logo" >
-                    </div>
+                    <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
+                    <label class="col-2">Logo</label><br>
+                    <div class="col-4"><input type="file" id="foto" class="form-control" name="logo"></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nama Aplikasi</label>
-                    <div class="col-sm-10"><input type="text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama"></div>
+                    <label class="col-2">Nama Aplikasi:</label>
+                    <div class="col-6"><input type=" text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama"></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nama Toko</label>
-                    <div class="col-sm-10"><input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan"></div>
+                    <label class="col-2">Nama Toko:</label>
+                    <div class="col-6"><input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan"></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
+                    <label class="col-2">Alamat:</label>
+                    <div class="col-10"><input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
+                    <label class="col-2">Telepon</label>
+                    <div class="col-6"><input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
                 </div>
                 <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </div>
-
             <div class="card-footer">
                 <p></p>
             </div>
-        </form>
     </div>
+    </form>
 </div>
 @endsection
 
 @push('script')
-    <script>
+<script>
     //menampilkan foto setiap ada perubahan pada modal tambah
-$('#foto').on('change', function() {
-    readURL(this);
-});
-function readURL(input) {
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    $('#foto').on('change', function() {
+        readURL(this);
+    });
 
-      reader.onload = function (e) {
-          $('#img_foto').attr('src', e.target.result);
-      };
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-      reader.readAsDataURL(input.files[0]);
-  }
-}
-    </script>
+            reader.onload = function(e) {
+                $('#img_foto').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 @endpush
