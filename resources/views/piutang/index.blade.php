@@ -89,7 +89,7 @@
               @foreach ($bills as $bill)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td><a href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td>{{$bill->customer->alamat}}</td>
                 <td>{{$bill->customer->telepon}}</td>
