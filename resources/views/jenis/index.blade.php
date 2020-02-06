@@ -44,16 +44,16 @@
                   <tr>
                     <th>No</th>
                     <th>Jenis Barang</th>
-                    <th>Aksi</th>
+                    <th style="width:10%">Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                 @foreach ($categories as $category)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $category->nama }}
+                        <td> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
                         </td>
-                        <td>
+                        <td style="width:10%">
                             <form class="d-inline"
                             onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')"
                             action="{{route('jenis.hapus', $category->id)}}"
@@ -63,13 +63,9 @@
                                 <button type="submit" class="btn btn-outline-danger btn-sm">
                                     <i class="fa fa-trash"></i></button>
                             </form>
-                                <a href="{{route('jenis.detail',$category->id)}}" class="btn btn-outline-success btn-sm">
-                                <i class="fa fa-location-arrow"></i>
-                            </a>
                         </td>
                     </tr>
                 @endforeach
-
                 </table>
               </div>
               <!-- /.card-body -->

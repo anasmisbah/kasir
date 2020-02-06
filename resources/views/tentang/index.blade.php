@@ -8,7 +8,7 @@
           <ol class="breadcrumb float-sm-left">
             <li class="breadcrumb-item">Beranda</li>
             <li class="breadcrumb-item">Tentang Aplikasi</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
+            <li class="breadcrumb-item active"><a href="#">Detail</a></li>
           </ol>
         </div>
       </div>
