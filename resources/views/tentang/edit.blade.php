@@ -1,10 +1,30 @@
 @extends('layouts.master')
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ">
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item">Beranda</li>
+            <li class="breadcrumb-item">Tentang Aplikasi</li>
+            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 <div class="col-12">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Tentang Aplikasi Toko</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-danger active" href="{{ route('tentang.index') }}"><i class=" fas fa-times"></i></a>
+                  </li>
+                </ul>
+              </div>
         </div>
 
         <form class="form-horizontal" action="{{route('tentang.perbarui',$app->id)}}" method="POST" enctype="multipart/form-data">
@@ -32,9 +52,10 @@
                     <label class="col-2">Telepon</label>
                     <div class="col-6"><input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
                 </div>
+                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-lg btn-primary float-right"><i class="fa fa-save"></i></button>
+                <p></p>
             </div>
     </div>
     </form>

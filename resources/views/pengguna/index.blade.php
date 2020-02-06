@@ -38,7 +38,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped display">
             <thead>
               <tr>
                 <th>No.</th>
@@ -58,6 +58,14 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->level->nama }}</td>
                 <td><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                <td>
+                  <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Pengguna secara permanen?')" action="{{route('pengguna.hapus', $user->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                      <i class="fa fa-trash"></i></button>
+                  </form>
+                </td>
               </tr>
               @endforeach
             </tbody>
