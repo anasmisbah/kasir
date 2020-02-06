@@ -34,7 +34,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="{{route('penjualan.index')}}" method="GET">
+                <form action="{{route('piutang.index')}}" method="GET">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="custom-control custom-radio">
@@ -42,24 +42,27 @@
                                 <label for="customRadio1" class="custom-control-label">Per Hari</label>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
-                                <label for="customRadio1" class="custom-control-label">Cabang</label>
+                        @if (auth()->user()->level_id ==1)
+                            <div class="col-md-2">
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
+                                    <label for="customRadio1" class="custom-control-label">Cabang</label>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <div class="row mb-4">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                                    <input type="text" name="hari" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
                                     <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @if (auth()->user()->level_id == 1)
                         <div class="col-md-2">
                             <select class="form-control select2" name="cabang">
                                 <option value="0">Semua</option>
@@ -68,6 +71,8 @@
                                 @endforeach
                             </select>
                         </div>
+                        @endif
+
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                             <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>

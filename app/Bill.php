@@ -10,6 +10,10 @@ class Bill extends Model
         'tanggal_nota', 'diskon', 'total_nota','jumlah_uang_nota','kembalian_nota','status','user_id','customer_id','no_nota_kas','branch_id'
     ];
 
+    protected $dates = [
+        'tanggal_nota'
+    ];
+
     public function customer()
     {
         return $this->belongsTo('App\Customer');

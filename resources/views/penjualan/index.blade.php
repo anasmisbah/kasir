@@ -54,18 +54,28 @@
                                 <label for="radiotahun" class="custom-control-label">Per Tahun</label>
                             </div>
                         </div>
+                        @if (auth()->user()->level_id == 1)
                         <div class="col-md-2">
                             <div class="custom-control custom-radio">
                                 <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" checked>
                                 <label for="radiocabang" class="custom-control-label">Cabang</label>
                             </div>
                         </div>
+                        @else
+                        <div class="col-md-2">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="status" checked>
+                                <label for="radiocabang" class="custom-control-label">Status</label>
+                            </div>
+                        </div>
+                        @endif
+
                     </div>
                     <div class="row mb-4">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                                    <input name="hari" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
                                     <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
@@ -75,24 +85,25 @@
                         <div class="col-md-2">
                             <select class="form-control select2" name="bulan">
                                 @foreach ($bulan as $key => $item)
-                                    <option value="">{{$key}}</option>
+                                    <option value="{{$key}}">{{$item}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-1">
-                            <select class="form-control select2" name="tahun">
+                            <select class="form-control select2" name="bulantahun">
                                 @foreach ($tahun as $key=> $item)
-                                    <option value="">{{$key}}</option>
+                                    <option value="{{$key}}">{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control select2" name="cabang">
+                            <select class="form-control select2" name="tahun">
                                 @foreach ($tahun as $key=> $item)
-                                    <option value="">{{$key}}</option>
+                                    <option value="{{$key}}">{{$key}}</option>
                                 @endforeach
                             </select>
                         </div>
+                        @if (auth()->user()->level_id == 1)
                         <div class="col-md-2">
                             <select class="form-control select2" name="cabang">
                                 <option value="0">Semua</option>
@@ -101,6 +112,16 @@
                                 @endforeach
                             </select>
                         </div>
+                        @else
+                        <div class="col-md-2">
+                            <select class="form-control select2" name="status">
+                                <option value="0">Semua</option>
+                                <option value="lunas">LUNAS</option>
+                                <option value="piutang">PIUTANG</option>
+                            </select>
+                        </div>
+                        @endif
+
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                             <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>

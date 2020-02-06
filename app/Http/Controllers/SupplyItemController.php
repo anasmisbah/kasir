@@ -69,10 +69,9 @@ class SupplyItemController extends Controller
 
     public function create()
     {
-        // $userBranch =  Auth::user()->employee->branch;
-        $userBranch = User::find(2);
+        $userBranch =  Auth::user()->employee->branch;
         $items = Item::all();
-        $branch = $userBranch->employee->branch;
+        $branch = $userBranch;
         return view('stok.tambah',compact('items','branch'));
     }
 

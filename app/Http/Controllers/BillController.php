@@ -12,21 +12,80 @@ use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bills = Bill::all();
-        $tanggal = Bill::get()->groupBy(function ($val) {
-            return Carbon::parse($val->date)->toDateString();
-        });
-
-        $bulan = Bill::get()->groupBy(function ($val) {
-            return Carbon::parse($val->date)->localeMonth;
-        });
-        $tahun = Bill::get()->groupBy(function ($val) {
-            return Carbon::parse($val->date)->year;
-        });
-
         $branches = Branch::all();
+        $user = Auth::user();
+
+        if ($user->level_id == 1) {
+            if ($request->filter === "hari") {
+
+                $explodedate = explode('/',$request->hari);
+                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+
+                $bills = Bill::whereDate('tanggal_nota',$date)->get();
+            }else if($request->filter === "bulan"){
+                $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
+                                ->whereYear('tanggal_nota',$request->bulantahun)
+                                ->orderBy('tanggal_nota', 'asc')
+                                ->get();
+            }else if($request->filter === "tahun"){
+                $bills = Bill::whereYear('tanggal_nota',$request->tahun)
+                                ->orderBy('tanggal_nota', 'asc')
+                                ->get();
+
+            }else if($request->filter === "cabang"){
+                if ($request->cabang === "0") {
+                    $bills = Bill::all();
+                }else{
+                    $bills = Bill::where('branch_id',$request->cabang)->get();
+                }
+            }else{
+                $bills = Bill::all();
+            }
+        }else{
+            if ($request->filter === "hari") {
+                $explodedate = explode('/',$request->hari);
+                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                $bills = Bill::where('branch_id',$user->employee->branch_id)
+                            ->whereDate('tanggal_nota',$date)
+                            ->get();
+            }else if($request->filter === "bulan"){
+                $bills = Bill::where('branch_id',$user->employee->branch_id)
+                                ->whereMonth('tanggal_nota',$request->bulan)
+                                ->whereYear('tanggal_nota',$request->bulantahun)
+                                ->orderBy('tanggal_nota', 'asc')
+                                ->get();
+            }else if($request->filter === "tahun"){
+                $bills = Bill::where('branch_id',$user->employee->branch_id)
+                                ->whereYear('tanggal_nota',$request->tahun)
+                                ->orderBy('tanggal_nota', 'asc')
+                                ->get();
+
+            }else if($request->filter === "status"){
+                if ($request->status === "0") {
+                    $bills = Bill::where('branch_id',$user->employee->branch_id)->get();
+                }else{
+                    $bills = Bill::where([
+                            ['status','=',$request->status],
+                            ['branch_id','=',$user->employee->branch_id]
+                        ])->get();
+                }
+            }else{
+                $bills = Bill::where('branch_id',$user->employee->branch_id)->get();
+            }
+        }
+
+        $billForDate = Bill::all();
+        $tanggal=[];
+        $bulan = [];
+        $tahun =[];
+        foreach ($billForDate as $key => $bill) {
+            $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
+            $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
+            $tahun[$bill->tanggal_nota->year] =$bill->tanggal_nota->year;
+        }
+
 
         return view('penjualan.index',compact('bills','branches','bulan','tahun'));
     }
@@ -59,33 +118,7 @@ class BillController extends Controller
     public function filter(Request $request)
     {
         $bills = null;
-        if ($request->filter === "hari") {
-            $bills = Bill::where('tanggal_nota',$request->hari)->get();
-        }else if($request->filter === "bulan"){
-            $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
-                            ->whereYear('tanggal_nota',$request->tahun)
-                            ->orderBy('tanggal_nota', 'asc')
-                            ->get();
-        }else if($request->filter === "tahun"){
-            $bills = Bill::whereYear('tanggal_nota',$request->tahun)
-                            ->orderBy('tanggal_nota', 'asc')
-                            ->get();
 
-        }else if($request->filter === "cabang"){
-            if ($request->cabang === 0) {
-                $bills = Bill::all();
-            }else{
-                $bills = Bill::with('user','employee','branch')->where('employee.branch_id',$request->cabang)->get();
-            }
-        }else if($request->filter === "status"){
-            if ($request->cabang === 0) {
-                $bills = Bill::all();
-            }else{
-                $bills = Bill::where('status',$request->status)->get();
-            }
-        }else{
-            $bills = Bill::all();
-        }
 
 
     }
@@ -96,10 +129,48 @@ class BillController extends Controller
     }
 
     //menu Piutang
-    public function piutangAll()
+    public function piutangAll(Request $request)
     {
         $bills = Bill::where('status','piutang')->get();
         $branches = Branch::all();
+        $user = Auth::user();
+        if ($user->level_id == 1) {
+            if ($request->filter === "hari") {
+
+                $explodedate = explode('/',$request->hari);
+                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+
+                $bills = Bill::whereDate('tanggal_nota',$date)->where('status','piutang')->get();
+            }else if($request->filter === "cabang"){
+                if ($request->cabang === "0") {
+                    $bills = Bill::where('status','piutang')->get();
+                }else{
+                    $bills = Bill::where([
+                        ['branch_id','=',$request->cabang],
+                        ['status','=','piutang']
+                        ])->get();
+                }
+            }else{
+                $bills = Bill::where('status','piutang')->get();
+            }
+        }else{
+            if ($request->filter === "hari") {
+                $explodedate = explode('/',$request->hari);
+                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                $bills = Bill::where([
+                    ['branch_id','=',$user->employee->branch_id],
+                    ['status','=','piutang']
+                    ])
+                            ->whereDate('tanggal_nota',$date)
+                            ->get();
+            }else{
+                $bills = Bill::where([
+                    ['branch_id','=',$user->employee->branch_id],
+                    ['status','=','piutang']
+                    ])->get();
+            }
+        }
+
         return view('piutang.index',compact('bills','branches'));
     }
 
