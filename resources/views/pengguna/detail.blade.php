@@ -50,7 +50,7 @@
                   </tr>
                   <tr>
                     <td style="width:10%">Cabang</td>
-                    <td>{{$user->employee->branch->nama}}</td>
+                    <td> <a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{$user->employee->branch->nama}}</a></td>
                   </tr>
                 </tbody>
               </table>

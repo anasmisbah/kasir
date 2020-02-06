@@ -1,45 +1,73 @@
 @extends('layouts.master')
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ">
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item">Beranda</li>
+            <li class="breadcrumb-item">Stok Barang</li>
+            <li class="breadcrumb-item active"><a href="#">Detail</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 <div class="col-12 ">
     <div class="card mt-3">
         <div class="card-header">
-            <h3 class="card-title">Tambah Stok Barang</h3>
+            <h3 class="card-title">Stok Barang</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-danger active" href="{{ route('stok.index') }}"><i class=" fas fa-times"></i></a>
+                  </li>
+                </ul>
+              </div>
         </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td style="width:10%">Nama</td>
+                    <td><a href="{{route('cabang.detail',$supply->item->id)}}">{{$supply->item->nama}}</a></td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Cabang</td>
+                    <td> <a href="{{route('cabang.detail',$supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Harga Pusat</td>
+                    <td>{{$supply->item->harga}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Harga Cabang</td>
+                    <td>{{$supply->harga_cabang}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Harga Selisih</td>
+                    <td>{{$supply->harga_selisih}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Stok</td>
+                    <td>{{$supply->stok}}</td>
+                  </tr>
 
-        <form role="form" action="{{route('stok.simpan')}}" method="POST">
-            @csrf
-            <div class="card-body">
-                <div class="form-group">
-                        <label>Barang</label>
-                        <input type="text" value="{{$supply->item->nama}}" disabled class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label>Cabang</label>
-                    <input type="text" value="{{$supply->branch->nama}}" disabled class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label>Harga Pusat</label>
-                    <input type="text" value="{{$supply->item->harga}}" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat">
-                </div>
-                <div class="form-group">
-                    <label>Harga Cabang</label>
-                    <input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" disabled class="form-control inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
-                </div>
-                <div class="form-group">
-                    <label>Selisih</label>
-                    <input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih">
-                </div>
-                <div class="form-group">
-                    <label>Stok</label>
-                    <input type="text" disabled value="{{$supply->stok}}" class="form-control" name="stok" placeholder="Masukkan Stok Barang">
-                </div>
+                </tbody>
+              </table>
+              <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus stok Barang secara permanen?')" action="{{route('stok.hapus', $supply->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
+                  <i class="fa fa-trash"></i></button>
+              </form>
+              <a href="{{route('stok.ubah',$supply->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
             </div>
 
-            <div class="card-footer">
-                <a href="{{route('stok.ubah',$supply->id)}}" class="btn btn-lg btn-primary float-right"><i class="fa fa-edit"></i></a>
-            </div>
-        </form>
+                <div class="card-footer text-right">
+                    <strong>Dibuat Pada:</strong>{{$supply->created_at->format('l | d F Y')}} | {{$supply->created_at->format('h:i:s A')}} / <strong>Diubah Pada:</strong>{{$supply->updated_at->format('l | d F Y')}} | {{$supply->updated_at->format('h:i:s A')}}
+                </div>
     </div>
 </div>
 @endsection

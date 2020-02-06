@@ -5,45 +5,65 @@
 @endpush
 
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ">
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item">Beranda</li>
+            <li class="breadcrumb-item">Stok Barang</li>
+            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 <div class="col-12 ">
     <div class="card mt-3">
         <div class="card-header">
             <h3 class="card-title">Edit Stok Barang</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-danger active" href="{{ route('stok.index') }}"><i class=" fas fa-times"></i></a>
+                  </li>
+                </ul>
+              </div>
         </div>
 
-        <form role="form" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
+        <form role="form-horizontal" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
-                <div class="form-group">
-                        <label>Barang</label>
-                        <select id="barang" class="form-control select2" name="item_id">
+                <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Barang</label>
+                        <div class="col-sm-10"><select id="barang" class="form-control select2" name="item_id">
                             <option value="0" selected>--Pilih Barang--</option>
                             @foreach ($items as $item)
                                 <option value="{{$item->id}}" {{$item->id == $supply->item_id?"selected":""}}>{{$item->nama}}</option>
                             @endforeach
-                        </select>
+                        </select></div>
                 </div>
-                <div class="form-group">
-                    <label>Cabang</label>
-                    <input type="text" value="{{$supply->branch->nama}}" disabled class="form-control" >
-                    <input type="hidden" value="{{$supply->branch->id}}" name="branch_id">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Cabang</label>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->branch->nama}}" disabled class="form-control" >
+                    <input type="hidden" value="{{$supply->branch->id}}" name="branch_id"></div>
                 </div>
-                <div class="form-group">
-                    <label>Harga Pusat</label>
-                    <input type="text" value="{{$supply->item->harga}}" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Harga Pusat</label>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->item->harga}}" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat"></div>
                 </div>
-                <div class="form-group">
-                    <label>Harga Cabang</label>
-                    <input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Harga Cabang</label>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang"></div>
                 </div>
-                <div class="form-group">
-                    <label>Selisih</label>
-                    <input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Selisih</label>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih"></div>
                 </div>
-                <div class="form-group">
-                    <label>Stok</label>
-                    <input type="text" value="{{$supply->stok}}" class="form-control" name="stok" placeholder="Masukkan Stok Barang">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Stok</label>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->stok}}" class="form-control" name="stok" placeholder="Masukkan Stok Barang"></div>
                 </div>
             </div>
 
