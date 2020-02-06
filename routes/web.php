@@ -98,7 +98,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('customer/storeajax','CustomerController@storeAjax')->name('kasir.pelanggan.simpan');
     Route::get('/kasir/simpan','BillController@saveBillAjax')->name('kasir.simpan.nota');
 
-    Route::view('pdf/penjualan','pdf.penjualan_nota');
+    Route::view('pdf/penjualan','pdf.penjualannota');
+    Route::view('pdf/piutang','pdf.piutang_nota');
 
 
     Route::middleware(['utama'])->group(function (){
