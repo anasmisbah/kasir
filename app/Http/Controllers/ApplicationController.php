@@ -11,7 +11,9 @@ class ApplicationController extends Controller
 {
     public function index()
     {
+        $app = Application::first();
 
+        return view('tentang.index',compact('app'));
     }
 
     public function edit()

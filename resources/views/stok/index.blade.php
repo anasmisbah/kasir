@@ -39,17 +39,6 @@
           @endif
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-          @if (auth()->user()->level_id == 1)
-          <form action="{{route('stok.index')}}" method="GET">
-            <div class="row">
-              <div class="col-md-2">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
-                  <label for="customRadio1" class="custom-control-label">Cabang</label>
-                </div>
-              </div>
-            </div>
             <!-- /.card-header -->
             <div class="card-body">
                 @if (auth()->user()->level_id == 1)
@@ -118,7 +107,6 @@
                     </td>
                   </tr>
                 @endforeach
-
                 <tfoot>
                   <th>No.</th>
                   <th>Nama</th>
@@ -131,56 +119,6 @@
                 </tfoot>
               </table>
             </div>
-          </form>
-          @endif
-          <table id="example1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>Cabang</th>
-                <th>Harga Pusat</th>
-                <th>Harga Cabang</th>
-                <th>Selisih</th>
-                <th>Stok (Kg)</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($supplies as $supply)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{$supply->item->nama}}</td>
-                <td>{{$supply->branch->nama}}</td>
-                <td>Rp.<span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td>Rp. <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td>Rp.<span class="harga">{{$supply->harga_selisih}}</span>,-</td>
-                <td>{{$supply->stok}}</td>
-                <td>
-                  <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Stok Barang secara permanen?')" action="{{route('stok.hapus', $supply->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="fa fa-trash"></i></button>
-                  </form>
-                  <a href="{{route('stok.detail',$supply->id)}}" class="btn btn-outline-success btn-sm">
-                    <i class="fa fa-location-arrow"></i>
-                  </a>
-                </td>
-              </tr>
-              @endforeach
-
-            <tfoot>
-              <th>No.</th>
-              <th>Nama</th>
-              <th>Cabang</th>
-              <th>Harga Pusat</th>
-              <th>Harga Cabang</th>
-              <th>Selisih</th>
-              <th>Stok (Kg)</th>
-              <th>Aksi</th>
-            </tfoot>
-          </table>
         </div>
         <!-- /.card-body -->
       </div>

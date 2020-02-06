@@ -38,7 +38,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped display">
             <thead>
               <tr>
                 <th>No.</th>
@@ -66,9 +66,6 @@
                     <button type="submit" class="btn btn-outline-danger btn-sm">
                       <i class="fa fa-trash"></i></button>
                   </form>
-                  <a href="{{route('pengguna.detail',$user->id)}}" class="btn btn-outline-success btn-sm">
-                    <i class="fa fa-location-arrow"></i>
-                  </a>
                 </td>
               </tr>
               @endforeach

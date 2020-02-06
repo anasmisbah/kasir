@@ -61,7 +61,13 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $levels = Level::all();
-        $employees = Employee::all();
+        $employeesAll = Employee::all();
+        $employees = [];
+        foreach ($employeesAll as $employ) {
+            if (!$employ->user) {
+                $employees[] = $employ;
+            }
+        }
         return view('pengguna.ubah',compact('user','levels','employees'));
     }
 

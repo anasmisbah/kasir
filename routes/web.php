@@ -77,7 +77,7 @@ Route::middleware(['auth'])->group(function (){
     Route::put('/karyawan/{id}', 'EmployeeController@update')->name('karyawan.perbarui');
     Route::get('/karyawan/detail/{id}','EmployeeController@show')->name('karyawan.detail');
     Route::delete('/karyawan/hapus/{id}','EmployeeController@delete')->name('karyawan.hapus');
-
+    Route::get('/pengguna/getEmployeeJson','EmployeeController@getEmployeeJson')->name('karyawan.data');
 
     Route::get('/pengguna', 'UserController@index')->name('pengguna.index');
     Route::get('/pengguna/tambah', 'UserController@create')->name('pengguna.tambah');
@@ -87,7 +87,9 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/pengguna/detail/{id}','UserController@show')->name('pengguna.detail');
     Route::delete('/pengguna/hapus/{id}','UserController@delete')->name('pengguna.hapus');
 
-    Route::get('/tentang', 'ApplicationController@edit')->name('tentang.index');
+
+    Route::get('/tentang', 'ApplicationController@index')->name('tentang.index');
+    Route::get('/tentang/ubah', 'ApplicationController@edit')->name('tentang.ubah');
     Route::put('/tentang/{id}', 'ApplicationController@update')->name('tentang.perbarui');
 
     Route::get('/kasir','BillController@kasir')->name('kasir.index');

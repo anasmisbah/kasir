@@ -142,23 +142,23 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label for="">Uang muka</label>
-                <input id="uangmuka" type="text" value="0" class="form-control">
+                <input id="uangmuka" type="text" value="0" class="form-control form-control-sm ">
             </div>
             <div class="form-group">
                 <label for="">Uang kembali</label>
-                <input id="uangkembali" type="text" disabled  class="form-control">
+                <input id="uangkembali" type="text" disabled  class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <label for="">diskon (%)</label>
-                <input id="diskon" disabled min="0" value="0" type="text" class="form-control">
+                <input id="diskon" disabled min="0" value="0" type="text" class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
-                <input id="status" type="text" disabled  class="form-control">
+                <input id="status" type="text" disabled  class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <label for="">Kasir</label>
-                <input type="text" value="{{auth()->user()->employee->nama}}" disabled  class="form-control">
+                <input type="text" value="{{auth()->user()->employee->nama}}" disabled  class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <a href="#" onClick="window.location.reload();" class="btn btn-danger">Reset</a>

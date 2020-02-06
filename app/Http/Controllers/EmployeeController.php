@@ -62,6 +62,13 @@ class EmployeeController extends Controller
         return view('karyawan.detail',compact('employee'));
     }
 
+    public function getEmployeeJson(Request $request)
+    {
+        $employee = Employee::findOrFail($request->id);
+        $employee->branch;
+        return response()->json($employee);
+    }
+
     public function create()
     {
         $branches = Branch::all();
