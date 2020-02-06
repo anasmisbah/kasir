@@ -9,6 +9,8 @@ use App\Customer;
 use App\Bill;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use App\Application;
 
 class BillController extends Controller
 {
@@ -16,7 +18,8 @@ class BillController extends Controller
     {
         $branches = Branch::all();
         $user = Auth::user();
-
+        $app = Application::first();
+        $branch = $user->employee->branch;
         if ($user->level_id == 1) {
             if ($request->filter === "hari") {
 
@@ -42,6 +45,18 @@ class BillController extends Controller
                 }
             }else{
                 $bills = Bill::all();
+            }
+
+            if ($request->pdf) {
+                $data = [
+                    'bills'=>$bills,
+                    'branch'=> $branch,
+                    'app'=>$app,
+                    'date'=>Carbon::now()->format('d F Y')
+                ];
+                $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                // return $pdf->stream();
+                return $pdf->download('penjualan.pdf');
             }
         }else{
             if ($request->filter === "hari") {
@@ -73,6 +88,17 @@ class BillController extends Controller
                 }
             }else{
                 $bills = Bill::where('branch_id',$user->employee->branch_id)->get();
+            }
+            if ($request->pdf) {
+                $data = [
+                    'bills'=>$bills,
+                    'branch'=> $branch,
+                    'app'=>$app,
+                    'date'=>Carbon::now()->format('d F Y')
+                ];
+                $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                // return $pdf->stream();
+                return $pdf->download('penjualan.pdf');
             }
         }
 
@@ -134,6 +160,8 @@ class BillController extends Controller
         $bills = Bill::where('status','piutang')->get();
         $branches = Branch::all();
         $user = Auth::user();
+        $app = Application::first();
+        $branch = $user->employee->branch;
         if ($user->level_id == 1) {
             if ($request->filter === "hari") {
 
@@ -153,6 +181,18 @@ class BillController extends Controller
             }else{
                 $bills = Bill::where('status','piutang')->get();
             }
+
+            if ($request->pdf) {
+                $data = [
+                    'bills'=>$bills,
+                    'branch'=> $branch,
+                    'app'=>$app,
+                    'date'=>Carbon::now()->format('d F Y')
+                ];
+                $pdf = PDF::loadView('pdf.piutang', $data);
+                // return $pdf->stream();
+                return $pdf->download('piutang.pdf');
+            }
         }else{
             if ($request->filter === "hari") {
                 $explodedate = explode('/',$request->hari);
@@ -168,6 +208,17 @@ class BillController extends Controller
                     ['branch_id','=',$user->employee->branch_id],
                     ['status','=','piutang']
                     ])->get();
+            }
+            if ($request->pdf) {
+                $data = [
+                    'bills'=>$bills,
+                    'branch'=> $branch,
+                    'app'=>$app,
+                    'date'=>Carbon::now()->format('d F Y')
+                ];
+                $pdf = PDF::loadView('pdf.piutang', $data);
+                // return $pdf->stream();
+                return $pdf->download('piutang.pdf');
             }
         }
 
