@@ -4,7 +4,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Ubah Karyawan</h3>
+            <h3 class="card-title">Tetang Aplikasi Toko</h3>
         </div>
 
         <form role="form" action="{{route('tentang.perbarui',$app->id)}}" method="POST" enctype="multipart/form-data">
