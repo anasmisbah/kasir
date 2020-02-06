@@ -121,11 +121,58 @@
               </div>
               @endif
 
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-              </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                            <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
+                            <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                        </div>
+                    </div>
+                </form>
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>No. Nota Kas</th>
+                  <th>Tanggal</th>
+                  <th>Pelanggan</th>
+                  <th>Total</th>
+                  <th>Piutang</th>
+                  <th>Status</th>
+                  <th>Cabang</th>
+                  <th>Aksi</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($bills as $bill)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$bill->no_nota_kas}}</td>
+                        <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
+                        <td>{{$bill->customer->nama}}</td>
+                        <td>Rp.{{$bill->total_nota}},-</td>
+                        <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                        <td>{{strtoupper($bill->status)}}</td>
+                        <td>{{ $bill->branch->nama }}</td>
+                        <td>
+                            <a href="{{route('penjualan.detail',$bill->id)}}" class="btn btn-outline-success btn-sm">
+                                <i class="fa fa-location-arrow"></i>
+                        </td>
+                      </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>No.</th>
+                  <th>No. Nota Kas</th>
+                  <th>Tanggal</th>
+                  <th>Pelanggan</th>
+                  <th>Total</th>
+                  <th>Piutang</th>
+                  <th>Status</th>
+                  <th>Cabang</th>
+                </tr>
+                </tfoot>
+              </table>
             </div>
           </form>
           <table id="example1" class="table table-bordered table-striped">
