@@ -4,31 +4,31 @@
 <div class="col-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Tetang Aplikasi Toko</h3>
+            <h3 class="card-title">Tentang Aplikasi Toko</h3>
         </div>
 
-        <form role="form" action="{{route('tentang.perbarui',$app->id)}}" method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" action="{{route('tentang.perbarui',$app->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="card-body">
-                <div class="form-group">
+                <div class="form-group row">
                     <label>Logo</label><br>
                     <img src="{{asset("/storage/".$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     <input type="file" id="foto" class="form-control" name="logo">
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label>Nama Aplikasi</label>
                     <input type="text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama">
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label>Nama Toko</label>
                     <input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan">
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label>Alamat</label>
                     <input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan">
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label>Telepon</label>
                     <input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan">
                 </div>
