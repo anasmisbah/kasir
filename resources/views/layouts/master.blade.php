@@ -36,7 +36,7 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Halo {{auth()->user()->username}}</a>
-          </li>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
              <i class="fas fa-user"></i>

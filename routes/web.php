@@ -100,7 +100,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::view('pdf/penjualan','pdf.penjualannota');
     Route::view('pdf/piutang','pdf.piutang_nota');
-
+    Route::view('master/kasir','layouts.kasir');
 
     Route::middleware(['utama'])->group(function (){
 
