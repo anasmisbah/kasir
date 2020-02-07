@@ -17,36 +17,46 @@
             height: 5px;
         }
 
-        .header h3,
-        .header h4 {
+        .grid-item h3,
+        .grid-item h4 {
             font-weight: bold
         }
-        th{
-            text-align: center
-        }
-        .header p{
+
+        .grid-item p{
             margin-top: -10px;
+        }
+        .grid-container{
+            display: grid;
+            grid-template-columns: 400px 100px 300px;
+        }
+        .grid-item.second{
+            margin-top:3rem;
+            text-align: right;
+        }
+        .grid-container-2{
+            display: grid;
+            grid-template-columns: 350px 120px
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row header">
-            <div class="col-md-5">
+        <div class="grid-container">
+            <div class="grid-item">
                 <div>NOTA KAS</div>
                 <h4 class="mt-1">{{$app->toko}}</h4>
                 <div>{{$app->alamat}}</div>
                 <div>{{$app->telepon}}</div>
             </div>
-                    <div class="col-md-3 text-right">
+                    <div class="grid-item second">
                         <p>No. Nota Bon:</p>
                         <p>Tanggal:</p>
                         <p>Pelanggan:</p>
                         <p>Alamat:</p>
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="grid-item" style="margin-top:3rem; margin-left:20px">
                         <p>{{$bill->no_nota_kas}}</p>
                         <p>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</p>
                         <p>{{$bill->customer->nama}}</p>
@@ -116,11 +126,11 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
+        <div class="grid-container-2">
+            <div class="grid-item">
                 Status : <span><b><i>{{strtoupper($bill->status)}}</i></b></span>
             </div>
-            <div class="col-lg-4">
+            <div class="grid-item">
                 <p>Hormat Kami,</p>
                 <br><br>
                 <b> {{$bill->user->employee->nama}} </b>

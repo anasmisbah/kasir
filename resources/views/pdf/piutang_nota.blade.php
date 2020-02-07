@@ -17,15 +17,25 @@
             height: 5px;
         }
 
-        .header h3,
-        .header h4 {
+        .grid-item h3,
+        .grid-item h4 {
             font-weight: bold
         }
-        th{
-            text-align: center
-        }
-        .header p{
+
+        .grid-item p{
             margin-top: -10px;
+        }
+        .grid-container{
+            display: grid;
+            grid-template-columns: 400px 100px 300px;
+        }
+        .grid-item.second{
+            margin-top:3rem;
+            text-align: right;
+        }
+        .grid-container-2{
+            display: grid;
+            grid-template-columns: 350px 120px
         }
     </style>
 </head>
@@ -33,31 +43,30 @@
 <body>
     <div class="container">
 
-        <div class="row header">
-            <div class="col-lg-5">
+        <div class="grid-container">
+            <div class="grid-item">
                 <h3>NOTA BON</h3>
                 <h4 class="mt-1">NAMA TOKO</h4>
                 <p>Jl. Agus Salim Gg. Masjid No. 30 Sidomulyo, Samarinda Ulu, Samarinda, Kalimantan Timur <br>75115</p>
                 <p>08112233445</p>
-            </div>
-            <div class="col-lg-7" style="margin-top: 3rem">
-                <div class="col-lg-4 text-right">
-                    <p>No. Nota Bon:</p>
-                    <p>Tanggal:</p>
-                    <p>Pelanggan:</p>
-                    <p>Alamat:</p>
 
-                </div>
-                <div class="col-lg-8">
-                    <p>B08786755</p>
-                    <p>29 September 2019 | 10:30:10 WIB</p>
-                    <p>Wiliam Doe</p>
-                    <p>Jl. Agus Salim Gg. Masjid No.20 Sidomulyo, Samarinda Ulu, Samarinda, Kalimantan Timur <br>75115
-                    </p>
-                    <p>08112233445</p>
-                </div>
+            </div>
+            <div class="grid-item second">
+                <p>No. Nota Bon:</p>
+                <p>Tanggal:</p>
+                <p>Pelanggan:</p>
+                <p>Alamat:</p>
+            </div>
+            <div class="grid-item" style="margin-top:3rem; margin-left:20px">
+                <p>B08786755</p>
+                <p>29 September 2019 | 10:30:10 WIB</p>
+                <p>Wiliam Doe</p>
+                <p>Jl. Agus Salim Gg. Masjid No.20 Sidomulyo, Samarinda Ulu, Samarinda, Kalimantan Timur <br>75115
+                </p>
+                <p>08112233445</p>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <table class="no-margin table table-hover text-center" id="table">
@@ -103,11 +112,11 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
+        <div class="grid-container-2">
+            <div class="grid-item">
                 Status : <span><b><i>LUNAS</i></b></span>
             </div>
-            <div class="col-lg-4">
+            <div class="grid-item">
                 <p>Hormat Kami,</p>
                 <br><br>
                 <b>Nama Kasir</b>
