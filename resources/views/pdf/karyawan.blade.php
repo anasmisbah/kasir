@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap3.min.css" >
     <title>Daftar Karyawan</title>
-
+<style>
+    .border{
+            border-top: 2px solid black !important;
+        }
+</style>
 </head>
-<body>
+<body id="body_print">
     <div class="container">
-        <div class="row" >
+        <div class="row mt-3" >
             <h4 class="text-center">DAFTAR KARYAWAN</h4>
             <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
 
@@ -18,8 +22,7 @@
             <br>
 
             <table class="table table-striped">
-                <thead>
-                    <tr>
+                    <tr class="border">
                         <th>No.</th>
                         <th>Nama</th>
                         <th>Jabatan</th>
@@ -27,10 +30,9 @@
                         <th>Telepon</th>
                         <th>Cabang</th>
                     </tr>
-                </thead>
                 <tbody>
                     @foreach ($employees as $employee)
-                        <tr>
+                        <tr class="{{$loop->iteration == 1?'border':''}}">
                             <td>{{$loop->iteration}}</td>
                             <td>{{$employee->nama}}</td>
                             <td>{{$employee->jabatan}}</td>
@@ -52,5 +54,18 @@
             </div>
         </div>
     </div>
+
+      <!-- jQuery -->
+  <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/adminlte/dist/js/adminlte.min.js"></script>
+  <script>
+    window.addEventListener("afterprint", function(){
+      history.back();
+    });
+    $("#body_print").ready(function(){
+      window.print();
+    });
+  </script>
 </body>
 </html>

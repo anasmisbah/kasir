@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap3.min.css" >
     <title>Daftar Stok Barang</title>
-
+    <style>
+        .border{
+                border-top: 2px solid black !important;
+            }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="row" >
+        <div class="row mt-3" >
             <h4 class="text-center">DAFTAR STOK BARANG</h4>
             <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
 
@@ -19,7 +23,7 @@
 
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr class="border">
                         <th>No.</th>
                         <th>Nama Barang</th>
                         <th>Cabang</th>
@@ -30,7 +34,7 @@
                 </thead>
                 <tbody>
                     @foreach ($supplies as $supply)
-                        <tr>
+                        <tr class="{{$loop->iteration == 1?'border':''}}">
                             <td>{{$loop->iteration}}</td>
                             <td>{{$supply->item->nama}}</td>
                             <td>{{$supply->branch->nama}}</td>
@@ -52,5 +56,18 @@
             </div>
         </div>
     </div>
+
+      <!-- jQuery -->
+  <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/adminlte/dist/js/adminlte.min.js"></script>
+  <script>
+    window.addEventListener("afterprint", function(){
+      history.back();
+    });
+    $("#body_print").ready(function(){
+      window.print();
+    });
+  </script>
 </body>
 </html>

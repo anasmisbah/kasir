@@ -55,7 +55,7 @@
               </div>
               <div class="col-md-6">
                 <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
+                <button type="submit" class="btn btn-primary" name="print" value="supply"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
