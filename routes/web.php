@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/penjualan/detail/{id}','BillController@show')->name('penjualan.detail');
 
     Route::get('/piutang', 'BillController@piutangAll')->name('piutang.index');
+    Route::get('/piutang/lunas/{id}','BillController@piutanglunas')->name('piutang.lunas');
     Route::get('/piutang/detail/{id}','BillController@showPiutang')->name('piutang.detail');
 
 
@@ -97,6 +98,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/stok/getjsonsupply','SupplyItemController@getJsonSupply')->name('stok.data');
     Route::post('customer/storeajax','CustomerController@storeAjax')->name('kasir.pelanggan.simpan');
     Route::get('/kasir/simpan','BillController@saveBillAjax')->name('kasir.simpan.nota');
+    Route::get('/kasir/cetaknota/{id}','BillController@cetaknota')->name('kasir.cetaknota');
+    Route::get('/kasir/unduhnota/{id}','BillController@unduhknota')->name('kasir.unduhnota');
 
     Route::view('pdf/penjualan','pdf.penjualannota');
     Route::view('pdf/piutang','pdf.piutang_nota');

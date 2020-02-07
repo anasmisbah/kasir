@@ -234,7 +234,7 @@
 @push('script')
 <script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
 $(function () {
     $('.select2').select2()
@@ -337,15 +337,17 @@ $(document).on('click', '#cetaknota', function () {
             data
         },
         success: function (data) {
+            const printurl = `kasir/cetaknota/${data.data.id}`
+                        window.open(printurl,'_blank');
             if (data.status) {
                 swal({
                     title: "Berhasil Menambahkan Transaksi",
                     text: "",
                     icon: "success",
                 })
-                    .then(function () {
-                        location.reload()
-                    });
+                .then(function () {
+                    location.reload()
+                });
             }
 
         },

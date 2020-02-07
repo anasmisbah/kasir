@@ -287,6 +287,19 @@ class BillController extends Controller
         return view('piutang.index',compact('bills','branches'));
     }
 
+    public function piutanglunas($id)
+    {
+        $bill =Bill::findOrFail($id);
+
+        $bill->update([
+            'status'=>'lunas',
+            'jumlah_uang_nota'=>$bill->total_nota,
+            'kembalian_nota'=>0,
+        ]);
+
+        return redirect()->route('penjualan.detail',$bill->id);
+    }
+
     public function piutangFilter(Request $request)
     {
         if ($request->filter == "tanggal") {
@@ -358,28 +371,26 @@ class BillController extends Controller
             ]);
         }
 
-        $this->nota_penjualan($newBill);
-
         return response()->json([
             'data'=>$newBill,
             'status'=>true
         ]);
     }
 
-    public function nota_penjualan($bill)
+    public function cetaknota($id)
     {
-        $user = Auth::user();
-        $tanggal_nota = Carbon::now();
+        $bill = Bill::findOrFail($id);
         $app = Application::first();
 
         $data = [
             'bill'=>$bill,
             'app'=>$app,
         ];
-        $pdf = PDF::loadView('pdf.penjualan_nota', $data);
+        $pdf = PDF::loadView('pdf.penjualannota', $data);
         // return $pdf->stream();
-        $pdfname = $bill->no_nota_kas;
-        return $pdf->download("$pdfname.pdf");
+        // $pdfname = $bill->no_nota_kas;
+        // return $pdf->download("$pdfname.pdf");
+        return view('pdf.penjualannota',compact('bill','app'));
     }
 
     public function store(Request $request)
