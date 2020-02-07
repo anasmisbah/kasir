@@ -96,7 +96,7 @@
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td>{{$bill->customer->alamat}}</td>
                 <td>{{$bill->customer->telepon}}</td>
-                <td>Rp. {{abs($bill->kembalian_nota)}},-</td>
+                <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                 <td>
                   <a href="{{route('piutang.detail',$bill->id)}}" class="btn btn-outline-success btn-sm">
                     <i class="fa fa-location-arrow"></i>
@@ -149,6 +149,10 @@
       "ordering": true,
       "info": true,
       "autoWidth": false,
+    });
+    $(".harga").divide({
+      delimiter: '.',
+      divideThousand: true
     });
   });
 </script>

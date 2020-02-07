@@ -63,7 +63,7 @@
               </div>
             </div>
           </form>
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table compact table-bordered table-striped">
             <thead>
               <tr>
                 <th>No.</th>
@@ -81,7 +81,7 @@
                 <td><a href="{{route('barang.detail', $supply->item->id)}}">{{$supply->item->nama}}</a></td>
                 <td><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
                 <td>Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td>Rp  <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td>Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                 <td>Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach

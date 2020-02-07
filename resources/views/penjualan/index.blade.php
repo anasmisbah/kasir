@@ -154,8 +154,8 @@
                 <td><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
                 <td>{{$bill->tanggal_nota}}</td>
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td>Rp.{{$bill->total_nota}},-</td>
-                <td>Rp.{{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                <td>Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
+                <td><span class="harga">{{ $bill->kembalian_nota < 0 ?"Rp ".abs($bill->kembalian_nota).",-":"-"}}</span></td>
                 <td>{{strtoupper($bill->status)}}</td>
                 <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
@@ -210,7 +210,11 @@
       "info": true,
       "autoWidth": false,
     });
-    $('.select2').select2()
+    $('.select2').select2();
+    $(".harga").divide({
+      delimiter: '.',
+      divideThousand: true
+    });
   });
 </script>
 @endpush
