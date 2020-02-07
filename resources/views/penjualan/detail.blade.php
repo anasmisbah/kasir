@@ -33,10 +33,10 @@
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
                     <li class="nav-item mr-2">
-                        <a class="nav-link btn-primary active" href="{{ route('pelanggan.index') }}"><i class=" fas fa-print"></i></a>
+                        <a class="nav-link btn-primary active" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
                       </li>
                     <li class="nav-item mr-5">
-                        <a class="nav-link btn-warning active" href="{{ route('pelanggan.index') }}"><i class=" fas fa-trash"></i></a>
+                        <a class="nav-link btn-warning active" href="{{ route('penjualan.index') }}"><i class=" fas fa-trash"></i></a>
                       </li>
                     <li class="nav-item">
                         <a class="nav-link btn-danger active" href="{{ route('penjualan.index') }}"><i class=" fas fa-times"></i></a>

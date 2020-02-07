@@ -325,6 +325,22 @@ class BillController extends Controller
 
     }
 
+    public function cetaknotapiutang($id)
+    {
+        $bill = Bill::findOrFail($id);
+        $app = Application::first();
+
+        $data = [
+            'bill'=>$bill,
+            'app'=>$app,
+        ];
+        $pdf = PDF::loadView('pdf.penjualannota', $data);
+        // return $pdf->stream();
+        // $pdfname = $bill->no_nota_kas;
+        // return $pdf->download("$pdfname.pdf");
+        return view('pdf.piutang_nota',compact('bill','app'));
+    }
+
 
     //Menu Kasir
     public function kasir()

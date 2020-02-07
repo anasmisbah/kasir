@@ -3,8 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap3.min.css" >
     <title>Nota Kas</title>
 
     <style>
@@ -70,11 +69,11 @@
                 <table class="no-margin table table-hover" id="table">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Harga Satuan</th>
-                            <th>Qty(Kg)</th>
-                            <th>Jumlah</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama Barang</th>
+                            <th class="text-center">Harga Satuan</th>
+                            <th class="text-center">Qty(Kg)</th>
+                            <th class="text-center">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,5 +137,16 @@
         </div>
     </div>
 </body>
-
+      <!-- jQuery -->
+      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+      <!-- AdminLTE App -->
+      <script src="/adminlte/dist/js/adminlte.min.js"></script>
+      <script>
+        window.addEventListener("afterprint", function(){
+          history.back();
+        });
+        $("#body_print").ready(function(){
+          window.print();
+        });
+      </script>
 </html>

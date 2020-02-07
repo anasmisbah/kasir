@@ -36,7 +36,7 @@
                         <a class="nav-link btn-secondary active" href="{{ route('piutang.lunas',$bill->id) }}"><i class=" fas fa-check"></i></a>
                       </li>
                     <li class="nav-item mr-5">
-                        <a class="nav-link btn-primary active" href="{{ route('pelanggan.index') }}"><i class=" fas fa-print"></i></a>
+                        <a class="nav-link btn-primary active" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
                       </li>
                     <li class="nav-item">
                         <a class="nav-link btn-danger active" href="{{ route('piutang.index') }}"><i class=" fas fa-times"></i></a>

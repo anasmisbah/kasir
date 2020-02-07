@@ -23,10 +23,12 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('/penjualan', 'BillController@index')->name('penjualan.index');
     Route::get('/penjualan/detail/{id}','BillController@show')->name('penjualan.detail');
+    Route::get('/penjualan/cetaknota/{id}','BillController@cetaknota')->name('penjualan.cetaknota');
 
     Route::get('/piutang', 'BillController@piutangAll')->name('piutang.index');
     Route::get('/piutang/lunas/{id}','BillController@piutanglunas')->name('piutang.lunas');
     Route::get('/piutang/detail/{id}','BillController@showPiutang')->name('piutang.detail');
+    Route::get('/piutang/cetaknota/{id}','BillController@cetaknotapiutang')->name('piutang.cetaknota');
 
 
     Route::get('/pelanggan', 'CustomerController@index')->name('pelanggan.index');
