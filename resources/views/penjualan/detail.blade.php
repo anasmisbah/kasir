@@ -73,7 +73,7 @@
                   </tr>
                   <tr>
                     <td style="width:15%">Kasir</td>
-                    <td><a href="{{route('cabang.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
+                    <td><a href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
                   </tr>
                   <tr>
                     <td style="width:15%">Status</td>

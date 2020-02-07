@@ -48,7 +48,7 @@
             <table class="table table-striped">
                 <tbody>
                   <tr>
-                    <td style="width:15%">No Nota Kas</td>
+                    <td style="width:15%">No Nota Bon</td>
                     <td> <strong>{{$bill->no_nota_kas}}</strong> </td>
                   </tr>
                   <tr>
@@ -73,7 +73,7 @@
                   </tr>
                   <tr>
                     <td style="width:15%">Kasir</td>
-                    <td><a href="{{route('cabang.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
+                    <td><a href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
                   </tr>
                   <tr>
                     <td style="width:15%">Status</td>
@@ -88,11 +88,11 @@
             <table class="no-margin table table-stripped text-center" id="table">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Nama Barang</th>
-                        <th>Harga Satuan</th>
-                        <th>Qty(Kg)</th>
-                        <th>Jumlah</th>
+                        <th>No Nota Kas</th>
+                        <th>Tanggal nota Kas</th>
+                        <th>Sub Total Nota Kas</th>
+                        <th>Diskon</th>
+                        <th>Total Nota Kas</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,45 +100,37 @@
                         $subtotal = 0;
                     @endphp
                     @foreach ($bill->transaction as $trans)
-                        <tr>
-                            <td class="text-center">{{$loop->iteration}}</td>
-                            <td width="50%">{{$trans->supply->item->nama}}</td>
-                            <td class="text-center" >{{$trans->supply->harga_cabang}}</td>
-                            <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
-                            <td class="text-center">Rp {{$trans->total_harga}},-</td>
-                        </tr>
                         @php
                             $subtotal+=$trans->total_harga
                         @endphp
                     @endforeach
-
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Sub Total</td>
-                        <td>Rp {{$subtotal}},-</td>
+                    <tr>
+                        <td class="text-center">{{$bill->no_nota_kas}}</td>
+                        <td width="50%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
+                        <td class="text-center" >Rp {{$subtotal}}</td>
+                        <td class="text-center" width="10%">Rp {{$subtotal-$bill->total_nota}}</td>
+                        <td class="text-center">Rp {{$bill->total_nota}},-</td>
                     </tr>
                     <tr class="text-center">
-                        <td style="border: none"></td>
-                        <td style="border: none"></td>
-                        <td > Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
-                        <td ><b>TOTAL</b></td>
-                        <td>Rp {{$bill->total_nota}} ,-</td>
-                    </tr>
-                    <tr class="text-center">
-                        <td style="border: none"></td>
-                        <td style="border: none"></td>
-                        <td ></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>Uang Muka</td>
-                        <td>Rp {{$bill->jumlah_uang_nota}} ,-</td>
+                        <td>Rp {{$bill->jumlah_uang_nota}},-</td>
                     </tr>
                     <tr class="text-center">
                         <td style="border: none"></td>
                         <td style="border: none"></td>
                         <td style="border: none"></td>
-                        <td>Piutang</td>
-                        <td>Rp {{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}} ,-</td>
+                        <td ><strong>Piutang</strong></td>
+                        <td> <strong>Rp {{ abs($bill->kembalian_nota)}} ,-</strong></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td style="border: none"></td>
+                        <td style="border: none"></td>
+                        <td style="border: none"></td>
+                        <td>Pembayaran</td>
+                        <td>Rp {{abs($bill->kembalian_nota)}} ,-</td>
                     </tr>
                 </tbody>
             </table>

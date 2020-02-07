@@ -31,15 +31,15 @@
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="hari" checked>
-                  <label for="customRadio1" class="custom-control-label">Per Hari</label>
+                  <input class="custom-control-input" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
+                  <label for="hari" class="custom-control-label">Pilih Tanggal</label>
                 </div>
               </div>
               @if (auth()->user()->level_id ==1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
-                  <label for="customRadio1" class="custom-control-label">Cabang</label>
+                  <input class="custom-control-input" type="radio" id="cabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
+                  <label for="cabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @endif
@@ -147,6 +147,7 @@
       "info": true,
       "autoWidth": false,
     });
+    $('.select2').select2()
   });
 </script>
 @endpush
