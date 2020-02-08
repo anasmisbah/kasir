@@ -21,6 +21,15 @@ class BillController extends Controller
         $app = Application::first();
         $branch = $user->employee->branch;
         $filter = '';
+        $billForDate = Bill::all();
+        $tanggal=[];
+        $bulan = [];
+        $tahun =[];
+        foreach ($billForDate as $key => $bill) {
+            $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
+            $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
+            $tahun[$bill->tanggal_nota->year] =$bill->tanggal_nota->year;
+        }
         if ($user->level_id == 1) {
             if ($request) {
                 if ($request->filter === "hari") {
@@ -32,12 +41,37 @@ class BillController extends Controller
                 }else if($request->filter === "bulan"){
                     $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
-                                    ->orderBy('tanggal_nota', 'asc')
-                                    ->get();
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('d');
+                                  });
+                    $data = [];
+                    foreach ($bills as $key => $bill) {
+                        $data[$key]['tanggal'] = $key;
+                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
+                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
                     $bills = Bill::whereYear('tanggal_nota',$request->tahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get();
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('m');
+                                  });
+                    $data = [];
+                    foreach ($bills as $key => $bill) {
+                        $data[$key]['tanggal'] = $key;
+                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
+                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
 
                 }else if($request->filter === "cabang"){
                     if ($request->cabang === "0") {
@@ -78,12 +112,38 @@ class BillController extends Controller
                                     ->whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get();
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('d');
+                                  });
+                    $data = [];
+                    foreach ($bills as $key => $bill) {
+                        $data[$key]['tanggal'] = $key;
+                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
+                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
                     $bills = Bill::where('branch_id',$user->employee->branch_id)
                                     ->whereYear('tanggal_nota',$request->tahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get();
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('m');
+                                  });
+                    $data = [];
+                    foreach ($bills as $key => $bill) {
+                        $data[$key]['tanggal'] = $key;
+                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
+                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
 
                 }else if($request->filter === "status"){
                     if ($request->status === "0") {
@@ -113,15 +173,7 @@ class BillController extends Controller
             }
         }
 
-        $billForDate = Bill::all();
-        $tanggal=[];
-        $bulan = [];
-        $tahun =[];
-        foreach ($billForDate as $key => $bill) {
-            $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
-            $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
-            $tahun[$bill->tanggal_nota->year] =$bill->tanggal_nota->year;
-        }
+
 
         return view('penjualan.index',compact('bills','branches','bulan','tahun','filter'));
     }

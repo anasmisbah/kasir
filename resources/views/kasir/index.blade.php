@@ -1,21 +1,28 @@
-@extends('layouts.master')
+@extends('layouts.kasir')
 
 @push('css')
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<style>
+    .btn-cetak{
+        width: 100%;
+        min-height: 100px;
+        text-align: justify
+    }
+</style>
 @endpush
 
 @section('content')
 <div class="container-fluid">
-    <div class="ml-1 row" style="padding-top: 30px !important;">
+    <div class="ml-1 row">
         <div class="col-md-2">
             <div class="pb-2 row border border-dark rounded">
                 <div class="col-12">
                     <label for="">No Nota Kas</label> <br>
-                    <input id="nonotakas" class="form-control" disabled type="text" value="{{$formatnnk}}">
+                    <input id="nonotakas" class="form-control form-control-sm" disabled type="text" value="{{$formatnnk}}">
                 </div>
                 <div class="col-12 mt-2">
                     <label for="">Tanggal</label> <br>
-                    <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control" disabled type="text">
+                    <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control form-control-sm" disabled type="text">
                 </div>
             </div>
         </div>
@@ -23,7 +30,7 @@
             <div class="pb-2 row border border-dark rounded">
                 <div class="col-10">
                     <label for="">Pelanggan</label> <br>
-                    <select id="selectpelanggan" class="form-control select2">
+                    <select id="selectpelanggan" class="form-control form-control-sm select2">
                         <option value="" disabled selected>Pilih Pelanggan</option>
                         @foreach ($customers as $customer)
                         <option value="{{$customer->id}}">{{$customer->nama}}</option>
@@ -36,7 +43,7 @@
                 </div>
                 <div class="col-12 mt-2">
                     <label for="">Telepon</label>
-                    <input id="teleponpelanggan" class="form-control" disabled type="text" >
+                    <input id="teleponpelanggan" class="form-control form-control-sm" disabled type="text" >
                 </div>
             </div>
         </div>
@@ -44,7 +51,7 @@
             <div class="pb-3 row border border-dark rounded">
                 <div class="col-12">
                     <label for="">Alamat</label>
-                    <textarea id="alamatpelanggan" rows="4" disabled class="form-control" ></textarea>
+                    <textarea id="alamatpelanggan" rows="3" disabled class="form-control" ></textarea>
                 </div>
             </div>
         </div>
@@ -53,16 +60,16 @@
             <div class="row">
                 <div class="col-6">
                     <label for="">Total</label>
-                    <h3 class="form-control">Rp. <span id="jml" class="inputharga">0</span>,-</h3>
+                    <h3 class="form-control form-control-sm">Rp. <span id="jml" class="inputharga">0</span>,-</h3>
                 </div>
                 <div class="col-6">
-                    <a  href="#"  id="cetaknota" class="disabled btn btn-primary btn-lg btn-block">Cetak Nota</a>
+                    <a  href="#"  id="cetaknota" class="disabled btn btn-primary btn-lg btn-cetak align-middle" >Cetak Nota</a>
                 </div>
             </div>
 
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-2">
         <div class="col-md-10">
             <div class="row">
                 <div class="col-12">
@@ -71,13 +78,13 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Kode</label>
-                                    <input id="kodebarang" type="text"  disabled id="kode" class="form-control ">
+                                    <input id="kodebarang" type="text"  disabled id="kode" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="">Nama Barang</label>
-                                    <select id="selectbarang" class="form-control select2">
+                                    <select id="selectbarang" class="form-control form-control-sm select2">
                                         <option value="" disabled selected>Pilih Barang</option>
                                         @foreach ($supplies as $supply)
                                         <option value="{{$supply->id}}">{{$supply->item->nama}}</option>
@@ -88,19 +95,19 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                <input type="text" id="hargabarang" disabled  id="harga" value="0" class="form-control ">
+                                <input type="text" id="hargabarang" disabled  id="harga" value="0" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="">Qty (Kg)</label>
-                                    <input id="qtybarang" disabled type="text"  id="qty"  class="form-control inputharga">
+                                    <input id="qtybarang" disabled type="text"  id="qty"  class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled  id="jumlah" class="form-control inputharga">
+                                    <input id="jumlahbarang" type="text" disabled  id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-1">
@@ -116,6 +123,7 @@
             </div>
                 <div class="row mt-1">
                     <div class="col-md-12">
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-striped" id="tableBarang">
                             <thead>
                                 <tr>
@@ -136,6 +144,7 @@
                                 <th>Rp. <span id="total" class="inputharga">0</span>,-</th>
                             </tfoot>
                         </table>
+                        </div>
                     </div>
                 </div>
         </div>

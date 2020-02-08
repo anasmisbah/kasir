@@ -13,12 +13,9 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Data Piutang</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Piutang</a></li>
-          <li class="breadcrumb-item active">Index</li>
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item ">Beranda</li>
+          <li class="breadcrumb-item active"><a href="#">Piutang</a></li>
         </ol>
       </div>
     </div>
@@ -34,15 +31,15 @@
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="hari" checked>
-                  <label for="customRadio1" class="custom-control-label">Per Hari</label>
+                  <input class="custom-control-input" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
+                  <label for="hari" class="custom-control-label">Pilih Tanggal</label>
                 </div>
               </div>
               @if (auth()->user()->level_id ==1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
-                  <label for="customRadio1" class="custom-control-label">Cabang</label>
+                  <input class="custom-control-input" type="radio" id="cabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
+                  <label for="cabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @endif
@@ -92,7 +89,7 @@
               @foreach ($bills as $bill)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td><a href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td>{{$bill->customer->alamat}}</td>
                 <td>{{$bill->customer->telepon}}</td>

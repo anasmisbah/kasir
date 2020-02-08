@@ -34,9 +34,12 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" class="nav-link">Halo {{auth()->user()->username}}</a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            {{auth()->user()->username}} <i class="fas fa-user"></i>
+             <i class="fas fa-user"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <a href="#" class="dropdown-item">
@@ -87,7 +90,7 @@
             @if (auth()->user()->level->nama == "utama")
             {{-- Menut Role Utama --}}
             <li class="nav-item">
-              <a href="{{ route('beranda') }}" class="nav-link">
+              <a href="{{ route('beranda') }}" class="nav-link {{ Request::segment(1) == 'beranda'?'active':'' }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                   Beranda
@@ -95,7 +98,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('penjualan.index') }}" class="nav-link">
+              <a href="{{ route('penjualan.index') }}" class="nav-link {{ Request::segment(1) == 'penjualan'?'active':'' }}">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
                   Penjualan
@@ -103,7 +106,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('piutang.index') }}" class="nav-link">
+              <a href="{{ route('piutang.index') }}" class="nav-link {{ Request::segment(1) == 'piutang'?'active':'' }}">
                 <i class="nav-icon fas fa-credit-card"></i>
                 <p>
                   Piutang
@@ -111,7 +114,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pelanggan.index') }}" class="nav-link">
+              <a href="{{ route('pelanggan.index') }}" class="nav-link {{ Request::segment(1) == 'pelanggan'?'active':'' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Pelanggan
@@ -119,7 +122,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('cabang.index') }}" class="nav-link">
+              <a href="{{ route('cabang.index') }}" class="nav-link {{ Request::segment(1) == 'cabang'?'active':'' }}">
                 <i class="nav-icon fas fa-flag"></i>
                 <p>
                   Cabang
@@ -127,7 +130,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('jenis.index') }}" class="nav-link">
+              <a href="{{ route('jenis.index') }}" class="nav-link {{ Request::segment(1) == 'jenis'?'active':'' }}">
                 <i class="nav-icon fas fa-barcode"></i>
                 <p>
                   Jenis Barang
@@ -135,7 +138,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('barang.index') }}" class="nav-link">
+              <a href="{{ route('barang.index') }}" class="nav-link {{ Request::segment(1) == 'barang'?'active':'' }}">
                 <i class="nav-icon fas fa-th-large"></i>
                 <p>
                   Barang
@@ -143,7 +146,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('stok.index') }}" class="nav-link">
+              <a href="{{ route('stok.index') }}" class="nav-link {{ Request::segment(1) == 'stok'?'active':'' }}">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   Stok Barang
@@ -151,7 +154,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('karyawan.index') }}" class="nav-link">
+              <a href="{{ route('karyawan.index') }}" class="nav-link {{ Request::segment(1) == 'karyawan'?'active':'' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
                   Karyawan
@@ -159,7 +162,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pengguna.index') }}" class="nav-link">
+              <a href="{{ route('pengguna.index') }}" class="nav-link {{ Request::segment(1) == 'pengguna'?'active':'' }}">
                 <i class="nav-icon fas fa-user-circle"></i>
                 <p>
                   Pengguna
@@ -167,7 +170,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('tentang.index') }}" class="nav-link">
+              <a href="{{ route('tentang.index') }}" class="nav-link {{ Request::segment(1) == 'tentang'?'active':'' }}">
                 <i class="nav-icon fas fa-info"></i>
                 <p>
                   Tentang
@@ -177,7 +180,7 @@
             @elseif(auth()->user()->level->nama == "cabang")
             {{-- Menut Role Cabang --}}
             <li class="nav-item">
-              <a href="{{ route('beranda') }}" class="nav-link">
+              <a href="{{ route('beranda') }}" class="nav-link {{ Request::segment(1) == 'tentang'?'beranda':'' }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                   Beranda
@@ -185,7 +188,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('penjualan.index') }}" class="nav-link">
+              <a href="{{ route('penjualan.index') }}" class="nav-link {{ Request::segment(1) == 'penjualan'?'active':'' }}">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
                   Penjualan
@@ -193,7 +196,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('piutang.index') }}" class="nav-link">
+              <a href="{{ route('piutang.index') }}" class="nav-link {{ Request::segment(1) == 'piutang'?'active':'' }}">
                 <i class="nav-icon fas fa-credit-card"></i>
                 <p>
                   Piutang
@@ -201,7 +204,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pelanggan.index') }}" class="nav-link">
+              <a href="{{ route('pelanggan.index') }}" class="nav-link {{ Request::segment(1) == 'pelanggan'?'active':'' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Pelanggan
@@ -209,7 +212,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('stok.index') }}" class="nav-link">
+              <a href="{{ route('stok.index') }}" class="nav-link {{ Request::segment(1) == 'stok'?'active':'' }}">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   Stok Barang
@@ -217,7 +220,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('karyawan.index') }}" class="nav-link">
+              <a href="{{ route('karyawan.index') }}" class="nav-link {{ Request::segment(1) == 'karyawan'?'active':'' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
                   Karyawan
@@ -227,7 +230,7 @@
             @else()
             {{-- Menut Role Kasir --}}
             <li class="nav-item">
-              <a href="{{ route('kasir.index') }}" class="nav-link">
+              <a href="{{ route('kasir.index') }}" class="nav-link {{ Request::segment(1) == 'kasir'?'active':'' }}">
                 <i class="nav-icon fas fa-shopping-cart"></i>
                 <p>
                   Kasir

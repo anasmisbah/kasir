@@ -1,51 +1,69 @@
 @extends('layouts.master')
 @section('content')
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2 ">
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item">Beranda</li>
+            <li class="breadcrumb-item">Cabang</li>
+            <li class="breadcrumb-item active"><a href="#">Detail</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 <div class="container-fluid">
     <div class="row">
       <!-- left column -->
       <div class="col-md-12 mt-3">
         <!-- general form elements -->
-        <div class="card card-primary">
+        <div class="card">
           <div class="card-header">
             <h3 class="card-title">Cabang</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-danger active" href="{{ route('cabang.index') }}"><i class=" fas fa-times"></i></a>
+                  </li>
+                </ul>
+              </div>
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-            <form class="form-horizontal">
-                <div class="card-body">
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10">
-                    <input type="text" disabled value="{{$branch->nama}}" name="nama" class="form-control" id="inputEmail3" placeholder="Nama">
-                    </div>
-                </div>
+          <div class="card-body">
+            <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <td style="width:10%">Nama</td>
+                    <td> <strong>{{$branch->nama}}</strong> </td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Alamat</td>
+                    <td>{{$branch->alamat}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Telepon</td>
+                    <td>{{$branch->telepon}}</td>
+                  </tr>
+                  <tr>
+                    <td style="width:10%">Pimpinan</td>
+                    <td>{{$branch->pimpinan}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Cabang secara permanen?')" action="{{route('cabang.hapus', $branch->id)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
+                  <i class="fa fa-trash"></i></button>
+              </form>
+              <a href="{{route('cabang.ubah',$branch->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+            </div>
 
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10">
-                    <input type="text" disabled value="{{$branch->telepon}}" name="telepon" class="form-control" id="inputEmail3" placeholder="Telepon">
-                    </div>
+                <div class="card-footer text-right">
+                    <strong>Dibuat Pada:</strong>{{$branch->created_at->format('l | d F Y')}} | {{$branch->created_at->format('h:i:s A')}} / <strong>Diubah Pada:</strong>{{$branch->updated_at->format('l | d F Y')}} | {{$branch->updated_at->format('h:i:s A')}}
                 </div>
-
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
-                    <div class="col-sm-10">
-                    <input type="text" disabled value="{{$branch->pimpinan}}" name="pimpinan" class="form-control" id="inputEmail3" placeholder="Pimpinan">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10">
-                        <textarea disabled name="alamat" class="form-control" rows="3" placeholder="Alamat">{{$branch->alamat}}</textarea>
-                    </div>
-                </div>
-                <a href="{{ route('cabang.ubah',$branch->id) }}" class="btn btn-primary float-right"><i class="fa fa-edit"></i></a>
-                </div>
-                <div class="card-footer">
-                    <p class="text-right"><b>Di buat pada </b>: tanggal | <a href="">nama</a> / <b>Diperbarui pada:</b> tanggal | <a href="">nama</a></p>
-                </div>
-            </form>
         </div>
       </div>
     </div>

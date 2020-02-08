@@ -40,7 +40,7 @@
                 <p>Jl. Agus Salim Gg. Masjid No. 30 Sidomulyo, Samarinda Ulu, Samarinda, Kalimantan Timur <br>75115</p>
                 <p>08112233445</p>
             </div>
-            <div class="col-lg-7" style="margin-top: 3rem">
+            <div class="col-lg-7 " style="margin-top: 3rem">
                 <div class="col-lg-4 text-right">
                     <p>No. Nota Bon:</p>
                     <p>Tanggal:</p>
@@ -60,43 +60,73 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="no-margin table table-hover text-center" id="table">
+                <table class="no-margin table table-hover" id="table">
                     <thead>
                         <tr>
-                            <th>No. Nota Kas</th>
-                            <th>Tanggal Nota Kas</th>
-                            <th>Sub Total Nota Kas</th>
-                            <th>Diskon Nota Kas</th>
-                            <th>Total Nota Kas</th>
+                            <th>No</th>
+                            <th>Nama Barang</th>
+                            <th>Harga Satuan</th>
+                            <th>Qty(Kg)</th>
+                            <th>Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>pocari sewat</td>
-                            <td>90000</td>
-                            <td>90</td>
-                            <td>90000</td>
+                            <td class="text-center">1</td>
+                            <td width="50%">pocari sewat</td>
+                            <td class="text-center" >90000</td>
+                            <td class="text-center" width="10%">90</td>
+                            <td class="text-center">90000</td>
                         </tr>
                         <tr>
+                            <td class="text-center">1</td>
+                            <td width="50%">pocari sewat</td>
+                            <td class="text-center" >90000</td>
+                            <td class="text-center" width="10%">90</td>
+                            <td class="text-center">90000</td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td width="50%">pocari sewat</td>
+                            <td class="text-center" >90000</td>
+                            <td class="text-center" width="10%">90</td>
+                            <td class="text-center">90000</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td width="50%">pocari sewat</td>
+                            <td class="text-center" >90000</td>
+                            <td class="text-center" width="10%">90</td>
+                            <td class="text-center">90000</td>
+                        </tr>
+
+                        <tr class="text-center">
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>Uang Muka</td>
+                            <td>Sub Total</td>
                             <td><b>20000</b></td>
                         </tr>
-                        <tr>
+                        <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td style="border: none"></td>
-                            <td ><b>PIUTANG</b></td>
+                            <td > Diskon &nbsp;&nbsp;10%</td>
+                            <td ><b>TOTAL</b></td>
                             <td>Rp 300000</td>
                         </tr>
-                        <tr>
+                        <tr class="text-center">
+                            <td style="border: none"></td>
+                            <td style="border: none"></td>
+                            <td ></td>
+                            <td>Uang Muka</td>
+                            <td>Rp 300000</td>
+                        </tr>
+                        <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td>Pembayaran</td>
+                            <td>Piutang</td>
                             <td>Rp 300000</td>
                         </tr>
                     </tbody>
@@ -105,7 +135,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
-                Status : <span><b><i>LUNAS</i></b></span>
+                Status : <span><b><i>UTANG</i></b></span>
             </div>
             <div class="col-lg-4">
                 <p>Hormat Kami,</p>
