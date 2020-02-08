@@ -11,7 +11,9 @@
         body {
             margin-top: 40px;
         }
-
+        th{
+            text-align: center !important
+        }
         .hr-red {
             background-color: red;
             height: 5px;

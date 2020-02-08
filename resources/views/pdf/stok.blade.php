@@ -10,6 +10,9 @@
         .border{
                 border-top: 2px solid black !important;
             }
+        .border-bawah{
+        border-bottom: 2px solid black !important;
+        }
     </style>
 </head>
 <body>
@@ -34,7 +37,7 @@
                 </thead>
                 <tbody>
                     @foreach ($supplies as $supply)
-                        <tr class="{{$loop->iteration == 1?'border':''}}">
+                        <tr class="{{$loop->iteration == 1?'border':'' }} {{$loop->iteration == count($supplies)?'border-bawah':''}}">
                             <td>{{$loop->iteration}}</td>
                             <td>{{$supply->item->nama}}</td>
                             <td>{{$supply->branch->nama}}</td>

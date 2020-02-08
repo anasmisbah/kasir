@@ -25,6 +25,7 @@ class BillController extends Controller
         $tanggal=[];
         $bulan = [];
         $tahun =[];
+        $dateNow = Carbon::now()->format('d F Y');
         foreach ($billForDate as $key => $bill) {
             $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
             $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
@@ -56,6 +57,10 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    if($request->print){
+                        $month = Carbon::now()->month($request->bulan);
+                        return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month'));
+                    }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
                     $bills = Bill::whereYear('tanggal_nota',$request->tahun)
@@ -73,7 +78,11 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
-                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
+                    if($request->print){
+                        $year = Carbon::now()->year($request->tahun);
+                        return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year'));
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
                 }else if($request->filter === "cabang"){
                     if ($request->cabang === "0") {
@@ -99,6 +108,8 @@ class BillController extends Controller
                 $pdf = PDF::loadView('pdf.penjualan_hari', $data);
                 // return $pdf->stream();
                 return $pdf->download('penjualan.pdf');
+            }else if($request->print){
+                return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch'));
             }
 
         }else{
@@ -229,6 +240,7 @@ class BillController extends Controller
         $user = Auth::user();
         $app = Application::first();
         $branch = $user->employee->branch;
+        $dateNow = Carbon::now()->format('d F Y');
         if ($user->level_id == 1) {
             if ($request->filter === "hari") {
 
@@ -261,6 +273,8 @@ class BillController extends Controller
                 $pdf = PDF::loadView('pdf.piutang', $data);
                 // return $pdf->stream();
                 return $pdf->download('piutang.pdf');
+            }else if($request->print){
+                return view('pdf.piutang',compact('bills','app','dateNow','branch'));
             }
         }else{
             if ($request->filter === "hari") {

@@ -9,7 +9,10 @@
 <style>
     .border{
             border-top: 2px solid black !important;
-        }
+    }
+    .border-bawah{
+        border-bottom: 2px solid black !important;
+    }
 </style>
 </head>
 <body id="body_print">
@@ -32,7 +35,7 @@
                     </tr>
                 <tbody>
                     @foreach ($employees as $employee)
-                        <tr class="{{$loop->iteration == 1?'border':''}}">
+                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($employees)?'border-bawah':''}}">
                             <td>{{$loop->iteration}}</td>
                             <td>{{$employee->nama}}</td>
                             <td>{{$employee->jabatan}}</td>
