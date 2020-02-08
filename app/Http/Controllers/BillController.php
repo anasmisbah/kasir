@@ -34,10 +34,12 @@ class BillController extends Controller
             if ($request) {
                 if ($request->filter === "hari") {
 
-                    $explodedate = explode('/',$request->hari);
-                    $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
-
-                    $bills = Bill::whereDate('tanggal_nota',$date)->get();
+                    $explodedatetime = explode(' ',$request->hari);
+                    $explodeddateFrom = explode('/',$explodedatetime[0]);
+                    $explodeddateTo = explode('/',$explodedatetime[3]);
+                    $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                    $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
+                    $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                 }else if($request->filter === "bulan"){
                     $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
@@ -102,10 +104,13 @@ class BillController extends Controller
         }else{
             if ($request) {
                 if ($request->filter === "hari") {
-                    $explodedate = explode('/',$request->hari);
-                    $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                    $explodedatetime = explode(' ',$request->hari);
+                    $explodeddateFrom = explode('/',$explodedatetime[0]);
+                    $explodeddateTo = explode('/',$explodedatetime[3]);
+                    $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                    $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                     $bills = Bill::where('branch_id',$user->employee->branch_id)
-                                ->whereDate('tanggal_nota',$date)
+                                ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                                 ->get();
                 }else if($request->filter === "bulan"){
                     $bills = Bill::where('branch_id',$user->employee->branch_id)
@@ -227,10 +232,12 @@ class BillController extends Controller
         if ($user->level_id == 1) {
             if ($request->filter === "hari") {
 
-                $explodedate = explode('/',$request->hari);
-                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
-
-                $bills = Bill::whereDate('tanggal_nota',$date)->where('status','piutang')->get();
+                $explodedatetime = explode(' ',$request->hari);
+                $explodeddateFrom = explode('/',$explodedatetime[0]);
+                $explodeddateTo = explode('/',$explodedatetime[3]);
+                $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
+                $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
             }else if($request->filter === "cabang"){
                 if ($request->cabang === "0") {
                     $bills = Bill::where('status','piutang')->get();
@@ -257,13 +264,16 @@ class BillController extends Controller
             }
         }else{
             if ($request->filter === "hari") {
-                $explodedate = explode('/',$request->hari);
-                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                $explodedatetime = explode(' ',$request->hari);
+                $explodeddateFrom = explode('/',$explodedatetime[0]);
+                $explodeddateTo = explode('/',$explodedatetime[3]);
+                $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                 $bills = Bill::where([
                     ['branch_id','=',$user->employee->branch_id],
                     ['status','=','piutang']
                     ])
-                            ->whereDate('tanggal_nota',$date)
+                    ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                             ->get();
             }else{
                 $bills = Bill::where([

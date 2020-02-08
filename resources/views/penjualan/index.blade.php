@@ -3,9 +3,7 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-
+<link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
 @endpush
 @section('content')
 <!-- Content Header (Page header) -->
@@ -29,7 +27,7 @@
         <div class="card-body">
           <form action="{{route('penjualan.index')}}" method="GET">
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                   <label for="radiohari" class="custom-control-label">Hari:</label>
@@ -65,66 +63,66 @@
 
             </div>
             <div class="row mb-4">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                    <input name="hari" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
-                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                      </div>
+                      <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
                     </div>
                   </div>
-                </div>
               </div>
               <div class="col-md-1">
                 <select class="form-control select2" name="bulan">
-                  <option value="1">Jan</option>
-                  <option value="02">Feb</option>
-                  <option value="03">Mar</option>
-                  <option value="04">Apr</option>
-                  <option value="05">Mei</option>
-                  <option value="06">Jun</option>
-                  <option value="07">Jul</option>
-                  <option value="08">Agu</option>
-                  <option value="09">Sep</option>
-                  <option value="10">Okt</option>
-                  <option value="11">Nov</option>
-                  <option value="12">Des</option>
+                  <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Jan</option>
+                  <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Feb</option>
+                  <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Mar</option>
+                  <option value="04" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '04' ?'selected':'':''}}>Apr</option>
+                  <option value="05" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '05' ?'selected':'':''}}>Mei</option>
+                  <option value="06" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '06' ?'selected':'':''}}>Jun</option>
+                  <option value="07" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '07' ?'selected':'':''}}>Jul</option>
+                  <option value="08" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '08' ?'selected':'':''}}>Agu</option>
+                  <option value="09" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '09' ?'selected':'':''}}>Sep</option>
+                  <option value="10" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '10' ?'selected':'':''}}>Okt</option>
+                  <option value="11" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '11' ?'selected':'':''}}>Nov</option>
+                  <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Des</option>
                 </select>
               </div>
               <div class="col-md-1">
                 <select class="form-control select2" name="bulantahun">
                   @foreach ($tahun as $key=> $item)
-                  <option value="{{$key}}">{{$key}}</option>
+                  <option value="{{$key}}" {{Request::input('filter') == 'bulan' ?Request::input('bulantahun') == $key ?'selected':'':''}}>{{$key}}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-md-2">
                 <select class="form-control select2" name="tahun">
                   @foreach ($tahun as $key=> $item)
-                  <option value="{{$key}}">{{$key}}</option>
+                  <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
                   @endforeach
                 </select>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
                 <select class="form-control select2" name="cabang">
-                  <option value="0">Semua</option>
+                  <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
               @else
               <div class="col-md-2">
                 <select class="form-control select2" name="status">
-                  <option value="0">Semua</option>
-                  <option value="lunas">LUNAS</option>
-                  <option value="piutang">PIUTANG</option>
+                  <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
+                  <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
+                  <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
                 </select>
               </div>
               @endif
 
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
@@ -267,24 +265,19 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-
+<script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
   $(function() {
-    $('#datetimepicker4').datetimepicker({
-      format: 'L',
-      default: moment().format()
-    });
     $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
     $('.select2').select2()
+    $('#tanggal').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 5,
+      timePicker24Hour:true,
+      locale: {
+        format: 'MM/DD/YYYY HH:mm:ss'
+      }
+    })
   });
 </script>
 @endpush

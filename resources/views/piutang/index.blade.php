@@ -3,8 +3,7 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+<link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
 
 @endpush
 @section('content')
@@ -29,7 +28,7 @@
         <div class="card-body">
           <form action="{{route('piutang.index')}}" method="GET">
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                   <label for="hari" class="custom-control-label">Pilih Tanggal</label>
@@ -45,22 +44,22 @@
               @endif
             </div>
             <div class="row mb-4">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                    <input type="text" name="hari" class="form-control datetimepicker-input" data-target="#datetimepicker4" />
-                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                      </div>
+                      <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
                     </div>
                   </div>
-                </div>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
                 <select class="form-control select2" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
@@ -131,13 +130,9 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-
+<script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
   $(function() {
-    $('#datetimepicker4').datetimepicker({
-      format: 'L'
-    });
     $("#example1").DataTable();
     $('#example2').DataTable({
       "paging": true,
@@ -148,6 +143,14 @@
       "autoWidth": false,
     });
     $('.select2').select2()
+    $('#tanggal').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 5,
+      timePicker24Hour:true,
+      locale: {
+        format: 'MM/DD/YYYY HH:mm:ss'
+      }
+    })
   });
 </script>
 @endpush
