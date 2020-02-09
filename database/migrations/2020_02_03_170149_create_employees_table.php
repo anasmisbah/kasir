@@ -21,9 +21,15 @@ class CreateEmployeesTable extends Migration
             $table->text('alamat');
             $table->string('telepon');
             $table->string('foto')->default('fotos/default.jpg');
-            
+
             $table->unsignedBigInteger('branch_id');
             $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
+
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

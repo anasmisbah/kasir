@@ -20,6 +20,11 @@ class CreateApplicationsTable extends Migration
             $table->text('alamat');
             $table->string('telepon');
             $table->string('logo')->default('logo/default.jpg');
+
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

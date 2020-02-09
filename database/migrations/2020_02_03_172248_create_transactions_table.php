@@ -25,6 +25,11 @@ class CreateTransactionsTable extends Migration
             $table->foreign('supply_id')->references('id')->on('supplies')->onDelete('cascade');
             $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
 
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
