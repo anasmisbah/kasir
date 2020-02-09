@@ -7,6 +7,10 @@
         height: 170px !important;
         overflow-y: scroll !important
     }
+    .scrollable-list{
+        max-height: 150px !important;
+        overflow-y: scroll !important
+    }
 
 </style>
 @endpush
@@ -35,13 +39,33 @@
                         <div class="form-group-sm">
 
                             <label for="">Nama Pelanggan</label> <br>
-                            <select id="selectpelanggan" class="form-control form-control-sm select2 d-inline"
+                            <input type="text" name="" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
+                            <div class="position-absolute scrollable-list" style="z-index:999; width:77%">
+                                <div class="list-group position-relative">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                          Cras justo odio
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                                        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                                Cras justo odio
+                                              </a>
+                                              <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                                              <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                                              <a href="#" class="list-group-item list-group-item-action">
+                                                    Cras justo odio
+                                                  </a>
+                                                  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                                                  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                                      </div>
+                            </div>
+                            {{-- <select id="selectpelanggan" class="form-control form-control-sm select2 d-inline"
                                 style="width:80%">
                                 <option value="" disabled selected>Pilih Pelanggan</option>
                                 @foreach ($customers as $customer)
                                 <option value="{{$customer->id}}">{{$customer->nama}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             <button class="btn btn-info create-modal d-inline" id="tambahpelanggan"><i
                                     class="fa fa-plus"></i></button>
                         </div>
@@ -123,12 +147,22 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Nama Barang</label>
-                                <select id="selectbarang" class="form-control form-control-sm select2">
+                                <input type="text" name="" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
+                                <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
+                                    <div class="list-group position-relative">
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                              Cras justo odio
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                                          </div>
+                                </div>
+                                {{-- <select id="selectbarang" class="form-control form-control-sm select2">
                                     <option value="" disabled selected>Pilih Barang</option>
                                     @foreach ($supplies as $supply)
                                     <option value="{{$supply->id}}">{{$supply->item->nama}}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                         </div>
                         <div class="col-2">
@@ -536,7 +570,7 @@
                 '</td>\
                                     <td>\
                                         <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
-                (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
+`                (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
                                     </td>\
                                 </tr>'
             table.append(markup);
