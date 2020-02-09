@@ -23,7 +23,7 @@
     <div class="card p-3">
         <div class="ml-1 row ">
             <div class="col-md-2">
-                <div class="row border border-light rounded pt-3 mr-1 pb-4 ">
+                <div class="row border border-secondary rounded pt-3 mr-1 pb-4 ">
                     <div class="col-12">
                         <label for="">No Nota Kas</label>
                         <input id="nonotakas" class="form-control form-control-sm" disabled type="text"
