@@ -54,9 +54,9 @@
           <a href="{{route('tentang.ubah',$app->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
         </div>
 
-            <div class="card-footer">
-                <p></p>
-            </div>
+        <div class="card-footer text-right">
+            <strong>Dibuat Pada:</strong>{{$app->created_at->format('l | d F Y')}} | {{$app->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$app->createdBy->employee->id)}}">{{$app->createdBy->employee->nama}}</a>  / <strong>Diubah Pada:</strong>{{$app->updated_at->format('l | d F Y')}} | {{$app->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$app->updatedBy->employee->id)}}">{{$app->updatedBy->employee->nama}}</a>
+        </div>
     </div>
 </div>
 @endsection

@@ -143,7 +143,7 @@
                 </tbody>
             </table>
             <div class="card-footer text-right">
-                <strong>Dibuat Pada : </strong>{{$bill->created_at->format('l | d F Y')}} | {{$bill->created_at->format('h:i:s A')}}
+                <strong>Dibuat Pada : </strong>{{$bill->created_at->format('l | d F Y')}} | {{$bill->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
             </div>
         </div>
       </div>

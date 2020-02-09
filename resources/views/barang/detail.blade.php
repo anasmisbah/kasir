@@ -56,7 +56,7 @@
                 </div>
 
                     <div class="card-footer text-right">
-                        <strong>Dibuat Pada:</strong>{{$item->created_at->format('l | d F Y')}} | {{$item->created_at->format('h:i:s A')}} / <strong>Diubah Pada:</strong>{{$item->updated_at->format('l | d F Y')}} | {{$item->updated_at->format('h:i:s A')}}
+                        <strong>Dibuat Pada:</strong>{{$item->created_at->format('l | d F Y')}} | {{$item->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->createdBy->employee->id)}}">{{$item->createdBy->employee->nama}}</a> / <strong>Diubah Pada:</strong>{{$item->updated_at->format('l | d F Y')}} | {{$item->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->updatedBy->employee->id)}}">{{$item->updatedBy->employee->nama}}</a>
                     </div>
             </div>
 </div>

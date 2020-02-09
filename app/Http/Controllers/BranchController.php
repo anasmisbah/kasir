@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Branch;
-
+use Illuminate\Support\Facades\Auth;
 class BranchController extends Controller
 {
     public function index()
@@ -40,6 +40,8 @@ class BranchController extends Controller
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('cabang.index');
@@ -68,6 +70,7 @@ class BranchController extends Controller
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('cabang.index');

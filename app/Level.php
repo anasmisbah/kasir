@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Level extends Model
 {
     protected $fillable = [
-        'nama'
+        'nama','created_by','updated_by'
     ];
 
     public function user()

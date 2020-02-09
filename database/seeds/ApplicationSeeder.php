@@ -17,6 +17,8 @@ class ApplicationSeeder extends Seeder
                 'toko'=>'cici bedu jaya',
                 'alamat'=>'jl samarinda',
                 'telepon'=>'085252525223',
+                'created_by'=>1,
+                'updated_by'=>1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]

@@ -33,7 +33,9 @@ class CategoryController extends Controller
         ]);
 
         $newCategory = Category::create([
-            'nama'=>$request->nama
+            'nama'=>$request->nama,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('jenis.index');
@@ -53,7 +55,8 @@ class CategoryController extends Controller
         ]);
         $updatedCategory = Category::findOrFail($request->id);
         $updatedCategory->update([
-            'nama'=>$request->nama
+            'nama'=>$request->nama,
+            'updated_by'=>Auth::user()->id
         ]);
         return redirect()->route('jenis.index');
     }

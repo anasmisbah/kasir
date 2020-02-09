@@ -17,6 +17,7 @@ class BranchSeed extends Seeder
                 'alamat'=>'jl samarinda',
                 'telepon'=>'085253456545',
                 'pimpinan'=>'ahmad',
+
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
@@ -25,6 +26,7 @@ class BranchSeed extends Seeder
                 'alamat'=>'jl balikpapan',
                 'telepon'=>'085253456545',
                 'pimpinan'=>'tello',
+
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
@@ -33,6 +35,7 @@ class BranchSeed extends Seeder
                 'alamat'=>'jl tenggarong',
                 'telepon'=>'085253456545',
                 'pimpinan'=>'adi',
+
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]

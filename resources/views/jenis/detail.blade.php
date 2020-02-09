@@ -44,7 +44,7 @@
             </div>
 
                 <div class="card-footer text-right">
-                    <strong>Dibuat Pada:</strong>{{$category->created_at->format('l | d F Y')}} | {{$category->created_at->format('h:i:s A')}} / <strong>Diubah Pada:</strong>{{$category->updated_at->format('l | d F Y')}} | {{$category->updated_at->format('h:i:s A')}}
+                    <strong>Dibuat Pada:</strong>{{$category->created_at->format('l | d F Y')}} | {{$category->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$category->createdBy->employee->id)}}">{{$category->createdBy->employee->nama}}</a> / <strong>Diubah Pada:</strong>{{$category->updated_at->format('l | d F Y')}} | {{$category->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$category->updatedBy->employee->id)}}">{{$category->updatedBy->employee->nama}}</a>
                 </div>
 
 

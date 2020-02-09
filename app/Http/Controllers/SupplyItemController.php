@@ -70,6 +70,13 @@ class SupplyItemController extends Controller
         ]);
     }
 
+    public function getdatajson(Request $request)
+    {
+        $supplies = Supply::where('branch_id',$request->id)->get();
+
+        return response()->json($supplies);
+    }
+
     public function create()
     {
         $userBranch =  Auth::user()->employee->branch;
@@ -94,6 +101,8 @@ class SupplyItemController extends Controller
             'stok'=>$request->stok,
             'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id,
         ]);
 
         return redirect()->route('stok.index');
@@ -122,6 +131,7 @@ class SupplyItemController extends Controller
             'stok'=>$request->stok,
             'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
+            'updated_by'=>Auth::user()->id,
         ]);
         return redirect()->route('stok.index');
     }

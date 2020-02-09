@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','username','level_id','employee_id'
+        'name', 'email', 'password','username','level_id','employee_id','created_by','updated_by'
     ];
 
     /**
@@ -45,5 +45,15 @@ class User extends Authenticatable
     public function level()
     {
         return $this->belongsTo('App\Level');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by','id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by','id');
     }
 }

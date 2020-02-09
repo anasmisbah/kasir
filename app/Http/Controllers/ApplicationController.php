@@ -63,7 +63,8 @@ class ApplicationController extends Controller
             'nama'=>$request->nama,
             'toko'=>$request->toko,
             'alamat'=>$request->alamat,
-            'telepon'=>$request->telepon
+            'telepon'=>$request->telepon,
+            'updated_by'=>Auth::user()->id
         ]);
 
         if ($request->file('logo')) {

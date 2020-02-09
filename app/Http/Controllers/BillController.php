@@ -319,6 +319,7 @@ class BillController extends Controller
             'status'=>'lunas',
             'jumlah_uang_nota'=>$bill->total_nota,
             'kembalian_nota'=>0,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('penjualan.detail',$bill->id);
@@ -399,7 +400,9 @@ class BillController extends Controller
             'status'=>strtolower($request->data['status']),
             'branch_id'=>$user->employee->branch_id,
             'customer_id'=>$request->data['customer_id'],
-            'no_nota_kas'=>$request->data['no_nota_kas']
+            'no_nota_kas'=>$request->data['no_nota_kas'],
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         foreach ($request->data['items'] as $key => $item) {
@@ -407,7 +410,9 @@ class BillController extends Controller
                 'no_urut'=>$item['no_urut'],
                 'total_harga'=>$item['total_harga'],
                 'kuantitas'=>$item['kuantitas'],
-                'supply_id'=>$item['supply_id']
+                'supply_id'=>$item['supply_id'],
+                'created_by'=>Auth::user()->id,
+                'updated_by'=>Auth::user()->id
             ]);
         }
 

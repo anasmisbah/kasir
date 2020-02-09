@@ -3,25 +3,18 @@
 @push('css')
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
-    /* .btn-cetak{
-        width: 100%;
-        min-height: 100px;
-        text-align: justify
+    .scrollable{
+        height: 170px !important;
+        overflow-y: scroll !important
     }
-    .border-bawah{
-        border-bottom: 2px solid black !important;
-    }
-    .border-top{
-        border-top: 2px solid black !important;
-    } */
 
 </style>
 @endpush
 
 @section('content')
-<div class="container-fluid">
-    <div class="card p-3">
-        <div class="ml-1 row ">
+<div class="container-fluid pt-2">
+    <div class="card p-3 ">
+        <div class="ml-1 row">
             <div class="col-md-2">
                 <div class="row border border-secondary rounded pt-3 mr-1 pb-4 ">
                     <div class="col-12">
@@ -148,7 +141,7 @@
                         <div class="col-1">
                             <div class="form-group">
                                 <label for="">Qty (Kg)</label>
-                                <input id="qtybarang" type="text" id="qty" placeholder="0"
+                                <input id="qtybarang" type="text" disabled id="qty" placeholder="0"
                                     class="form-control form-control-sm inputharga">
                             </div>
                         </div>
@@ -173,7 +166,7 @@
         <div class="row mt-1">
             <div class="col-md-12">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    <table class="table" id="tableBarang">
+                    <table class="table table-sm" id="tableBarang">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
@@ -185,22 +178,38 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <section class="scrollable">
+                    <table class="table table-sm" id="tableBarang">
+                        <tbody >
                         </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-md-12">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-sm" id="tableBarang">
                         <tfoot>
                             <tr>
                                 <td colspan="4"></td>
-                                <td class="border-top border-bawah"> Sub Total</td>
+                                <td class="border-top border-bawah text-center"> Sub Total</td>
                                 <td class="border-top border-bawah">Rp. <span id="total" class="inputharga">0</span>,-
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3" style="border: none"></td>
-                                <td style="border:none">
-                                    Diskon (%) <span><input type="text" name=""
-                                            class="form-control form-control-sm d-inline" style="width:50px"></span>
+                                <td style="border:none" class="text-right pr-2">
+                                    Diskon (%) <span><input type="text" name="" id="diskon"
+                                            class="form-control form-control-sm d-inline" disabled style="width:50px"></span>
                                 </td>
-                                <td class="border-top border-bottom text-bold">TOTAL</td>
+                                <td class="border-top border-bottom text-bold text-center">TOTAL</td>
                                 <td class="border-top  border-bottom text-bold">Rp. <span id="total"
                                         class="inputharga">0</span>,-
                                 </td>
@@ -218,7 +227,7 @@
         </div>
         <div class="form-group">
             <label for="">Uang kembali</label>
-            <input id="uangkembali" type="text" disabled class="form-control form-control-sm">
+            <input id="uangkembali" type="text" value="0"disabled class="form-control form-control-sm">
         </div>
         <div class="form-group">
             <label for="">Status</label>
@@ -466,7 +475,7 @@
 
             addNewRow();
         } else {
-            alert("masukkan jumlah barang")
+            alert("masukkan Kuantitan barang Terlebih Dahulu")
         }
 
 
@@ -478,7 +487,7 @@
         const uangMuka = $("#uangmuka").val()
         uangkembali(uangMuka)
 
-        $("#qtybarang").val(0)
+        $("#qtybarang").val('')
         $("#jumlahbarang").val(0)
         $('#diskon').removeAttr('disabled')
         hitungdiskon();
@@ -502,7 +511,7 @@
         const table = $('#tableBarang tbody')
         if ($lastRow.length == 0) {
 
-            const markup = '<tr data-id=1>\
+            const markup = '<tr data-id=1 class="text-center">\
                                     <td>1</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
                                     <td>' + $('#selectbarang option:selected').text() + '</td>\
@@ -513,11 +522,11 @@
                                         <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=1><i class="fas fa-trash"></a>\
                                     </td>\
                                 </tr>'
-            table.append(markup);
+            table.prepend(markup);
         } else {
             const $cloneRow = $lastRow.clone();
             const lastNo = $cloneRow.find('td').eq(0).text();
-            const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + '>\
+            const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + ' class="text-center">\
                                     <td>' + (parseInt(lastNo) + 1) + '</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
                                     <td>' + $('#selectbarang option:selected').text() + '</td>\
@@ -526,7 +535,7 @@
                                     <td>' + $('#jumlahbarang').val() +
                 '</td>\
                                     <td>\
-                                        <button href="#"  class="btn btn-outline-danger btn-sm delete-barang" data-id=' +
+                                        <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
                 (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
                                     </td>\
                                 </tr>'

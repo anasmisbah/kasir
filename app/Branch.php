@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     protected $fillable = [
-        'nama', 'alamat', 'telepon','pimpinan'
+        'nama', 'alamat', 'telepon','pimpinan','created_by','updated_by'
     ];
 
     public function supply()
@@ -23,5 +23,15 @@ class Branch extends Model
     public function customer()
     {
         return $this->hasMany('App\Customer');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by','id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by','id');
     }
 }

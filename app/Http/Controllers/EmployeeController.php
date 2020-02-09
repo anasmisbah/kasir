@@ -101,7 +101,9 @@ class EmployeeController extends Controller
             'branch_id'=>$request->branch_id,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'foto'=>$foto
+            'foto'=>$foto,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('karyawan.index');
@@ -133,7 +135,8 @@ class EmployeeController extends Controller
             'jabatan'=>$request->jabatan,
             'branch_id'=>$request->branch_id,
             'alamat'=>$request->alamat,
-            'telepon'=>$request->telepon
+            'telepon'=>$request->telepon,
+            'updated_by'=>Auth::user()->id
         ]);
 
         if ($request->file('foto')) {
