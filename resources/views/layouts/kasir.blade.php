@@ -26,11 +26,11 @@
         }
   </style>
 </head>
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav text-sm">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark text-sm">
     <div class="container">
       <a href="{{route('kasir.index')}}" class="navbar-brand">
         <img src="{{asset("/storage/".$app->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
