@@ -428,7 +428,10 @@
 
     $(document).on('click', '#cetaknota', function() {
         const total_nota = $(".jml").html()
-        const diskon = $('#diskon').val();
+        let diskon = $('#diskon').val();
+        if (!diskon) {
+            diskon = 0
+        }
         const jumlah_uang_nota = $('#uangmuka').val();
         const kembalian_nota = $('#uangkembali').val()
         const status = $('#status').val()
