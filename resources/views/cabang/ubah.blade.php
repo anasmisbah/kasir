@@ -38,28 +38,28 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                    <input type="text"  value="{{$branch->nama}}" name="nama" class="form-control" id="inputEmail3" placeholder="Nama">
+                    <input type="text"  value="{{$branch->nama}}" name="nama" class="form-control form-control-sm" id="inputEmail3" placeholder="Nama">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Telepon</label>
                     <div class="col-sm-10">
-                    <input type="text"  value="{{$branch->telepon}}" name="telepon" class="form-control" id="inputEmail3" placeholder="Telepon">
+                    <input type="text"  value="{{$branch->telepon}}" name="telepon" class="form-control form-control-sm" id="inputEmail3" placeholder="Telepon">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
                     <div class="col-sm-10">
-                    <input type="text"  value="{{$branch->pimpinan}}" name="pimpinan" class="form-control" id="inputEmail3" placeholder="Pimpinan">
+                    <input type="text"  value="{{$branch->pimpinan}}" name="pimpinan" class="form-control form-control-sm" id="inputEmail3" placeholder="Pimpinan">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <textarea  name="alamat" class="form-control" rows="3" placeholder="Alamat">{{$branch->alamat}}</textarea>
+                        <textarea  name="alamat" class="form-control form-control-sm" rows="3" placeholder="Alamat">{{$branch->alamat}}</textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>

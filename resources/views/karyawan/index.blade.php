@@ -49,7 +49,7 @@
             </div>
             <div class="row mb-4">
               <div class="col-md-2">
-                <select class="form-control select2" name="cabang">
+                <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
                   <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
@@ -57,9 +57,9 @@
                 </select>
               </div>
               <div class="col-md-6">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="print" value="employee"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" class="btn btn-sm btn-primary" name="print" value="employee"><i class="nav-icon fas fa-print"></i></button>
+                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
           </form>

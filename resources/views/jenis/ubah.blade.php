@@ -38,7 +38,7 @@
               <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                <input type="text" value="{{ old('nama')?old('nama'):$category->nama }}" name="nama" class="form-control {{ $errors->first('nama')?'is-invalid':'' }}" id="inputEmail3" placeholder="Nama">
+                <input type="text" value="{{ old('nama')?old('nama'):$category->nama }}" name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="inputEmail3" placeholder="Nama">
                 <div class="invalid-feedback">
                     {{$errors->first('nama')}}
                 </div>

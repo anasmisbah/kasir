@@ -69,12 +69,12 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
+                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm form-control-sm form-control-sm float-right" id="tanggal">
                   </div>
                 </div>
               </div>
               <div class="col-md-1">
-                <select class="form-control select2" name="bulan">
+                <select class="form-control form-control-sm form-control-sm form-control-sm " name="bulan">
                   <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Jan</option>
                   <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Feb</option>
                   <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Mar</option>
@@ -90,14 +90,14 @@
                 </select>
               </div>
               <div class="col-md-1">
-                <select class="form-control select2" name="bulantahun">
+                <select class="form-control form-control-sm form-control-sm form-control-sm " name="bulantahun">
                   @foreach ($tahun as $key=> $item)
                   <option value="{{$key}}" {{Request::input('filter') == 'bulan' ?Request::input('bulantahun') == $key ?'selected':'':''}}>{{$key}}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-md-2">
-                <select class="form-control select2" name="tahun">
+                <select class="form-control form-control-sm form-control-sm form-control-sm " name="tahun">
                   @foreach ($tahun as $key=> $item)
                   <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
                   @endforeach
@@ -105,7 +105,7 @@
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
-                <select class="form-control select2" name="cabang">
+                <select class="form-control form-control-sm form-control-sm form-control-sm " name="cabang">
                   <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                   @foreach ($branches as $branch)
                   <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
@@ -114,7 +114,7 @@
               </div>
               @else
               <div class="col-md-2">
-                <select class="form-control select2" name="status">
+                <select class="form-control form-control-sm form-control-sm form-control-sm " name="status">
                   <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
                   <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
                   <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
@@ -123,9 +123,9 @@
               @endif
 
               <div class="col-md-2">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="print" value="bill"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" class="btn btn-sm btn-primary" name="print" value="bill"><i class="nav-icon fas fa-print"></i></button>
+                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
           </form>
@@ -156,9 +156,12 @@
                 <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td>Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
-                <td><span class="harga">{{ $bill->kembalian_nota < 0 ?"Rp ".abs($bill->kembalian_nota).",-":"-"}}</span></td>
-                <td>{{strtoupper($bill->status)}}</td>
-                <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
+                @if($bill->kembalian_nota < 0) <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                  @else
+                  <td>-</td>
+                  @endif
+                  <td>{{strtoupper($bill->status)}}</td>
+                  <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
               $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
@@ -174,8 +177,8 @@
                 <th></th>
                 <th></th>
                 <th>Jumlah</th>
-                <th>Rp {{$total}},-</th>
-                <th>Rp {{$totalpiutang}},-</th>
+                <th>Rp <span class="harga">{{$total}}</span>,-</th>
+                <th>Rp <span class="harga">{{$totalpiutang}}</span>,-</th>
                 <th></th>
                 <th></th>
               </tr>
@@ -184,7 +187,7 @@
                 <th></th>
                 <th></th>
                 <th>Jumlah Kas</th>
-                <th>Rp {{$total-$totalpiutang}}</th>
+                <th>Rp <span class="harga">{{$total-$totalpiutang}}</span>,-</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -261,6 +264,7 @@
 
 @push('script')
 <!-- DataTables -->
+<script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>

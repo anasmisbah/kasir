@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
     .scrollable {
-        height: 170px !important;
+        height: 150px !important;
         overflow-y: scroll !important
     }
 

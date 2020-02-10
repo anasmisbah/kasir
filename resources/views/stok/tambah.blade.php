@@ -36,7 +36,7 @@
             <div class="card-body">
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
-                        <div class="col-sm-10"><select id="barang" class="form-control select2 {{ $errors->first('item_id')?'is-invalid':'' }}" name="item_id">
+                        <div class="col-sm-10"><select id="barang" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm select2 {{ $errors->first('item_id')?'is-invalid':'' }}" name="item_id">
                             <option selected>--Pilih Barang--</option>
                             @foreach ($items as $item)
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
@@ -49,16 +49,16 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><input type="text" value="{{$branch->nama}}" disabled class="form-control" ></div>
+                    <div class="col-sm-10"><input type="text" value="{{$branch->nama}}" disabled class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" ></div>
                     <input type="hidden" value="{{$branch->id}}" name="branch_id">
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Pusat</label>
-                    <div class="col-sm-10"><input type="text" id="harga_pusat" disabled class="form-control inputharga" name="harga_pusat" placeholder="harga pusat"></div>
+                    <div class="col-sm-10"><input type="text" id="harga_pusat" disabled class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm inputharga" name="harga_pusat" placeholder="harga pusat"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Cabang</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('harga_cabang')}}"  id="harga_cabang" disabled class="form-control {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
+                    <div class="col-sm-10"><input type="text" value="{{ old('harga_cabang')}}"  id="harga_cabang" disabled class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang">
                         <div class="invalid-feedback">
                             {{$errors->first('harga_cabang')}}
                         </div>
@@ -66,11 +66,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Selisih</label>
-                    <div class="col-sm-10"><input type="text" id="selisih" disabled class="form-control inputharga" name="harga_selisih" placeholder="selisih"></div>
+                    <div class="col-sm-10"><input type="text" id="selisih" disabled class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm inputharga" name="harga_selisih" placeholder="selisih"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Stok</label>
-                    <div class="col-sm-10"><input type="text"  value="{{ old('stok')}}" class="form-control {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
+                    <div class="col-sm-10"><input type="text"  value="{{ old('stok')}}" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
                         <div class="invalid-feedback">
                             {{$errors->first('stok')}}
                         </div>

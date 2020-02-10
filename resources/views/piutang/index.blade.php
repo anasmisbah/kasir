@@ -50,13 +50,13 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
-                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
+                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm float-right" id="tanggal">
                   </div>
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
-                <select class="form-control select2" name="cabang">
+                <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
                   <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
@@ -66,9 +66,9 @@
               @endif
 
               <div class="col-md-3">
-                <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="print" value="bon"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" class="btn btn-sm btn-primary" name="print" value="bon"><i class="nav-icon fas fa-print"></i></button>
+                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
           </form>
@@ -94,7 +94,7 @@
                 <td>{{$bill->customer->telepon}}</td>
                 <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                 <td>
-                  <a href="{{route('piutang.detail',$bill->id)}}" class="btn btn-outline-success btn-sm">
+                  <a href="{{route('piutang.detail',$bill->id)}}" class="btn btn-sm btn-outline-success btn-sm">
                     <i class="fa fa-location-arrow"></i>
                 </td>
               </tr>
@@ -126,6 +126,7 @@
 
 @push('script')
 <!-- DataTables -->
+<script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>

@@ -37,19 +37,19 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama Cabang"></div>
+                    <div class="col-sm-10"><input type="text" value="{{$customer->nama}}" class="form-control form-control-sm" name="nama" placeholder="Masukkan Nama Cabang"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
+                    <div class="col-sm-10"><input type="text" value="{{$customer->alamat}}" class="form-control form-control-sm" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
+                    <div class="col-sm-10"><input type="text" value="{{$customer->telepon}}" class="form-control form-control-sm" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control select2" name="branch_id">
+                    <div class="col-sm-10"><select class="form-control form-control-sm " name="branch_id">
                         @foreach ($branches as $branch)
                             <option value="{{$branch->id}}" {{ $branch->id == $customer->branch_id?"selected":"" }} >{{$branch->nama}}</option>
                         @endforeach

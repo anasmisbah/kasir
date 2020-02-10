@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Karyawan</label>
-                    <div class="col-sm-10"><select class="form-control select2" id="selectkaryawan" name="employee_id">
+                    <div class="col-sm-10"><select class="form-control form-control-sm select2" id="selectkaryawan" name="employee_id">
                         <option value="{{$user->employee->id}}" selected>{{$user->employee->nama}}</option>
                         @foreach ($employees as $employee)
                             <option value="{{$employee->id}}" {{ $employee->id === $user->employee_id?"selected":"" }}>{{$employee->nama}}</option>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pengguna</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('username')?old('username'):$user->username }}" class="form-control {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
+                    <div class="col-sm-10"><input type="text" value="{{ old('username')?old('username'):$user->username }}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('username')}}
                         </div>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control  {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Karyawan">
+                    <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control form-control-sm  {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Karyawan">
                         <div class="invalid-feedback">
                             {{$errors->first('email')}}
                         </div>
@@ -68,11 +68,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" name="password" placeholder="Masukkan Password Karyawan"></div>
+                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password" placeholder="Masukkan Password Karyawan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Level</label>
-                    <div class="col-sm-10"><select class="form-control select2" name="level_id">
+                    <div class="col-sm-10"><select class="form-control form-control-sm" name="level_id">
                         @foreach ($levels as $level)
                             <option value="{{$level->id}}" {{ $level->id === $user->level_id?"selected":"" }}>{{$level->nama}}</option>
                         @endforeach
@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><input type="text" id="cabang"  value="{{$user->employee->branch->nama}}" disabled class="form-control" placeholder="Cabang"></div>
+                    <div class="col-sm-10"><input type="text" id="cabang"  value="{{$user->employee->branch->nama}}" disabled class="form-control form-control-sm" placeholder="Cabang"></div>
                 </div>
             </div>
             <div class="card-footer">

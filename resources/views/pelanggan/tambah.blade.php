@@ -36,19 +36,19 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="nama" placeholder="Masukkan Nama Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="alamat" placeholder="Masukkan Alamat Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" class="form-control" name="telepon" placeholder="Masukkan Telepon Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="telepon" placeholder="Masukkan Telepon Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control select2" name="branch_id">
+                    <div class="col-sm-10"><select class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="branch_id">
                         @foreach ($branches as $branch)
                             <option value="{{$branch->id}}">{{$branch->nama}}</option>
                         @endforeach
