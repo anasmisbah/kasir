@@ -68,6 +68,9 @@ class ApplicationController extends Controller
         ]);
 
         if ($request->file('logo')) {
+            $request->validate([
+                'logo'=>'mimes:jpeg,bmp,png,jpg,ico',
+            ]);
             if (!($app->logo == "logo/default.jpg") && file_exists(storage_path('app/public/'.$app->logo))) {
                 Storage::delete('public/'.$app->logo);
             }

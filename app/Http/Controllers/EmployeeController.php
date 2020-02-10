@@ -91,6 +91,9 @@ class EmployeeController extends Controller
 
         $foto='';
         if ($request->file('foto')) {
+            $request->validate([
+                'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
+            ]);
             $foto = $request->file('foto')->store('fotos','public');
         }
 
@@ -140,6 +143,9 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->file('foto')) {
+            $request->validate([
+                'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
+            ]);
             if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists(storage_path('app/public/'.$updateEmployee->foto))) {
                 Storage::delete('public/'.$updateEmployee->foto);
             }

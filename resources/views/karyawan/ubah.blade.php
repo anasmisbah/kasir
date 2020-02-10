@@ -37,39 +37,68 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label><br>
-                    <div class="col-sm-10"><img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
-                    <input type="file" id="foto" class="" name="foto"></div>
+                    <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                    <div class="col-sm-4">
+                        <input type="file" id="foto" style="margin-top:10%" class="form-control {{ $errors->first('foto')?'is-invalid':'' }}" name="foto">
+                        <div class="invalid-feedback">
+                            {{$errors->first('foto')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" value="{{$employee->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama"></div>
+                    <div class="col-sm-10"><input type="text" value="{{ old('nama')?old('nama'):$employee->nama }}" class="form-control {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                    <div class="col-sm-10"><select class="form-control" name="jenis_kelamin">
+                    <div class="col-sm-10"><select class="form-control {{ $errors->first('jenis_kelamin')?'is-invalid':'' }}" name="jenis_kelamin">
                         <option value="laki-laki" {{$employee->jenis_kelamin == "laki-laki"?"selected":""}}>Laki-Laki</option>
                         <option value="perempuan" {{$employee->jenis_kelamin == "perempuan"?"selected":""}}>Perempuan</option>
-                    </select></div>
+                    </select>
+                        <div class="invalid-feedback">
+                            {{$errors->first('jenis_kelamin')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Jabatan</label>
-                    <div class="col-sm-10"><input type="text" value="{{$employee->jabatan}}" class="form-control" name="jabatan" placeholder="Masukkan Jabatan"></div>
+                    <div class="col-sm-10"><input type="text" value="{{ old('jabatan')?old('jabatan'):$employee->jabatan }}" class="form-control {{ $errors->first('jabatan')?'is-invalid':'' }}" name="jabatan" placeholder="Masukkan Jabatan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('jabatan')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" value="{{$employee->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
+                    <div class="col-sm-10"><input type="text" value="{{ old('alamat')?old('alamat'):$employee->alamat }}" class="form-control {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('alamat')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" value="{{$employee->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
+                    <div class="col-sm-10"><input type="text" value="{{ old('telepon')?old('telepon'):$employee->telepon }}" class="form-control {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control select2" name="branch_id">
+                    <div class="col-sm-10"><select class="form-control {{ $errors->first('branch_id')?'is-invalid':'' }} select2" name="branch_id">
                             @foreach ($branches as $branch)
                                 <option value="{{$branch->id}}" {{$employee->branch_id == $branch->id?"selected":""}} >{{$branch->nama}}</option>
                             @endforeach
-                    </select></div>
+                    </select>
+                        <div class="invalid-feedback">
+                            cabang wajib dipilih
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </div>

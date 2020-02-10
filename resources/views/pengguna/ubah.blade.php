@@ -52,11 +52,19 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pengguna</label>
-                    <div class="col-sm-10"><input type="text" value="{{$user->username}}" class="form-control" name="username" placeholder="Masukkan Nama Pengguna"></div>
+                    <div class="col-sm-10"><input type="text" value="{{ old('username')?old('username'):$user->username }}" class="form-control {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
+                        <div class="invalid-feedback">
+                            {{$errors->first('username')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10"><input type="email" value="{{$user->email}}" class="form-control" name="email" placeholder="Masukkan Email Karyawan"></div>
+                    <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control  {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Karyawan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('email')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>

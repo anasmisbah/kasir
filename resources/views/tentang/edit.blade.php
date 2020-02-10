@@ -34,25 +34,46 @@
                 <div class="form-group row">
                     <label class="col-2">Logo</label>
                     <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
-                    <div class="col-4"><input type="file" id="foto" class="form-control" name="logo"></div>
+                    <div class="col-4"><input type="file" id="foto" style="margin-top:10%" class="form-control {{ $errors->first('logo')?'is-invalid':'' }}" name="logo">
+                        <div class="invalid-feedback">
+                            {{$errors->first('logo')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Nama Aplikasi:</label>
-                    <div class="col-6"><input type=" text" value="{{$app->nama}}" class="form-control" name="nama" placeholder="Masukkan Nama"></div>
+                    <div class="col-6"><input type="text" value="{{ old('nama')?old('nama'):$app->nama }}" class="form-control {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Nama Toko:</label>
-                    <div class="col-6"><input type="text" value="{{$app->toko}}" class="form-control" name="toko" placeholder="Masukkan Jabatan"></div>
+                    <div class="col-6"><input type="text" value="{{ old('toko')?old('toko'):$app->toko }}" class="form-control {{ $errors->first('toko')?'is-invalid':'' }}" name="toko" placeholder="Masukkan Jabatan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('toko')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Alamat:</label>
-                    <div class="col-10"><input type="text" value="{{$app->alamat}}" class="form-control" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
+                    <div class="col-6"><input type="text" value="{{ old('alamat')?old('alamat'):$app->alamat }}" class="form-control {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('alamat')}}
+                        </div>
+
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Telepon</label>
-                    <div class="col-6"><input type="text" value="{{$app->telepon}}" class="form-control" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
+                    <div class="col-6"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}" class="form-control {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                <button type="submit" class="btn  btn-primary float-right " style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </div>
             <div class="card-footer">
                 <p></p>
