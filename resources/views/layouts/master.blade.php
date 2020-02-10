@@ -8,6 +8,7 @@
   @endphp
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="{{asset("/storage/".$app->logo)}}" type="image/x-icon">
   <title>{{ $app->toko }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">

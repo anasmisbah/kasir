@@ -13,6 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="shortcut icon" href="{{asset("/storage/".$app->logo)}}" type="image/x-icon">
 
   <title>Kasir | {{ $app->toko }}</title>
 

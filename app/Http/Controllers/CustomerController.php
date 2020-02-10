@@ -62,7 +62,10 @@ class CustomerController extends Controller
 
     public function getdatajson(Request $request)
     {
-        $customers = Customer::where('branch_id',$request->id)->get();
+        $customers = Customer::where([
+            ['branch_id','=',Auth::user()->employee->branch_id],
+            ['nama','LIKE',"%{$request->keyword}%"]
+            ])->get();
 
         return response()->json($customers);
     }

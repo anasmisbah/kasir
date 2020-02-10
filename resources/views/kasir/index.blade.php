@@ -37,35 +37,13 @@
                 <div class="row pt-3">
                     <div class="col-5">
                         <div class="form-group-sm">
-
+                            <input type="hidden" id="idpelanggan">
                             <label for="">Nama Pelanggan</label> <br>
-                            <input type="text" name="" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
+                            <input type="text" name="" id="searchpelanggan" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
                             <div class="position-absolute scrollable-list" style="z-index:999; width:77%">
-                                <div class="list-group position-relative">
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                          Cras justo odio
-                                        </a>
-                                        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                                        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                                Cras justo odio
-                                              </a>
-                                              <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                                              <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                                              <a href="#" class="list-group-item list-group-item-action">
-                                                    Cras justo odio
-                                                  </a>
-                                                  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                                                  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                                      </div>
+                                <div class="list-group position-relative" id="list-pelanggan">
+                                </div>
                             </div>
-                            {{-- <select id="selectpelanggan" class="form-control form-control-sm select2 d-inline"
-                                style="width:80%">
-                                <option value="" disabled selected>Pilih Pelanggan</option>
-                                @foreach ($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->nama}}</option>
-                                @endforeach
-                            </select> --}}
                             <button class="btn btn-info create-modal d-inline" id="tambahpelanggan"><i
                                     class="fa fa-plus"></i></button>
                         </div>
@@ -84,52 +62,13 @@
             </div>
             <div class="col-2 mt-3">
                 <label for="">TOTAL</label>
-                <h3 class="form-control form-control-lg text-bold  text-center pt-4" style="height:60%">Rp. <span
-                        id="jml" class="inputharga">0</span>,-</h3>
+                <h3 class="form-control form-control-lg text-bold text-center pt-4" style="height:60%">Rp. <span
+                         class="inputharga jml">0</span>,-</h3>
             </div>
             <div class="col-2 " style="padding-top: 50px; padding-bottom:35px">
                 <a href="#" id="cetaknota" class="pt-4 text-bold disabled btn btn-info btn-lg btn-cetak"
                     style="width:100%; height:100%">Cetak Nota</a>
             </div>
-            {{-- <div class="ml-1 col-md-3">
-            <div class="pb-2 row border border-dark rounded form-group">
-                <div class="col-10">
-                    <label for="">Nama Pelanggan</label>
-                    <select id="selectpelanggan" class=" form-control-sm select2">
-                        <option value="" disabled selected>Pilih Pelanggan</option>
-                        @foreach ($customers as $customer)
-                        <option value="{{$customer->id}}">{{$customer->nama}}</option>
-            @endforeach
-            </select>
-
-
-        </div>
-        <div class="col-12 mt-2">
-            <label for="">Telepon</label>
-            <input id="teleponpelanggan" class="form-control form-control-sm" disabled type="text">
-        </div>
-    </div>
-</div> --}}
-{{-- <div class="ml-1 col-md-3 ">
-            <div class="pb-3 row border border-dark rounded">
-                <div class="col-12">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="ml-1 col-md-3">
-            <div class="row">
-                <div class="col-6">
-                    <label for="">Total</label>
-
-                </div>
-                <div class="col-6 mt-4">
-                    <a  href="#"  id="cetaknota" class="disabled btn btn-primary btn-lg btn-cetak" >Cetak Nota</a>
-                </div>
-            </div>
-
-        </div> --}}
 </div>
 <div class="row mt-2">
     <div class="col-md-10">
@@ -147,22 +86,11 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Nama Barang</label>
-                                <input type="text" name="" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
+                                <input type="text" name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
                                 <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
-                                    <div class="list-group position-relative">
-                                            <a href="#" class="list-group-item list-group-item-action">
-                                              Cras justo odio
-                                            </a>
-                                            <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                                            <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                                          </div>
+                                    <div class="list-group position-relative" id="list-barang">
+                                    </div>
                                 </div>
-                                {{-- <select id="selectbarang" class="form-control form-control-sm select2">
-                                    <option value="" disabled selected>Pilih Barang</option>
-                                    @foreach ($supplies as $supply)
-                                    <option value="{{$supply->id}}">{{$supply->item->nama}}</option>
-                                    @endforeach
-                                </select> --}}
                             </div>
                         </div>
                         <div class="col-2">
@@ -245,7 +173,7 @@
                                 </td>
                                 <td class="border-top border-bottom text-bold text-center">TOTAL</td>
                                 <td class="border-top  border-bottom text-bold">Rp. <span id="total"
-                                        class="inputharga">0</span>,-
+                                        class="inputharga jml">0</span>,-
                                 </td>
                             </tr>
                         </tfoot>
@@ -365,40 +293,152 @@
 
 </script>
 <script>
-    $(document).on('change', '#selectpelanggan', function () {
+    function getpelanggan(id) {
         let url = "{{ route('pelanggan.data') }}"
+        const containerlist = $('#list-pelanggan')
+        containerlist.html('')
 
         $.ajax({
             type: 'get',
             url: url,
             data: {
-                'id': $("#selectpelanggan").val(),
+                'id': id,
             },
             success: function (data) {
                 $('#alamatpelanggan').html(data.customer.alamat)
                 $('#teleponpelanggan').val(data.customer.telepon)
-
+                $('#searchpelanggan').val(data.customer.nama)
                 $("#cetaknota").removeClass('disabled')
+                $('#idpelanggan').val(data.customer.id)
             },
         });
-    });
+    }
 
-    $(document).on('change', '#selectbarang', function () {
-        let url = "{{ route('stok.data') }}"
+
+    $("#searchpelanggan").keyup(function () {
+        let keyword = $(this).val()
+        let url = "{{ route('pelanggan.datajson') }}"
+        const containerlist = $('#list-pelanggan')
+        containerlist.html('')
         $.ajax({
             type: 'get',
             url: url,
             data: {
-                'id': $("#selectbarang").val(),
+                'keyword': keyword,
+            },
+            success: function (data) {
+                var list = data.map((item)=>{
+                    return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
+                })
+                list.forEach((item)=>{
+                    containerlist.append(item)
+                })
+
+            },
+        });
+    });
+    // $( "#searchpelanggan" ).focusout(function(){
+    //     const containerlist = $('#list-pelanggan')
+    //     containerlist.html('')
+
+    // })
+    $( "#searchpelanggan" ).focus(function(){
+        let keyword = $(this).val()
+        let url = "{{ route('pelanggan.datajson') }}"
+        const containerlist = $('#list-pelanggan')
+        containerlist.html('')
+        $.ajax({
+            type: 'get',
+            url: url,
+            data: {
+                'keyword': keyword,
+            },
+            success: function (data) {
+                var list = data.map((item)=>{
+                    return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
+                })
+                list.forEach((item)=>{
+                    containerlist.append(item)
+                })
+
+            },
+        });
+
+    })
+
+    function getbarang(id) {
+        let url = "{{ route('stok.data') }}"
+        const containerlist = $('#list-barang')
+        containerlist.html('')
+
+        $.ajax({
+            type: 'get',
+            url: url,
+            data: {
+                'id': id,
             },
             success: function (data) {
                 $('#kodebarang').val(data.supply.id)
                 $('#hargabarang').val(data.supply.harga_cabang)
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
+                $("#searchbarang").val(data.supply.item.nama)
+            },
+        });
+    }
+
+    $("#searchbarang").keyup(function () {
+        let keyword = $(this).val()
+        let url = "{{ route('barang.datajson') }}"
+        const containerlist = $('#list-barang')
+        containerlist.html('')
+        $.ajax({
+            type: 'get',
+            url: url,
+            data: {
+                'keyword': keyword,
+            },
+            success: function (data) {
+                var list = data.map((item)=>{
+                    return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
+                })
+                list.forEach((item)=>{
+                    containerlist.append(item)
+                })
+
             },
         });
     });
+    // $( "#searchbarang" ).focusout(function(){
+    //     const containerlist = $('#list-barang')
+    //     containerlist.html('')
+
+    // })
+    $( "#searchbarang" ).focus(function(){
+        let keyword = $(this).val()
+        let url = "{{ route('barang.datajson') }}"
+        const containerlist = $('#list-barang')
+        containerlist.html('')
+        $.ajax({
+            type: 'get',
+            url: url,
+            data: {
+                'keyword': keyword,
+            },
+            success: function (data) {
+                var list = data.map((item)=>{
+                    return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
+                })
+                list.forEach((item)=>{
+                    containerlist.append(item)
+                })
+
+            },
+        });
+
+    })
+
+
 
     $(document).on('click', '#tambahpelanggan', function () {
         $('#plus').modal('show');
@@ -408,12 +448,12 @@
     });
 
     $(document).on('click', '#cetaknota', function () {
-        const total_nota = $("#jml").html()
+        const total_nota = $(".jml").html()
         const diskon = $('#diskon').val();
         const jumlah_uang_nota = $('#uangmuka').val();
         const kembalian_nota = $('#uangkembali').val()
         const status = $('#status').val()
-        const customer_id = $("#selectpelanggan").val()
+        const customer_id = $('#idpelanggan').val()
         const no_nota_kas = $('#nonotakas').val();
 
 
@@ -522,6 +562,9 @@
         uangkembali(uangMuka)
 
         $("#qtybarang").val('')
+        $("#kodebarang").val('')
+        $("#hargabarang").val('')
+        $("#searchbarang").val('')
         $("#jumlahbarang").val(0)
         $('#diskon').removeAttr('disabled')
         hitungdiskon();
@@ -548,7 +591,7 @@
             const markup = '<tr data-id=1 class="text-center">\
                                     <td>1</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
-                                    <td>' + $('#selectbarang option:selected').text() + '</td>\
+                                    <td>' + $('#searchbarang').val() + '</td>\
                                     <td>' + $('#hargabarang').val() + '</td>\
                                     <td>' + $('#qtybarang').val() + '</td>\
                                     <td>' + $('#jumlahbarang').val() + '</td>\
@@ -563,14 +606,13 @@
             const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + ' class="text-center">\
                                     <td>' + (parseInt(lastNo) + 1) + '</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
-                                    <td>' + $('#selectbarang option:selected').text() + '</td>\
+                                    <td>' + $('#searchbarang').val() + '</td>\
                                     <td>' + $('#hargabarang').val() + '</td>\
                                     <td>' + $('#qtybarang').val() + '</td>\
-                                    <td>' + $('#jumlahbarang').val() +
-                '</td>\
+                                    <td>' + $('#jumlahbarang').val() +'</td>\
                                     <td>\
                                         <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
-`                (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
+                (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
                                     </td>\
                                 </tr>'
             table.append(markup);
@@ -603,14 +645,14 @@
         const hasildiskon = (total * diskon) / 100
 
         total = total - hasildiskon
-        $("#jml").html(total)
+        $(".jml").html(total)
 
         let uangmuka = $('#uangmuka').val()
         uangkembali(uangmuka);
     }
 
     function uangkembali(nilai) {
-        const total = $("#jml").html()
+        const total = $(".jml").html()
         const kembali = parseInt(nilai) - parseInt(total)
 
         $('#uangkembali').val(kembali)

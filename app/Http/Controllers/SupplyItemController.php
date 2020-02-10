@@ -64,7 +64,7 @@ class SupplyItemController extends Controller
     public function getJsonSupply(Request $request)
     {
         $supply = Supply::findOrFail($request->id);
-
+        $supply->item;
         return response()->json([
             'supply'=>$supply
         ]);
@@ -72,8 +72,10 @@ class SupplyItemController extends Controller
 
     public function getdatajson(Request $request)
     {
-        $supplies = Supply::where('branch_id',$request->id)->get();
-
+        $supplies = Supply::select('supplies.id','items.nama',)->join('items','items.id','=','supplies.item_id')->where([
+            ['branch_id',Auth::user()->employee->branch_id],
+            ['items.nama','LIKE',"%{$request->keyword}%"]
+            ])->get();
         return response()->json($supplies);
     }
 
