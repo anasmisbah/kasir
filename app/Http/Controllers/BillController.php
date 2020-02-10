@@ -25,6 +25,7 @@ class BillController extends Controller
         $tanggal=[];
         $bulan = [];
         $tahun =[];
+        $dateNow = Carbon::now()->format('d F Y');
         foreach ($billForDate as $key => $bill) {
             $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
             $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
@@ -34,10 +35,12 @@ class BillController extends Controller
             if ($request) {
                 if ($request->filter === "hari") {
 
-                    $explodedate = explode('/',$request->hari);
-                    $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
-
-                    $bills = Bill::whereDate('tanggal_nota',$date)->get();
+                    $explodedatetime = explode(' ',$request->hari);
+                    $explodeddateFrom = explode('/',$explodedatetime[0]);
+                    $explodeddateTo = explode('/',$explodedatetime[3]);
+                    $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                    $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
+                    $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                 }else if($request->filter === "bulan"){
                     $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
@@ -53,6 +56,10 @@ class BillController extends Controller
                         $data[$key]['piutang'] = $bill->where('status','piutang')->count();
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    if($request->print){
+                        $month = Carbon::now()->month($request->bulan);
+                        return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month'));
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
@@ -71,7 +78,11 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
-                    return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
+                    if($request->print){
+                        $year = Carbon::now()->year($request->tahun);
+                        return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year'));
+                    }
+                    return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
                 }else if($request->filter === "cabang"){
                     if ($request->cabang === "0") {
@@ -97,15 +108,20 @@ class BillController extends Controller
                 $pdf = PDF::loadView('pdf.penjualan_hari', $data);
                 // return $pdf->stream();
                 return $pdf->download('penjualan.pdf');
+            }else if($request->print){
+                return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch'));
             }
 
         }else{
             if ($request) {
                 if ($request->filter === "hari") {
-                    $explodedate = explode('/',$request->hari);
-                    $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                    $explodedatetime = explode(' ',$request->hari);
+                    $explodeddateFrom = explode('/',$explodedatetime[0]);
+                    $explodeddateTo = explode('/',$explodedatetime[3]);
+                    $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                    $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                     $bills = Bill::where('branch_id',$user->employee->branch_id)
-                                ->whereDate('tanggal_nota',$date)
+                                ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                                 ->get();
                 }else if($request->filter === "bulan"){
                     $bills = Bill::where('branch_id',$user->employee->branch_id)
@@ -224,13 +240,16 @@ class BillController extends Controller
         $user = Auth::user();
         $app = Application::first();
         $branch = $user->employee->branch;
+        $dateNow = Carbon::now()->format('d F Y');
         if ($user->level_id == 1) {
             if ($request->filter === "hari") {
 
-                $explodedate = explode('/',$request->hari);
-                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
-
-                $bills = Bill::whereDate('tanggal_nota',$date)->where('status','piutang')->get();
+                $explodedatetime = explode(' ',$request->hari);
+                $explodeddateFrom = explode('/',$explodedatetime[0]);
+                $explodeddateTo = explode('/',$explodedatetime[3]);
+                $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
+                $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
             }else if($request->filter === "cabang"){
                 if ($request->cabang === "0") {
                     $bills = Bill::where('status','piutang')->get();
@@ -254,16 +273,21 @@ class BillController extends Controller
                 $pdf = PDF::loadView('pdf.piutang', $data);
                 // return $pdf->stream();
                 return $pdf->download('piutang.pdf');
+            }else if($request->print){
+                return view('pdf.piutang',compact('bills','app','dateNow','branch'));
             }
         }else{
             if ($request->filter === "hari") {
-                $explodedate = explode('/',$request->hari);
-                $date = $explodedate[2]."-".$explodedate[0]."-".$explodedate[1];
+                $explodedatetime = explode(' ',$request->hari);
+                $explodeddateFrom = explode('/',$explodedatetime[0]);
+                $explodeddateTo = explode('/',$explodedatetime[3]);
+                $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
+                $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                 $bills = Bill::where([
                     ['branch_id','=',$user->employee->branch_id],
                     ['status','=','piutang']
                     ])
-                            ->whereDate('tanggal_nota',$date)
+                    ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                             ->get();
             }else{
                 $bills = Bill::where([
@@ -285,6 +309,19 @@ class BillController extends Controller
         }
 
         return view('piutang.index',compact('bills','branches'));
+    }
+
+    public function piutanglunas($id)
+    {
+        $bill =Bill::findOrFail($id);
+
+        $bill->update([
+            'status'=>'lunas',
+            'jumlah_uang_nota'=>$bill->total_nota,
+            'kembalian_nota'=>0,
+        ]);
+
+        return redirect()->route('penjualan.detail',$bill->id);
     }
 
     public function piutangFilter(Request $request)
@@ -310,6 +347,22 @@ class BillController extends Controller
 
         return view('piutang.detail',compact('bill'));
 
+    }
+
+    public function cetaknotapiutang($id)
+    {
+        $bill = Bill::findOrFail($id);
+        $app = Application::first();
+
+        $data = [
+            'bill'=>$bill,
+            'app'=>$app,
+        ];
+        $pdf = PDF::loadView('pdf.penjualannota', $data);
+        // return $pdf->stream();
+        // $pdfname = $bill->no_nota_kas;
+        // return $pdf->download("$pdfname.pdf");
+        return view('pdf.piutang_nota',compact('bill','app'));
     }
 
 
@@ -358,28 +411,26 @@ class BillController extends Controller
             ]);
         }
 
-        $this->nota_penjualan($newBill);
-
         return response()->json([
             'data'=>$newBill,
             'status'=>true
         ]);
     }
 
-    public function nota_penjualan($bill)
+    public function cetaknota($id)
     {
-        $user = Auth::user();
-        $tanggal_nota = Carbon::now();
+        $bill = Bill::findOrFail($id);
         $app = Application::first();
 
         $data = [
             'bill'=>$bill,
             'app'=>$app,
         ];
-        $pdf = PDF::loadView('pdf.penjualan_nota', $data);
+        $pdf = PDF::loadView('pdf.penjualannota', $data);
         // return $pdf->stream();
-        $pdfname = $bill->no_nota_kas;
-        return $pdf->download("$pdfname.pdf");
+        // $pdfname = $bill->no_nota_kas;
+        // return $pdf->download("$pdfname.pdf");
+        return view('pdf.penjualannota',compact('bill','app'));
     }
 
     public function store(Request $request)

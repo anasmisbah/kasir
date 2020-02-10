@@ -50,7 +50,7 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -69,7 +69,7 @@
     <script src="/adminlte/dist/js/adminlte.min.js"></script>
 
 </body>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
     <script>
         $(function(){
             var error = '{{ $errors->first() }}'

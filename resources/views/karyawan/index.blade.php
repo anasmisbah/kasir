@@ -3,6 +3,7 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 @endpush
 
 @section('content')
@@ -41,7 +42,7 @@
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" checked>
+                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
                   <label for="customRadio1" class="custom-control-label">Cabang</label>
                 </div>
               </div>
@@ -51,13 +52,13 @@
                 <select class="form-control select2" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}">{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-md-6">
                 <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-primary" name="pdf" value="download"><i class="nav-icon fas fa-print"></i></button>
+                <button type="submit" class="btn btn-primary" name="print" value="employee"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
@@ -109,8 +110,10 @@
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function() {
+    $('.select2').select2();
     $("#example1").DataTable();
     $('#example2').DataTable({
       "paging": true,

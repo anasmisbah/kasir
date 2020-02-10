@@ -8,6 +8,12 @@
         min-height: 100px;
         text-align: justify
     }
+    .border-bawah{
+        border-bottom: 2px solid black !important;
+    }
+    .border-top{
+        border-top: 2px solid black !important;
+    }
 </style>
 @endpush
 
@@ -101,13 +107,13 @@
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="">Qty (Kg)</label>
-                                    <input id="qtybarang" disabled type="text"  id="qty"  class="form-control form-control-sm inputharga">
+                                    <input id="qtybarang" disabled type="text"  id="qty" value="0" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled  id="jumlah" class="form-control form-control-sm inputharga">
+                                    <input id="jumlahbarang" type="text" disabled value="0"  id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-1">
@@ -139,9 +145,11 @@
                             <tbody>
                             </tbody>
                             <tfoot>
-                                <th colspan="4"></th>
-                                <th>Sub Total</th>
-                                <th>Rp. <span id="total" class="inputharga">0</span>,-</th>
+                                <tr >
+                                    <td colspan="4"></td>
+                                    <td class="border-top border-bawah"> Sub Total</td>
+                                    <td class="border-top border-bawah">Rp. <span id="total" class="inputharga">0</span>,-</td>
+                                </tr>
                             </tfoot>
                         </table>
                         </div>
@@ -234,7 +242,7 @@
 @push('script')
 <script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
 $(function () {
     $('.select2').select2()
@@ -337,15 +345,17 @@ $(document).on('click', '#cetaknota', function () {
             data
         },
         success: function (data) {
+            const printurl = `kasir/cetaknota/${data.data.id}`
+                        window.open(printurl,'_blank');
             if (data.status) {
                 swal({
                     title: "Berhasil Menambahkan Transaksi",
                     text: "",
                     icon: "success",
                 })
-                    .then(function () {
-                        location.reload()
-                    });
+                .then(function () {
+                    location.reload()
+                });
             }
 
         },
@@ -385,7 +395,13 @@ $("#qtybarang").keyup(function(){
 
 
 $(document).on('click', '#tambahbarang', function () {
-    addNewRow();
+    if ($('#qtybarang').val() !=0) {
+
+        addNewRow();
+    } else {
+        alert("masukkan jumlah barang")
+    }
+
 
     const total = $("#total").html()
     const jmlbarang = $('#jumlahbarang').val()
