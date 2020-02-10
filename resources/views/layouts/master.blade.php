@@ -31,7 +31,7 @@
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
+    <nav class="main-header navbar navbar-expand navbar-black navbar-dark text-sm">
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
