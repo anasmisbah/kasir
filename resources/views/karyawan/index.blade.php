@@ -26,16 +26,6 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          <div class="card-tools">
-            <ul class="nav nav-pills ml-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="{{ route('karyawan.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- /.card-header -->
         <div class="card-body">
           @if (auth()->user()->level_id == 1)
           <form action="{{route('karyawan.index')}}" method="GET">
@@ -60,11 +50,12 @@
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button type="submit" class="btn btn-sm btn-primary" name="print" value="employee"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <a href="{{ route('karyawan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
             </div>
           </form>
           @endif
-          <table id="example1" class="display table table-bordered table-striped compact">
+          <table id="example1" class="display table table-striped compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -86,13 +77,6 @@
               @endforeach
 
             </tbody>
-            <tfoot>
-              <th>No.</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Jabatan</th>
-              <th>Telepon</th>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
@@ -115,14 +99,6 @@
   $(function() {
     $('.select2').select2();
     $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
   });
 </script>
 @endpush

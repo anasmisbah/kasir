@@ -2,7 +2,6 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
 
 @endpush
@@ -72,7 +71,7 @@
               </div>
             </div>
           </form>
-          <table id="example1" class="table table-bordered table-striped compact">
+          <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -80,7 +79,7 @@
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
-                <th>Piutang</th>
+                <th class="text-right">Piutang</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -92,7 +91,7 @@
                 <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td>{{$bill->customer->alamat}}</td>
                 <td>{{$bill->customer->telepon}}</td>
-                <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                <td class="text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                 <td>
                   <a href="{{route('piutang.detail',$bill->id)}}" class="btn btn-sm btn-outline-success btn-sm">
                     <i class="fa fa-location-arrow"></i>
@@ -100,17 +99,6 @@
               </tr>
               @endforeach
             </tbody>
-            <tfoot>
-              <tr>
-                <th>No.</th>
-                <th>No. Nota Kas</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
-                <th>Piutang</th>
-                <th>Aksi</th>
-              </tr>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
@@ -135,14 +123,6 @@
 <script>
   $(function() {
     $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
     $('.select2').select2();
     $(".harga").divide({
       delimiter: '.',

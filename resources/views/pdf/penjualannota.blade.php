@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="/adminlte/plugins/bootstrap3.min.css" >
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap3.min.css">
     <title>Nota Kas</title>
 
     <style>
@@ -21,18 +21,21 @@
             font-weight: bold
         }
 
-        .grid-item p{
+        .grid-item p {
             margin-top: -10px;
         }
-        .grid-container{
+
+        .grid-container {
             display: grid;
             grid-template-columns: 400px 100px 300px;
         }
-        .grid-item.second{
-            margin-top:3rem;
+
+        .grid-item.second {
+            margin-top: 3rem;
             text-align: right;
         }
-        .grid-container-2{
+
+        .grid-container-2 {
             display: grid;
             grid-template-columns: 350px 120px
         }
@@ -48,21 +51,21 @@
                 <div>{{$app->alamat}}</div>
                 <div>{{$app->telepon}}</div>
             </div>
-                    <div class="grid-item second">
-                        <p>No. Nota Bon:</p>
-                        <p>Tanggal:</p>
-                        <p>Pelanggan:</p>
-                        <p>Alamat:</p>
+            <div class="grid-item second">
+                <p>No. Nota Bon:</p>
+                <p>Tanggal:</p>
+                <p>Pelanggan:</p>
+                <p>Alamat:</p>
 
-                    </div>
-                    <div class="grid-item" style="margin-top:3rem; margin-left:20px">
-                        <p>{{$bill->no_nota_kas}}</p>
-                        <p>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</p>
-                        <p>{{$bill->customer->nama}}</p>
-                        <p>{{$bill->customer->alamat}}
-                        </p>
-                        <p>{{$bill->customer->telepon}}</p>
-                    </div>
+            </div>
+            <div class="grid-item" style="margin-top:3rem; margin-left:20px">
+                <p>{{$bill->no_nota_kas}}</p>
+                <p>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</p>
+                <p>{{$bill->customer->nama}}</p>
+                <p>{{$bill->customer->alamat}}
+                </p>
+                <p>{{$bill->customer->telepon}}</p>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -78,19 +81,19 @@
                     </thead>
                     <tbody>
                         @php
-                            $subtotal = 0;
+                        $subtotal = 0;
                         @endphp
                         @foreach ($bill->transaction as $trans)
-                            <tr>
-                                <td class="text-center">{{$loop->iteration}}</td>
-                                <td width="50%" class="text-center">{{$trans->supply->item->nama}}</td>
-                                <td class="text-center" >{{$trans->supply->harga_cabang}}</td>
-                                <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
-                                <td class="text-center">Rp {{$trans->total_harga}},-</td>
-                            </tr>
-                            @php
-                                $subtotal+=$trans->total_harga
-                            @endphp
+                        <tr>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td width="50%" class="text-center">{{$trans->supply->item->nama}}</td>
+                            <td class="text-center">{{$trans->supply->harga_cabang}}</td>
+                            <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
+                            <td class="text-center">Rp {{$trans->total_harga}},-</td>
+                        </tr>
+                        @php
+                        $subtotal+=$trans->total_harga
+                        @endphp
                         @endforeach
 
                         <tr class="text-center">
@@ -103,14 +106,14 @@
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td > Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
-                            <td ><b>TOTAL</b></td>
+                            <td style="border: none"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
+                            <td><b>TOTAL</b></td>
                             <td>Rp {{$bill->total_nota}} ,-</td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td ></td>
+                            <td></td>
                             <td>Uang Muka</td>
                             <td>Rp {{$bill->jumlah_uang_nota}} ,-</td>
                         </tr>
@@ -137,16 +140,17 @@
         </div>
     </div>
 </body>
-      <!-- jQuery -->
-      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="/adminlte/dist/js/adminlte.min.js"></script>
-      <script>
-        window.addEventListener("afterprint", function(){
-          history.back();
-        });
-        $("#body_print").ready(function(){
-          window.print();
-        });
-      </script>
+<!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script>
+    window.addEventListener("afterprint", function() {
+        history.back();
+    });
+    $("#body_print").ready(function() {
+        window.print();
+    });
+</script>
+
 </html>

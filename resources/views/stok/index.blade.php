@@ -24,16 +24,6 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          <div class="card-tools">
-            <ul class="nav nav-pills ml-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="{{ route('stok.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- /.card-header -->
         <div class="card-body">
           <form action="{{route('stok.index')}}" method="GET">
             <div class="row">
@@ -57,40 +47,32 @@
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button type="submit" class="btn btn-sm btn-primary" name="print" value="supply"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <a href="{{ route('stok.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
             </div>
           </form>
-          <table id="example1" class="table compact table-bordered table-striped">
+          <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>Cabang</th>
-                <th>Harga Pusat</th>
-                <th>Harga Cabang</th>
-                <th>Selisih</th>
+                <th style="width: 5%" class="text-left">No.</th>
+                <th style="width: 30%" class="text-left">Nama</th>
+                <th style="width: 20%" class="text-left">Cabang</th>
+                <th style="width: 15%" class="text-right">Harga Pusat</th>
+                <th style="width: 15%" class="text-right">Harga Cabang</th>
+                <th style="width: 15%" class="text-right">Selisih</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td><a href="{{route('barang.detail', $supply->item->id)}}">{{$supply->item->nama}}</a></td>
-                <td><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td>Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td>Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td>Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td style="width: 5%" class="text-left">{{ $loop->iteration }}</td>
+                <td style="width: 30%" class="text-left"><a href="{{route('barang.detail', $supply->item->id)}}">{{$supply->item->nama}}</a></td>
+                <td style="width: 20%" class="text-left"><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
+                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach
-
-            <tfoot>
-              <th>No.</th>
-              <th>Nama</th>
-              <th>Cabang</th>
-              <th>Harga Pusat</th>
-              <th>Harga Cabang</th>
-              <th>Selisih</th>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
@@ -112,14 +94,7 @@
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function() {
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
+    $("#example1").DataTable();
     $('.select2').select2();
     $(".harga").divide({
       delimiter: '.',

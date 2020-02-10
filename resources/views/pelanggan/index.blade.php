@@ -23,16 +23,6 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          <div class="card-tools">
-            <ul class="nav nav-pills ml-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="{{ route('pelanggan.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- /.card-header -->
         <div class="card-body">
           @if (auth()->user()->level_id == 1)
           <form action="{{route('pelanggan.index')}}" method="GET">
@@ -57,11 +47,12 @@
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button type="submit" class="btn btn-sm btn-primary" name="print" value="customer"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                <a href="{{ route('pelanggan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
             </div>
           </form>
           @endif
-          <table id="example1" class="table table-bordered table-striped compact">
+          <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -81,13 +72,6 @@
                 <td><a href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
               @endforeach
-            <tfoot>
-              <th>No.</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Telepon</th>
-              <th>Cabang</th>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
@@ -109,14 +93,6 @@
 <script>
   $(function() {
     $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
     $('.select2').select2()
   });
 </script>

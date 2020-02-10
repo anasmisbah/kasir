@@ -24,18 +24,9 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-          <div class="card-tools">
-            <ul class="nav nav-pills ml-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="{{ route('pengguna.tambah') }}"><i class="nav-icon fas fa-plus"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped display compact">
+          <a href="{{ route('pengguna.tambah') }}" class="btn btn-sm btn-primary mb-3"><i class="nav-icon fas fa-plus"></i></a>
+          <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -67,15 +58,6 @@
               </tr>
               @endforeach
             </tbody>
-            <tfoot>
-              <th>No.</th>
-              <th>Nama lengkap</th>
-              <th>Nama Pengguna</th>
-              <th>Email</th>
-              <th>Level</th>
-              <th>Cabang</th>
-              <th>Aksi</th>
-            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
@@ -96,14 +78,6 @@
 <script>
   $(function() {
     $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
   });
 </script>
 @endpush

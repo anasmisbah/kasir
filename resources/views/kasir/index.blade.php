@@ -1,7 +1,6 @@
 @extends('layouts.kasir')
 
 @push('css')
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
     .scrollable {
         height: 150px !important;
@@ -16,180 +15,178 @@
 @endpush
 
 @section('content')
-<div class="container-fluid pt-2">
-    <div class="card p-3 ">
-        <div class="ml-1 row">
-            <div class="col-md-2">
-                <div class="row border border-secondary rounded pt-3 mr-1 pb-4 ">
-                    <div class="col-12">
-                        <label for="">No Nota Kas</label>
-                        <input id="nonotakas" class="form-control form-control-sm" disabled type="text" value="{{$formatnnk}}">
-                    </div>
-                    <div class="col-12 mt-3">
-                        <label for="">Tanggal</label>
-                        <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control form-control-sm" disabled type="text">
-                    </div>
+<div class="container-fluid">
+    <div class="row py-3">
+        <div class="col-2 border rounded">
+            <div class="row">
+                <div class="col-12">
+                    <label for="">No Nota Kas</label>
+                    <input id="nonotakas" class="form-control form-control-sm" disabled type="text" value="{{$formatnnk}}">
                 </div>
-            </div>
-            <div class="col-6 border border-secondary rounded">
-                <div class="row pt-3">
-                    <div class="col-5">
-                        <div class="form-group-sm">
-                            <input type="hidden" id="idpelanggan">
-                            <label for="">Nama Pelanggan</label> <br>
-                            <input type="text" name="" id="searchpelanggan" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
-                            <div class="position-absolute scrollable-list" style="z-index:999; width:77%">
-                                <div class="list-group position-relative" id="list-pelanggan">
-                                </div>
-                            </div>
-                            <button class="btn-sm btn-info create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <div class="form-group mt-3">
-
-                            <label for="">Telepon</label>
-                            <input id="teleponpelanggan" class="form-control form-control-sm" style="width:80%" disabled type="text">
-                        </div>
-                    </div>
-                    <div class="col-7">
-                        <label for="">Alamat</label>
-                        <textarea id="alamatpelanggan" rows="4" disabled class="form-control"></textarea>
-                    </div>
+                <div class="col-12">
+                    <label for="">Tanggal</label>
+                    <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control form-control-sm" disabled type="text">
                 </div>
-            </div>
-            <div class="col-2 mt-3">
-                <label for="">TOTAL</label>
-                <h3 class="form-control form-control-lg text-bold text-center pt-4" style="height:60%">Rp <span class="inputharga jml">0</span>,-</h3>
-            </div>
-            <div class="col-2 " style="padding-top: 50px; padding-bottom:35px">
-                <a href="#" id="cetaknota" class="pt-4 text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%">Cetak Nota</a>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form">
-                            <div class="row ">
-                                <div class="col-2">
-                                    <div class="form-group ml-5">
-                                        <label for="">Kode</label>
-                                        <input id="kodebarang" type="text" disabled id="kode" class="form-control form-control-sm " style="width:100%">
-                                    </div>
+        <div class="col-6 border rounded">
+            <div class="row">
+                <div class="col-5">
+                    <div class="form-group-sm">
+                        <input type="hidden" id="idpelanggan">
+                        <label for="">Nama Pelanggan</label> <br>
+                        <input type="text" name="" id="searchpelanggan" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
+                        <div class="position-absolute scrollable-list" style="z-index:999; width:77%">
+                            <div class="list-group position-relative" id="list-pelanggan">
+                            </div>
+                        </div>
+                        <button class="btn-sm btn-info create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="form-group-sm">
+                        <label for="">Telepon</label>
+                        <input id="teleponpelanggan" class="form-control form-control-sm" style="width:80%" disabled type="text">
+                    </div>
+                </div>
+                <div class="col-7">
+                    <label for="">Alamat</label>
+                    <textarea id="alamatpelanggan" rows="3" disabled class="form-control" style="resize: none;"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 border rounded">
+            <label for="">TOTAL</label>
+            <h3 class="form-control form-control-lg text-bold text-center pt-4" style="height:60%">Rp <span class="inputharga jml">0</span>,-</h3>
+        </div>
+        <div class="col-2 border rounded">
+        <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
+            <a href="#" id="cetaknota" class="pt-4 text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%">Cetak Nota</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form">
+                        <div class="row ">
+                            <div class="col" style="width: 10%">
+                                <div class="form-group ml-5">
+                                    <label for="">Kode</label>
+                                    <input id="kodebarang" type="text" disabled id="kode" class="form-control form-control-sm " style="width:100%">
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="">Nama Barang</label>
-                                        <input type="text" name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
-                                        <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
-                                            <div class="list-group position-relative" id="list-barang">
-                                            </div>
+                            </div>
+                            <div class="col" style="width: 10%">
+                                <div class="form-group">
+                                    <label for="">Nama Barang</label>
+                                    <input type="text" name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
+                                    <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
+                                        <div class="list-group position-relative" id="list-barang">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="">Harga</label>
-                                        <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm ">
-                                    </div>
-                                </div>
-                                <div class="col-1">
-                                    <div class="form-group">
-                                        <label for="">Qty</label>
-                                        <input id="qtybarang" type="text" disabled id="qty" placeholder="0" class="form-control form-control-sm inputharga">
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="">Jumlah</label>
-                                        <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
-                                    </div>
-                                </div>
-                                <div class="col-1">
-                                    <div class="form-group" style="margin-top:30px">
-                                        <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" style="width:40px;">
-                                            <i class="fa fa-plus"></i></button>
-                                    </div>
+                            </div>
+                            <div class="col" style="width: 10%">
+                                <div class="form-group">
+                                    <label for="">Harga</label>
+                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm ">
                                 </div>
                             </div>
+                            <div class="col" style="width: 10%">
+                                <div class="form-group">
+                                    <label for="">Qty</label>
+                                    <input id="qtybarang" type="text" disabled id="qty" placeholder="0" class="form-control form-control-sm inputharga">
+                                </div>
+                            </div>
+                            <div class="col" style="width: 10%">
+                                <div class="form-group">
+                                    <label for="">Jumlah</label>
+                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
+                                </div>
+                            </div>
+                            <div class="col" style="width: 50%">
+                                <div class="form-group" style="margin-top:30px">
+                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" style="width:40px;">
+                                        <i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="col-md-12">
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-sm" id="tableBarang">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>No</th>
-                                        <th>Kode</th>
-                                        <th>Nama Barang</th>
-                                        <th>Harga</th>
-                                        <th>Qty</th>
-                                        <th>Jumlah</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <section class="scrollable">
-                            <table class="table table-sm" id="tableBarang">
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </section>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="col-md-12">
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-sm" id="tableBarang">
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4"></td>
-                                        <td class="border-top border-bawah text-center"> Sub Total</td>
-                                        <td class="border-top border-bawah">Rp <span id="total" class="inputharga">0</span>,-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="border: none"></td>
-                                        <td style="border:none" class="text-right pr-2">
-                                            Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px"></span>
-                                        </td>
-                                        <td class="border-top border-bottom text-bold text-center">TOTAL</td>
-                                        <td class="border-top  border-bottom text-bold">Rp <span id="total" class="inputharga jml">0</span>,-
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="">Uang muka</label>
-                    <input id="uangmuka" type="text" value="0" class="form-control form-control-sm ">
+            <div class="row mt-1">
+                <div class="col-12">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-sm" id="tableBarang">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" style="width: 5%">No</th>
+                                    <th class="text-left" style="width: 10%">Kode</th>
+                                    <th class="text-left" style="width: 30%">Nama Barang</th>
+                                    <th class="text-left" style="width: 20%">Harga</th>
+                                    <th class="text-left" style="width: 10%">Qty</th>
+                                    <th class="text-left" style="width: 20%">Jumlah</th>
+                                    <th class="text-left" style="width: 5%">Aksi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Uang kembali</label>
-                    <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm">
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <section class="scrollable">
+                        <table class="table table-sm" id="tableBarang">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
-                <div class="form-group">
-                    <label for="">Status</label>
-                    <input id="status" type="text" disabled class="form-control form-control-sm">
+            </div>
+            <div class="row mt-1">
+                <div class="col-12">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-sm" id="tableBarang">
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"></td>
+                                    <td class="border-top border-bawah text-center"> Sub Total</td>
+                                    <td class="border-top border-bawah">Rp <span id="total" class="inputharga">0</span>,-
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="border: none"></td>
+                                    <td style="border:none" class="text-right pr-2">
+                                        Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px"></span>
+                                    </td>
+                                    <td class="border-top border-bottom text-bold text-center">TOTAL</td>
+                                    <td class="border-top border-bottom text-bold">Rp <span id="total" class="inputharga jml">0</span>,-
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Kasir</label>
-                    <input type="text" value="{{auth()->user()->employee->nama}}" disabled class="form-control form-control-sm">
-                </div>
-                <div class="form-group mt-4">
-                    <a href="#" onClick="window.location.reload();" style="width:100%" class="btn btn-danger">Reset</a>
-                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="">Uang muka</label>
+                <input id="uangmuka" type="text" value="0" class="form-control form-control-sm ">
+            </div>
+            <div class="form-group">
+                <label for="">Uang kembali</label>
+                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm">
+            </div>
+            <div class="form-group">
+                <label for="">Status</label>
+                <input id="status" type="text" disabled class="form-control form-control-sm">
+            </div>
+            <div class="form-group">
+                <label for="">Kasir</label>
+                <input type="text" value="{{auth()->user()->employee->nama}}" disabled class="form-control form-control-sm">
+            </div>
+            <div class="form-group mt-4">
+                <a href="#" onClick="window.location.reload();" style="width:100%" class="btn btn-danger">Reset</a>
             </div>
         </div>
     </div>
@@ -248,15 +245,14 @@
     </div>
 </div>
 {{-- /modal tambah --}}
-@stop
+@endsection
 
 @push('script')
 <script src="/adminlte/plugins/number-divider.min.js"></script>
-<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
     $(function() {
-        $('.select2').select2()
+    
         // Number Divide
         $("#inputharga").divide({
             delimiter: '.',
@@ -582,7 +578,7 @@
         } else {
             const $cloneRow = $lastRow.clone();
             const lastNo = $cloneRow.find('td').eq(0).text();
-            const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + ' class="text-center">\
+            const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + '>\
                                     <td>' + (parseInt(lastNo) + 1) + '</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
                                     <td>' + $('#searchbarang').val() + '</td>\
