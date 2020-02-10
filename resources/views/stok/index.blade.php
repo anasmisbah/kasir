@@ -66,7 +66,7 @@
               @foreach ($supplies as $supply)
               <tr>
                 <td style="width: 5%" class="text-left">{{ $loop->iteration }}</td>
-                <td style="width: 30%" class="text-left"><a href="{{route('barang.detail', $supply->item->id)}}">{{$supply->item->nama}}</a></td>
+                <td style="width: 30%" class="text-left"><a href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
                 <td style="width: 20%" class="text-left"><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>

@@ -31,7 +31,7 @@
                 <tbody>
                   <tr>
                     <td style="width:10%">Nama</td>
-                    <td><a href="{{route('cabang.detail',$supply->item->id)}}">{{$supply->item->nama}}</a></td>
+                    <td><a href="{{route('barang.detail',$supply->item->id)}}">{{$supply->item->nama}}</a></td>
                   </tr>
                   <tr>
                     <td style="width:10%">Cabang</td>
