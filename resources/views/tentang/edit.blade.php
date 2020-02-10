@@ -32,8 +32,8 @@
             @method('PUT')
             <div class="card-body">
                 <div class="form-group row">
+                    <label class="col-2">Logo</label>
                     <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
-                    <label class="col-2">Logo</label><br>
                     <div class="col-4"><input type="file" id="foto" class="form-control" name="logo"></div>
                 </div>
                 <div class="form-group row">

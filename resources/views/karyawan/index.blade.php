@@ -13,8 +13,8 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item active">Beranda</li>
-            <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
+          <li class="breadcrumb-item active">Beranda</li>
+          <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
 
         </ol>
       </div>
@@ -64,7 +64,7 @@
             </div>
           </form>
           @endif
-          <table id="example1" class="display table table-bordered table-striped">
+          <table id="example1" class="display table table-bordered table-striped compact">
             <thead>
               <tr>
                 <th>No.</th>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Category;
-
+use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     public function index()
@@ -47,7 +47,9 @@ class ItemController extends Controller
         $newItem = Item::create([
             'nama'=>$request->nama,
             'harga'=>$request->harga,
-            'category_id'=>$request->category_id
+            'category_id'=>$request->category_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id,
         ]);
 
         return redirect()->route('barang.index');
@@ -73,7 +75,8 @@ class ItemController extends Controller
         $updatedItem->update([
             'nama'=>$request->nama,
             'harga'=>$request->harga,
-            'category_id'=>$request->category_id
+            'category_id'=>$request->category_id,
+            'updated_by'=>Auth::user()->id,
         ]);
 
         return redirect()->route('barang.index');

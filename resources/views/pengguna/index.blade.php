@@ -35,7 +35,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped display">
+          <table id="example1" class="table table-bordered table-striped display compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -44,6 +44,7 @@
                 <th>Email</th>
                 <th>Level</th>
                 <th>Cabang</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +74,7 @@
               <th>Email</th>
               <th>Level</th>
               <th>Cabang</th>
+              <th>Aksi</th>
             </tfoot>
           </table>
         </div>

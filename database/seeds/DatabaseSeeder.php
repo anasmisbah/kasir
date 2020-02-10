@@ -13,10 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LevelSeed::class);
         $this->call(BranchSeed::class);
-        $this->call(CategorySeeder::class);
         $this->call(EmployeeSeed::class);
         $this->call(UserSeed::class);
+        $this->call(CategorySeeder::class);
         $this->call(ItemSeeder::class);
+        
 
     }
 }

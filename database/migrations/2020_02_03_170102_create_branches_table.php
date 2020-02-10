@@ -19,6 +19,12 @@ class CreateBranchesTable extends Migration
             $table->text('alamat');
             $table->string('telepon');
             $table->string('pimpinan');
+
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

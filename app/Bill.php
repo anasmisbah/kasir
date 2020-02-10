@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     protected $fillable = [
-        'tanggal_nota', 'diskon', 'total_nota','jumlah_uang_nota','kembalian_nota','status','user_id','customer_id','no_nota_kas','branch_id'
+        'tanggal_nota', 'diskon', 'total_nota','jumlah_uang_nota','kembalian_nota','status','user_id','customer_id','no_nota_kas','branch_id','created_by','updated_by'
     ];
 
     protected $dates = [
@@ -32,5 +32,15 @@ class Bill extends Model
     public function branch()
     {
         return $this->belongsTo('App\Branch');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by','id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by','id');
     }
 }

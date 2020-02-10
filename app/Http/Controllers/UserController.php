@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Level;
 use App\Employee;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
@@ -52,6 +52,8 @@ class UserController extends Controller
             'password'=>Hash::make($request->password),
             'level_id'=>$request->level_id,
             'employee_id'=>$request->employee_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id,
         ]);
 
         return redirect()->route('pengguna.index');
@@ -92,6 +94,7 @@ class UserController extends Controller
             'email'=>$request->email,
             'level_id'=>$request->level_id,
             'employee_id'=>$request->employee_id,
+            'updated_by'=>Auth::user()->id,
         ]);
         return redirect()->route('pengguna.index');
     }

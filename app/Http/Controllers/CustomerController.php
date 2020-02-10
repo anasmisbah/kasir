@@ -60,6 +60,16 @@ class CustomerController extends Controller
 
     }
 
+    public function getdatajson(Request $request)
+    {
+        $customers = Customer::where([
+            ['branch_id','=',Auth::user()->employee->branch_id],
+            ['nama','LIKE',"%{$request->keyword}%"]
+            ])->get();
+
+        return response()->json($customers);
+    }
+
     public function show($id)
     {
         $customer = Customer::findOrFail($id);
@@ -89,7 +99,9 @@ class CustomerController extends Controller
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'branch_id'=>$request->branch_id
+            'branch_id'=>$request->branch_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return response()->json([
@@ -117,7 +129,9 @@ class CustomerController extends Controller
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'branch_id'=>$request->branch_id
+            'branch_id'=>$request->branch_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('pelanggan.index');
@@ -145,7 +159,8 @@ class CustomerController extends Controller
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'branch_id'=>$request->branch_id
+            'branch_id'=>$request->branch_id,
+            'updated_by'=>Auth::user()->id
         ]);
 
         return  redirect()->route('pelanggan.index');;

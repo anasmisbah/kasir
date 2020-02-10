@@ -64,10 +64,19 @@ class SupplyItemController extends Controller
     public function getJsonSupply(Request $request)
     {
         $supply = Supply::findOrFail($request->id);
-
+        $supply->item;
         return response()->json([
             'supply'=>$supply
         ]);
+    }
+
+    public function getdatajson(Request $request)
+    {
+        $supplies = Supply::select('supplies.id','items.nama',)->join('items','items.id','=','supplies.item_id')->where([
+            ['branch_id',Auth::user()->employee->branch_id],
+            ['items.nama','LIKE',"%{$request->keyword}%"]
+            ])->get();
+        return response()->json($supplies);
     }
 
     public function create()
@@ -94,6 +103,8 @@ class SupplyItemController extends Controller
             'stok'=>$request->stok,
             'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
+            'created_by'=>Auth::user()->id,
+            'updated_by'=>Auth::user()->id,
         ]);
 
         return redirect()->route('stok.index');
@@ -122,6 +133,7 @@ class SupplyItemController extends Controller
             'stok'=>$request->stok,
             'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
+            'updated_by'=>Auth::user()->id,
         ]);
         return redirect()->route('stok.index');
     }

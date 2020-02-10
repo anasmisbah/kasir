@@ -62,7 +62,7 @@
             </div>
 
                 <div class="card-footer text-right">
-                    <strong>Dibuat Pada:</strong>{{$branch->created_at->format('l | d F Y')}} | {{$branch->created_at->format('h:i:s A')}} / <strong>Diubah Pada:</strong>{{$branch->updated_at->format('l | d F Y')}} | {{$branch->updated_at->format('h:i:s A')}}
+                    <strong>Dibuat Pada:</strong>{{$branch->created_at->format('l | d F Y')}} | {{$branch->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$branch->createdBy->employee->id)}}">{{$branch->createdBy->employee->nama}}</a> / <strong>Diubah Pada:</strong>{{$branch->updated_at->format('l | d F Y')}} | {{$branch->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$branch->updatedBy->employee->id)}}">{{$branch->updatedBy->employee->nama}}</a>
                 </div>
         </div>
       </div>

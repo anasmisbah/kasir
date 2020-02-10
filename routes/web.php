@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function (){
     Route::put('/pelanggan/{id}', 'CustomerController@update')->name('pelanggan.perbarui');
     Route::get('/pelanggan/detail/{id}','CustomerController@show')->name('pelanggan.detail');
     Route::delete('/pelanggan/hapus/{id}','CustomerController@delete')->name('pelanggan.hapus');
+    Route::get('/pelanggan/fetchpelanggan','CustomerController@getdatajson')->name('pelanggan.datajson');
 
     Route::get('/cabang', 'BranchController@index')->name('cabang.index');
     Route::get('/cabang/tambah', 'BranchController@create')->name('cabang.tambah');
@@ -65,6 +66,7 @@ Route::middleware(['auth'])->group(function (){
     Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
     Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
 
+
     Route::get('/stok', 'SupplyItemController@index')->name('stok.index');
     Route::get('/stok/tambah', 'SupplyItemController@create')->name('stok.tambah');
     Route::post('/stok/simpan','SupplyItemController@store')->name('stok.simpan');
@@ -72,6 +74,7 @@ Route::middleware(['auth'])->group(function (){
     Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
     Route::get('/stok/detail/{id}','SupplyItemController@show')->name('stok.detail');
     Route::delete('/stok/hapus/{id}','SupplyItemController@delete')->name('stok.hapus');
+    Route::get('/stok/fetchbarang','SupplyItemController@getdatajson')->name('barang.datajson');
 
     Route::get('/karyawan', 'EmployeeController@index')->name('karyawan.index');
     Route::get('/karyawan/tambah', 'EmployeeController@create')->name('karyawan.tambah');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $fillable = [
-        'nama', 'alamat', 'telepon','branch_id'
+        'nama', 'alamat', 'telepon','branch_id','created_by','updated_by'
     ];
 
     public function bill()
@@ -18,5 +18,15 @@ class Customer extends Model
     public function branch()
     {
         return $this->belongsTo('App\Branch');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by','id');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by','id');
     }
 }

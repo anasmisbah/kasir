@@ -20,6 +20,12 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('category_id');
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

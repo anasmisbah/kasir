@@ -12,7 +12,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item ">Beranda</li>
+          <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Penjualan</a></li>
         </ol>
       </div>
@@ -35,27 +35,27 @@
               </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}} >
+                  <input class="custom-control-input" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}}>
                   <label for="radiobulan" class="custom-control-label">Bulan:</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}} >
+                  <input class="custom-control-input" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
                   <label for="radiotahun" class="custom-control-label">Tahun:</label>
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}} >
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @else
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}} >
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Status</label>
                 </div>
               </div>
@@ -65,13 +65,13 @@
             <div class="row mb-4">
               <div class="col-md-4">
                 <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-clock"></i></span>
-                      </div>
-                      <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
+                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
                   </div>
+                </div>
               </div>
               <div class="col-md-1">
                 <select class="form-control select2" name="bulan">
@@ -144,11 +144,11 @@
               </tr>
             </thead>
             <tbody>
-                @php
-                    $total = 0;
-                    $totalkas = 0;
-                    $totalpiutang =0;
-                @endphp
+              @php
+              $total = 0;
+              $totalkas = 0;
+              $totalpiutang =0;
+              @endphp
               @foreach ($bills as $bill)
               <tr>
                 <td>{{$loop->iteration}}</td>
@@ -161,34 +161,34 @@
                 <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
-                    $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
-                    $totalpiutang+=$temppiutang;
-                    $total+=$bill->total_nota
+              $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
+                $totalpiutang+=$temppiutang;
+                $total+=$bill->total_nota
                 @endphp
-              @endforeach
+                @endforeach
             </tbody>
 
             <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Jumlah</th>
-                    <th>Rp {{$total}},-</th>
-                    <th>Rp {{$totalpiutang}},-</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Jumlah Kas</th>
-                    <th>Rp {{$total-$totalpiutang}}</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Jumlah</th>
+                <th>Rp {{$total}},-</th>
+                <th>Rp {{$totalpiutang}},-</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Jumlah Kas</th>
+                <th>Rp {{$total-$totalpiutang}}</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
             </tfoot>
           </table>
           @elseif(Request::input('filter') == "bulan" || Request::input('filter') == "tahun")
@@ -205,13 +205,13 @@
               </tr>
             </thead>
             <tbody>
-                @php
-                    $totalpenjualan = 0;
-                    $totalnominalpenjualan = 0;
-                    $totalpiutang = 0;
-                    $totalnominalpiutang =0;
-                    $totalkas = 0;
-                @endphp
+              @php
+              $totalpenjualan = 0;
+              $totalnominalpenjualan = 0;
+              $totalpiutang = 0;
+              $totalnominalpiutang =0;
+              $totalkas = 0;
+              @endphp
               @foreach ($data as $item)
               <tr>
                 <td>{{$loop->iteration}}</td>
@@ -219,29 +219,29 @@
                 <td>{{$item['penjualan']}}</td>
                 <td>Rp {{$item['nominal_penjualan']}},-</td>
                 <td>{{$item['piutang']}}</td>
-                <td>Rp {{ abs($item['nominal_piutang'])}},-</td>
+                <td>Rp <span class="harga">{{abs($item['nominal_piutang'])}}</span>,-</td>
                 <td>Rp {{$item['kas']}},-</td>
               </tr>
               @php
-                    $totalpenjualan +=$item['penjualan'] ;
-                    $totalnominalpenjualan += $item['nominal_penjualan'];
-                    $totalpiutang +=$item['piutang'] ;
-                    $totalnominalpiutang +=$item['nominal_piutang'];
-                    $totalkas += $item['kas'];
-                @endphp
+              $totalpenjualan +=$item['penjualan'] ;
+              $totalnominalpenjualan += $item['nominal_penjualan'];
+              $totalpiutang +=$item['piutang'] ;
+              $totalnominalpiutang +=$item['nominal_piutang'];
+              $totalkas += $item['kas'];
+              @endphp
               @endforeach
             </tbody>
 
             <tfoot>
-                <tr>
-                    <th></th>
-                    <th>JUMLAH</th>
-                    <th>{{$totalpenjualan}}</th>
-                    <th>Rp {{$totalnominalpenjualan}},-</th>
-                    <th>{{$totalpiutang}}</th>
-                    <th>Rp {{abs($totalnominalpiutang)}},-</th>
-                    <th>Rp {{$totalkas}},-</th>
-                  </tr>
+              <tr>
+                <th></th>
+                <th>JUMLAH</th>
+                <th>{{$totalpenjualan}}</th>
+                <th>Rp {{$totalnominalpenjualan}},-</th>
+                <th>{{$totalpiutang}}</th>
+                <th>Rp <span class="harga">{{abs($totalnominalpiutang)}}</span>,-</th>
+                <th>Rp {{$totalkas}},-</th>
+              </tr>
             </tfoot>
           </table>
           @endif
@@ -269,11 +269,15 @@
 <script>
   $(function() {
     $("#example1").DataTable();
-    $('.select2').select2()
+    $('.select2').select2();
+    $(".harga").divide({
+      delimiter: '.',
+      divideThousand: true
+    });
     $('#tanggal').daterangepicker({
       timePicker: true,
       timePickerIncrement: 5,
-      timePicker24Hour:true,
+      timePicker24Hour: true,
       locale: {
         format: 'MM/DD/YYYY HH:mm:ss'
       }

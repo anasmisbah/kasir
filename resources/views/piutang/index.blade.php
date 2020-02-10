@@ -13,7 +13,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item ">Beranda</li>
+          <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Piutang</a></li>
         </ol>
       </div>
@@ -46,13 +46,13 @@
             <div class="row mb-4">
               <div class="col-md-4">
                 <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-clock"></i></span>
-                      </div>
-                      <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
                     </div>
+                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control float-right" id="tanggal">
                   </div>
+                </div>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
@@ -72,7 +72,7 @@
               </div>
             </div>
           </form>
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped compact">
             <thead>
               <tr>
                 <th>No.</th>
@@ -142,11 +142,15 @@
       "info": true,
       "autoWidth": false,
     });
-    $('.select2').select2()
+    $('.select2').select2();
+    $(".harga").divide({
+      delimiter: '.',
+      divideThousand: true
+    });
     $('#tanggal').daterangepicker({
       timePicker: true,
       timePickerIncrement: 5,
-      timePicker24Hour:true,
+      timePicker24Hour: true,
       locale: {
         format: 'MM/DD/YYYY HH:mm:ss'
       }
