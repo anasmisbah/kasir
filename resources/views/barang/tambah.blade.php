@@ -36,9 +36,12 @@
                 @csrf
                 <div class="card-body">
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                    <label for="inputEmail3"  class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="nama" class="form-control" id="inputEmail3" placeholder="Nama">
+                    <input type="text" value="{{ old('nama')}}" name="nama" class="form-control {{ $errors->first('nama')?'is-invalid':'' }}" id="inputEmail3" placeholder="Nama">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
                     </div>
                 </div>
 
@@ -47,16 +50,22 @@
                     <div class="col-sm-10 " style="width: 100%;">
                         <select name="category_id" id="inputjenis" class="form-control select2" >
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->nama}}</option>
+                            <option value="{{$category->id}}" {{ old('category_id') == $category->id?'selected':''}}>{{$category->nama}}</option>
                         @endforeach
                         </select>
                     </div>
+                        <div class="invalid-feedback">
+                            jenis barang wajib dipilih
+                        </div>
                   </div>
 
                 <div class="form-group row">
                     <label for="inputharga" class="col-sm-2 col-form-label">Harga</label>
                     <div class="col-sm-10">
-                    <input type="text" min="0" oninput="validity.valid||(value='');" class="form-control divide" id="inputharga" name="harga" placeholder="Harga">
+                    <input type="text" value="{{ old('harga')}}" min="0" oninput="validity.valid||(value='');" class="form-control {{ $errors->first('harga')?'is-invalid':'' }} divide" id="inputharga" name="harga" placeholder="Harga">
+                        <div class="invalid-feedback">
+                            {{$errors->first('harga')}}
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>

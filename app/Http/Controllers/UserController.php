@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         $request->validate([
             'username'=>'required',
-            'email'=>'required',
+            'email'=>'required|email|unique:users',
             'password'=>'required',
             'level_id'=>'required',
             'employee_id'=>'required'
@@ -75,13 +75,14 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $updatedUser = User::findOrFail($request->id);
         $request->validate([
             'username'=>'required',
-            'email'=>'required',
+            'email'=>'required|email|unique:users,email,'.$updatedUser->id,
             'level_id'=>'required',
             'employee_id'=>'required'
         ]);
-        $updatedUser = User::findOrFail($request->id);
+
 
         if ($request->password) {
             $updatedUser->update([
