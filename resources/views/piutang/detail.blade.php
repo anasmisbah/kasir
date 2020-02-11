@@ -33,7 +33,7 @@
           <div class="card-tools">
             <ul class="nav nav-pills ml-auto">
               <li class="nav-item mr-2">
-                <a class="nav-link btn-secondary active" href="{{ route('piutang.lunas',$bill->id) }}"><i class=" fas fa-check"></i></a>
+                <a class="nav-link btn-secondary active" id="piutang" href="{{ route('piutang.lunas',$bill->id) }}"><i class=" fas fa-check"></i></a>
               </li>
               <li class="nav-item mr-5">
                 <a class="nav-link btn-primary active" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
@@ -144,3 +144,31 @@
   </div>
 </div>
 @endsection
+
+@push('script')
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script>
+    $('#piutang').click((e)=>{
+    e.preventDefault()
+    const url = $('#piutang').attr('href')
+    console.log(url);
+
+      swal({
+      title: "apakah anda yakin telah lunas?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("berhasil menghapus", {
+          icon: "success",
+          button:false,
+          timer:750
+        });
+        window.open(url,"_self")
+      }
+    });
+    })
+</script>
+@endpush

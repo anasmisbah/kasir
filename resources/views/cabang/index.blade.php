@@ -25,7 +25,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <a href="{{ route('pengguna.tambah') }}" class="btn btn-sm btn-primary mb-3"><i class="nav-icon fas fa-plus"></i></a>
+          <a href="{{ route('cabang.tambah') }}" class="btn btn-sm btn-primary mb-3"><i class="nav-icon fas fa-plus"></i></a>
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>

@@ -42,12 +42,9 @@
                 <td> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
                 </td>
                 <td style="width:10%">
-                  <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Kriteria secara permanen?')" action="{{route('jenis.hapus', $category->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="fa fa-trash"></i></button>
-                  </form>
+
+                        <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
+                          <i class="fa fa-trash"></i></button>
                 </td>
               </tr>
               @endforeach
@@ -62,12 +59,38 @@
   <!-- /.row -->
 </section>
 <!-- /.content -->
+<form class="d-inline" id="form-delete" method="POST">
+    @csrf
+    @method('DELETE')
+    </form>
 @endsection
 
 @push('script')
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script>
+    function hapus(id,nama){
+        swal({
+        title: `apakah anda yakin menghapus ${nama}?`,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            swal("berhasil menghapus", {
+            icon: "success",
+            button:false,
+            timer:750
+            });
+            $('#form-delete').attr('action',`/jenis/hapus/${id}`)
+            $('#form-delete').submit()
+        }
+        });
+    }
+</script>
 <script>
   $(function() {
     $("#example1").DataTable();

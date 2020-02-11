@@ -28,7 +28,7 @@
       <div class="card">
         <div class="card-body">
           @if (auth()->user()->level_id == 1)
-          <form action="{{route('karyawan.index')}}" method="GET">
+          <form id="form-filter" action="{{route('karyawan.index')}}" method="GET">
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
@@ -47,8 +47,9 @@
                 </select>
               </div>
               <div class="col-md-6">
+                <input id="downloadble" type="hidden" name="pdf">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-sm btn-primary" name="print" value="employee"><i class="nav-icon fas fa-print"></i></button>
+                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary" ><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
                 <a href="{{ route('karyawan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
@@ -96,9 +97,15 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
-  $(function() {
-    $('.select2').select2();
-    $("#example1").DataTable();
-  });
+    $(function() {
+        $('.select2').select2();
+        $("#example1").DataTable();
+    });
+    $('#btn-pdf').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('download')
+        $('#form-filter').attr('target','_blank')
+        $('#form-filter').submit()
+    })
 </script>
 @endpush

@@ -52,13 +52,13 @@
               </tr>
             </tbody>
           </table>
-          <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Cabang secara permanen?')" action="{{route('cabang.hapus', $branch->id)}}" method="POST">
+          <form class="d-inline" id="form-delete" action="{{route('cabang.hapus', $branch->id)}}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
+            </form>
+            <button type="submit" id="delete" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
               <i class="fa fa-trash"></i></button>
-          </form>
-          <a href="{{route('cabang.ubah',$branch->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+            <a href="{{route('cabang.ubah',$branch->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
         </div>
 
         <div class="card-footer text-right">
@@ -71,3 +71,28 @@
   </div>
 </div>
 @endsection
+
+@push('script')
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script>
+    $('#delete').click(()=>{
+      swal({
+      title: "apakah anda yakin menghapus cabang {{$branch->nama}}?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("berhasil menghapus", {
+          icon: "success",
+          button:false,
+          timer:750
+        });
+        $('#form-delete').submit()
+      }
+    });
+
+    })
+</script>
+@endpush

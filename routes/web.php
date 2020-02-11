@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/penjualan', 'BillController@index')->name('penjualan.index');
     Route::get('/penjualan/detail/{id}','BillController@show')->name('penjualan.detail');
     Route::get('/penjualan/cetaknota/{id}','BillController@cetaknota')->name('penjualan.cetaknota');
+    Route::delete('/penjualan/hapus/{id}','BillController@delete')->name('penjualan.hapus');
 
     Route::get('/piutang', 'BillController@piutangAll')->name('piutang.index');
     Route::get('/piutang/lunas/{id}','BillController@piutanglunas')->name('piutang.lunas');

@@ -24,7 +24,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <form action="{{route('penjualan.index')}}" method="GET">
+          <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
             <div class="row">
               <div class="col-md-4">
                 <div class="custom-control custom-radio">
@@ -47,14 +47,14 @@
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @else
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Status</label>
                 </div>
               </div>
@@ -122,8 +122,9 @@
               @endif
 
               <div class="col-md-2">
+                <input id="downloadble" type="hidden" name="pdf">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-sm btn-primary" name="print" value="bill"><i class="nav-icon fas fa-print"></i></button>
+                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
@@ -286,5 +287,11 @@
       }
     })
   });
+  $('#btn-pdf').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('download')
+        $('#form-filter').attr('target','_blank')
+        $('#form-filter').submit()
+    })
 </script>
 @endpush

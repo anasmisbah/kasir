@@ -36,7 +36,11 @@
                 <a class="nav-link btn-primary active" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
               </li>
               <li class="nav-item mr-5">
-                <a class="nav-link btn-warning active" href="{{ route('penjualan.index') }}"><i class=" fas fa-trash"></i></a>
+                <form class="d-inline" id="form-delete" action="{{route('penjualan.hapus', $bill->id)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    </form>
+                <a class="nav-link btn-warning active" href="" id="delete" ><i class=" fas fa-trash"></i></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link btn-danger active" href="{{ route('penjualan.index') }}"><i class=" fas fa-times"></i></a>
@@ -152,3 +156,28 @@
   </div>
 </div>
 @endsection
+
+@push('script')
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script>
+    $('#delete').click((e)=>{
+    e.preventDefault()
+      swal({
+      title: "apakah anda yakin menghapus penjualan?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("berhasil menghapus", {
+          icon: "success",
+          button:false,
+          timer:750
+        });
+        $('#form-delete').submit()
+      }
+    });
+    })
+</script>
+@endpush

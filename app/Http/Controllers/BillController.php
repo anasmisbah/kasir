@@ -40,14 +40,52 @@ class BillController extends Controller
                     $explodeddateTo = explode('/',$explodedatetime[3]);
                     $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
                     $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
-                    $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    if ($request->filter2 === "cabang") {
+                        if ($request->cabang == "0") {
+                            $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                        } else {
+                            $bills = Bill::where('branch_id',$request->cabang)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                        }
+                    }else{
+                        $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y')
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan.pdf');
+                    }
                 }else if($request->filter === "bulan"){
-                    $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
+                    if ($request->filter2 === "cabang") {
+                        if ($request->cabang == "0") {
+                            $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
                                     ->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
-                                  });
+                                    });
+                        } else {
+                            $bills = Bill::where('branch_id',$request->cabang)
+                                    ->whereMonth('tanggal_nota',$request->bulan)
+                                    ->whereYear('tanggal_nota',$request->bulantahun)
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('d');
+                                    });
+                        }
+                    }else{
+                        $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
+                                    ->whereYear('tanggal_nota',$request->bulantahun)
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('d');
+                                    });
+                    }
                     $data = [];
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
@@ -57,18 +95,51 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    $month = Carbon::now()->month($request->bulan);
                     if($request->print){
-                        $month = Carbon::now()->month($request->bulan);
+
                         return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month'));
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'month'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_bulan', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_bulan.pdf');
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
-                    $bills = Bill::whereYear('tanggal_nota',$request->tahun)
-                                    ->orderBy('tanggal_nota', 'asc')
-                                    ->get()
-                                    ->groupBy(function($val) {
-                                        return Carbon::parse($val->tanggal_nota)->format('m');
-                                  });
+                    if ($request->filter2 === "cabang") {
+                        if ($request->cabang == "0") {
+                            $bills = Bill::whereYear('tanggal_nota',$request->tahun)
+                            ->orderBy('tanggal_nota', 'asc')
+                            ->get()
+                            ->groupBy(function($val) {
+                                return Carbon::parse($val->tanggal_nota)->format('m');
+                          });
+                        } else {
+                            $bills = Bill::where('branch_id',$request->cabang)
+                            ->whereYear('tanggal_nota',$request->tahun)
+                            ->orderBy('tanggal_nota', 'asc')
+                            ->get()
+                            ->groupBy(function($val) {
+                                return Carbon::parse($val->tanggal_nota)->format('m');
+                          });
+                        }
+                    }else{
+                        $bills = Bill::whereYear('tanggal_nota',$request->tahun)
+                        ->orderBy('tanggal_nota', 'asc')
+                        ->get()
+                        ->groupBy(function($val) {
+                            return Carbon::parse($val->tanggal_nota)->format('m');
+                      });
+                    }
                     $data = [];
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
@@ -78,18 +149,26 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    $year = Carbon::now()->year($request->tahun);
                     if($request->print){
-                        $year = Carbon::now()->year($request->tahun);
+
                         return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year'));
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'year'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_tahun', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_tahun.pdf');
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
-                }else if($request->filter === "cabang"){
-                    if ($request->cabang === "0") {
-                        $bills = Bill::all();
-                    }else{
-                        $bills = Bill::where('branch_id',$request->cabang)->get();
-                    }
                 }else{
                     $bills = Bill::all();
                 }
@@ -103,7 +182,7 @@ class BillController extends Controller
                     'bills'=>$bills,
                     'branch'=> $branch,
                     'app'=>$app,
-                    'date'=>Carbon::now()->format('d F Y')
+                    'dateNow'=>Carbon::now()->format('d F Y')
                 ];
                 $pdf = PDF::loadView('pdf.penjualan_hari', $data);
                 // return $pdf->stream();
@@ -120,18 +199,69 @@ class BillController extends Controller
                     $explodeddateTo = explode('/',$explodedatetime[3]);
                     $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
                     $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
-                    $bills = Bill::where('branch_id',$user->employee->branch_id)
-                                ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
-                                ->get();
+                    if ($request->filter2 === "status") {
+                        if ($request->status == "0") {
+                            $bills = Bill::where('branch_id',$user->employee->branch_id)
+                            ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
+                            ->get();
+                        } else {
+                            $bills = Bill::where([
+                                ['status','=',$request->status],
+                                ['branch_id','=',$user->employee->branch_id]
+                            ])
+                            ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
+                            ->get();
+                        }
+                    }else{
+                        $bills = Bill::where('branch_id',$user->employee->branch_id)
+                        ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
+                        ->get();
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'date'=>Carbon::now()->format('d F Y')
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan.pdf');
+                    }
                 }else if($request->filter === "bulan"){
-                    $bills = Bill::where('branch_id',$user->employee->branch_id)
+                    if ($request->filter2 === "status") {
+                        if ($request->status == "0") {
+                            $bills = Bill::where('branch_id',$user->employee->branch_id)
+                                        ->whereMonth('tanggal_nota',$request->bulan)
+                                        ->whereYear('tanggal_nota',$request->bulantahun)
+                                        ->orderBy('tanggal_nota', 'asc')
+                                        ->get()
+                                        ->groupBy(function($val) {
+                                            return Carbon::parse($val->tanggal_nota)->format('d');
+                                        });
+                        } else {
+                            $bills = Bill::where([
+                                ['status','=',$request->status],
+                                ['branch_id','=',$user->employee->branch_id]
+                            ])
+                            ->whereMonth('tanggal_nota',$request->bulan)
+                            ->whereYear('tanggal_nota',$request->bulantahun)
+                            ->orderBy('tanggal_nota', 'asc')
+                            ->get()
+                            ->groupBy(function($val) {
+                                return Carbon::parse($val->tanggal_nota)->format('d');
+                          });
+                        }
+                    }else{
+                        $bills = Bill::where('branch_id',$user->employee->branch_id)
                                     ->whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
                                     ->orderBy('tanggal_nota', 'asc')
                                     ->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
-                                  });
+                                });
+                    }
                     $data = [];
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
@@ -141,15 +271,51 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'month'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_bulan', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_bulan.pdf');
+                    }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
-                    $bills = Bill::where('branch_id',$user->employee->branch_id)
+                    if ($request->filter2 === "status") {
+                        if ($request->status == "0") {
+                            $bills = Bill::where('branch_id',$user->employee->branch_id)
                                     ->whereYear('tanggal_nota',$request->tahun)
                                     ->orderBy('tanggal_nota', 'asc')
                                     ->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('m');
-                                  });
+                                });
+                        } else {
+                            $bills = Bill::where([
+                                        ['status','=',$request->status],
+                                        ['branch_id','=',$user->employee->branch_id]
+                                    ])
+                                    ->whereYear('tanggal_nota',$request->tahun)
+                                    ->orderBy('tanggal_nota', 'asc')
+                                    ->get()
+                                    ->groupBy(function($val) {
+                                        return Carbon::parse($val->tanggal_nota)->format('m');
+                                });
+                        }
+                    }else{
+                        $bills = Bill::where('branch_id',$user->employee->branch_id)
+                                ->whereYear('tanggal_nota',$request->tahun)
+                                ->orderBy('tanggal_nota', 'asc')
+                                ->get()
+                                ->groupBy(function($val) {
+                                    return Carbon::parse($val->tanggal_nota)->format('m');
+                            });
+                    }
                     $data = [];
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
@@ -159,17 +325,21 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'year'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_tahun', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_tahun.pdf');
+                    }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
 
-                }else if($request->filter === "status"){
-                    if ($request->status === "0") {
-                        $bills = Bill::where('branch_id',$user->employee->branch_id)->get();
-                    }else{
-                        $bills = Bill::where([
-                                ['status','=',$request->status],
-                                ['branch_id','=',$user->employee->branch_id]
-                            ])->get();
-                    }
                 }else{
                     $bills = Bill::where('branch_id',$user->employee->branch_id)->get();
                 }
@@ -216,7 +386,7 @@ class BillController extends Controller
     {
         $bill = Bill::findOrFail($id);
         $bill->delete();
-        return true;
+        return redirect()->route('penjualan.index');
     }
 
     public function filter(Request $request)
@@ -249,16 +419,20 @@ class BillController extends Controller
                 $explodeddateTo = explode('/',$explodedatetime[3]);
                 $dateFrom = $explodeddateFrom[2]."-".$explodeddateFrom[0]."-".$explodeddateFrom[1]." ".$explodedatetime[1];
                 $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
-                $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
-            }else if($request->filter === "cabang"){
-                if ($request->cabang === "0") {
-                    $bills = Bill::where('status','piutang')->get();
+
+                if ($request->filter2 === "cabang") {
+                    if ($request->cabang == "0") {
+                        $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    } else {
+                        $bills = Bill::where([
+                            ['branch_id','=',$request->cabang],
+                            ['status','=','piutang']
+                            ])->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    }
                 }else{
-                    $bills = Bill::where([
-                        ['branch_id','=',$request->cabang],
-                        ['status','=','piutang']
-                        ])->get();
+                    $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                 }
+
             }else{
                 $bills = Bill::where('status','piutang')->get();
             }

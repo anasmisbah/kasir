@@ -25,7 +25,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <form action="{{route('stok.index')}}" method="GET">
+          <form id="form-filter" action="{{route('stok.index')}}" method="GET">
             <div class="row">
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
@@ -44,8 +44,9 @@
                 </select>
               </div>
               <div class="col-md-6">
+                <input id="downloadble" type="hidden" name="pdf">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button type="submit" class="btn btn-sm btn-primary" name="print" value="supply"><i class="nav-icon fas fa-print"></i></button>
+                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
                 <a href="{{ route('stok.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
@@ -100,7 +101,13 @@
       delimiter: '.',
       divideThousand: true
     });
-
   });
+
+    $('#btn-pdf').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('download')
+        $('#form-filter').attr('target','_blank')
+        $('#form-filter').submit()
+    })
 </script>
 @endpush
