@@ -49,9 +49,18 @@ class BillController extends Controller
                     }else{
                         $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                     }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y')
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan.pdf');
+                    }
                 }else if($request->filter === "bulan"){
-
-
                     if ($request->filter2 === "cabang") {
                         if ($request->cabang == "0") {
                             $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
@@ -86,13 +95,26 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    $month = Carbon::now()->month($request->bulan);
                     if($request->print){
-                        $month = Carbon::now()->month($request->bulan);
+
                         return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month'));
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'month'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_bulan', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_bulan.pdf');
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
-
                     if ($request->filter2 === "cabang") {
                         if ($request->cabang == "0") {
                             $bills = Bill::whereYear('tanggal_nota',$request->tahun)
@@ -127,9 +149,23 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    $year = Carbon::now()->year($request->tahun);
                     if($request->print){
-                        $year = Carbon::now()->year($request->tahun);
+
                         return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year'));
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'year'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_tahun', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_tahun.pdf');
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
@@ -146,7 +182,7 @@ class BillController extends Controller
                     'bills'=>$bills,
                     'branch'=> $branch,
                     'app'=>$app,
-                    'date'=>Carbon::now()->format('d F Y')
+                    'dateNow'=>Carbon::now()->format('d F Y')
                 ];
                 $pdf = PDF::loadView('pdf.penjualan_hari', $data);
                 // return $pdf->stream();
@@ -180,6 +216,17 @@ class BillController extends Controller
                         $bills = Bill::where('branch_id',$user->employee->branch_id)
                         ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                         ->get();
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'date'=>Carbon::now()->format('d F Y')
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_hari', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan.pdf');
                     }
                 }else if($request->filter === "bulan"){
                     if ($request->filter2 === "status") {
@@ -224,15 +271,21 @@ class BillController extends Controller
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'month'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_bulan', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_bulan.pdf');
+                    }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
-                    $bills = Bill::where('branch_id',$user->employee->branch_id)
-                                    ->whereYear('tanggal_nota',$request->tahun)
-                                    ->orderBy('tanggal_nota', 'asc')
-                                    ->get()
-                                    ->groupBy(function($val) {
-                                        return Carbon::parse($val->tanggal_nota)->format('m');
-                                  });
                     if ($request->filter2 === "status") {
                         if ($request->status == "0") {
                             $bills = Bill::where('branch_id',$user->employee->branch_id)
@@ -271,6 +324,19 @@ class BillController extends Controller
                         $data[$key]['piutang'] = $bill->where('status','piutang')->count();
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
+                    }
+                    if ($request->pdf) {
+                        $data = [
+                            'bills'=>$bills,
+                            'branch'=> $branch,
+                            'app'=>$app,
+                            'dateNow'=>Carbon::now()->format('d F Y'),
+                            'data'=>$data,
+                            'year'=>$month
+                        ];
+                        $pdf = PDF::loadView('pdf.penjualan_tahun', $data);
+                        // return $pdf->stream();
+                        return $pdf->download('penjualan_tahun.pdf');
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
 

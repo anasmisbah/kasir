@@ -42,7 +42,7 @@ class EmployeeController extends Controller
                     ];
                     $pdf = PDF::loadView('pdf.karyawan', $data);
                     // return $pdf->stream();
-                    // return $pdf->download('karyawan.pdf');
+                    return $pdf->download('karyawan.pdf');
                 }elseif ($request->print) {
                         $date=Carbon::now()->format('d F Y');
                     return view('pdf.karyawan',compact('employees','branch','app','date'));
