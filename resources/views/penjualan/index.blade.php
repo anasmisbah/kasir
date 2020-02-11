@@ -47,14 +47,14 @@
               @if (auth()->user()->level_id == 1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @else
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
+                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Status</label>
                 </div>
               </div>
