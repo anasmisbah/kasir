@@ -35,7 +35,6 @@
                 <th>Email</th>
                 <th>Level</th>
                 <th>Cabang</th>
-                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -47,14 +46,6 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->level->nama }}</td>
                 <td><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
-                <td>
-                  <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus Pengguna secara permanen?')" action="{{route('pengguna.hapus', $user->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger btn-sm">
-                      <i class="fa fa-trash"></i></button>
-                  </form>
-                </td>
               </tr>
               @endforeach
             </tbody>

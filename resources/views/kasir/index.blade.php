@@ -77,7 +77,7 @@
                             <div class="col" style="width: 10%">
                                 <div class="form-group">
                                     <label for="">Nama Barang</label>
-                                    <input type="text" name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
+                                    <input type="text" disabled name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
                                     <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
                                         <div class="list-group position-relative" id="list-barang">
                                         </div>
@@ -252,7 +252,7 @@
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
     $(function() {
-    
+
         // Number Divide
         $("#inputharga").divide({
             delimiter: '.',
@@ -283,8 +283,9 @@
                 $('#alamatpelanggan').html(data.customer.alamat)
                 $('#teleponpelanggan').val(data.customer.telepon)
                 $('#searchpelanggan').val(data.customer.nama)
-                $("#cetaknota").removeClass('disabled')
+
                 $('#idpelanggan').val(data.customer.id)
+                $('#searchbarang').removeAttr('disabled')
             },
         });
     }
@@ -524,28 +525,29 @@
 
     $(document).on('click', '#tambahbarang', function() {
         if ($('#qtybarang').val() != 0) {
-
             addNewRow();
+            const total = $("#total").html()
+            const jmlbarang = $('#jumlahbarang').val()
+            const totalan = parseInt(total) + parseInt(jmlbarang)
+            $("#total").html(totalan)
+
+            const uangMuka = $("#uangmuka").val()
+            uangkembali(uangMuka)
+
+            $("#qtybarang").val('')
+            $("#kodebarang").val('')
+            $("#hargabarang").val('')
+            $("#searchbarang").val('')
+            $("#jumlahbarang").val(0)
+            $('#diskon').removeAttr('disabled')
+            $("#cetaknota").removeClass('disabled')
+            hitungdiskon();
         } else {
             alert("masukkan Kuantitan barang Terlebih Dahulu")
         }
 
 
-        const total = $("#total").html()
-        const jmlbarang = $('#jumlahbarang').val()
-        const totalan = parseInt(total) + parseInt(jmlbarang)
-        $("#total").html(totalan)
 
-        const uangMuka = $("#uangmuka").val()
-        uangkembali(uangMuka)
-
-        $("#qtybarang").val('')
-        $("#kodebarang").val('')
-        $("#hargabarang").val('')
-        $("#searchbarang").val('')
-        $("#jumlahbarang").val(0)
-        $('#diskon').removeAttr('disabled')
-        hitungdiskon();
 
     });
 
@@ -566,7 +568,7 @@
         const table = $('#tableBarang tbody')
         if ($lastRow.length == 0) {
 
-            const markup = '<tr data-id=1 class="text-center">\
+            const markup = '<tr data-id=1>\
                                     <td>1</td>\
                                     <td>' + $('#kodebarang').val() + '</td>\
                                     <td>' + $('#searchbarang').val() + '</td>\
@@ -604,7 +606,19 @@
         const jmlbarang = $findRow.find('td').eq(5).text()
         const totalan = parseInt(total) - parseInt(jmlbarang)
         $("#total").html(totalan)
+
+
+
         $findRow.remove();
+        checklastrow();
+    }
+
+    function checklastrow(){
+        const lastRow = $('table tbody tr:last');
+        if (!(lastRow.length)) {
+            console.log(lastRow);
+            $('#cetaknota').addClass('disabled')
+        }
     }
 
     $("#uangmuka").keyup(function() {

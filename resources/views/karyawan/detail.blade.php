@@ -64,13 +64,13 @@
           </tr>
         </tbody>
       </table>
-      <form class="d-inline" onsubmit="return confirm('Apakah anda ingin menghapus karyawan secara permanen?')" action="{{route('karyawan.hapus', $employee->id)}}" method="POST">
+      <form class="d-inline" id="form-delete"  action="{{route('karyawan.hapus', $employee->id)}}" method="POST">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
-          <i class="fa fa-trash"></i></button>
-      </form>
-      <a href="{{route('karyawan.ubah',$employee->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+        </form>
+        <button type="submit" id="delete" class="btn ml-4 mt-2 btn-warning float-right" style="width: 78px !important;">
+        <i class="fa fa-trash"></i></button>
+        <a href="{{route('karyawan.ubah',$employee->id)}}" class="btn mt-2 btn-primary float-right" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
     </div>
 
     <div class="card-footer text-right">
@@ -84,6 +84,28 @@
 
 @push('script')
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script>
+    $('#delete').click(()=>{
+      swal({
+      title: "apakah anda yakin menghapus {{$employee->nama}} ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("berhasil menghapus", {
+          icon: "success",
+          button:false,
+          timer:750
+        });
+        $('#form-delete').submit()
+      }
+    });
+
+    })
+</script>
 <script>
   $(function() {
     $('.select2').select2()

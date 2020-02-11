@@ -216,7 +216,7 @@ class BillController extends Controller
     {
         $bill = Bill::findOrFail($id);
         $bill->delete();
-        return true;
+        return redirect()->route('penjualan.index');
     }
 
     public function filter(Request $request)
