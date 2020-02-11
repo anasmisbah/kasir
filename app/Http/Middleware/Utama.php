@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Illuminate\Support\Facades\Auth;
 class Utama
 {
     /**
@@ -15,7 +15,7 @@ class Utama
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level == 'utama') {
+        if (Auth::user()->level->id == 1) {
             return $next($request);
         }
         return redirect()->route('login');
