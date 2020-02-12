@@ -29,14 +29,14 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                   <label for="hari" class="custom-control-label">Pilih Tanggal</label>
                 </div>
               </div>
               @if (auth()->user()->level_id ==1)
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="cabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="cabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
                   <label for="cabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
@@ -58,7 +58,7 @@
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('filter2') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
@@ -143,6 +143,30 @@
         $('#downloadble').val('download')
         $('#form-filter').attr('target','_blank')
         $('#form-filter').submit()
+    })
+
+    $('#hari').click((e)=>{
+        const propCheck = $('#hari').is(':checked');
+        const data = $('#hari').data('id');
+        if(data == "0") {
+            $("#hari").prop("checked", true);
+            $('#hari').data('id','1');
+        } else {
+            $("#hari").prop("checked", false);
+            $('#hari').data('id','0');
+        }
+    })
+
+    $('#cabang').click((e)=>{
+        const propCheck = $('#cabang').is(':checked');
+        const data = $('#cabang').data('id');
+        if(data == "0") {
+            $("#cabang").prop("checked", true);
+            $('#cabang').data('id','1');
+        } else {
+            $("#cabang").prop("checked", false);
+            $('#cabang').data('id','0');
+        }
     })
 </script>
 @endpush

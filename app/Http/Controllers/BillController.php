@@ -434,6 +434,15 @@ class BillController extends Controller
                     $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                 }
 
+            }if ($request->filter2 === "cabang") {
+                if ($request->cabang == "0") {
+                    $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                } else {
+                    $bills = Bill::where([
+                        ['branch_id','=',$request->cabang],
+                        ['status','=','piutang']
+                        ])->get();
+                }
             }else{
                 $bills = Bill::where('status','piutang')->get();
             }

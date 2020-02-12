@@ -27,14 +27,14 @@
             <br>
             <br>
 
-            <table class="table table-striped text-center">
-                    <tr class="border">
-                            <th>No.</th>
-                            <th>No. Nota Bon</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Alamat</th>
-                            <th>Hutang</th>
-                            <th>Cabang</th>
+            <table class="table table-hover text-center">
+                    <tr>
+                            <th  class="border">No.</th>
+                            <th  class="border">No. Nota Bon</th>
+                            <th  class="border">Nama Pelanggan</th>
+                            <th  class="border">Alamat</th>
+                            <th  class="border">Hutang</th>
+                            <th  class="border">Cabang</th>
                     </tr>
                 <tbody>
                     @php
@@ -72,16 +72,4 @@
         </div>
     </div>
 </body>
-      <!-- jQuery -->
-      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="/adminlte/dist/js/adminlte.min.js"></script>
-      <script>
-        window.addEventListener("afterprint", function(){
-          history.back();
-        });
-        $("#body_print").ready(function(){
-          window.print();
-        });
-      </script>
 </html>
