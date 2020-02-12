@@ -24,18 +24,37 @@
             <br>
             <br>
 
-            <table class="table table-striped">
-                    <tr class="border">
-                        <th>No.</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        <th>Alamat</th>
-                        <th>Telepon</th>
-                        <th>Cabang</th>
+            <table class="table table-hover">
+                    <tr>
+                        <th class="border">No.</th>
+                        <th class="border">Nama</th>
+                        <th class="border">Jabatan</th>
+                        <th class="border">Alamat</th>
+                        <th class="border">Telepon</th>
+                        <th class="border">Cabang</th>
                     </tr>
                 <tbody>
                     @foreach ($employees as $employee)
-                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($employees)?'border-bawah':''}}">
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td class="border">{{$loop->iteration}}</td>
+                            <td class="border">{{$employee->nama}}</td>
+                            <td class="border">{{$employee->jabatan}}</td>
+                            <td class="border">{{$employee->alamat}}</td>
+                            <td class="border">{{$employee->telepon}}</td>
+                            <td class="border">{{$employee->branch->nama}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($employees))
+                            <tr>
+                                <td class="border-bawah">{{$loop->iteration}}</td>
+                                <td class="border-bawah">{{$employee->nama}}</td>
+                                <td class="border-bawah">{{$employee->jabatan}}</td>
+                                <td class="border-bawah">{{$employee->alamat}}</td>
+                                <td class="border-bawah">{{$employee->telepon}}</td>
+                                <td class="border-bawah">{{$employee->branch->nama}}</td>
+                            </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$employee->nama}}</td>
                             <td>{{$employee->jabatan}}</td>
@@ -43,6 +62,7 @@
                             <td>{{$employee->telepon}}</td>
                             <td>{{$employee->branch->nama}}</td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

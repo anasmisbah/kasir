@@ -20,16 +20,12 @@ class SupplyItemController extends Controller
         $app = Application::first();
         $branch = $user->employee->branch;
         if ($user->level_id == 1 ) {
-            if ($request) {
-                if ($request->filter === "cabang") {
-                    if($request->cabang === "0"){
-                        $supplies = Supply::all();
-                    }else{
-                        $supplies = Supply::where('branch_id',$request->cabang)->get();
-                        $branch = Branch::findOrFail($request->cabang);
-                    }
-                }else{
+            if ($request->all()) {
+                if($request->cabang == "0"){
                     $supplies = Supply::all();
+                }else{
+                    $supplies = Supply::where('branch_id',$request->cabang)->get();
+                    $branch = Branch::findOrFail($request->cabang);
                 }
                 if ($request->pdf) {
                     $data = [
@@ -44,7 +40,7 @@ class SupplyItemController extends Controller
                 }elseif ($request->print) {
                     $date=Carbon::now()->format('d F Y');
                 return view('pdf.stok',compact('supplies','branch','app','date'));
-            }
+                }
             }else{
                 $supplies = Supply::all();
             }

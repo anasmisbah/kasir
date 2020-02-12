@@ -20,24 +20,39 @@
         <div class="row mt-3" >
             <h4 class="text-center">DAFTAR STOK BARANG</h4>
             <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
-
             <br>
             <br>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr class="border">
-                        <th>No.</th>
-                        <th>Nama Barang</th>
-                        <th>Cabang</th>
-                        <th>Harga Pusat</th>
-                        <th>Harga Cabang</th>
-                        <th>Stok (Kg)</th>
+            <table class="table table-hover">
+                    <tr>
+                        <th class="border">No.</th>
+                        <th class="border">Nama Barang</th>
+                        <th class="border">Cabang</th>
+                        <th class="border">Harga Pusat</th>
+                        <th class="border">Harga Cabang</th>
+                        <th class="border">Stok (Kg)</th>
                     </tr>
-                </thead>
                 <tbody>
                     @foreach ($supplies as $supply)
-                        <tr class="{{$loop->iteration == 1?'border':'' }} {{$loop->iteration == count($supplies)?'border-bawah':''}}">
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td class="border">{{$loop->iteration}}</td>
+                            <td class="border">{{$supply->item->nama}}</td>
+                            <td class="border">{{$supply->branch->nama}}</td>
+                            <td class="border">{{$supply->item->harga}}</td>
+                            <td class="border">{{$supply->harga_cabang}}</td>
+                            <td class="border">{{$supply->stok}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($supplies))
+                        <tr>
+                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah">{{$supply->item->nama}}</td>
+                            <td class="border-bawah">{{$supply->branch->nama}}</td>
+                            <td class="border-bawah">{{$supply->item->harga}}</td>
+                            <td class="border-bawah">{{$supply->harga_cabang}}</td>
+                            <td class="border-bawah">{{$supply->stok}}</td>
+                        </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$supply->item->nama}}</td>
                             <td>{{$supply->branch->nama}}</td>
@@ -45,6 +60,7 @@
                             <td>{{$supply->harga_cabang}}</td>
                             <td>{{$supply->stok}}</td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
