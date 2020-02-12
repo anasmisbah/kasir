@@ -19,8 +19,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function (){
 
-
-
+    Route::get('/beranda', 'AdminController@beranda')->name('beranda');
 
     Route::middleware(['utama'])->group(function (){
 
@@ -67,7 +66,7 @@ Route::middleware(['auth'])->group(function (){
 
     });
     Route::middleware(['cabangutama'])->group(function (){
-        Route::get('/beranda', 'AdminController@beranda')->name('beranda');
+
 
         Route::get('/penjualan', 'BillController@index')->name('penjualan.index');
         Route::get('/penjualan/detail/{id}','BillController@show')->name('penjualan.detail');
@@ -87,7 +86,6 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/pelanggan/{id}', 'CustomerController@update')->name('pelanggan.perbarui');
         Route::get('/pelanggan/detail/{id}','CustomerController@show')->name('pelanggan.detail');
         Route::delete('/pelanggan/hapus/{id}','CustomerController@delete')->name('pelanggan.hapus');
-        Route::get('/pelanggan/fetchpelanggan','CustomerController@getdatajson')->name('pelanggan.datajson');
 
 
         Route::get('/stok', 'SupplyItemController@index')->name('stok.index');
@@ -97,7 +95,6 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
         Route::get('/stok/detail/{id}','SupplyItemController@show')->name('stok.detail');
         Route::delete('/stok/hapus/{id}','SupplyItemController@delete')->name('stok.hapus');
-        Route::get('/stok/fetchbarang','SupplyItemController@getdatajson')->name('barang.datajson');
 
         Route::get('/karyawan', 'EmployeeController@index')->name('karyawan.index');
         Route::get('/karyawan/tambah', 'EmployeeController@create')->name('karyawan.tambah');
@@ -119,6 +116,8 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/kasir/cetaknota/{id}','BillController@cetaknota')->name('kasir.cetaknota');
         Route::get('/kasir/unduhnota/{id}','BillController@unduhknota')->name('kasir.unduhnota');
 
+        Route::get('/pelanggan/fetchpelanggan','CustomerController@getdatajson')->name('pelanggan.datajson');
+        Route::get('/stok/fetchbarang','SupplyItemController@getdatajson')->name('barang.datajson');
     });
 
 });
