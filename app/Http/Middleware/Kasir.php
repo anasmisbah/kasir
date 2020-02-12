@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-class Cabang
+class Kasir
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class Cabang
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level->id == 2) {
+        if (Auth::user()->level->id == 3) {
             return $next($request);
         }
         return redirect()->route('login');

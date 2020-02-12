@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use App\Application;
+use App\Supply;
 
 class BillController extends Controller
 {
@@ -587,6 +588,11 @@ class BillController extends Controller
                 'supply_id'=>$item['supply_id'],
                 'created_by'=>Auth::user()->id,
                 'updated_by'=>Auth::user()->id
+            ]);
+            $supply = Supply::findOrFail($item['supply_id']);
+            $stokbaru = $supply->stok - $item['kuantitas'];
+            $supply->update([
+                'stok'=> $stokbaru
             ]);
         }
 

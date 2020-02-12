@@ -93,6 +93,7 @@
                             <div class="col" style="width: 10%">
                                 <div class="form-group">
                                     <label for="">Qty</label>
+                                    <input type="hidden" id="stok">
                                     <input id="qtybarang" type="text" disabled id="qty" placeholder="0" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
@@ -359,6 +360,7 @@
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
                 $("#searchbarang").val(data.supply.item.nama)
+                $('#stok').val(data.supply.stok);
             },
         });
     }
@@ -402,6 +404,7 @@
                 'keyword': keyword,
             },
             success: function(data) {
+
                 var list = data.map((item) => {
                     return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
                 })
@@ -525,23 +528,31 @@
 
     $(document).on('click', '#tambahbarang', function() {
         if ($('#qtybarang').val() != 0) {
-            addNewRow();
-            const total = $("#total").html()
-            const jmlbarang = $('#jumlahbarang').val()
-            const totalan = parseInt(total) + parseInt(jmlbarang)
-            $("#total").html(totalan)
+            console.log();
 
-            const uangMuka = $("#uangmuka").val()
-            uangkembali(uangMuka)
+            if (parseInt($('#stok').val())< parseInt($('#qtybarang').val())) {
+                alert("nilai kuantitas melibihi stok yang tersedia")
+                $("#qtybarang").val('')
+                $("#jumlahbarang").val(0)
+            } else {
+                addNewRow();
+                const total = $("#total").html()
+                const jmlbarang = $('#jumlahbarang').val()
+                const totalan = parseInt(total) + parseInt(jmlbarang)
+                $("#total").html(totalan)
 
-            $("#qtybarang").val('')
-            $("#kodebarang").val('')
-            $("#hargabarang").val('')
-            $("#searchbarang").val('')
-            $("#jumlahbarang").val(0)
-            $('#diskon').removeAttr('disabled')
-            $("#cetaknota").removeClass('disabled')
-            hitungdiskon();
+                const uangMuka = $("#uangmuka").val()
+                uangkembali(uangMuka)
+
+                $("#qtybarang").val('')
+                $("#kodebarang").val('')
+                $("#hargabarang").val('')
+                $("#searchbarang").val('')
+                $("#jumlahbarang").val(0)
+                $('#diskon').removeAttr('disabled')
+                $("#cetaknota").removeClass('disabled')
+                hitungdiskon();
+            }
         } else {
             alert("masukkan Kuantitan barang Terlebih Dahulu")
         }
