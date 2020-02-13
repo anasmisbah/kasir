@@ -40,7 +40,7 @@
               </div>
               <div class="col-md-6">
                 <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary" ><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
                 <a href="{{ route('karyawan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
@@ -93,6 +93,12 @@
         $('.select2').select2();
         $("#example1").DataTable();
     });
+    $('#btn-filter').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('')
+        $('#form-filter').attr('target','_self')
+        $('#form-filter').submit()
+    })
     $('#btn-pdf').click((e)=>{
         e.preventDefault()
         $('#downloadble').val('download')

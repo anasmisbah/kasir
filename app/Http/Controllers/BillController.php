@@ -545,9 +545,9 @@ class BillController extends Controller
         ];
         $pdf = PDF::loadView('pdf.penjualannota', $data);
         // return $pdf->stream();
-        // $pdfname = $bill->no_nota_kas;
-        // return $pdf->download("$pdfname.pdf");
-        return view('pdf.piutang_nota',compact('bill','app'));
+        $pdfname = "nota piutang".$bill->no_nota_kas;
+        return $pdf->download("$pdfname.pdf");
+        // return view('pdf.piutang_nota',compact('bill','app'));
     }
 
 
@@ -622,9 +622,9 @@ class BillController extends Controller
         ];
         $pdf = PDF::loadView('pdf.penjualannota', $data);
         // return $pdf->stream();
-        // $pdfname = $bill->no_nota_kas;
-        // return $pdf->download("$pdfname.pdf");
-        return view('pdf.penjualannota',compact('bill','app'));
+        $pdfname = "penjualan ".$bill->no_nota_kas;
+        return $pdf->download("$pdfname.pdf");
+        // return view('pdf.penjualannota',compact('bill','app'));
     }
 
     public function store(Request $request)
