@@ -57,8 +57,7 @@
 
     <div class="card-footer text-right">
       <span style="font-size: 12px">
-        <strong>Dibuat Pada:</strong>{{$item->created_at->format('l | d F Y')}} | {{$item->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->createdBy->employee->id)}}">{{$item->createdBy->employee->nama}}</a> / <strong>Diubah Pada:</strong>{{$item->updated_at->format('l | d F Y')}} | {{$item->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->updatedBy->employee->id)}}">{{$item->updatedBy->employee->nama}}</a>
-      </span>
+        <strong>Dibuat Pada: </strong>{{  $item->created_at->dayName." | ".$item->created_at->day." ".$item->created_at->monthName." ".$item->created_at->year}} | {{$item->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->createdBy->employee->id)}}">{{$item->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $item->updated_at->dayName." | ".$item->updated_at->day." ".$item->updated_at->monthName." ".$item->updated_at->year}} | {{$item->updated_at->format('h:i:s A')}} | {{$item->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->updatedBy->employee->id)}}">{{$item->updatedBy->employee->nama}}</a>      </span>
     </div>
   </div>
 </div>

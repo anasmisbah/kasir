@@ -58,8 +58,8 @@
 
     <div class="card-footer text-right">
       <span style="font-size: 12px">
-        <strong>Dibuat Pada:</strong>{{$customer->created_at->format('l | d F Y')}} | {{$customer->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$customer->createdBy->employee->id)}}">{{$customer->createdBy->employee->nama}}</a> / <strong>Diubah Pada:</strong>{{$customer->updated_at->format('l | d F Y')}} | {{$customer->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$customer->updatedBy->employee->id)}}">{{$customer->updatedBy->employee->nama}}</a>
-      </span>
+        <strong>Dibuat Pada: </strong>{{  $customer->created_at->dayName." | ".$customer->created_at->day." ".$customer->created_at->monthName." ".$customer->created_at->year}} | {{$customer->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$customer->createdBy->employee->id)}}">{{$customer->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $customer->updated_at->dayName." | ".$customer->updated_at->day." ".$customer->updated_at->monthName." ".$customer->updated_at->year}} | {{$customer->updated_at->format('h:i:s A')}} | {{$customer->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$customer->updatedBy->employee->id)}}">{{$customer->updatedBy->employee->nama}}</a>
+    </span>
     </div>
   </div>
 </div>

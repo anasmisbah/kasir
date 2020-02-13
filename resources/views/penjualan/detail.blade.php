@@ -148,7 +148,7 @@
         </table>
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat Pada : </strong>{{$bill->created_at->format('l | d F Y')}} | {{$bill->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>
