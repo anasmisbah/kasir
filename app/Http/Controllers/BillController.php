@@ -112,7 +112,8 @@ class BillController extends Controller
                         ];
                         $pdf = PDF::loadView('pdf.penjualan_bulan', $data);
                         // return $pdf->stream();
-                        return $pdf->download('penjualan_bulan.pdf');
+                        $namafile = "penjualan_bulan_".$month->monthName;
+                        return $pdf->download("$namafile.pdf");
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
@@ -162,11 +163,12 @@ class BillController extends Controller
                             'app'=>$app,
                             'dateNow'=>Carbon::now()->format('d F Y'),
                             'data'=>$data,
-                            'year'=>$month
+                            'year'=>$year
                         ];
                         $pdf = PDF::loadView('pdf.penjualan_tahun', $data);
                         // return $pdf->stream();
-                        return $pdf->download('penjualan_tahun.pdf');
+                        $namafile = "penjualan_tahun_".$year->year;
+                        return $pdf->download("$namafile.pdf");
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
@@ -622,7 +624,7 @@ class BillController extends Controller
         ];
         $pdf = PDF::loadView('pdf.penjualannota', $data);
         // return $pdf->stream();
-        $pdfname = "penjualan ".$bill->no_nota_kas;
+        $pdfname = "penjualan_".$bill->no_nota_kas;
         return $pdf->download("$pdfname.pdf");
         // return view('pdf.penjualannota',compact('bill','app'));
     }

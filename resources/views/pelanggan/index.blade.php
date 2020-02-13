@@ -26,20 +26,12 @@
         <div class="card-body">
           @if (auth()->user()->level_id == 1)
           <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
-            <div class="row">
-              <div class="col-md-2">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
-                  <label for="customRadio1" class="custom-control-label">Cabang</label>
-                </div>
-              </div>
-            </div>
             <div class="row mb-4">
               <div class="col-md-2">
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>

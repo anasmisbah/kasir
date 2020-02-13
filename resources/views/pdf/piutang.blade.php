@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Laporan Piutang</title>
     <style>
         .border{
@@ -23,20 +25,39 @@
             <br>
 
             <table class="table table-hover text-center">
-                    <tr>
-                            <th  class="border">No.</th>
-                            <th  class="border">No. Nota Bon</th>
-                            <th  class="border">Nama Pelanggan</th>
-                            <th  class="border">Alamat</th>
-                            <th  class="border">Hutang</th>
-                            <th  class="border">Cabang</th>
-                    </tr>
+                <tr>
+                    <th  class="border">No.</th>
+                    <th  class="border">No Nota Bon</th>
+                    <th  class="border">Nama Pelanggan</th>
+                    <th  class="border">Alamat</th>
+                    <th  class="border">Hutang</th>
+                    <th  class="border">Cabang</th>
+                </tr>
                 <tbody>
                     @php
                         $total = 0;
                     @endphp
                     @foreach ($bills as $bill)
-                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($bills)?'border-bawah':''}}">
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td class="border">{{$loop->iteration}}</td>
+                            <td class="border">{{$bill->customer->nama}}</td>
+                            <td class="border">{{$bill->no_nota_kas}}</td>
+                            <td class="border">{{$bill->customer->alamat}}</td>
+                            <td class="border">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td class="border">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($customers))
+                        <tr>
+                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah">{{$bill->customer->nama}}</td>
+                            <td class="border-bawah">{{$bill->no_nota_kas}}</td>
+                            <td class="border-bawah">{{$bill->customer->alamat}}</td>
+                            <td class="border-bawah">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td class="border-bawah">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$bill->customer->nama}}</td>
                             <td>{{$bill->no_nota_kas}}</td>
@@ -44,6 +65,7 @@
                             <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
                             <td>{{$bill->branch->nama}}</td>
                         </tr>
+                        @endif
                         @php
                             $total += abs($bill->kembalian_nota)
                         @endphp
