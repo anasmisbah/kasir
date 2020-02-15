@@ -2,48 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Nota Kas</title>
 
     <style>
         body {
-            margin-top: 40px;
+            margin-top: 40px !important;
         }
 
         .hr-red {
-            background-color: red;
-            height: 5px;
+            background-color: red !important;
+            height: 5px !important;
         }
 
         .grid-item h3,
         .grid-item h4 {
-            font-weight: bold
+            font-weight: bold !important
         }
 
         .grid-item p {
-            margin-top: -10px;
+            margin-top: -10px !important;
         }
 
         .grid-container {
-            display: grid;
+            display: grid !important;
             grid-template-columns: 400px 100px 300px;
         }
 
         .grid-item.second {
-            margin-top: 3rem;
-            text-align: right;
+            margin-top: 3rem !important;
+            text-align: right !important;
         }
 
         .grid-container-2 {
-            display: grid;
-            grid-template-columns: 350px 120px
+            display: grid !important;
+            grid-template-columns: 350px 120px !important
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <div class="row">
         <div class="grid-container">
             <div class="grid-item">
                 <div>NOTA KAS</div>
@@ -67,6 +70,7 @@
                 <p>{{$bill->customer->telepon}}</p>
             </div>
         </div>
+    </div>
         <div class="row">
             <div class="col-md-12">
                 <table class="no-margin table table-hover" id="table">

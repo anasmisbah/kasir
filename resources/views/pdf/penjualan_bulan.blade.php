@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Laporan Penjualan</title>
 <style>
         .border{
@@ -28,15 +28,15 @@
             <br>
             <br>
 
-            <table class="table table-striped text-center">
-                    <tr class="border">
-                      <th>No.</th>
-                      <th>{{Request::input('filter') == "bulan"?"Tanggal":"Bulan"}}</th>
-                      <th>Penjualan</th>
-                      <th>Nominal</th>
-                      <th>Piutang</th>
-                      <th>Nominal</th>
-                      <th>Kas</th>
+            <table class="table table-hover text-center">
+                    <tr>
+                      <th  class="border">No.</th>
+                      <th  class="border">Tanggal</th>
+                      <th  class="border">Penjualan</th>
+                      <th  class="border">Nominal</th>
+                      <th  class="border">Piutang</th>
+                      <th  class="border">Nominal</th>
+                      <th  class="border">Kas</th>
                     </tr>
                   <tbody>
                       @php
@@ -47,15 +47,37 @@
                           $totalkas = 0;
                       @endphp
                     @foreach ($data as $item)
-                    <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($data)?'border-bawah':''}}">
-                      <td>{{$loop->iteration}}</td>
-                      <td>{{$item['tanggal']}}</td>
-                      <td>{{$item['penjualan']}}</td>
-                      <td>Rp {{$item['nominal_penjualan']}},-</td>
-                      <td>{{$item['piutang']}}</td>
-                      <td>Rp {{ abs($item['nominal_piutang'])}},-</td>
-                      <td>Rp {{$item['kas']}},-</td>
-                    </tr>
+                    @if ($loop->iteration == 1)
+                    <tr>
+                        <td class="border">{{$loop->iteration}}</td>
+                        <td class="border">{{$item['tanggal']}}</td>
+                        <td class="border">{{$item['penjualan']}}</td>
+                        <td class="border">Rp {{$item['nominal_penjualan']}},-</td>
+                        <td class="border">{{$item['piutang']}}</td>
+                        <td class="border">Rp {{ abs($item['nominal_piutang'])}},-</td>
+                        <td class="border">Rp {{$item['kas']}},-</td>
+                      </tr>
+                        @elseif ($loop->iteration == count($data))
+                        <tr>
+                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah">{{$item['tanggal']}}</td>
+                            <td class="border-bawah">{{$item['penjualan']}}</td>
+                            <td class="border-bawah">Rp {{$item['nominal_penjualan']}},-</td>
+                            <td class="border-bawah">{{$item['piutang']}}</td>
+                            <td class="border-bawah">Rp {{ abs($item['nominal_piutang'])}},-</td>
+                            <td class="border-bawah">Rp {{$item['kas']}},-</td>
+                          </tr>
+                        @else
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item['tanggal']}}</td>
+                            <td>{{$item['penjualan']}}</td>
+                            <td>Rp {{$item['nominal_penjualan']}},-</td>
+                            <td>{{$item['piutang']}}</td>
+                            <td>Rp {{ abs($item['nominal_piutang'])}},-</td>
+                            <td>Rp {{$item['kas']}},-</td>
+                          </tr>
+                        @endif
                     @php
                           $totalpenjualan +=$item['penjualan'] ;
                           $totalnominalpenjualan += $item['nominal_penjualan'];
@@ -65,18 +87,15 @@
                       @endphp
                     @endforeach
                   </tbody>
-
-                  <tfoot>
-                      <tr class="border-bawah">
-                          <th ></th>
-                          <th>JUMLAH</th>
-                          <th>{{$totalpenjualan}}</th>
-                          <th>Rp {{$totalnominalpenjualan}},-</th>
-                          <th>{{$totalpiutang}}</th>
-                          <th>Rp {{abs($totalnominalpiutang)}},-</th>
-                          <th>Rp {{$totalkas}},-</th>
+                      <tr>
+                          <th class="border border-bawah"></th>
+                          <th class="border border-bawah">JUMLAH</th>
+                          <th class="border border-bawah">{{$totalpenjualan}}</th>
+                          <th class="border border-bawah">Rp {{$totalnominalpenjualan}},-</th>
+                          <th class="border border-bawah">{{$totalpiutang}}</th>
+                          <th class="border border-bawah">Rp {{abs($totalnominalpiutang)}},-</th>
+                          <th class="border border-bawah">Rp {{$totalkas}},-</th>
                         </tr>
-                  </tfoot>
             </table>
         </div>
         <div class="row" style="margin-top:20px">
@@ -84,22 +103,10 @@
                 <p class="pull-right">
                     {{$branch->nama}},{{$dateNow}} <br>
                     Manager Cabang, <br><br><br><br>
-                    {{$branch->pimpinan}}
+                    <strong>{{$branch->pimpinan}}</strong>
                 </p>
             </div>
         </div>
     </div>
 </body>
-      <!-- jQuery -->
-      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="/adminlte/dist/js/adminlte.min.js"></script>
-      <script>
-        window.addEventListener("afterprint", function(){
-          history.back();
-        });
-        $("#body_print").ready(function(){
-          window.print();
-        });
-      </script>
 </html>

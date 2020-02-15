@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Laporan Piutang</title>
     <style>
         .border{
@@ -12,9 +12,6 @@
         }
         .border-bawah{
             border-bottom: 2px solid black !important;
-        }
-        th{
-            text-align: center !important
         }
     </style>
 </head>
@@ -27,21 +24,40 @@
             <br>
             <br>
 
-            <table class="table table-striped text-center">
-                    <tr class="border">
-                            <th>No.</th>
-                            <th>No. Nota Bon</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Alamat</th>
-                            <th>Hutang</th>
-                            <th>Cabang</th>
-                    </tr>
+            <table class="table table-hover text-center">
+                <tr>
+                    <th  class="border">No.</th>
+                    <th  class="border">No Nota Bon</th>
+                    <th  class="border">Nama Pelanggan</th>
+                    <th  class="border">Alamat</th>
+                    <th  class="border">Hutang</th>
+                    <th  class="border">Cabang</th>
+                </tr>
                 <tbody>
                     @php
                         $total = 0;
                     @endphp
                     @foreach ($bills as $bill)
-                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($bills)?'border-bawah':''}}">
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td class="border">{{$loop->iteration}}</td>
+                            <td class="border">{{$bill->customer->nama}}</td>
+                            <td class="border">{{$bill->no_nota_kas}}</td>
+                            <td class="border">{{$bill->customer->alamat}}</td>
+                            <td class="border">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td class="border">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($customers))
+                        <tr>
+                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah">{{$bill->customer->nama}}</td>
+                            <td class="border-bawah">{{$bill->no_nota_kas}}</td>
+                            <td class="border-bawah">{{$bill->customer->alamat}}</td>
+                            <td class="border-bawah">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td class="border-bawah">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$bill->customer->nama}}</td>
                             <td>{{$bill->no_nota_kas}}</td>
@@ -49,6 +65,7 @@
                             <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
                             <td>{{$bill->branch->nama}}</td>
                         </tr>
+                        @endif
                         @php
                             $total += abs($bill->kembalian_nota)
                         @endphp
@@ -72,16 +89,4 @@
         </div>
     </div>
 </body>
-      <!-- jQuery -->
-      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="/adminlte/dist/js/adminlte.min.js"></script>
-      <script>
-        window.addEventListener("afterprint", function(){
-          history.back();
-        });
-        $("#body_print").ready(function(){
-          window.print();
-        });
-      </script>
 </html>

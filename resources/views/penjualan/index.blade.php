@@ -123,7 +123,7 @@
 
               <div class="col-md-2">
                 <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
@@ -289,11 +289,17 @@
       }
     })
   });
-  $('#btn-pdf').click((e) => {
-    e.preventDefault()
-    $('#downloadble').val('download')
-    $('#form-filter').attr('target', '_blank')
-    $('#form-filter').submit()
-  })
+  $('#btn-filter').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('')
+        $('#form-filter').attr('target','_self')
+        $('#form-filter').submit()
+    })
+  $('#btn-pdf').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('download')
+        $('#form-filter').attr('target','_blank')
+        $('#form-filter').submit()
+    })
 </script>
 @endpush

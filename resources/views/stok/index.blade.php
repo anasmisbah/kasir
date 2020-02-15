@@ -26,26 +26,18 @@
       <div class="card">
         <div class="card-body">
           <form id="form-filter" action="{{route('stok.index')}}" method="GET">
-            <div class="row">
-              <div class="col-md-2">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="filter" value="cabang" {{Request::input('filter') == 'cabang' ?'checked':''}}>
-                  <label for="customRadio1" class="custom-control-label">Cabang</label>
-                </div>
-              </div>
-            </div>
             <div class="row mb-4">
               <div class="col-md-2">
                 <select class="form-control form-control-sm " name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-md-6">
                 <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
                 <a href="{{ route('stok.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
@@ -62,6 +54,7 @@
                 <th style="width: 15%" class="text-right">Harga Pusat</th>
                 <th style="width: 15%" class="text-right">Harga Cabang</th>
                 <th style="width: 15%" class="text-right">Selisih</th>
+                <th style="width: 15%" class="text-right">Stok</th>
               </tr>
             </thead>
             <tbody>
@@ -74,6 +67,7 @@
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td style="width: 15%" class="text-right">{{$supply->stok}}</td>
               </tr>
               @endforeach
           </table>
@@ -106,12 +100,17 @@
       divideThousand: true
     });
   });
-
-  $('#btn-pdf').click((e) => {
-    e.preventDefault()
-    $('#downloadble').val('download')
-    $('#form-filter').attr('target', '_blank')
-    $('#form-filter').submit()
-  })
+  $('#btn-filter').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('')
+        $('#form-filter').attr('target','_self')
+        $('#form-filter').submit()
+    })
+    $('#btn-pdf').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('download')
+        $('#form-filter').attr('target','_blank')
+        $('#form-filter').submit()
+    })
 </script>
 @endpush

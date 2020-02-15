@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Daftar Pelanggan</title>
     <style>
         .border{
@@ -24,21 +24,37 @@
             <br>
             <br>
 
-            <table class="table table-striped">
-                    <tr class="border">
-                        <th>No.</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Telepon</th>
+            <table class="table table-hover text-center">
+                    <tr>
+                        <th  class="border">No.</th>
+                        <th  class="border">Nama</th>
+                        <th  class="border">Alamat</th>
+                        <th  class="border">Telepon</th>
                     </tr>
                 <tbody>
                     @foreach ($customers as $customer)
-                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($customers)?'border-bawah':''}}" >
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td class="border">{{$loop->iteration}}</td>
+                            <td class="border">{{$customer->nama}}</td>
+                            <td class="border">{{$customer->alamat}}</td>
+                            <td class="border">{{$customer->telepon}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($customers))
+                        <tr>
+                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah">{{$customer->nama}}</td>
+                            <td class="border-bawah">{{$customer->alamat}}</td>
+                            <td class="border-bawah">{{$customer->telepon}}</td>
+                        </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$customer->nama}}</td>
                             <td>{{$customer->alamat}}</td>
                             <td>{{$customer->telepon}}</td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -48,7 +64,7 @@
                 <p class="pull-right">
                     {{$branch->nama}},{{$date}} <br>
                     Manager Cabang, <br><br><br><br>
-                    {{$branch->pimpinan}}
+                    <strong>{{$branch->pimpinan}}</strong>
                 </p>
             </div>
         </div>

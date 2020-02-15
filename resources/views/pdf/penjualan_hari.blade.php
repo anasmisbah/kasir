@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Laporan Penjualan</title>
 <style>
-            .border{
+        .border{
             border-top: 2px solid black !important;
         }
         .border-bawah{
@@ -23,16 +23,15 @@
             <h4 class="text-center">TANGGAL {{$dateNow}}</h4>
             <br>
             <br>
-
-            <table class="table table-striped">
-                    <tr class="border">
-                            <th>No.</th>
-                            <th>No. Nota</th>
-                            <th>Pelanggan</th>
-                            <th>Total</th>
-                            <th>Piutang</th>
-                            <th>Status</th>
-                            <th>Cabang</th>
+            <table class="table table-hover">
+                    <tr>
+                            <th  class="border">No.</th>
+                            <th  class="border">No. Nota</th>
+                            <th  class="border">Pelanggan</th>
+                            <th  class="border">Total</th>
+                            <th  class="border">Piutang</th>
+                            <th  class="border">Status</th>
+                            <th  class="border">Cabang</th>
                     </tr>
                 <tbody>
                     @php
@@ -41,7 +40,28 @@
                         $totalpiutang =0;
                     @endphp
                     @foreach ($bills as $bill)
-                        <tr class="{{$loop->iteration == 1?'border':''}} {{$loop->iteration == count($bills)?'border-bawah':''}}">
+                        @if ($loop->iteration == 1)
+                        <tr>
+                            <td  class="border">{{$loop->iteration}}</td>
+                            <td  class="border">{{$bill->no_nota_kas}}</td>
+                            <td  class="border">{{$bill->customer->nama}}</td>
+                            <td  class="border">Rp.{{$bill->total_nota}},-</td>
+                            <td  class="border">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td  class="border">{{  strtoupper($bill->status)}}</td>
+                            <td  class="border">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @elseif ($loop->iteration == count($bills))
+                        <tr>
+                            <td  class="border-bawah">{{$loop->iteration}}</td>
+                            <td  class="border-bawah">{{$bill->no_nota_kas}}</td>
+                            <td  class="border-bawah">{{$bill->customer->nama}}</td>
+                            <td  class="border-bawah">Rp.{{$bill->total_nota}},-</td>
+                            <td  class="border-bawah">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
+                            <td  class="border-bawah">{{  strtoupper($bill->status)}}</td>
+                            <td  class="border-bawah">{{$bill->branch->nama}}</td>
+                        </tr>
+                        @else
+                        <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$bill->no_nota_kas}}</td>
                             <td>{{$bill->customer->nama}}</td>
@@ -50,6 +70,7 @@
                             <td>{{  strtoupper($bill->status)}}</td>
                             <td>{{$bill->branch->nama}}</td>
                         </tr>
+                        @endif
                         @php
                             $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
                             $totalpiutang+=$temppiutang;
@@ -57,23 +78,23 @@
                         @endphp
                     @endforeach
 
-                    <tr class="border-bawah">
-                        <td></td>
-                        <td></td>
-                        <td>JUMLAH</td>
-                        <td>Rp {{$total}},-</td>
-                        <td>Rp {{$totalpiutang}},-</td>
-                        <td></td>
-                        <td></td>
+                    <tr >
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah">JUMLAH</td>
+                        <td class="border-bawah">Rp {{$total}},-</td>
+                        <td class="border-bawah">Rp {{$totalpiutang}},-</td>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah"></td>
                     </tr>
-                    <tr class="border-bawah">
-                        <td></td>
-                        <td></td>
-                        <td>JUMLAH KAS</td>
-                        <td>Rp {{$total-$totalpiutang}},-</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah">JUMLAH KAS</td>
+                        <td class="border-bawah">Rp {{$total-$totalpiutang}},-</td>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah"></td>
+                        <td class="border-bawah"></td>
                     </tr>
                 </tbody>
             </table>
@@ -83,22 +104,10 @@
                 <p class="pull-right">
                     {{$branch->nama}},{{$dateNow}} <br>
                     Manager Cabang, <br><br><br><br>
-                    {{$branch->pimpinan}}
+                    <strong>{{$branch->pimpinan}}</strong>
                 </p>
             </div>
         </div>
     </div>
 </body>
-      <!-- jQuery -->
-      <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-      <!-- AdminLTE App -->
-      <script src="/adminlte/dist/js/adminlte.min.js"></script>
-      <script>
-        window.addEventListener("afterprint", function(){
-          history.back();
-        });
-        $("#body_print").ready(function(){
-          window.print();
-        });
-      </script>
 </html>
