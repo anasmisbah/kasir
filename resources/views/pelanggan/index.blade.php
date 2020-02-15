@@ -93,14 +93,16 @@
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
     $('.select2').select2()
   });
-    $('#btn-pdf').click((e)=>{
-        e.preventDefault()
-        $('#downloadble').val('download')
-        $('#form-filter').attr('target','_blank')
-        $('#form-filter').submit()
-    })
+  $('#btn-pdf').click((e) => {
+    e.preventDefault()
+    $('#downloadble').val('download')
+    $('#form-filter').attr('target', '_blank')
+    $('#form-filter').submit()
+  })
 </script>
 @endpush

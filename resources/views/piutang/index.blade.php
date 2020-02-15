@@ -46,10 +46,10 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-clock"></i></span>
-                    </div>
                     <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm float-right" id="tanggal">
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="far fa-calendar"></i></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -123,7 +123,9 @@
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
     $('.select2').select2();
     $(".harga").divide({
       delimiter: '.',
@@ -138,11 +140,11 @@
       }
     })
   });
-    $('#btn-pdf').click((e)=>{
-        e.preventDefault()
-        $('#downloadble').val('download')
-        $('#form-filter').attr('target','_blank')
-        $('#form-filter').submit()
-    })
+  $('#btn-pdf').click((e) => {
+    e.preventDefault()
+    $('#downloadble').val('download')
+    $('#form-filter').attr('target', '_blank')
+    $('#form-filter').submit()
+  })
 </script>
 @endpush

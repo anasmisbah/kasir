@@ -40,12 +40,12 @@
             <tbody>
               @foreach ($users as $user)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->level->nama }}</td>
-                <td><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                <td min-height= "10px">{{$loop->iteration}}</td>
+                <td min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                <td min-height= "10px"><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td min-height= "10px">{{ $user->email }}</td>
+                <td min-height= "10px">{{ $user->level->nama }}</td>
+                <td min-height= "10px"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
               </tr>
               @endforeach
             </tbody>
@@ -68,7 +68,9 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
   });
 </script>
 @endpush

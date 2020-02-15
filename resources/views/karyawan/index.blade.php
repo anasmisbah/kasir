@@ -10,12 +10,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
+    <div class="row">
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item active">Beranda</li>
           <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-
         </ol>
       </div>
     </div>
@@ -42,14 +41,16 @@
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{
+                    Request::input('cabang') == $branch->id ?'selected':''
+                  }}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-md-6">
                 <input id="downloadble" type="hidden" name="pdf">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary" ><i class="nav-icon fas fa-print"></i></button>
+                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
                 <a href="{{ route('karyawan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
@@ -61,6 +62,7 @@
               <tr>
                 <th>No.</th>
                 <th>Nama</th>
+                <th>cabang</th>
                 <th>Jabatan</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
@@ -71,6 +73,7 @@
               <tr>
                 <td>{{$loop->iteration}}</td>
                 <td><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                <td><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
                 <td>{{$employee->jabatan}}</td>
                 <td>{{$employee->alamat}}</td>
                 <td>{{$employee->telepon}}</td>
@@ -97,15 +100,17 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
-    $(function() {
-        $('.select2').select2();
-        $("#example1").DataTable();
+  $(function() {
+    $('.select2').select2();
+    $("#example1").DataTable({
+      "ordering": false
     });
-    $('#btn-pdf').click((e)=>{
-        e.preventDefault()
-        $('#downloadble').val('download')
-        $('#form-filter').attr('target','_blank')
-        $('#form-filter').submit()
-    })
+  });
+  $('#btn-pdf').click((e) => {
+    e.preventDefault()
+    $('#downloadble').val('download')
+    $('#form-filter').attr('target', '_blank')
+    $('#form-filter').submit()
+  })
 </script>
 @endpush

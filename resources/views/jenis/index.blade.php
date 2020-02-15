@@ -43,8 +43,8 @@
                 </td>
                 <td style="width:10%">
 
-                        <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
-                          <i class="fa fa-trash"></i></button>
+                  <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
+                    <i class="fa fa-trash"></i></button>
                 </td>
               </tr>
               @endforeach
@@ -60,9 +60,9 @@
 </section>
 <!-- /.content -->
 <form class="d-inline" id="form-delete" method="POST">
-    @csrf
-    @method('DELETE')
-    </form>
+  @csrf
+  @method('DELETE')
+</form>
 @endsection
 
 @push('script')
@@ -71,29 +71,31 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
-    function hapus(id,nama){
-        swal({
+  function hapus(id, nama) {
+    swal({
         title: `apakah anda yakin menghapus ${nama}?`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
-        })
-        .then((willDelete) => {
+      })
+      .then((willDelete) => {
         if (willDelete) {
-            swal("berhasil menghapus", {
+          swal("berhasil menghapus", {
             icon: "success",
-            button:false,
-            timer:750
-            });
-            $('#form-delete').attr('action',`/jenis/hapus/${id}`)
-            $('#form-delete').submit()
+            button: false,
+            timer: 750
+          });
+          $('#form-delete').attr('action', `/jenis/hapus/${id}`)
+          $('#form-delete').submit()
         }
-        });
-    }
+      });
+  }
 </script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
   });
 </script>
 @endpush
