@@ -172,6 +172,23 @@ class BillController extends Controller
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
+                }else if($request->filter === "status"){
+                    if ($request->filter2 === "cabang") {
+                        if ($request->cabang == "0") {
+                            $bills = Bill::where('status',$request->status)
+                            ->get();
+
+                        } else {
+                            $bills = Bill::where([
+                                ['status',$request->status],
+                                ['branch_id',$request->cabang]
+                                ])
+                            ->get();
+                        }
+                    }else{
+                        $bills = Bill::where('status',$request->status)
+                        ->get();
+                    }
                 }else{
                     $bills = Bill::all();
                 }

@@ -26,7 +26,7 @@
         <div class="card-body">
           <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                   <label for="radiohari" class="custom-control-label">Hari:</label>
@@ -45,6 +45,12 @@
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
+              <div class="col-md-1">
+                <div class="custom-control custom-radio">
+                  <input class="custom-control-input" type="radio" id="radiostatus" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
+                  <label for="radiostatus" class="custom-control-label">Status</label>
+                </div>
+              </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
@@ -54,15 +60,15 @@
               @else
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
-                  <label for="radiocabang" class="custom-control-label">Status</label>
+                  <input class="custom-control-input" type="radio" id="radiostatus" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
+                  <label for="radiostatus" class="custom-control-label">Status</label>
                 </div>
               </div>
               @endif
 
             </div>
             <div class="row mb-4">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -103,11 +109,18 @@
                 </select>
               </div>
               @if (auth()->user()->level_id == 1)
+              <div class="col-md-1">
+                <select class="form-control form-control-sm" name="status">
+                  <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
+                  <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
+                  <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
+                </select>
+              </div>
               <div class="col-md-2">
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('filter2') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>
