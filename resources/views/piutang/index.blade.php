@@ -9,7 +9,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row class="py-2"">
       <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
@@ -75,28 +75,23 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>No. Nota Kas</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
-                <th class="text-right">Piutang</th>
-                <th>Aksi</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">No. Nota Kas</th>
+                <th class="py-2">Nama</th>
+                <th class="py-2">Alamat</th>
+                <th class="py-2">Telepon</th>
+                <th class="py-2 text-right">Piutang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($bills as $bill)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td>{{$bill->customer->alamat}}</td>
-                <td>{{$bill->customer->telepon}}</td>
-                <td class="text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
-                <td>
-                  <a href="{{route('piutang.detail',$bill->id)}}" class="btn btn-sm btn-outline-success btn-sm">
-                    <i class="fa fa-location-arrow"></i>
-                </td>
+                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="py-2"><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td class="py-2">{{$bill->customer->alamat}}</td>
+                <td class="py-2">{{$bill->customer->telepon}}</td>
+                <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
               </tr>
               @endforeach
             </tbody>

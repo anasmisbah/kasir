@@ -7,8 +7,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Barang</a></li>
@@ -27,19 +27,19 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="text-left">No.</th>
-                <th style="width: 50%" class="text-left">Barang</th>
-                <th style="width: 30%" class="text-left">Jenis</th>
-                <th style="width: 15%" class="text-right">Harga</th>
+                <th style="width: 5%" class="py-2 text-left">No.</th>
+                <th style="width: 50%" class="py-2 text-left">Barang</th>
+                <th style="width: 30%" class="py-2 text-left">Jenis</th>
+                <th style="width: 15%" class="py-2 text-right">Harga</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($items as $item)
               <tr>
-                <td style="width: 5%" class="text-left">{{ $loop->iteration }}</td>
-                <td style="width: 50%" class="text-left"><a href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
-                <td style="width: 30%" class="text-left"><a href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
-                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$item->harga}}</span>,-</td>
+                <td style="width: 5%" class="py-2 text-left">{{ $loop->iteration }}</td>
+                <td style="width: 50%" class="py-2 text-left"><a href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
+                <td style="width: 30%" class="py-2 text-left"><a href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
+                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$item->harga}}</span>,-</td>
               </tr>
               @endforeach
           </table>

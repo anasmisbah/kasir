@@ -47,25 +47,25 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="text-left">No.</th>
-                <th style="width: 25%" class="text-left">Nama</th>
-                <th style="width: 15%" class="text-left">Cabang</th>
-                <th style="width: 10%" class="text-left">Stok</th>
-                <th style="width: 15%" class="text-right">Harga Pusat</th>
-                <th style="width: 15%" class="text-right">Harga Cabang</th>
-                <th style="width: 15%" class="text-right">Selisih</th>
+                <th style="width: 5%" class="py-2 text-left">No.</th>
+                <th style="width: 25%" class="py-2 text-left">Nama</th>
+                <th style="width: 15%" class="py-2 text-left">Cabang</th>
+                <th style="width: 10%" class="py-2 text-left">Stok</th>
+                <th style="width: 15%" class="py-2 text-right">Harga Pusat</th>
+                <th style="width: 15%" class="py-2 text-right">Harga Cabang</th>
+                <th style="width: 15%" class="py-2 text-right">Selisih</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td style="width: 5%" class="text-left">{{ $loop->iteration }}</td>
-                <td style="width: 25%" class="text-left"><a href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td style="width: 15%" class="text-left"><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td style="width: 10%">{{$supply->stok}}</td>
-                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td style="width: 5%" class="py-2 text-left">{{ $loop->iteration }}</td>
+                <td style="width: 25%" class="py-2 text-left"><a href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                <td style="width: 15%" class="py-2 text-left"><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td style="width: 10%" class="py-2">{{$supply->stok}}</td>
+                <td style=" width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
+                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach
           </table>
@@ -98,17 +98,17 @@
       divideThousand: true
     });
   });
-  $('#btn-filter').click((e)=>{
-        e.preventDefault()
-        $('#downloadble').val('')
-        $('#form-filter').attr('target','_self')
-        $('#form-filter').submit()
-    })
-    $('#btn-pdf').click((e)=>{
-        e.preventDefault()
-        $('#downloadble').val('download')
-        $('#form-filter').attr('target','_blank')
-        $('#form-filter').submit()
-    })
+  $('#btn-filter').click((e) => {
+    e.preventDefault()
+    $('#downloadble').val('')
+    $('#form-filter').attr('target', '_self')
+    $('#form-filter').submit()
+  })
+  $('#btn-pdf').click((e) => {
+    e.preventDefault()
+    $('#downloadble').val('download')
+    $('#form-filter').attr('target', '_blank')
+    $('#form-filter').submit()
+  })
 </script>
 @endpush

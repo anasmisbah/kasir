@@ -29,22 +29,22 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
-                <th>Pimpinan</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama</th>
+                <th class="py-2">Alamat</th>
+                <th class="py-2">Telepon</th>
+                <th class="py-2">Pimpinan</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($branches as $branch)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('cabang.detail', $branch->id)}}">{{$branch->nama}}</a></td>
-                <td>{{$branch->alamat}}</td>
-                <td>{{$branch->telepon}}</td>
-                <td>{{$branch->pimpinan}}</td>
+                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('cabang.detail', $branch->id)}}">{{$branch->nama}}</a></td>
+                <td class="py-2">{{$branch->alamat}}</td>
+                <td class="py-2">{{$branch->telepon}}</td>
+                <td class="py-2">{{$branch->pimpinan}}</td>
               </tr>
               @endforeach
           </table>

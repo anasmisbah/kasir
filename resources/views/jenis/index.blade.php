@@ -30,19 +30,18 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No</th>
-                <th>Jenis Barang</th>
-                <th style="width:10%">Aksi</th>
+                <th class="py-2">No</th>
+                <th class="py-2">Jenis Barang</th>
+                <th class="py-2" style="width:10%">Aksi</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($categories as $category)
               <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
+                <td class="py-2">{{ $loop->iteration }}</td>
+                <td class="py-2"> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
                 </td>
-                <td style="width:10%">
-
+                <td class="py-2" style="width:10%">
                   <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
                     <i class="fa fa-trash"></i></button>
                 </td>

@@ -144,14 +144,14 @@
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>No. Nota Kas</th>
-                <th>Tanggal</th>
-                <th>Pelanggan</th>
-                <th class="text-right">Total</th>
-                <th class="text-right">Piutang</th>
-                <th>Status</th>
-                <th>Cabang</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">No. Nota Kas</th>
+                <th class="py-2">Tanggal</th>
+                <th class="py-2">Pelanggan</th>
+                <th class="py-2 text-right">Total</th>
+                <th class="py-2 text-right">Piutang</th>
+                <th class="py-2">Status</th>
+                <th class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
@@ -162,17 +162,17 @@
               @endphp
               @foreach ($bills as $bill)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
-                <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td class="text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
-                @if($bill->kembalian_nota < 0) <td class="text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                <td  class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="py-2">{{$bill->tanggal_nota->format('d F Y')}}</td>
+                <td class="py-2"><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td class="py-2 text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
+                @if($bill->kembalian_nota < 0) <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                   @else
-                  <td class="text-right">-</td>
+                  <td class="py-2 text-right">-</td>
                   @endif
-                  <td>{{strtoupper($bill->status)}}</td>
-                  <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
+                  <td class="py-2">{{strtoupper($bill->status)}}</td>
+                  <td class="py-2"><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
               $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;

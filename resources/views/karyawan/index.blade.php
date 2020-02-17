@@ -50,23 +50,23 @@
           <table id="example1" class="display table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>cabang</th>
-                <th>Jabatan</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama</th>
+                <th class="py-2">cabang</th>
+                <th class="py-2">Jabatan</th>
+                <th class="py-2">Alamat</th>
+                <th class="py-2">Telepon</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($employees as $employee)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
-                <td><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
-                <td>{{$employee->jabatan}}</td>
-                <td>{{$employee->alamat}}</td>
-                <td>{{$employee->telepon}}</td>
+                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                <td class="py-2"><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                <td class="py-2">{{$employee->jabatan}}</td>
+                <td class="py-2">{{$employee->alamat}}</td>
+                <td class="py-2">{{$employee->telepon}}</td>
               </tr>
               @endforeach
 

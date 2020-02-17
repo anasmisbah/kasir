@@ -29,23 +29,23 @@
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama lengkap</th>
-                <th>Nama Pengguna</th>
-                <th>Email</th>
-                <th>Level</th>
-                <th>Cabang</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama lengkap</th>
+                <th class="py-2">Nama Pengguna</th>
+                <th class="py-2">Email</th>
+                <th class="py-2">Level</th>
+                <th class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($users as $user)
               <tr>
-                <td min-height= "10px">{{$loop->iteration}}</td>
-                <td min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td min-height= "10px"><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td min-height= "10px">{{ $user->email }}</td>
-                <td min-height= "10px">{{ $user->level->nama }}</td>
-                <td min-height= "10px"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                <td class="py-2" min-height= "10px">{{$loop->iteration}}</td>
+                <td class="py-2" min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                <td class="py-2" min-height= "10px"><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td class="py-2" min-height= "10px">{{ $user->email }}</td>
+                <td class="py-2" min-height= "10px">{{ $user->level->nama }}</td>
+                <td class="py-2" min-height= "10px"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
               </tr>
               @endforeach
             </tbody>
