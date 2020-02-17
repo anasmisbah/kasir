@@ -9,8 +9,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Stok Barang</a></li>
@@ -54,7 +54,6 @@
                 <th style="width: 15%" class="text-right">Harga Pusat</th>
                 <th style="width: 15%" class="text-right">Harga Cabang</th>
                 <th style="width: 15%" class="text-right">Selisih</th>
-                <th style="width: 15%" class="text-right">Stok</th>
               </tr>
             </thead>
             <tbody>
@@ -67,7 +66,6 @@
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                 <td style="width: 15%" class="text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
-                <td style="width: 15%" class="text-right">{{$supply->stok}}</td>
               </tr>
               @endforeach
           </table>

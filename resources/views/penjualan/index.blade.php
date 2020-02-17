@@ -8,13 +8,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Penjualan</a></li>
         </ol>
-      </div>
     </div>
   </div><!-- /.container-fluid -->
 </section>

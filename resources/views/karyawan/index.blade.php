@@ -11,7 +11,7 @@
 <section class="content-header">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item active">Beranda</li>
           <li class="breadcrumb-item"><a href="#">Karyawan</a></li>

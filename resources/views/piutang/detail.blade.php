@@ -11,8 +11,8 @@
 @section('content')
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2 ">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item">Beranda</li>
           <li class="breadcrumb-item">Piutang</li>
@@ -35,10 +35,10 @@
               <li class="nav-item mr-2">
                 <a class="nav-link btn-secondary active" id="piutang" href="{{ route('piutang.lunas',$bill->id) }}"><i class=" fas fa-check"></i></a>
               </li>
-              <li class="nav-item mr-5">
+              <li class="nav-item mr-2">
                 <a class="nav-link btn-primary active" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item mr-2">
                 <a class="nav-link btn-danger active" href="{{ route('piutang.index') }}"><i class=" fas fa-times"></i></a>
               </li>
             </ul>
@@ -136,7 +136,7 @@
         </table>
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat Pada : </strong>{{ $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>
@@ -148,27 +148,27 @@
 @push('script')
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
-    $('#piutang').click((e)=>{
+  $('#piutang').click((e) => {
     e.preventDefault()
     const url = $('#piutang').attr('href')
     console.log(url);
 
-      swal({
-      title: "apakah anda yakin telah lunas?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal("berhasil menghapus", {
-          icon: "success",
-          button:false,
-          timer:750
-        });
-        window.open(url,"_self")
-      }
-    });
-    })
+    swal({
+        title: "apakah anda yakin telah lunas?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("berhasil menghapus", {
+            icon: "success",
+            button: false,
+            timer: 750
+          });
+          window.open(url, "_self")
+        }
+      });
+  })
 </script>
 @endpush
