@@ -35,8 +35,8 @@ class SupplyItemController extends Controller
                         'date'=>Carbon::now()->format('d F Y')
                     ];
                     $pdf = PDF::loadView('pdf.stok', $data);
-                    // return $pdf->stream();
-                    return $pdf->download('stok.pdf');
+                    return $pdf->stream();
+                    // return $pdf->download('stok.pdf');
                 }elseif ($request->print) {
                     $date=Carbon::now()->format('d F Y');
                 return view('pdf.stok',compact('supplies','branch','app','date'));

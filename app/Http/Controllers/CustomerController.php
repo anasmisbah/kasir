@@ -35,8 +35,8 @@ class CustomerController extends Controller
                         'date'=>Carbon::now()->format('d F Y')
                     ];
                     $pdf = PDF::loadView('pdf.pelanggan', $data);
-                    // return $pdf->stream();
-                    return $pdf->download('pelanggan.pdf');
+                    return $pdf->stream();
+                    // return $pdf->download('pelanggan.pdf');
                 }elseif ($request->print) {
                     $date=Carbon::now()->format('d F Y');
                     return view('pdf.pelanggan',compact('customers','branch','app','date'));
