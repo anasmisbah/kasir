@@ -639,16 +639,16 @@ class BillController extends Controller
             'bill'=>$bill,
             'app'=>$app,
         ];
-        // $pdf = PDF::loadView('pdf.penjualannota', $data);
-        // // return $pdf->stream();
+        $pdf = PDF::loadView('pdf.penjualannota', $data);
+        return $pdf->stream();
         // $pdfname = "penjualan_".$bill->no_nota_kas;
         // return $pdf->download("$pdfname.pdf");
         // return view('pdf.penjualannota',compact('bill','app'));
         // return view('pdf.invoice');
-        $pdf = PDF::loadView('pdf.invoice');
-        // return $pdf->stream();
-        // $pdfname = "penjualan_".$bill->no_nota_kas;
-        return $pdf->download("test.pdf");
+        // $pdf = PDF::loadView('pdf.invoice');
+        // // return $pdf->stream();
+        // // $pdfname = "penjualan_".$bill->no_nota_kas;
+        // return $pdf->download("test.pdf");
     }
 
     public function store(Request $request)
