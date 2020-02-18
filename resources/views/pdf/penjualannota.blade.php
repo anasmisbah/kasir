@@ -144,7 +144,7 @@
         </div>
     </div>
 </body>
-<!-- jQuery -->
+{{-- <!-- jQuery -->
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
@@ -155,6 +155,6 @@
     $("#body_print").ready(function() {
         window.print();
     });
-</script>
+</script> --}}
 
 </html>

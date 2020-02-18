@@ -112,6 +112,8 @@
                   <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
                   <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
                   <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
+                  <option value="pelunasan" {{Request::input('filter') == 'status' ?Request::input('status') == 'pelunasan' ?'selected':'':''}}>PELUNASAN</option>
+
                 </select>
               </div>
               <div class="col-md-2">
@@ -128,6 +130,8 @@
                   <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
                   <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
                   <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
+                  <option value="pelunasan" {{Request::input('filter') == 'status' ?Request::input('status') == 'pelunasan' ?'selected':'':''}}>PELUNASAN</option>
+
                 </select>
               </div>
               @endif

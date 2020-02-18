@@ -153,22 +153,22 @@
     const url = $('#piutang').attr('href')
     console.log(url);
 
-    swal({
-        title: "apakah anda yakin telah lunas?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("berhasil menghapus", {
-            icon: "success",
-            button: false,
-            timer: 750
-          });
-          window.open(url, "_self")
-        }
-      });
-  })
+      swal({
+      title: "apakah anda yakin melakukan pelunasan?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("berhasil menghapus", {
+          icon: "success",
+          button:false,
+          timer:750
+        });
+        window.open(url,"_self")
+      }
+    });
+    })
 </script>
 @endpush
