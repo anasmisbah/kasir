@@ -8,13 +8,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Penjualan</a></li>
         </ol>
-      </div>
     </div>
   </div><!-- /.container-fluid -->
 </section>
@@ -71,10 +69,10 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm float-right" id="tanggal">
+                    <div class="input-group-append">
+                      <span class="input-group-text"><i class="far fa-calendar"></i></span>
                     </div>
-                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm form-control-sm form-control-sm float-right" id="tanggal">
                   </div>
                 </div>
               </div>
@@ -150,14 +148,14 @@
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>No. Nota Kas</th>
-                <th>Tanggal</th>
-                <th>Pelanggan</th>
-                <th class="text-right">Total</th>
-                <th class="text-right">Piutang</th>
-                <th>Status</th>
-                <th>Cabang</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">No. Nota Kas</th>
+                <th class="py-2">Tanggal</th>
+                <th class="py-2">Pelanggan</th>
+                <th class="py-2 text-right">Total</th>
+                <th class="py-2 text-right">Piutang</th>
+                <th class="py-2">Status</th>
+                <th class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
@@ -168,17 +166,17 @@
               @endphp
               @foreach ($bills as $bill)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td>{{$bill->tanggal_nota->format('d F Y')}}</td>
-                <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td class="text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
-                @if($bill->kembalian_nota < 0) <td class="text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                <td  class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="py-2">{{$bill->tanggal_nota->format('d F Y')}}</td>
+                <td class="py-2"><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td class="py-2 text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
+                @if($bill->kembalian_nota < 0) <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                   @else
-                  <td class="text-right">-</td>
+                  <td class="py-2 text-right">-</td>
                   @endif
-                  <td>{{strtoupper($bill->status)}}</td>
-                  <td><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
+                  <td class="py-2">{{strtoupper($bill->status)}}</td>
+                  <td class="py-2"><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
               $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
@@ -289,7 +287,9 @@
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
     $('.select2').select2();
     $(".harga").divide({
       delimiter: '.',

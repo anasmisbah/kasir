@@ -10,12 +10,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item active">Beranda</li>
           <li class="breadcrumb-item"><a href="#">Karyawan</a></li>
-
         </ol>
       </div>
     </div>
@@ -51,21 +50,23 @@
           <table id="example1" class="display table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama</th>
+                <th class="py-2">cabang</th>
+                <th class="py-2">Jabatan</th>
+                <th class="py-2">Alamat</th>
+                <th class="py-2">Telepon</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($employees as $employee)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
-                <td>{{$employee->jabatan}}</td>
-                <td>{{$employee->alamat}}</td>
-                <td>{{$employee->telepon}}</td>
+                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                <td class="py-2"><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                <td class="py-2">{{$employee->jabatan}}</td>
+                <td class="py-2">{{$employee->alamat}}</td>
+                <td class="py-2">{{$employee->telepon}}</td>
               </tr>
               @endforeach
 
@@ -89,21 +90,22 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
-    $(function() {
-        $('.select2').select2();
-        $("#example1").DataTable();
+  $(function() {
+    $('.select2').select2();
+    $("#example1").DataTable({
+      "ordering": false
     });
     $('#btn-filter').click((e)=>{
         e.preventDefault()
         $('#downloadble').val('')
         $('#form-filter').attr('target','_self')
         $('#form-filter').submit()
-    })
+    });
     $('#btn-pdf').click((e)=>{
         e.preventDefault()
         $('#downloadble').val('download')
         $('#form-filter').attr('target','_blank')
         $('#form-filter').submit()
-    })
+    });
+  });
 </script>
-@endpush

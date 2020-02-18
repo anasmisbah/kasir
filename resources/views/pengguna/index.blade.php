@@ -9,8 +9,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Pengguna</a></li>
@@ -29,23 +29,23 @@
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama lengkap</th>
-                <th>Nama Pengguna</th>
-                <th>Email</th>
-                <th>Level</th>
-                <th>Cabang</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama lengkap</th>
+                <th class="py-2">Nama Pengguna</th>
+                <th class="py-2">Email</th>
+                <th class="py-2">Level</th>
+                <th class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($users as $user)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->level->nama }}</td>
-                <td><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                <td class="py-2" min-height= "10px">{{$loop->iteration}}</td>
+                <td class="py-2" min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                <td class="py-2" min-height= "10px"><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td class="py-2" min-height= "10px">{{ $user->email }}</td>
+                <td class="py-2" min-height= "10px">{{ $user->level->nama }}</td>
+                <td class="py-2" min-height= "10px"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
               </tr>
               @endforeach
             </tbody>
@@ -68,7 +68,9 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
   });
 </script>
 @endpush

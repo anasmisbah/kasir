@@ -8,8 +8,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col class="py-2"-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Pelanggan</a></li>
@@ -48,21 +48,21 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Telepon</th>
-                <th>Cabang</th>
+                <th class="py-2">No.</th>
+                <th class="py-2">Nama</th>
+                <th class="py-2">Alamat</th>
+                <th class="py-2">Telepon</th>
+                <th class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($customers as $customer)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td><a href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
-                <td>{{$customer->alamat}}</td>
-                <td>{{$customer->telepon}}</td>
-                <td><a href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
+                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2"><a href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
+                <td class="py-2">{{$customer->alamat}}</td>
+                <td class="py-2">{{$customer->telepon}}</td>
+                <td class="py-2"><a href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
               @endforeach
           </table>
@@ -85,7 +85,9 @@
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
     $('.select2').select2()
   });
   $('#btn-filter').click((e)=>{

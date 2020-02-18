@@ -9,8 +9,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-6">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Jenis</a></li>
@@ -30,21 +30,20 @@
           <table id="example1" class="table table-striped compact">
             <thead>
               <tr>
-                <th>No</th>
-                <th>Jenis Barang</th>
-                <th style="width:10%">Aksi</th>
+                <th class="py-2">No</th>
+                <th class="py-2">Jenis Barang</th>
+                <th class="py-2" style="width:10%">Aksi</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($categories as $category)
               <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
+                <td class="py-2">{{ $loop->iteration }}</td>
+                <td class="py-2"> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
                 </td>
-                <td style="width:10%">
-
-                        <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
-                          <i class="fa fa-trash"></i></button>
+                <td class="py-2" style="width:10%">
+                  <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
+                    <i class="fa fa-trash"></i></button>
                 </td>
               </tr>
               @endforeach
@@ -60,9 +59,9 @@
 </section>
 <!-- /.content -->
 <form class="d-inline" id="form-delete" method="POST">
-    @csrf
-    @method('DELETE')
-    </form>
+  @csrf
+  @method('DELETE')
+</form>
 @endsection
 
 @push('script')
@@ -71,29 +70,31 @@
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
-    function hapus(id,nama){
-        swal({
+  function hapus(id, nama) {
+    swal({
         title: `apakah anda yakin menghapus ${nama}?`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
-        })
-        .then((willDelete) => {
+      })
+      .then((willDelete) => {
         if (willDelete) {
-            swal("berhasil menghapus", {
+          swal("berhasil menghapus", {
             icon: "success",
-            button:false,
-            timer:750
-            });
-            $('#form-delete').attr('action',`/jenis/hapus/${id}`)
-            $('#form-delete').submit()
+            button: false,
+            timer: 750
+          });
+          $('#form-delete').attr('action', `/jenis/hapus/${id}`)
+          $('#form-delete').submit()
         }
-        });
-    }
+      });
+  }
 </script>
 <script>
   $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+      "ordering": false
+    });
   });
 </script>
 @endpush
