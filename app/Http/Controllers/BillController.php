@@ -519,7 +519,7 @@ class BillController extends Controller
         $bill =Bill::findOrFail($id);
 
         $bill->update([
-            'status'=>'lunas',
+            'status'=>'pelunasan',
             'jumlah_uang_nota'=>$bill->total_nota,
             'kembalian_nota'=>0,
             'updated_by'=>Auth::user()->id
