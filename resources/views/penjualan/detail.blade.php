@@ -33,7 +33,7 @@
           <div class="card-tools">
             <ul class="nav nav-pills ml-auto">
               <li class="nav-item mr-2">
-                <a class="nav-link btn-primary active" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
+                <a target="_blank" class="nav-link btn-primary active" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
               </li>
               <li class="nav-item mr-5">
                 <form class="d-inline" id="form-delete" action="{{route('penjualan.hapus', $bill->id)}}" method="POST">

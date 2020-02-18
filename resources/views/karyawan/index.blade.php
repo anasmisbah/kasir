@@ -2,8 +2,8 @@
 
 @push('css')
 <!-- DataTables -->
-<link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+<link rel="stylesheet" href="{{asset('adminlte/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @section('content')
@@ -95,9 +95,9 @@
 
 @push('script')
 <!-- DataTables -->
-<script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
-<script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
 <script>
   $(function() {
     $('.select2').select2();
@@ -118,3 +118,4 @@
     });
   });
 </script>
+@endpush

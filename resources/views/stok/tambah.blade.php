@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Stok</label>
-                    <div class="col-sm-10"><input type="text"  value="{{ old('stok')}}" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
+                    <div class="col-sm-10"><input type="number" step="0.01"  value="{{ old('stok')}}" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
                         <div class="invalid-feedback">
                             {{$errors->first('stok')}}
                         </div>
