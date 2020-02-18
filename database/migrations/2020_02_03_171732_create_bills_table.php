@@ -20,7 +20,7 @@ class CreateBillsTable extends Migration
             $table->double('total_nota');
             $table->double('jumlah_uang_nota');
             $table->double('kembalian_nota');
-            $table->enum('status',['lunas','piutang']);
+            $table->enum('status',['lunas','piutang'.'pelunasan']);
             $table->string('no_nota_kas')->unique();
 
 
