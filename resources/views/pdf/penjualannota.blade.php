@@ -116,25 +116,25 @@
 <body>
     <div class="container">
         <div class="row">
-                <div class="column-6">
+                <div style="padding-left:20px" class="column-6">
                     <h3 style="padding-top:-20px;">NOTA KAS</h3>
                     <h4 class="mt-1" style="text-transform:uppercase">{{ $app->toko}}</h4>
                     <div>{{$app->alamat}}</div>
                     <div>{{$app->telepon}}</div>
                 </div>
                 <div class="column-2" style="text-align:right">
-                    <p>No. Nota Bon:</p>
-                    <p>Tanggal:</p>
-                    <p>Pelanggan:</p>
-                    <p>Alamat:</p>
+                    <div>No. Nota Bon:</div>
+                    <div>Tanggal:</div>
+                    <div>Pelanggan:</div>
+                    <div>Alamat:</div>
 
                 </div>
                 <div class="column-5" style="margin-left:20px">
-                    <p>{{$bill->no_nota_kas}}</p>
-                    <p>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</p>
-                    <p>{{$bill->customer->nama}}</p>
-                    <p>{{$bill->customer->alamat}}
-                    </p>
+                    <div>{{$bill->no_nota_kas}}</div>
+                    <div>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</div>
+                    <div>{{$bill->customer->nama}}</div>
+                    <div>{{$bill->customer->alamat}}
+                    </div>
                     <p>{{$bill->customer->telepon}}</p>
                 </div>
         </div>
