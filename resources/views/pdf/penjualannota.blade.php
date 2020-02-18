@@ -45,16 +45,16 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-        <div class="grid-container">
-            <div class="grid-item">
+    <div >
+        <div >
+        <div >
+            <div >
                 <div>NOTA KAS</div>
-                <h4 class="mt-1">{{$app->toko}}</h4>
+                <h4 >{{$app->toko}}</h4>
                 <div>{{$app->alamat}}</div>
                 <div>{{$app->telepon}}</div>
             </div>
-            <div class="grid-item second">
+            <div >
                 <p>No. Nota Bon:</p>
                 <p>Tanggal:</p>
                 <p>Pelanggan:</p>
