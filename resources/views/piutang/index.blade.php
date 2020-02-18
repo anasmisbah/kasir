@@ -24,6 +24,9 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Piutang</h3>
+          </div>
         <div class="card-body">
           <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
             <div class="row">

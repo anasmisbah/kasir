@@ -23,6 +23,16 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Pelanggan Toko</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-primary active" href="{{ route('pelanggan.tambah') }}"><i class=" fas fa-plus"></i></a>
+                  </li>
+                </ul>
+              </div>
+          </div>
         <div class="card-body">
           @if (auth()->user()->level_id == 1)
           <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
@@ -40,7 +50,6 @@
                 <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
                 <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-                <a href="{{ route('pelanggan.tambah') }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-plus"></i></a>
               </div>
             </div>
           </form>

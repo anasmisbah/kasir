@@ -29,7 +29,7 @@
       <!-- general form elements -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"> <strong>Penjualan</strong> </h3>
+          <h3 class="card-title"> <strong>Detail Piutang</strong> </h3>
           <div class="card-tools">
             <ul class="nav nav-pills ml-auto">
               <li class="nav-item mr-2">

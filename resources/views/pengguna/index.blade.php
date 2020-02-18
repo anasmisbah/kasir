@@ -24,8 +24,17 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Pengguna</h3>
+            <div class="card-tools">
+                <ul class="nav nav-pills ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link btn-primary active" href="{{ route('pengguna.tambah') }}"><i class=" fas fa-plus"></i></a>
+                  </li>
+                </ul>
+              </div>
+        </div>
         <div class="card-body">
-          <a href="{{ route('pengguna.tambah') }}" class="btn btn-sm btn-primary mb-3"><i class="nav-icon fas fa-plus"></i></a>
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
