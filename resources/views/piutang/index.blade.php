@@ -79,7 +79,7 @@
             <thead>
               <tr>
                 <th class="py-2">No.</th>
-                <th class="py-2">No. Nota Kas</th>
+                <th class="py-2">No. Nota Bon</th>
                 <th class="py-2">Nama</th>
                 <th class="py-2">Alamat</th>
                 <th class="py-2">Telepon</th>

@@ -39,15 +39,15 @@
                   </tr>
                   <tr>
                     <td style="width:10%">Harga Pusat</td>
-                    <td>{{$supply->item->harga}}</td>
+                    <td>Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
                   </tr>
                   <tr>
                     <td style="width:10%">Harga Cabang</td>
-                    <td>{{$supply->harga_cabang}}</td>
+                    <td>Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                   </tr>
                   <tr>
                     <td style="width:10%">Harga Selisih</td>
-                    <td>{{$supply->harga_selisih}}</td>
+                    <td>Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
                   </tr>
                   <tr>
                     <td style="width:10%">Stok</td>
@@ -77,7 +77,7 @@
 <script>
     $(function () {
         // Number Divide
-        $(".inputharga").divide({
+        $(".harga").divide({
             delimiter:',',
             divideThousand:true
         });

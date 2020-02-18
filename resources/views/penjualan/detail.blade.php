@@ -107,9 +107,9 @@
             <tr>
               <td class="text-center">{{$loop->iteration}}</td>
               <td width="50%">{{$trans->supply->item->nama}}</td>
-              <td class="text-center">{{$trans->supply->harga_cabang}}</td>
+              <td class="text-center">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
               <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
-              <td class="text-center">Rp {{$trans->total_harga}},-</td>
+              <td class="text-center">Rp <span class="harga">{{$trans->total_harga}}</span> ,-</td>
             </tr>
             @php
             $subtotal+=$trans->total_harga
@@ -121,28 +121,28 @@
               <td></td>
               <td></td>
               <td>Sub Total</td>
-              <td>Rp {{$subtotal}},-</td>
+              <td>Rp <span class="harga">{{$subtotal}}</span> ,-</td>
             </tr>
             <tr class="text-center">
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
               <td><b>TOTAL</b></td>
-              <td>Rp {{$bill->total_nota}} ,-</td>
+              <td>Rp <span class="harga">{{$bill->total_nota}}</span>  ,-</td>
             </tr>
             <tr class="text-center">
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td></td>
               <td>Uang Muka</td>
-              <td>Rp {{$bill->jumlah_uang_nota}} ,-</td>
+              <td>Rp <span class="harga">{{$bill->jumlah_uang_nota}}</span>  ,-</td>
             </tr>
             <tr class="text-center">
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td>Piutang</td>
-              <td>Rp {{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}} ,-</td>
+              <td>Rp <span class="harga">{{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</span>  ,-</td>
             </tr>
           </tbody>
         </table>
@@ -159,6 +159,16 @@
 
 @push('script')
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:',',
+            divideThousand:true
+        });
+    });
+    </script>
 <script>
     $('#delete').click((e)=>{
     e.preventDefault()
