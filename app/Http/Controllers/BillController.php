@@ -562,10 +562,10 @@ class BillController extends Controller
             'bill'=>$bill,
             'app'=>$app,
         ];
-        $pdf = PDF::loadView('pdf.penjualannota', $data);
-        // return $pdf->stream();
-        $pdfname = "nota piutang".$bill->no_nota_kas;
-        return $pdf->download("$pdfname.pdf");
+        $pdf = PDF::loadView('pdf.piutang_nota', $data);
+        return $pdf->stream();
+        // $pdfname = "nota piutang".$bill->no_nota_kas;
+        // return $pdf->download("$pdfname.pdf");
         // return view('pdf.piutang_nota',compact('bill','app'));
     }
 
