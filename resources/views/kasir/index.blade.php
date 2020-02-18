@@ -87,14 +87,14 @@
                             <div class="col" style="width: 10%">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm ">
+                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col" style="width: 10%">
                                 <div class="form-group">
                                     <label for="">Qty</label>
                                     <input type="hidden" id="stok">
-                                    <input id="qtybarang" type="text" disabled id="qty" placeholder="0" class="form-control form-control-sm inputharga">
+                                    <input id="qtybarang" type="number" step="0.01" disabled id="qty" placeholder="0" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col" style="width: 10%">
