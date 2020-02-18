@@ -17,7 +17,7 @@
 <div class="col-12 ">
     <div class="card mt-3">
         <div class="card-header">
-            <h3 class="card-title">Stok Barang</h3>
+            <h3 class="card-title">Detail Stok Barang</h3>
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
                   <li class="nav-item">
