@@ -37,8 +37,8 @@ class EmployeeController extends Controller
                         'date'=>Carbon::now()->format('d F Y')
                     ];
                     $pdf = PDF::loadView('pdf.karyawan', $data);
-                    // return $pdf->stream();
-                    return $pdf->download('karyawan.pdf');
+                    return $pdf->stream();
+                    // return $pdf->download('karyawan.pdf');
                 }elseif ($request->print) {
                         $date=Carbon::now()->format('d F Y');
                     return view('pdf.karyawan',compact('employees','branch','app','date'));

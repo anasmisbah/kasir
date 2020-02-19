@@ -29,39 +29,39 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                   <label for="radiohari" class="custom-control-label">Hari:</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}}>
                   <label for="radiobulan" class="custom-control-label">Bulan:</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
                   <label for="radiotahun" class="custom-control-label">Tahun:</label>
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
               <div class="col-md-1">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiostatus" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiostatus" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
                   <label for="radiostatus" class="custom-control-label">Status</label>
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Cabang</label>
                 </div>
               </div>
               @else
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
-                  <input class="custom-control-input" type="radio" id="radiostatus" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiostatus" name="filter2" value="status" {{Request::input('filter2') == 'status' ?'checked':''}}>
                   <label for="radiostatus" class="custom-control-label">Status</label>
                 </div>
               </div>
@@ -318,6 +318,63 @@
         $('#downloadble').val('download')
         $('#form-filter').attr('target','_blank')
         $('#form-filter').submit()
+    })
+    $('#radiohari').click((e)=>{
+        const propCheck = $('#radiohari').is(':checked');
+        const data = $('#radiohari').data('id');
+        if(data == "0") {
+            $("#radiohari").prop("checked", true);
+            $('#radiohari').data('id','1');
+        } else {
+            $("#radiohari").prop("checked", false);
+            $('#radiohari').data('id','0');
+        }
+    })
+    $('#radiobulan').click((e)=>{
+        const propCheck = $('#radiobulan').is(':checked');
+        const data = $('#radiobulan').data('id');
+        if(data == "0") {
+            $("#radiobulan").prop("checked", true);
+            $('#radiobulan').data('id','1');
+        } else {
+            $("#radiobulan").prop("checked", false);
+            $('#radiobulan').data('id','0');
+        }
+    })
+
+    $('#radiotahun').click((e)=>{
+        const propCheck = $('#radiotahun').is(':checked');
+        const data = $('#radiotahun').data('id');
+        if(data == "0") {
+            $("#radiotahun").prop("checked", true);
+            $('#radiotahun').data('id','1');
+        } else {
+            $("#radiotahun").prop("checked", false);
+            $('#radiotahun').data('id','0');
+        }
+    })
+
+    $('#radiocabang').click((e)=>{
+        const propCheck = $('#radiocabang').is(':checked');
+        const data = $('#radiocabang').data('id');
+        if(data == "0") {
+            $("#radiocabang").prop("checked", true);
+            $('#radiocabang').data('id','1');
+        } else {
+            $("#radiocabang").prop("checked", false);
+            $('#radiocabang').data('id','0');
+        }
+    })
+    $('#radiostatus').click((e)=>{
+        const propCheck = $('#radiostatus').is(':checked');
+        const data = $('#radiostatus').data('id');
+        if(data == "0") {
+            $("#radiostatus").prop("checked", true);
+            $('#radiostatus').data('id','1');
+        } else {
+            $("#radiostatus").prop("checked", false);
+            $('#radiostatus').data('id','0');
+        }
     })
 </script>
 @endpush

@@ -36,9 +36,6 @@
                 <a class="nav-link btn-secondary active" id="piutang" href="{{ route('piutang.lunas',$bill->id) }}"><i class=" fas fa-check"></i></a>
               </li>
               <li class="nav-item mr-2">
-                <a class="nav-link btn-primary active" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
-              </li>
-              <li class="nav-item mr-2">
                 <a class="nav-link btn-danger active" href="{{ route('piutang.index') }}"><i class=" fas fa-times"></i></a>
               </li>
             </ul>
@@ -107,30 +104,30 @@
             <tr>
               <td class="text-center">{{$bill->no_nota_kas}}</td>
               <td width="50%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
-              <td class="text-center">Rp {{$subtotal}}</td>
-              <td class="text-center" width="10%">Rp {{$subtotal-$bill->total_nota}}</td>
-              <td class="text-center">Rp {{$bill->total_nota}},-</td>
+              <td class="text-center">Rp <span class="harga">{{$subtotal}}</span>,-</td>
+              <td class="text-center" width="10%">Rp <span class="harga">{{$subtotal-$bill->total_nota}}</span>,-</td>
+              <td class="text-center">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
             </tr>
             <tr class="text-center">
               <td></td>
               <td></td>
               <td></td>
               <td>Uang Muka</td>
-              <td>Rp {{$bill->jumlah_uang_nota}},-</td>
+              <td>Rp <span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
             </tr>
             <tr class="text-center">
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td><strong>Piutang</strong></td>
-              <td> <strong>Rp {{ abs($bill->kembalian_nota)}} ,-</strong></td>
+              <td> <strong>Rp <span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
             </tr>
             <tr class="text-center">
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td style="border: none"></td>
               <td>Pembayaran</td>
-              <td>Rp {{abs($bill->kembalian_nota)}} ,-</td>
+              <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>  ,-</td>
             </tr>
           </tbody>
         </table>
@@ -147,6 +144,17 @@
 
 @push('script')
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:',',
+            divideThousand:true
+        });
+    });
+    </script>
+<script>
 <script>
   $('#piutang').click((e) => {
     e.preventDefault()

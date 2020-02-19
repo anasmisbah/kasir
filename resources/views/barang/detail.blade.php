@@ -41,7 +41,7 @@
           </tr>
           <tr>
             <td style="width:10%">Harga</td>
-            <td>{{$item->harga}}</td>
+            <td>Rp <span class="harga">{{$item->harga}}</span>,-</td>
           </tr>
 
         </tbody>
@@ -65,6 +65,16 @@
 
 @push('script')
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:',',
+            divideThousand:true
+        });
+    });
+    </script>
 <script>
     $('#delete').click(()=>{
       swal({
