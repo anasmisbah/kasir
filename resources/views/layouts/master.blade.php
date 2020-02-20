@@ -74,7 +74,7 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="width:200px">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4" style="width:200px;overflow:hidden">
       <!-- Brand Logo -->
       <a href="/" class="brand-link">
         <img src="{{asset("/storage/".$app->logo)}}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
