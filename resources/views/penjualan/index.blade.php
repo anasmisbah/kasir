@@ -46,16 +46,16 @@
                 </div>
               </div>
               @if (auth()->user()->level_id == 1)
-              <div class="col-md-1">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" data-id="0" type="radio" id="radiostatus" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
-                  <label for="radiostatus" class="custom-control-label">Status</label>
-                </div>
-              </div>
               <div class="col-md-2">
                 <div class="custom-control custom-radio">
                   <input class="custom-control-input" data-id="0" type="radio" id="radiocabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
                   <label for="radiocabang" class="custom-control-label">Cabang</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-radio">
+                  <input class="custom-control-input" data-id="0" type="radio" id="radiostatus" name="filter" value="status" {{Request::input('filter') == 'status' ?'checked':''}}>
+                  <label for="radiostatus" class="custom-control-label">Status</label>
                 </div>
               </div>
               @else
@@ -110,21 +110,20 @@
                 </select>
               </div>
               @if (auth()->user()->level_id == 1)
-              <div class="col-md-1">
-                <select class="form-control form-control-sm" name="status">
-                  <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
-                  <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
-                  <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
-                  <option value="pelunasan" {{Request::input('filter') == 'status' ?Request::input('status') == 'pelunasan' ?'selected':'':''}}>PELUNASAN</option>
-
-                </select>
-              </div>
               <div class="col-md-2">
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                   @foreach ($branches as $branch)
                   <option value="{{$branch->id}}" {{Request::input('filter2') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
                   @endforeach
+                </select>
+              </div>
+              <div class="col-md-1">
+                <select class="form-control form-control-sm" name="status">
+                  <option value="0" {{Request::input('filter') == 'status' ?Request::input('status') == '0' ?'selected':'':''}}>Semua</option>
+                  <option value="lunas" {{Request::input('filter') == 'status' ?Request::input('status') == 'lunas' ?'selected':'':''}}>LUNAS</option>
+                  <option value="piutang" {{Request::input('filter') == 'status' ?Request::input('status') == 'piutang' ?'selected':'':''}}>PIUTANG</option>
+                  <option value="pelunasan" {{Request::input('filter') == 'status' ?Request::input('status') == 'pelunasan' ?'selected':'':''}}>PELUNASAN</option>
                 </select>
               </div>
               @else
@@ -291,7 +290,10 @@
 <script>
   $(function() {
     $("#example1").DataTable({
-      "ordering": false
+        "ordering": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Indonesian.json"
+        }
     });
     $('.select2').select2();
     $(".harga").divide({

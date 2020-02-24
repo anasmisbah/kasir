@@ -22,7 +22,7 @@ class BillController extends Controller
         $app = Application::first();
         $branch = $user->employee->branch;
         $filter = '';
-        $billForDate = Bill::all();
+        $billForDate = Bill::orderBy('tanggal_nota','desc')->get();
         $tanggal=[];
         $bulan = [];
         $tahun =[];

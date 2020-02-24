@@ -26,13 +26,15 @@
       <div class="card">
         <div class="card-header">
             <h3 class="card-title">Daftar Stok Barang</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-primary active" href="{{ route('stok.tambah') }}"><i class=" fas fa-plus"></i></a>
-                  </li>
-                </ul>
-              </div>
+            @if (auth()->user()->level_id == 2)
+                <div class="card-tools">
+                    <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn-primary active" href="{{ route('stok.tambah') }}"><i class=" fas fa-plus"></i></a>
+                    </li>
+                    </ul>
+                </div>
+            @endif
         </div>
         <div class="card-body">
           <form id="form-filter" action="{{route('stok.index')}}" method="GET">
@@ -99,7 +101,10 @@
 <script>
   $(function() {
     $("#example1").DataTable({
-      "ordering": false
+        "ordering": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Indonesian.json"
+        }
     });
     $('.select2').select2();
     $(".harga").divide({

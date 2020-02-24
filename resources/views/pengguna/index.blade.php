@@ -78,7 +78,10 @@
 <script>
   $(function() {
     $("#example1").DataTable({
-      "ordering": false
+        "ordering": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Indonesian.json"
+        }
     });
   });
 </script>
