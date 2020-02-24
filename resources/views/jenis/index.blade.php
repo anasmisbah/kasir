@@ -3,6 +3,7 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endpush
 
 @section('content')
@@ -36,7 +37,7 @@
               </div>
         </div>
         <div class="card-body">
-          <table id="example1" class="table table-striped compact">
+          <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
                 <th class="py-2">No</th>
@@ -78,6 +79,8 @@
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   function hapus(id, nama) {
     swal({

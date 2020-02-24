@@ -147,7 +147,7 @@
             </div>
           </form>
           @if (!Request::input('filter') || Request::input('filter') == "hari" || Request::input('filter') == "cabang"|| Request::input('filter') == "status")
-          <table id="example1" class="table table-striped display compact">
+          <table id="example1" style="width:100%" class="table table-striped display compact dt-responsive nowrap">
             <thead>
               <tr>
                 <th class="py-2">No.</th>
@@ -212,7 +212,7 @@
             </tfoot>
           </table>
           @elseif(Request::input('filter') == "bulan" || Request::input('filter') == "tahun")
-          <table id="example1" class="table table-bordered table-striped display compact">
+          <table id="example1" style="width:100%" class="table table-bordered table-striped display compact dt-responsive nowrap">
             <thead>
               <tr>
                 <th>No.</th>
@@ -287,6 +287,8 @@
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $("#example1").DataTable({

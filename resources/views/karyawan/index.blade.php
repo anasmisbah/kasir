@@ -4,6 +4,8 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
 <link rel="stylesheet" href="{{asset('adminlte/plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 @endpush
 
 @section('content')
@@ -56,7 +58,7 @@
             </div>
           </form>
           @endif
-          <table id="example1" class="display table table-striped compact">
+          <table id="example1" style="width:100%" class="display table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
                 <th class="py-2">No.</th>
@@ -98,6 +100,8 @@
 <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('adminlte/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $('.select2').select2();

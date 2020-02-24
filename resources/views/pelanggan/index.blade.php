@@ -3,13 +3,15 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
 @endpush
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row">
-      <div class="col class="py-2"-6">
+      <div class="col-6 py-2">
         <ol class="breadcrumb float-sm-left">
           <li class="breadcrumb-item ">Beranda</li>
           <li class="breadcrumb-item active"><a href="#">Pelanggan</a></li>
@@ -56,7 +58,7 @@
             </div>
           </form>
           @endif
-          <table id="example1" class="table table-striped compact">
+          <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
                 <th class="py-2">No.</th>
@@ -94,6 +96,8 @@
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $("#example1").DataTable({
