@@ -2,6 +2,11 @@
 
 @push('css')
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<style>
+    .form-group{
+      margin-bottom: .5rem !important;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -42,7 +47,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Karyawan</label>
-                    <div class="col-sm-10">
+                    <div class="col-10">
                         <select id="selectkaryawan" class="form-control form-control-sm select2 {{ $errors->first('employee_id')?'is-invalid':'' }}" name="employee_id">
                             <option value="" disabled selected>Pilih Karyawan</option>
                         @foreach ($employees as $employee)

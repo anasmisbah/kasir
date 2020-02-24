@@ -1,5 +1,11 @@
 @extends('layouts.master')
-
+@push('css')
+    <style>
+        .form-group{
+          margin-bottom: .5rem !important;
+        }
+    </style>
+@endpush
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
@@ -14,7 +20,7 @@
       </div>
     </div><!-- /.container-fluid -->
   </section>
-<div class="col-12">
+<div  class="col-12">
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Ubah Aplikasi Toko</h3>
@@ -33,16 +39,17 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label class="col-2">Logo</label>
-                    <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
-                    <div class="col-4"><input type="file" id="foto" style="margin-top:10%" class="form-control form-control-sm {{ $errors->first('logo')?'is-invalid':'' }}" name="logo">
-                        <div class="invalid-feedback">
-                            {{$errors->first('logo')}}
-                        </div>
+                    <div class="col-4">
+                        <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
+                            <div class="btn btn-primary btn-file">
+                              Unggah Logo
+                              <input type="file" id="foto" name="logo">
+                            </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Nama Aplikasi:</label>
-                    <div class="col-6"><input type="text" value="{{ old('nama')?old('nama'):$app->nama }}" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
+                    <div class="col-10"><input type="text" value="{{ old('nama')?old('nama'):$app->nama }}" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
                         <div class="invalid-feedback">
                             {{$errors->first('nama')}}
                         </div>
@@ -50,7 +57,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Nama Toko:</label>
-                    <div class="col-6"><input type="text" value="{{ old('toko')?old('toko'):$app->toko }}" class="form-control form-control-sm {{ $errors->first('toko')?'is-invalid':'' }}" name="toko" placeholder="Masukkan Jabatan">
+                    <div class="col-10"><input type="text" value="{{ old('toko')?old('toko'):$app->toko }}" class="form-control form-control-sm {{ $errors->first('toko')?'is-invalid':'' }}" name="toko" placeholder="Masukkan Jabatan">
                         <div class="invalid-feedback">
                             {{$errors->first('toko')}}
                         </div>
@@ -58,7 +65,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Alamat:</label>
-                    <div class="col-6"><input type="text" value="{{ old('alamat')?old('alamat'):$app->alamat }}" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                    <div class="col-10"><input type="text" value="{{ old('alamat')?old('alamat'):$app->alamat }}" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
                         <div class="invalid-feedback">
                             {{$errors->first('alamat')}}
                         </div>
@@ -67,7 +74,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Telepon</label>
-                    <div class="col-6"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                    <div class="col-10"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
                         <div class="invalid-feedback">
                             {{$errors->first('telepon')}}
                         </div>

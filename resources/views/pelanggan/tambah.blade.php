@@ -2,6 +2,11 @@
 
 @push('css')
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<style>
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
+</style>
 @endpush
 
 @section('content')

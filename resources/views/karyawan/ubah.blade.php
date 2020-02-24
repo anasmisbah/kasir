@@ -2,6 +2,11 @@
 
 @push('css')
   <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+  <style>
+    .form-group{
+      margin-bottom: .5rem !important;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -37,9 +42,12 @@
             <div class="card-body">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label><br>
-                    <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
                     <div class="col-sm-4">
-                        <input type="file" id="foto" style="margin-top:10%" class="form-control form-control-sm {{ $errors->first('foto')?'is-invalid':'' }}" name="foto">
+                        <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                        <div class="btn btn-primary btn-file">
+                            Unggah Foto
+                            <input type="file" id="foto" name="foto">
+                        </div>
                         <div class="invalid-feedback">
                             {{$errors->first('foto')}}
                         </div>

@@ -1,4 +1,11 @@
 @extends('layouts.master')
+@push('css')
+<style>
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
+</style>
+@endpush
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
