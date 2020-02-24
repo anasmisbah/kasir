@@ -6,14 +6,42 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Level;
 use App\Employee;
+use App\Branch;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all();
-        return view('pengguna.index',compact('users'));
+        $branches = Branch::all();
+        if ($request->all()) {
+            if ($request->cabang == "0") {
+                $users = User::all();
+            }else{
+                $users = User::join('employees', 'users.employee_id', '=', 'employees.id')
+                            ->join('branches', 'employees.branch_id', '=', 'branches.id')->where('branch_id',$request->cabang)->get();
+                $branch = Branch::findOrFail($request->cabang);
+            }
+            if ($request->pdf) {
+                $data = [
+                    'users'=>$users,
+                    'branch'=> $branch,
+                    'app'=>$app,
+                    'date'=>Carbon::now()->format('d F Y')
+                ];
+                $pdf = PDF::loadView('pdf.karyawan', $data);
+                return $pdf->stream();
+                // return $pdf->download('karyawan.pdf');
+            }elseif ($request->print) {
+                    $date=Carbon::now()->format('d F Y');
+                return view('pdf.karyawan',compact('users','branch','app','date'));
+            }
+        }else{
+            $users = User::all();
+        }
+        return view('pengguna.index',compact('users','branches'));
     }
 
     public function show($id)

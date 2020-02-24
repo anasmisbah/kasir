@@ -35,12 +35,30 @@
               </div>
         </div>
         <div class="card-body">
+            <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
+                <div class="row mb-4">
+                  <div class="col-md-2">
+                    <select class="form-control form-control-sm" name="cabang">
+                      <option value="0">Semua</option>
+                      @foreach ($branches as $branch)
+                      <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <input id="downloadble" type="hidden" name="pdf">
+                    <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
+                    <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary" ><i class="nav-icon fas fa-print"></i></button>
+                    <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
+                  </div>
+                </div>
+              </form>
           <table id="example1" class="table table-striped display compact">
             <thead>
               <tr>
                 <th class="py-2">No.</th>
-                <th class="py-2">Nama lengkap</th>
                 <th class="py-2">Nama Pengguna</th>
+                <th class="py-2">Nama lengkap</th>
                 <th class="py-2">Email</th>
                 <th class="py-2">Level</th>
                 <th class="py-2">Cabang</th>
@@ -50,8 +68,8 @@
               @foreach ($users as $user)
               <tr>
                 <td class="py-2" min-height= "10px">{{$loop->iteration}}</td>
-                <td class="py-2" min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
                 <td class="py-2" min-height= "10px"><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td class="py-2" min-height= "10px"><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
                 <td class="py-2" min-height= "10px">{{ $user->email }}</td>
                 <td class="py-2" min-height= "10px">{{ $user->level->nama }}</td>
                 <td class="py-2" min-height= "10px"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
