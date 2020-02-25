@@ -62,7 +62,7 @@
                 <th style="width: 5%" class="py-2 text-left">No.</th>
                 <th style="width: 25%" class="py-2 text-left">Nama</th>
                 <th style="width: 15%" class="py-2 text-left">Cabang</th>
-                <th style="width: 10%" class="py-2 text-left">Stok</th>
+                <th style="width: 10%" class="py-2 text-left">Stok (Kg)</th>
                 <th style="width: 15%" class="py-2 text-right">Harga Pusat</th>
                 <th style="width: 15%" class="py-2 text-right">Harga Cabang</th>
                 <th style="width: 15%" class="py-2 text-right">Selisih</th>

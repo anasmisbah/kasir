@@ -63,10 +63,10 @@
               <tr>
                 <th class="py-2">No.</th>
                 <th class="py-2">Nama</th>
-                <th class="py-2">cabang</th>
                 <th class="py-2">Jabatan</th>
                 <th class="py-2">Alamat</th>
                 <th class="py-2">Telepon</th>
+                <th class="py-2">cabang</th>
               </tr>
             </thead>
             <tbody>
@@ -74,10 +74,10 @@
               <tr>
                 <td class="py-2">{{$loop->iteration}}</td>
                 <td class="py-2"><a href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
-                <td class="py-2"><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
                 <td class="py-2">{{$employee->jabatan}}</td>
                 <td class="py-2">{{$employee->alamat}}</td>
                 <td class="py-2">{{$employee->telepon}}</td>
+                <td class="py-2"><a href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
               </tr>
               @endforeach
 

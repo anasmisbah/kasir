@@ -68,7 +68,7 @@
               @endif
 
             </div>
-            <div class="row mb-4">
+            <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group">
