@@ -173,10 +173,11 @@
                 <td class="py-2">{{$bill->tanggal_nota->format('d F Y')}}</td>
                 <td class="py-2"><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td class="py-2 text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
-                @if($bill->kembalian_nota < 0) <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
-                  @else
-                  <td class="py-2 text-right">-</td>
-                  @endif
+                @if($bill->kembalian_nota < 0)
+                    <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                @else
+                    <td class="py-2 text-right">-</td>
+                @endif
                   <td class="py-2">{{strtoupper($bill->status)}}</td>
                   <td class="py-2"><a href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>

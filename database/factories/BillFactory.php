@@ -14,9 +14,9 @@ $factory->define(Bill::class, function (Faker $faker) {
     $date = Carbon::now();
     $branch = Branch::all()->random();
     $lastBill = Bill::select('id')->orderBy('id','desc')->first();
-    $nnk = $branch->id."". $user->employee_id ."" .($faker->numberBetween(999,9999))."".$date->day."".$date->month."".$date->second;
-    $total = 100000;
-    $jml = $faker->numberBetween(80000,95000);
+    $nnk = $branch->id."". $user->employee_id ."" .($faker->numberBetween(9,999))."".$date->day."".$date->month."".$date->micro;
+    $total = $faker->numberBetween(100000,200000);
+    $jml = $faker->numberBetween(210000,300000);
     $kembalian = $jml - $total;
     return [
         'tanggal_nota'=>$faker->dateTime($max = 'now', $timezone = null),
@@ -24,7 +24,7 @@ $factory->define(Bill::class, function (Faker $faker) {
         'total_nota'=>$total,
         'jumlah_uang_nota'=>$jml,
         'kembalian_nota'=>$kembalian,
-        'status'=>'lunas',
+        'status'=>'pelunasan',
         'branch_id'=>$branch->id,
         'user_id'=>$user->id,
         'customer_id'=>function() {

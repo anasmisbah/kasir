@@ -43,12 +43,12 @@ class BillController extends Controller
                     $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                     if ($request->filter2 === "cabang") {
                         if ($request->cabang == "0") {
-                            $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                            $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
                         } else {
-                            $bills = Bill::where('branch_id',$request->cabang)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                            $bills = Bill::where('branch_id',$request->cabang)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
                         }
                     }else{
-                        $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                        $bills = Bill::whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
                     }
                     if ($request->pdf) {
                         $data = [
@@ -66,7 +66,7 @@ class BillController extends Controller
                         if ($request->cabang == "0") {
                             $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                     });
@@ -74,7 +74,7 @@ class BillController extends Controller
                             $bills = Bill::where('branch_id',$request->cabang)
                                     ->whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                     });
@@ -82,7 +82,7 @@ class BillController extends Controller
                     }else{
                         $bills = Bill::whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                     });
@@ -121,7 +121,7 @@ class BillController extends Controller
                         if ($request->cabang == "0") {
                             $bills = Bill::whereYear('tanggal_nota',$request->tahun)
                             ->orderBy('tanggal_nota', 'asc')
-                            ->get()
+                            ->orderBy('tanggal_nota','desc')->get()
                             ->groupBy(function($val) {
                                 return Carbon::parse($val->tanggal_nota)->format('m');
                           });
@@ -129,7 +129,7 @@ class BillController extends Controller
                             $bills = Bill::where('branch_id',$request->cabang)
                             ->whereYear('tanggal_nota',$request->tahun)
                             ->orderBy('tanggal_nota', 'asc')
-                            ->get()
+                            ->orderBy('tanggal_nota','desc')->get()
                             ->groupBy(function($val) {
                                 return Carbon::parse($val->tanggal_nota)->format('m');
                           });
@@ -137,7 +137,7 @@ class BillController extends Controller
                     }else{
                         $bills = Bill::whereYear('tanggal_nota',$request->tahun)
                         ->orderBy('tanggal_nota', 'asc')
-                        ->get()
+                        ->orderBy('tanggal_nota','desc')->get()
                         ->groupBy(function($val) {
                             return Carbon::parse($val->tanggal_nota)->format('m');
                       });
@@ -176,25 +176,25 @@ class BillController extends Controller
                     if ($request->filter2 === "cabang") {
                         if ($request->cabang == "0") {
                             $bills = Bill::where('status',$request->status)
-                            ->get();
+                            ->orderBy('tanggal_nota','desc')->get();
 
                         } else {
                             $bills = Bill::where([
                                 ['status',$request->status],
                                 ['branch_id',$request->cabang]
                                 ])
-                            ->get();
+                            ->orderBy('tanggal_nota','desc')->get();
                         }
                     }else{
                         $bills = Bill::where('status',$request->status)
-                        ->get();
+                        ->orderBy('tanggal_nota','desc')->get();
                     }
                 }else{
-                    $bills = Bill::all();
+                    $bills = Bill::orderBy('tanggal_nota','desc')->get();
                 }
                 $filter = $request->filter;
             }else{
-                $bills = Bill::all();
+                $bills = Bill::orderBy('tanggal_nota','desc')->get();
             }
 
             if ($request->pdf) {
@@ -223,19 +223,19 @@ class BillController extends Controller
                         if ($request->status == "0") {
                             $bills = Bill::where('branch_id',$user->employee->branch_id)
                             ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
-                            ->get();
+                            ->orderBy('tanggal_nota','desc')->get();
                         } else {
                             $bills = Bill::where([
                                 ['status','=',$request->status],
                                 ['branch_id','=',$user->employee->branch_id]
                             ])
                             ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
-                            ->get();
+                            ->orderBy('tanggal_nota','desc')->get();
                         }
                     }else{
                         $bills = Bill::where('branch_id',$user->employee->branch_id)
                         ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
-                        ->get();
+                        ->orderBy('tanggal_nota','desc')->get();
                     }
                     if ($request->pdf) {
                         $data = [
@@ -255,7 +255,7 @@ class BillController extends Controller
                                         ->whereMonth('tanggal_nota',$request->bulan)
                                         ->whereYear('tanggal_nota',$request->bulantahun)
                                         ->orderBy('tanggal_nota', 'asc')
-                                        ->get()
+                                        ->orderBy('tanggal_nota','desc')->get()
                                         ->groupBy(function($val) {
                                             return Carbon::parse($val->tanggal_nota)->format('d');
                                         });
@@ -267,7 +267,7 @@ class BillController extends Controller
                             ->whereMonth('tanggal_nota',$request->bulan)
                             ->whereYear('tanggal_nota',$request->bulantahun)
                             ->orderBy('tanggal_nota', 'asc')
-                            ->get()
+                            ->orderBy('tanggal_nota','desc')->get()
                             ->groupBy(function($val) {
                                 return Carbon::parse($val->tanggal_nota)->format('d');
                           });
@@ -277,7 +277,7 @@ class BillController extends Controller
                                     ->whereMonth('tanggal_nota',$request->bulan)
                                     ->whereYear('tanggal_nota',$request->bulantahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                 });
@@ -311,7 +311,7 @@ class BillController extends Controller
                             $bills = Bill::where('branch_id',$user->employee->branch_id)
                                     ->whereYear('tanggal_nota',$request->tahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('m');
                                 });
@@ -322,7 +322,7 @@ class BillController extends Controller
                                     ])
                                     ->whereYear('tanggal_nota',$request->tahun)
                                     ->orderBy('tanggal_nota', 'asc')
-                                    ->get()
+                                    ->orderBy('tanggal_nota','desc')->get()
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('m');
                                 });
@@ -331,7 +331,7 @@ class BillController extends Controller
                         $bills = Bill::where('branch_id',$user->employee->branch_id)
                                 ->whereYear('tanggal_nota',$request->tahun)
                                 ->orderBy('tanggal_nota', 'asc')
-                                ->get()
+                                ->orderBy('tanggal_nota','desc')->get()
                                 ->groupBy(function($val) {
                                     return Carbon::parse($val->tanggal_nota)->format('m');
                             });
