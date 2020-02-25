@@ -17,7 +17,7 @@ class CreateSuppliesTable extends Migration
             $table->bigIncrements('id');
             $table->double('harga_selisih');
             $table->double('harga_cabang');
-            $table->bigInteger('stok');
+            $table->double('stok');
 
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('branch_id');

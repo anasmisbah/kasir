@@ -15,7 +15,7 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('kuantitas');
+            $table->double('kuantitas');
             $table->double('total_harga');
             $table->bigInteger('no_urut');
 
