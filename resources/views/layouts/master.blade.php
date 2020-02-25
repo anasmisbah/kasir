@@ -253,12 +253,8 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <footer class="main-footer text-sm">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 1.0.0
-      </div>
-      <strong>Copyright &copy; 2020 <a href="#">Link</a>.</strong> All rights
-      reserved.
+    <footer class="main-footer text-sm text-center">
+      <strong>Copyright 2020 | Develop With &hearts; <i class="fa fa-love"></i> by &dagger;
     </footer>
 
     <!-- Control Sidebar -->
