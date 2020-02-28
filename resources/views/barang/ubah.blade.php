@@ -6,41 +6,37 @@
     .form-group{
         margin-bottom: .5rem !important;
     }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Barang</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Barang</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12 mt-1">
-<div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Ubah Barang</h3>
-                <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                      <li class="nav-item">
-                        <a class="nav-link btn-danger active" href="{{ route('barang.index') }}"><i class=" fas fa-times"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form class="form" action="{{route('barang.perbarui',$item->id)}}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="card-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                <h4 class="card-title mb-0 text-bold">Memperbarui Barang</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                <a class="btn btn-danger"  href="{{ route('barang.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form class="form" action="{{route('barang.perbarui',$item->id)}}" method="POST">
+            @csrf
+            @method('PUT')
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
@@ -50,7 +46,6 @@
                     </div>
                     </div>
                 </div>
-
                 <div class="form-group row">
                     <label for="inputjenis" class="col-sm-2 col-form-label">Jenis</label>
                     <div class="col-sm-10 " style="width: 100%;">
@@ -63,8 +58,7 @@
                             jenis barang wajib dipilih
                         </div>
                     </div>
-                  </div>
-
+                </div>
                 <div class="form-group row">
                     <label for="inputharga" class="col-sm-2 col-form-label">Harga</label>
                     <div class="col-sm-10">
@@ -74,14 +68,16 @@
                     </div>
                     </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
-            </div>
+            <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+        </form>
+    </div>
 
-            <div class="card-footer">
-                <p></p>
-            </div>
-            </form>
-            </div>
+        <div class="card-footer text-right" style="background:#C5C6C7">
+        <span style="font-size: 12px">
+            <strong>Dibuat Pada: </strong>{{  $item->created_at->dayName." | ".$item->created_at->day." ".$item->created_at->monthName." ".$item->created_at->year}} | {{$item->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->createdBy->employee->id)}}" class="text-info">{{$item->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $item->updated_at->dayName." | ".$item->updated_at->day." ".$item->updated_at->monthName." ".$item->updated_at->year}} | {{$item->updated_at->format('h:i:s A')}} | {{$item->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$item->updatedBy->employee->id)}}" class="text-info">{{$item->updatedBy->employee->nama}}</a>      </span>
+        </div>
+    </div>
+    </div>
 </div>
 @endsection
 
