@@ -6,39 +6,40 @@
     .form-group{
         margin-bottom: .5rem !important;
     }
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Stok Barang</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Membuat</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Stok Barang</li>
-            <li class="breadcrumb-item active"><a href="#">Membuat</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12 ">
     <div class="card mt-3">
-        <div class="card-header">
-            <h3 class="card-title">Tambah Stok Barang</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('stok.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
+        <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+            <div>
+            <h4 class="card-title mb-0 text-bold">Membuat Stok Barang</h4>
+            </div>
+            <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+            <a class="btn btn-danger"  href="{{ route('stok.index') }}"><i class="fa fa-times"></i></a>
+            </div>
         </div>
 
         <form role="form-horizontal" action="{{route('stok.simpan')}}" method="POST">
             @csrf
-            <div class="card-body">
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
                         <div class="col-sm-10"><select id="barang" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm select2 {{ $errors->first('item_id')?'is-invalid':'' }}" name="item_id">
@@ -74,20 +75,20 @@
                     <div class="col-sm-10"><input type="text" id="selisih" disabled class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm inputharga" name="harga_selisih" placeholder="selisih"></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Stok</label>
+                    <label class="col-sm-2 col-form-label">Stok (Kg)</label>
                     <div class="col-sm-10"><input type="number" step="0.01"  value="{{ old('stok')}}" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
                         <div class="invalid-feedback">
                             {{$errors->first('stok')}}
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
             </div>
 
-            <div class="card-footer">
+            <div class="card-footer"  style="background:#C5C6C7">
                 <p></p>
             </div>
-        </form>
     </div>
 </div>
 @endsection
@@ -128,7 +129,7 @@ $("#harga_cabang").keyup(function(){
     $(function () {
         // Number Divide
         $(".inputharga").divide({
-            delimiter:',',
+            delimiter:'.',
             divideThousand:true
         });
 

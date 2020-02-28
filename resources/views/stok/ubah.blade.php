@@ -6,40 +6,40 @@
     .form-group{
         margin-bottom: .5rem !important;
     }
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Stok Barang</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Stok Barang</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12 ">
     <div class="card mt-3">
-        <div class="card-header">
-            <h3 class="card-title">Ubah Stok Barang</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('stok.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
+        <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+            <div>
+            <h4 class="card-title mb-0 text-bold">Memperbarui Stok Barang</h4>
+            </div>
+            <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+            <a class="btn btn-danger"  href="{{ route('stok.index') }}"><i class="fa fa-times"></i></a>
+            </div>
         </div>
-
         <form role="form-horizontal" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
             @csrf
             @method('PUT')
-            <div class="card-body">
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
                         <div class="col-sm-10"><select id="barang" class="form-control form-control-sm select2" name="item_id">
@@ -75,12 +75,16 @@
                         {{$errors->first('stok')}}
                     </div>
                 </div>
+                <button type="submit" class="btn btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
             </div>
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-lg btn-primary float-right"><i class="fa fa-save"></i></button>
+            <div class="card-footer text-right" style="background:#C5C6C7">
+                <span style="font-size: 12px">
+                    <strong>Dibuat Pada: </strong>{{  $supply->created_at->dayName." | ".$supply->created_at->day." ".$supply->created_at->monthName." ".$supply->created_at->year}} | {{$supply->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$supply->createdBy->employee->id)}}" class="text-info">{{$supply->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $supply->updated_at->dayName." | ".$supply->updated_at->day." ".$supply->updated_at->monthName." ".$supply->updated_at->year}} | {{$supply->updated_at->format('h:i:s A')}} | {{$supply->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$supply->updatedBy->employee->id)}}" class="text-info">{{$supply->updatedBy->employee->nama}}</a>
+                </span>
+                </div>
             </div>
-        </form>
     </div>
 </div>
 @endsection

@@ -3,72 +3,90 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+<style>
+    .min-padding{
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
+    }
+    .form-control-sm{
+        padding-right: 1rem;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .page-item.active .page-link{
+        background-color: #39f;
+        border-color: #39f;
+    }
+    .btn-warning{
+        color: white;
+    }
+    .page-link{
+        color: #39f;
+    }
+    .page-link:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+    }
+    .page-link:hover{
+        color: #39f;
+    }
+</style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item active"><a href="#" class="text-info">Stok Barang</a></li>
+@endsection
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-6">
-        <ol class="breadcrumb float-sm-left">
-          <li class="breadcrumb-item">Beranda</li>
-          <li class="breadcrumb-item active"><a href="#">Stok Barang</a></li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
-
 <section class="content">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Daftar Stok Barang</h3>
-            @if (auth()->user()->level_id == 2)
-                <div class="card-tools">
-                    <ul class="nav nav-pills ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-primary active" href="{{ route('stok.tambah') }}"><i class=" fas fa-plus"></i></a>
-                    </li>
-                    </ul>
-                </div>
-            @endif
-        </div>
         <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                  <h4 class="card-title mb-0">Stok jenis Barang</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    @if (auth()->user()->level_id == 2)
+                    <a class="btn btn-info"  href="{{ route('stok.tambah') }}"><i class="fa fa-plus"></i></a>
+                    @endif
+                </div>
+              </div>
           <form id="form-filter" action="{{route('stok.index')}}" method="GET">
             @if (auth()->user()->level_id == 1)
-
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="cabang" class="">Cabang</label>
-                </div>
-              </div>
-            <div class="row mb-4">
-              <div class="col-md-2">
-                <select class="form-control form-control-sm " name="cabang">
-                  <option value="0">Semua</option>
-                  @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="col-md-6">
-                <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-              </div>
-            </div>
+                    <div class="col-4 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="cabang" class="">Cabang</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2 bg-gray">
+                          <div class="col-md-8">
+                            <select class="form-control form-control-sm " name="cabang">
+                              <option value="0">Semua</option>
+                              @foreach ($branches as $branch)
+                              <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <input id="downloadble" type="hidden" name="pdf">
+                            <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
+                            <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                            <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
+                          </div>
+                        </div>
+                    </div>
             @endif
           </form>
-          <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
+          <table id="example1" style="width:100%" class="table table-striped compact">
             <thead>
               <tr>
                 <th style="width: 5%" class="py-2 text-left">No.</th>
-                <th style="width: 25%" class="py-2 text-left">Nama</th>
+                <th style="width: 25%" class="py-2 text-left">Nama Barang</th>
                 <th style="width: 15%" class="py-2 text-left">Cabang</th>
                 <th style="width: 10%" class="py-2 text-left">Stok (Kg)</th>
                 <th style="width: 15%" class="py-2 text-right">Harga Pusat</th>
@@ -79,13 +97,13 @@
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td style="width: 5%" class="py-2 text-left">{{ $loop->iteration }}</td>
-                <td style="width: 25%" class="py-2 text-left"><a href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td style="width: 15%" class="py-2 text-left"><a href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td style="width: 10%" class="py-2">{{$supply->stok}}</td>
-                <td style=" width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td style="width: 5%" class="min-padding text-left">{{ $loop->iteration }}</td>
+                <td style="width: 25%" class="min-padding text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                <td style="width: 15%" class="min-padding text-left"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td style="width: 10%" class="min-padding">{{$supply->stok}}</td>
+                <td style=" width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
+                <td style="width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td style="width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach
           </table>
@@ -107,8 +125,6 @@
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $("#example1").DataTable({
