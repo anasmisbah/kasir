@@ -13,10 +13,10 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                <h4 class="card-title mb-0 text-bold">Detail jenis Barang</h4>
-                </div>
-                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                <a class="btn btn-danger"  href="{{ route('jenis.index') }}"><i class="fa fa-times"></i></a>
+                    <h4 class="card-title mb-0 text-bold">Detail jenis Barang</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('jenis.index') }}"><i class="fa fa-times"></i></a>
                 </div>
             </div>
           <table class="table table-striped">

@@ -28,7 +28,7 @@
             <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
                         <div>
-                        <h4 class="card-title mb-0 text-bold">Membuat jenis Barang</h4>
+                        <h4 class="card-title mb-0 text-bold">Membuat Barang Barang</h4>
                         </div>
                         <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                         <a class="btn btn-danger"  href="{{ route('barang.index') }}"><i class="fa fa-times"></i></a>
