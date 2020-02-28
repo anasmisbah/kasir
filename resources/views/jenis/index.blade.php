@@ -11,12 +11,27 @@
     .form-control-sm{
         padding-right: 1rem;
     }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
     .page-item.active .page-link{
         background-color: #39f;
         border-color: #39f;
     }
     .btn-warning{
         color: white;
+    }
+    .page-link{
+        color: #39f;
+    }
+    .page-link:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+    }
+    .page-link:hover{
+        color: #39f;
     }
 </style>
 @endpush

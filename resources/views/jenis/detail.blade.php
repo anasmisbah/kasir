@@ -11,7 +11,6 @@
       <!-- general form elements -->
       <div class="card">
         <div class="card-body">
-          <table class="table table-striped">
             <div class="d-flex justify-content-between mb-3">
                 <div>
                 <h4 class="card-title mb-0 text-bold">Detail jenis Barang</h4>
@@ -20,6 +19,7 @@
                 <a class="btn btn-danger"  href="{{ route('jenis.index') }}"><i class="fa fa-times"></i></a>
                 </div>
             </div>
+          <table class="table table-striped">
             <tbody>
               <tr>
                 <td style="width:10%">Nama</td>
