@@ -410,7 +410,6 @@ class BillController extends Controller
     public function show($id)
     {
         $bill = Bill::findOrFail($id);
-
         return view('penjualan.detail',compact('bill'));
     }
 
@@ -518,14 +517,32 @@ class BillController extends Controller
     public function piutanglunas($id)
     {
         $bill =Bill::findOrFail($id);
-
-        $bill->update([
-            'status'=>'pelunasan',
-            'jumlah_uang_nota'=>$bill->total_nota,
+        $user = Auth::user();
+        $tgllunas = Carbon::now();
+        $lastBill = Bill::select('id')->orderBy('id','desc')->first();
+        $formatnnk = $bill->branch_id."". $bill->user->employee_id."" .($lastBill->id+1)."".$tgllunas->day."".$tgllunas->month."".$tgllunas->year;
+        $newBill = Bill::create([
+            'user_id'=>$bill->user_id,
+            'tanggal_nota'=>$tgllunas,
+            'diskon'=>$bill->diskon,
+            'total_nota'=>abs($bill->kembalian_nota),
+            'jumlah_uang_nota'=>abs($bill->kembalian_nota),
             'kembalian_nota'=>0,
-            'updated_by'=>Auth::user()->id
+            'status'=>'pelunasan',
+            'branch_id'=>$bill->branch_id,
+            'customer_id'=>$bill->customer_id,
+            'no_nota_kas'=>$formatnnk,
+            'created_by'=>$user->id,
+            'updated_by'=>$user->id
         ]);
 
+        $bill->update([
+            'status'=>'lunas',
+            'jumlah_uang_nota'=>$bill->total_nota,
+            'total_nota'=>($bill->total_nota - abs($bill->kembalian_nota)),
+            'kembalian_nota'=>0,
+            'updated_by'=>$user->id
+        ]);
         return redirect()->route('penjualan.detail',$bill->id);
     }
 
