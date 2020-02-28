@@ -37,6 +37,11 @@
         </div>
         <div class="card-body">
             <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="cabang" class="">Cabang</label>
+                    </div>
+                  </div>
                 <div class="row mb-4">
                   <div class="col-md-2">
                     <select class="form-control form-control-sm" name="cabang">

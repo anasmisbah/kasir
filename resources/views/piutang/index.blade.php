@@ -31,17 +31,11 @@
           <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
             <div class="row">
               <div class="col-md-4">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" data-id="0" type="radio" id="hari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
-                  <label for="hari" class="custom-control-label">Pilih Tanggal</label>
-                </div>
+                  <label for="hari" class="">Pilih Tanggal</label>
               </div>
               @if (auth()->user()->level_id ==1)
               <div class="col-md-2">
-                <div class="custom-control custom-radio">
-                  <input class="custom-control-input" data-id="0" type="radio" id="cabang" name="filter2" value="cabang" {{Request::input('filter2') == 'cabang' ?'checked':''}}>
-                  <label for="cabang" class="custom-control-label">Cabang</label>
-                </div>
+                  <label for="cabang" class="">Cabang</label>
               </div>
               @endif
             </div>
@@ -49,7 +43,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="input-group">
-                    <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="form-control form-control-sm float-right" id="tanggal">
+                    <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="far fa-calendar"></i></span>
                     </div>
@@ -61,7 +55,7 @@
                 <select class="form-control form-control-sm" name="cabang">
                   <option value="0">Semua</option>
                   @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('filter2') == 'cabang' ?Request::input('cabang') == $branch->id ?'selected':'':''}}>{{$branch->nama}}</option>
+                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
                   @endforeach
                 </select>
               </div>

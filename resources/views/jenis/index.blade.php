@@ -40,8 +40,8 @@
           <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
-                <th class="py-2">No</th>
-                <th class="py-2">Jenis Barang</th>
+                <th style="width: 5%" class="py-2">No</th>
+                <th class="py-2 text-left">Jenis Barang</th>
                 <th class="py-2" style="width:10%">Aksi</th>
               </tr>
             </thead>
@@ -49,7 +49,7 @@
               @foreach ($categories as $category)
               <tr>
                 <td class="py-2">{{ $loop->iteration }}</td>
-                <td class="py-2"> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
+                <td class="py-2 text-left"> <a href="{{route('jenis.detail',$category->id)}}"> {{ $category->nama }}</a>
                 </td>
                 <td class="py-2" style="width:10%">
                   <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">

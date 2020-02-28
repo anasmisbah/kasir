@@ -39,6 +39,13 @@
         </div>
         <div class="card-body">
           <form id="form-filter" action="{{route('stok.index')}}" method="GET">
+            @if (auth()->user()->level_id == 1)
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="cabang" class="">Cabang</label>
+                </div>
+              </div>
             <div class="row mb-4">
               <div class="col-md-2">
                 <select class="form-control form-control-sm " name="cabang">
@@ -55,6 +62,7 @@
                 <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
               </div>
             </div>
+            @endif
           </form>
           <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>

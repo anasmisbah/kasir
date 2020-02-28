@@ -27,6 +27,9 @@
             <h3 class="card-title">Daftar Barang</h3>
             <div class="card-tools">
                 <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item mr-2">
+                        <a class="nav-link btn-sm btn-info active" href="{{ route('cabang.tambah') }}"><i class="nav-icon fas fa-print"></i></a>
+                      </li>
                   <li class="nav-item">
                     <a class="nav-link btn-primary active" href="{{ route('barang.tambah') }}"><i class=" fas fa-plus"></i></a>
                   </li>
