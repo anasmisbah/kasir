@@ -1,45 +1,41 @@
 @extends('layouts.master')
 
 @push('css')
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
     .form-group{
         margin-bottom: .5rem !important;
     }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Pelanggan</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Pelanggan</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Edit Pelanggan</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('pelanggan.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-        </div>
-
-        <form role="form-horizontal" action="{{ route('pelanggan.perbarui',$customer->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="card-body">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h4 class="card-title mb-0 text-bold">Memperbarui Pelanggan</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('pelanggan.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form role="form-horizontal" action="{{ route('pelanggan.perbarui',$customer->id) }}" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10"><input type="text" value="{{$customer->nama}}" class="form-control form-control-sm" name="nama" placeholder="Masukkan Nama Cabang"></div>
@@ -54,28 +50,19 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control form-control-sm " name="branch_id">
-                        @foreach ($branches as $branch)
-                            <option value="{{$branch->id}}" {{ $branch->id == $customer->branch_id?"selected":"" }} >{{$branch->nama}}</option>
-                        @endforeach
-                    </select></div>
+                    <div class="col-sm-10">
+                        <input type="hidden" name="branch_id" value="{{$customer->branch_id}}">
+                        <input type="text" class="form-control form-control-sm" value="{{$customer->branch->nama}}" disabled >
+                    </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
-            </div>
-
-            <div class="card-footer">
-                <p></p>
-            </div>
-        </form>
+                <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
+        </div>
+        <div class="card-footer text-right" style="background:#C5C6C7">
+            <span style="font-size: 12px">
+                <strong>Dibuat Pada: </strong>{{  $customer->created_at->dayName." | ".$customer->created_at->day." ".$customer->created_at->monthName." ".$customer->created_at->year}} | {{$customer->created_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$customer->createdBy->employee->id)}}">{{$customer->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $customer->updated_at->dayName." | ".$customer->updated_at->day." ".$customer->updated_at->monthName." ".$customer->updated_at->year}} | {{$customer->updated_at->format('h:i:s A')}} | {{$customer->updated_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$customer->updatedBy->employee->id)}}">{{$customer->updatedBy->employee->nama}}</a>
+            </span>
+        </div>
     </div>
 </div>
 @endsection
-
-@push('script')
-<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script>
-$(function () {
-    $('.select2').select2()
-});
-</script>
-@endpush

@@ -63,7 +63,7 @@
                                 <label for="cabang" class="">Cabang</label>
                             </div>
                         </div>
-                        <div class="row mb-2 bg-gray">
+                        <div class="row mb-2">
                           <div class="col-md-8">
                             <select class="form-control form-control-sm " name="cabang">
                               <option value="0">Semua</option>

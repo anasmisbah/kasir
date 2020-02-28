@@ -1,80 +1,66 @@
 @extends('layouts.master')
 
 @push('css')
-<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
     .form-group{
         margin-bottom: .5rem !important;
     }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Pelanggan</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Membuat</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Pelanggan</li>
-            <li class="breadcrumb-item active"><a href="#">Membuat</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Tambah Pelanggan</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('pelanggan.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-        </div>
-
-        <form role="form-horizontal" action="{{ route('pelanggan.simpan') }}" method="POST">
-            @csrf
-            <div class="card-body">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h4 class="card-title mb-0 text-bold">Membuat Pelanggan</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('pelanggan.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form role="form-horizontal" action="{{ route('pelanggan.simpan') }}" method="POST">
+                @csrf
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="nama" placeholder="Masukkan Nama Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="nama" placeholder="Masukkan Nama Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="alamat" placeholder="Masukkan Alamat Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="alamat" placeholder="Masukkan Alamat Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="telepon" placeholder="Masukkan Telepon Pelanggan"></div>
+                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="telepon" placeholder="Masukkan Telepon Pelanggan"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control form-control-sm form-control form-control-sm-sm form-control form-control-sm form-control form-control-sm-sm-sm" name="branch_id">
-                        @foreach ($branches as $branch)
-                            <option value="{{$branch->id}}">{{$branch->nama}}</option>
-                        @endforeach
-                    </select></div>
+                    <div class="col-sm-10">
+                        <input type="hidden" name="branch_id" value="{{auth()->user()->employee->branch_id}}">
+                        <input type="text" class="form-control form-control-sm" value="{{auth()->user()->employee->branch->nama}}" disabled >
+                    </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
-            </div>
+                <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
+        </div>
 
-            <div class="card-footer">
-                <p></p>
-            </div>
-        </form>
+        <div class="card-footer"  style="background:#C5C6C7">
+            <p></p>
+        </div>
     </div>
 </div>
 @endsection
-
-@push('script')
-<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script>
-$(function () {
-    $('.select2').select2()
-});
-</script>
-@endpush

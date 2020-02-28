@@ -3,65 +3,86 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="{{asset('/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-
+<style>
+    .min-padding{
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
+    }
+    .form-control-sm{
+        padding-right: 1rem;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .page-item.active .page-link{
+        background-color: #39f;
+        border-color: #39f;
+    }
+    .btn-warning{
+        color: white;
+    }
+    .page-link{
+        color: #39f;
+    }
+    .page-link:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+    }
+    .page-link:hover{
+        color: #39f;
+    }
+</style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item active"><a href="#" class="text-info">Pelanggan</a></li>
+@endsection
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-6 py-2">
-        <ol class="breadcrumb float-sm-left">
-          <li class="breadcrumb-item ">Beranda</li>
-          <li class="breadcrumb-item active"><a href="#">Pelanggan</a></li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
 
 <section class="content">
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Daftar Pelanggan Toko</h3>
-            @if (auth()->user()->level_id == 2)
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-primary active" href="{{ route('pelanggan.tambah') }}"><i class=" fas fa-plus"></i></a>
-                  </li>
-                </ul>
-            </div>
-            @endif
-        </div>
-        <div class="card-body">
-          @if (auth()->user()->level_id == 1)
-          <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="cabang" class="">Cabang</label>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                    <h4 class="card-title mb-0">Daftar Pelanggan Toko</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                        @if (auth()->user()->level_id == 2)
+                        <a class="btn btn-info"  href="{{ route('pelanggan.tambah') }}"><i class="fa fa-plus"></i></a>
+                        @endif
+                    </div>
                 </div>
-              </div>
-            <div class="row mb-4">
-              <div class="col-md-2">
-                <select class="form-control form-control-sm" name="cabang">
-                  <option value="0">Semua</option>
-                  @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="col-md-6">
-                <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-              </div>
+          @if (auth()->user()->level_id == 1)
+            <div class="col-4 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+                <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="cabang" class="">Cabang</label>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-8">
+                            <select class="form-control form-control-sm" name="cabang">
+                            <option value="0">Semua</option>
+                            @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="downloadble" type="hidden" name="pdf">
+                            <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
+                            <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                            <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
           @endif
           <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
@@ -77,10 +98,10 @@
               @foreach ($customers as $customer)
               <tr>
                 <td class="py-2">{{$loop->iteration}}</td>
-                <td class="py-2"><a href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
+                <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
                 <td class="py-2">{{$customer->alamat}}</td>
                 <td class="py-2">{{$customer->telepon}}</td>
-                <td class="py-2"><a href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
+                <td class="py-2"><a class="text-info" href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
               @endforeach
           </table>
