@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v3.0.0
+* @link https://coreui.io
+* Copyright (c) 2020 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>CoreUI Free Bootstrap Admin Template</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="fontawesome-free/css/all.min.css">
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Main styles for this application-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+    <style>
+      .c-sidebar{
+        width: 200px;
+      }
+      .c-wrapper{
+        margin-left: 200px !important;
+      }
+      .c-sidebar.c-sidebar-dark,.c-header.c-header-dark{
+        background: #1F2833;
+      }
+      .c-sidebar-brand{
+        background: rgba(0, 0, 0, 0) !important;
+      }
+      .c-sidebar .c-sidebar-nav-link.c-active, .c-sidebar .c-active.c-sidebar-nav-dropdown-toggle{
+        background: #038ACA !important;
+      }
+      .c-sidebar .c-sidebar-nav-link:hover{
+        background: #038ACA;
+      }
+      .c-footer{
+        background: #C5C6C7;
+        border-top: 0px;
+        max-height: 40px;
+      }
+      .c-subheader{
+        background: #C5C6C7;
+      }
+      body, .c-app{
+        background-color: #EBEBEB;
+      }
+      .c-header.c-header-dark{
+        border-bottom: 0px;
+      }
+      .c-sidebar-nav{
+        padding-top: 48px;
+      }
+    </style>
+  </head>
+  <body class="c-app">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+      <div class="c-sidebar-brand d-lg-down-none">
+        LOGO
+      </div>
+      <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link c-active" href="index.html">
+            <i class="c-sidebar-nav-icon fa fa-home"></i> Beranda</a>
+          </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html">
+          <i class="c-sidebar-nav-icon fa fa-shopping-cart"></i> Penjualan</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-credit-card"></i> Piutang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-users"></i> Pelanggan</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-flag"></i> Cabang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-barcode"></i> Jenis Barang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-th-large"></i> Barang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-list"></i> Stok Barang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-user"></i> Karyawan</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-user-circle"></i> Pengguna</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <i class="c-sidebar-nav-icon fa fa-info-circle"></i> Tentang</a>
+        </li>
+      </ul>
+    </div>
+    <div class="c-wrapper c-fixed-components">
+      <header class="c-header c-header-dark c-header-fixed c-header-with-subheader">
+        <ul class="c-header-nav ml-auto mr-4">
+          <li class="c-header-nav-item d-md-down-none mx-2">
+            <a class="c-header-nav-link" href="#">Hallo Admin</a>
+          </li>
+          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
+            <div class="c-avatar"><img class="c-avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com"></div></a>
+          </li>
+          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
+            <i class="fa fa-power-off"></i>
+              </a>
+          </li>
+        </ul>
+        <div class="c-subheader px-3">
+          <!-- Breadcrumb-->
+          <ol class="breadcrumb border-0 m-0">
+            <li class="breadcrumb-item">Beranda</li>
+            <!-- Breadcrumb Menu-->
+          </ol>
+        </div>
+      </header>
+      <div class="c-body">
+        <main class="c-main">
+          <div class="container-fluid">
+            <div class="fade-in">
+                
+            </div>
+          </div>
+        </main>
+        <footer class="c-footer">
+          <div class="m-auto">Copyright 2020 | Developed with &hearts;</div>
+        </footer>
+      </div>
+    </div>
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <!--[if IE]><!-->
+    <script src="vendors/@coreui/icons/js/svgxuse.min.js"></script>
+    <!--<![endif]-->
+    <!-- Plugins and scripts required by this view-->
+    <script src="vendors/@coreui/utils/js/coreui-utils.js"></script>
+
+
+  </body>
+</html>
