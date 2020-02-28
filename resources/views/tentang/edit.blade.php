@@ -4,47 +4,42 @@
         .form-group{
           margin-bottom: .5rem !important;
         }
-    </style>
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
+</style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Tentang Aplikasi</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Tentang Aplikasi</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div  class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Ubah Aplikasi Toko</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('tentang.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
+        <div class="card-body">
+        <div class="d-flex justify-content-between mb-3">
+            <div>
+                <h4 class="card-title mb-0 text-bold">Memperbarui Tentang Aplikasi</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                <a class="btn btn-danger"  href="{{ route('tentang.index') }}"><i class="fa fa-times"></i></a>
+            </div>
         </div>
 
         <form class="form-horizontal" action="{{route('tentang.perbarui',$app->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="card-body">
                 <div class="form-group row">
                     <label class="col-2">Logo</label>
                     <div class="col-4">
-                        <img id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
-                            <div class="btn btn-primary btn-file">
-                              Unggah Logo
-                              <input type="file" id="foto" name="logo">
-                            </div>
+                        <img id="img_foto" width="125px" style="margin-bottom:3px" alt="logo" src="{{asset('/storage/'.$app->logo)}}">
+                        <input type="file" id="foto" name="logo">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -80,13 +75,15 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right " style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                <button type="submit" class="btn  btn-info float-right " style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
             </div>
-            <div class="card-footer">
-                <p></p>
+            <div class="card-footer text-right" style="background:#C5C6C7">
+                <span style="font-size: 12px">
+                    <strong>Dibuat Pada: </strong>{{  $app->created_at->dayName." | ".$app->created_at->day." ".$app->created_at->monthName." ".$app->created_at->year}} | {{$app->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$app->createdBy->employee->id)}}" class="text-info">{{$app->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $app->updated_at->dayName." | ".$app->updated_at->day." ".$app->updated_at->monthName." ".$app->updated_at->year}} | {{$app->updated_at->format('h:i:s A')}} | {{$app->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$app->updatedBy->employee->id)}}"  class="text-info">{{$app->updatedBy->employee->nama}}</a>
+                  </span>
             </div>
     </div>
-    </form>
 </div>
 @endsection
 
