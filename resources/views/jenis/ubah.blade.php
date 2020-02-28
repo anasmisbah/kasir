@@ -1,40 +1,41 @@
 @extends('layouts.master')
+@push('css')
+<style>
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
+</style>
+@endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Jenis Barang</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Jenis Barang</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-<div class="container-fluid">
-    <div class="row mt-1">
+    <div class="row">
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
         <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Ubah Jenis Barang</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('jenis.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-          </div>
+            <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                <h4 class="card-title mb-0 text-bold">Memperbarui jenis Barang</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                <a class="btn btn-danger"  href="{{ route('jenis.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
           <!-- /.card-header -->
           <!-- form start -->
           <form class="form-horizontal" action="{{route('jenis.perbarui',$category->id)}}" method="POST">
             @csrf
             @method('PUT')
-            <div class="card-body">
               <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
@@ -44,15 +45,16 @@
                 </div>
             </div>
               </div>
-              <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+              <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
           </div>
 
-          <div class="card-footer">
-              <p></p>
+          <div class="card-footer text-right" style="background:#C5C6C7">
+            <span style="font-size: 12px">
+                <strong>Dibuat Pada: </strong>{{  $category->created_at->dayName." | ".$category->created_at->day." ".$category->created_at->monthName." ".$category->created_at->year}} | {{$category->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$category->createdBy->employee->id)}}" class="text-info">{{$category->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $category->updated_at->dayName." | ".$category->updated_at->day." ".$category->updated_at->monthName." ".$category->updated_at->year}} | {{$category->updated_at->format('h:i:s A')}} | {{$category->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$category->updatedBy->employee->id)}}" class="text-info">{{$category->updatedBy->employee->nama}}</a>
+            </span>
           </div>
-          </form>
         </div>
       </div>
     </div>
-</div>
 @endsection
