@@ -1,50 +1,46 @@
 @extends('layouts.master')
 
 @push('css')
-  <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
   <style>
     .form-group{
-      margin-bottom: .5rem !important;
+        margin-bottom: .5rem !important;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
     }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Karyawan</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Karyawan</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Ubah Karyawan</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('karyawan.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-        </div>
-
-        <form role="form-horizontal" action="{{route('karyawan.perbarui',$employee->id)}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="card-body">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h4 class="card-title mb-0 text-bold">Memperbarui Karyawan</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('karyawan.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form role="form-horizontal" action="{{route('karyawan.perbarui',$employee->id)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label><br>
                     <div class="col-sm-4">
                         <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
-                        <div class="btn btn-primary btn-file">
+                        <div class="btn btn-info btn-file">
                             Unggah Foto
                             <input type="file" id="foto" name="foto">
                         </div>
@@ -108,25 +104,19 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
-            </div>
-
-            <div class="card-footer">
-                <p></p>
-            </div>
-        </form>
+                <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
+        </div>
+        <div class="card-footer text-right" style="background:#C5C6C7">
+            <span style="font-size: 12px">
+                <strong>Dibuat Pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s A')}} | {{$employee->updated_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
+            </span>
+        </div>
     </div>
 </div>
 @endsection
 
 @push('script')
-<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script>
-  $(function () {
-    $('.select2').select2()
-
-  });
-</script>
     <script>
     //menampilkan foto setiap ada perubahan pada modal tambah
 $('#foto').on('change', function() {

@@ -3,114 +3,111 @@
 @push('css')
   <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
   <style>
-      .form-group{
-          margin-bottom: .5rem !important;
-      }
-  </style>
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
+    }
+</style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Karyawan</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Membuat</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Karyawan</li>
-            <li class="breadcrumb-item active"><a href="#">Membuat</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Tambah Karyawan</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('karyawan.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-        </div>
-
-        <form role="form-horizontal" action="{{route('karyawan.simpan')}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="card-body">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Foto</label><br>
-                    <div class="col-sm-4">
-                        <img src="{{asset('img/default.png')}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
-                        <div class="btn btn-primary btn-file">
-                            Unggah Foto
-                            <input type="file" id="foto" name="foto">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h4 class="card-title mb-0 text-bold">Membuat Karyawan</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('karyawan.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form role="form-horizontal" action="{{route('karyawan.simpan')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Foto</label><br>
+                        <div class="col-sm-4">
+                            <img src="{{asset('img/default.png')}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                            <div class="btn btn-info btn-file">
+                                Unggah Foto
+                                <input type="file" id="foto" name="foto">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('nama')}}" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
-                        <div class="invalid-feedback">
-                            {{$errors->first('nama')}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10"><input type="text" value="{{ old('nama')}}" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama">
+                            <div class="invalid-feedback">
+                                {{$errors->first('nama')}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
-                    <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('jenis_kelamin')?'is-invalid':'' }}" name="jenis_kelamin">
-                        <option value="laki-laki" {{ old('jenis_kelamin') == 'laki-laki'?'selected':''}}>Laki-Laki</option>
-                        <option value="perempuan" {{ old('jenis_kelamin') == 'perempuan'?'selected':''}}>Perempuan</option>
-                    </select>
-                        <div class="invalid-feedback">
-                            {{$errors->first('jenis_kelamin')}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                        <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('jenis_kelamin')?'is-invalid':'' }}" name="jenis_kelamin">
+                            <option value="laki-laki" {{ old('jenis_kelamin') == 'laki-laki'?'selected':''}}>Laki-Laki</option>
+                            <option value="perempuan" {{ old('jenis_kelamin') == 'perempuan'?'selected':''}}>Perempuan</option>
+                        </select>
+                            <div class="invalid-feedback">
+                                {{$errors->first('jenis_kelamin')}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Jabatan</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('jabatan')}}" class="form-control form-control-sm {{ $errors->first('jabatan')?'is-invalid':'' }}" name="jabatan" placeholder="Masukkan Jabatan">
-                        <div class="invalid-feedback">
-                            {{$errors->first('jabatan')}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Jabatan</label>
+                        <div class="col-sm-10"><input type="text" value="{{ old('jabatan')}}" class="form-control form-control-sm {{ $errors->first('jabatan')?'is-invalid':'' }}" name="jabatan" placeholder="Masukkan Jabatan">
+                            <div class="invalid-feedback">
+                                {{$errors->first('jabatan')}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('alamat')}}" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
-                        <div class="invalid-feedback">
-                            {{$errors->first('alamat')}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="col-sm-10"><input type="text" value="{{ old('alamat')}}" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Karyawan">
+                            <div class="invalid-feedback">
+                                {{$errors->first('alamat')}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('telepon')}}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
-                        <div class="invalid-feedback">
-                            {{$errors->first('telepon')}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Telepon</label>
+                        <div class="col-sm-10"><input type="text" value="{{ old('telepon')}}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Karwayan">
+                            <div class="invalid-feedback">
+                                {{$errors->first('telepon')}}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('branch_id')?'is-invalid':'' }}" name="branch_id">
-                            @foreach ($branches as $branch)
-                                <option value="{{$branch->id}}" {{ old('branch_id') == $branch->id?'selected':''}}>{{$branch->nama}}</option>
-                            @endforeach
-                    </select>
-                        <div class="invalid-feedback">
-                            cabang wajib dipilih
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Cabang</label>
+                        <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('branch_id')?'is-invalid':'' }}" name="branch_id">
+                                @foreach ($branches as $branch)
+                                    <option value="{{$branch->id}}" {{ old('branch_id') == $branch->id?'selected':''}}>{{$branch->nama}}</option>
+                                @endforeach
+                        </select>
+                            <div class="invalid-feedback">
+                                cabang wajib dipilih
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button type="submit" class="btn  btn-primary float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                    <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                </form>
             </div>
 
-            <div class="card-footer">
+            <div class="card-footer" style="background:#C5C6C7">
                 <p></p>
             </div>
-        </form>
     </div>
 </div>
 @endsection
