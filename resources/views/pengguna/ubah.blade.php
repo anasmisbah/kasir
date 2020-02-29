@@ -4,42 +4,39 @@
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <style>
     .form-group{
-      margin-bottom: .5rem !important;
+        margin-bottom: .5rem !important;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .card-title{
+        color: black;
     }
 </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Pengguna</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-6">
-          <ol class="breadcrumb float-sm-left">
-            <li class="breadcrumb-item">Beranda</li>
-            <li class="breadcrumb-item">Pengguna</li>
-            <li class="breadcrumb-item active"><a href="#">Memperbarui</a></li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
 <div class="col-12">
-    <div class="card mt-3">
-        <div class="card-header">
-            <h3 class="card-title">Ubah Pengguna</h3>
-            <div class="card-tools">
-                <ul class="nav nav-pills ml-auto">
-                  <li class="nav-item">
-                    <a class="nav-link btn-danger active" href="{{ route('pengguna.index') }}"><i class=" fas fa-times"></i></a>
-                  </li>
-                </ul>
-              </div>
-        </div>
-
-        <form role="form" action="{{route('pengguna.perbarui',$user->id)}}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="card-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <h4 class="card-title mb-0 text-bold">Memperbarui Pengguna</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a class="btn btn-danger"  href="{{ route('pengguna.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <form role="form" action="{{route('pengguna.perbarui',$user->id)}}" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
@@ -87,11 +84,14 @@
                     <label class="col-sm-2 col-form-label">Cabang</label>
                     <div class="col-sm-10"><input type="text" id="cabang"  value="{{$user->employee->branch->nama}}" disabled class="form-control form-control-sm" placeholder="Cabang"></div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-lg btn-primary float-right"><i class="fa fa-save"></i></button>
-            </div>
-        </form>
+                <button type="submit" class="btn btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+            </form>
+        </div>
+        <div class="card-footer text-right" style="background:#C5C6C7">
+            <span style="font-size: 12px">
+                <strong>Dibuat Pada: </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}} | {{$user->created_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$user->createdBy->employee->id)}}">{{$user->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}} | {{$user->updated_at->format('h:i:s A')}} | {{$user->updated_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$user->updatedBy->employee->id)}}">{{$user->updatedBy->employee->nama}}</a>
+            </span>
+        </div>
     </div>
 </div>
 @endsection
