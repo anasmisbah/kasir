@@ -2,74 +2,102 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-<link rel="stylesheet" href="/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+<style>
+    .min-padding{
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
+    }
+    .form-control-sm{
+        padding-right: 1rem;
+    }
+    .form-control.form-control-sm:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+        color: black;
+    }
+    .page-item.active .page-link{
+        background-color: #39f;
+        border-color: #39f;
+    }
+    .btn-warning{
+        color: white;
+    }
+    .page-link{
+        color: #39f;
+    }
+    .page-link:focus{
+        border-color: #39f;
+        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
+    }
+    .page-link:hover{
+        color: #39f;
+    }
+    .filter{
+        padding-right: 0rem !important;
+    }
+</style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item active"><a href="#" class="text-info">Piutang</a></li>
+@endsection
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-6 py-2">
-        <ol class="breadcrumb float-sm-left">
-          <li class="breadcrumb-item ">Beranda</li>
-          <li class="breadcrumb-item active"><a href="#">Piutang</a></li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
 
 <section class="content">
   <div class="row">
     <div class="col-12">
       <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Daftar Piutang</h3>
-          </div>
-        <div class="card-body">
-          <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
-            <div class="row">
-              <div class="col-md-4">
-                  <label for="hari" class="">Pilih Tanggal</label>
-              </div>
-              @if (auth()->user()->level_id ==1)
-              <div class="col-md-2">
-                  <label for="cabang" class="">Cabang</label>
-              </div>
-              @endif
+          <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                <h4 class="card-title mb-0">Daftar Piutang</h4>
+                </div>
             </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <div class="input-group">
-                    <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
-                    <div class="input-group-append">
-                      <span class="input-group-text"><i class="far fa-calendar"></i></span>
+            <div class="col-7 pt-2 pb-2 mb-2"  style="background:#EBEBEB">
+                <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
+                  <div class="row">
+                    <div class="col-md-5">
+                        <label for="hari" class="">Pilih Tanggal</label>
+                    </div>
+                    @if (auth()->user()->level_id ==1)
+                    <div class="col-md-2">
+                        <label for="cabang" class="">Cabang</label>
+                    </div>
+                    @endif
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    @if (auth()->user()->level_id == 1)
+                    <div class="col-md-4">
+                      <select class="form-control form-control-sm" name="cabang">
+                        <option value="0">Semua</option>
+                        @foreach ($branches as $branch)
+                        <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    @endif
+
+                    <div class="col-md-3">
+                      <input id="downloadble" type="hidden" name="pdf">
+                      <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
+                      <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                      <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
                     </div>
                   </div>
-                </div>
-              </div>
-              @if (auth()->user()->level_id == 1)
-              <div class="col-md-2">
-                <select class="form-control form-control-sm" name="cabang">
-                  <option value="0">Semua</option>
-                  @foreach ($branches as $branch)
-                  <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                  @endforeach
-                </select>
-              </div>
-              @endif
-
-              <div class="col-md-3">
-                <input id="downloadble" type="hidden" name="pdf">
-                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-eye"></i></button>
-                <button id="btn-pdf" type="submit" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-print"></i></button>
-                <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-sync"></i></a>
-              </div>
+                </form>
             </div>
-          </form>
-          <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
+          <table id="example1" style="width:100%" class="table table-striped compact">
             <thead>
               <tr>
                 <th class="py-2">No.</th>
@@ -84,8 +112,8 @@
               @foreach ($bills as $bill)
               <tr>
                 <td class="py-2">{{$loop->iteration}}</td>
-                <td class="py-2"><a href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td class="py-2"><a href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td class="py-2"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td class="py-2">{{$bill->customer->alamat}}</td>
                 <td class="py-2">{{$bill->customer->telepon}}</td>
                 <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
@@ -110,8 +138,6 @@
 <script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>

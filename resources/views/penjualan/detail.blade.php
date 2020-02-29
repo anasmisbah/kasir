@@ -29,7 +29,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                <h4 class="card-title mb-0 text-bold">Detail Pengguna</h4>
+                <h4 class="card-title mb-0 text-bold">Detail Penjualan</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     <a target="_blank" class="btn btn-info mr-2" style="width: 78px !important;" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
@@ -38,7 +38,7 @@
                         @method('DELETE')
                         </form>
                     <a class="btn btn-warning mr-5" style="width: 78px !important;" href="" id="delete" ><i class=" fa fa-trash"></i></a>
-                <a class="btn btn-danger"  href="{{ route('pengguna.index') }}"><i class="fa fa-times"></i></a>
+                <a class="btn btn-danger"  href="{{ route('penjualan.index') }}"><i class="fa fa-times"></i></a>
                 </div>
             </div>
           <table class="table table-striped">
