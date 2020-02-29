@@ -5,50 +5,42 @@
   th {
     text-align: center !important
   }
-</style>
+    .btn-warning{
+        color: white;
+    }
+    .btn-warning:hover{
+        color: white;
+    }
+    </style>
 @endpush
+@section('breadcumb')
+<li class="breadcrumb-item">Beranda</li>
+<li class="breadcrumb-item">Penjualan</li>
+<li class="breadcrumb-item active"><a href="#"  class="text-info">Detail</a></li>
+@endsection
 
 @section('content')
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2 ">
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-left">
-          <li class="breadcrumb-item">Beranda</li>
-          <li class="breadcrumb-item">Penjualan</li>
-          <li class="breadcrumb-item active"><a href="#">Detail</a></li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
 <div class="container-fluid">
   <div class="row">
     <!-- left column -->
     <div class="col-md-12">
       <!-- general form elements -->
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title"> <strong>Detail Penjualan</strong> </h3>
-          <div class="card-tools">
-            <ul class="nav nav-pills ml-auto">
-              <li class="nav-item mr-2">
-                <a target="_blank" class="nav-link btn-primary active" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fas fa-print"></i></a>
-              </li>
-              <li class="nav-item mr-5">
-                <form class="d-inline" id="form-delete" action="{{route('penjualan.hapus', $bill->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    </form>
-                <a class="nav-link btn-warning active" href="" id="delete" ><i class=" fas fa-trash"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-danger active" href="{{ route('penjualan.index') }}"><i class=" fas fa-times"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
         <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                <h4 class="card-title mb-0 text-bold">Detail Pengguna</h4>
+                </div>
+                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <a target="_blank" class="btn btn-info mr-2" style="width: 78px !important;" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
+                    <form class="d-inline" id="form-delete" action="{{route('penjualan.hapus', $bill->id)}}" method="POST" style="display:none">
+                        @csrf
+                        @method('DELETE')
+                        </form>
+                    <a class="btn btn-warning mr-5" style="width: 78px !important;" href="" id="delete" ><i class=" fa fa-trash"></i></a>
+                <a class="btn btn-danger"  href="{{ route('pengguna.index') }}"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
           <table class="table table-striped">
             <tbody>
               <tr>
@@ -61,11 +53,11 @@
               </tr>
               <tr>
                 <td style="width:15%">Cabang</td>
-                <td><a href="{{route('cabang.detail',$bill->branch->id)}}"> <b> {{$bill->branch->nama}} </b></a></td>
+                <td><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}"> <b> {{$bill->branch->nama}} </b></a></td>
               </tr>
               <tr>
                 <td style="width:15%">Nama Pelanggan</td>
-                <td><a href="{{route('pelanggan.detail',$bill->customer->id)}}"> <b> {{$bill->customer->nama}}</b></a></td>
+                <td><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}"> <b> {{$bill->customer->nama}}</b></a></td>
               </tr>
               <tr>
                 <td style="width:15%">Alamat</td>
@@ -77,7 +69,7 @@
               </tr>
               <tr>
                 <td style="width:15%">Kasir</td>
-                <td><a href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
+                <td><a class="text-info" href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
               </tr>
               <tr>
                 <td style="width:15%">Status</td>
@@ -148,7 +140,7 @@
         </table>
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>
@@ -164,7 +156,7 @@
     $(function () {
         // Number Divide
         $(".harga").divide({
-            delimiter:',',
+            delimiter:'.',
             divideThousand:true
         });
     });
