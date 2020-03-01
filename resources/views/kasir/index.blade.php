@@ -15,9 +15,11 @@
 @endpush
 
 @section('content')
-<div class="container-fluid">
-    <div class="row py-3">
-        <div class="col-2 border rounded">
+<div class="container-fluid ">
+    <div class="card border-0">
+        <div class="card-body">
+    <div class="row">
+        <div class="col-2 border rounded mr-2 pb-2" style="background-color: #f5f6fa" >
             <div class="row">
                 <div class="col-12">
                     <label for="">No Nota Kas</label>
@@ -29,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 border rounded">
+        <div class="col-6 border rounded mr-2" style="background-color: #f5f6fa">
             <div class="row">
                 <div class="col-5">
                     <div class="form-group-sm">
@@ -53,28 +55,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-2 border rounded">
+        <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
-            <h3 class="form-control form-control-lg text-bold text-center pt-4" style="height:60%">Rp <span class="inputharga jml">0</span>,-</h3>
+            <div class="border rounded" style="background-color: #f5f6fa">
+                <h3 class="text-bold text-center pt-4 pb-4"  style="height:60%">Rp <span class="inputharga jml">0</span>,-</h3>
+            </div>
         </div>
-        <div class="col-2 border rounded">
+        <div class="col-2 pb-1 " style="max-width:13%;padding-top:1.8rem">
         <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
             <a href="#" id="cetaknota" class="pt-4 text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%">Cetak Nota</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-10">
+        <div class="col-11" style="max-width:85%">
             <div class="row">
                 <div class="col-12">
                     <div class="form">
                         <div class="row ">
-                            <div class="col" style="width: 10%">
-                                <div class="form-group ml-5">
+                            <div class="col-3" style="max-width:20%">
+                                <div class="form-group" style="margin-left:4rem">
                                     <label for="">Kode</label>
                                     <input id="kodebarang" type="text" disabled id="kode" class="form-control form-control-sm " style="width:100%">
                                 </div>
                             </div>
-                            <div class="col" style="width: 10%">
+                            <div class="col-3 ">
                                 <div class="form-group">
                                     <label for="">Nama Barang</label>
                                     <input type="text" disabled name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
@@ -84,28 +88,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col" style="width: 10%">
+                            <div class="col-2" style="width: 20%">
                                 <div class="form-group">
                                     <label for="">Harga</label>
                                     <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
-                            <div class="col" style="width: 10%">
+                            <div class="col-1" >
                                 <div class="form-group">
                                     <label for="">Qty</label>
                                     <input type="hidden" id="stok">
                                     <input id="qtybarang" type="number" step="0.01" disabled id="qty" placeholder="0" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <div class="col" style="width: 10%">
+                            <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
                                     <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
-                            <div class="col" style="width: 50%">
+                            <div class="col-1 pl-5 pr-1" style="width: 5%;margin-left:3rem;">
                                 <div class="form-group" style="margin-top:30px">
-                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" style="width:40px;">
+                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" >
                                         <i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
@@ -117,16 +121,16 @@
             <div class="row mt-1">
                 <div class="col-12">
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class="table table-sm" id="tableBarang">
+                        <table class="table table-sm"  id="tableBarang">
                             <thead>
-                                <tr>
-                                    <th class="text-left" style="width: 5%">No</th>
-                                    <th class="text-left" style="width: 10%">Kode</th>
-                                    <th class="text-left" style="width: 30%">Nama Barang</th>
-                                    <th class="text-left" style="width: 20%">Harga</th>
-                                    <th class="text-left" style="width: 10%">Qty</th>
-                                    <th class="text-left" style="width: 20%">Jumlah</th>
-                                    <th class="text-left" style="width: 5%">Aksi</th>
+                                <tr class="text-center">
+                                    <th  style="width: 5%">No</th>
+                                    <th  style="width: 10%">Kode</th>
+                                    <th  style="width: 30%">Nama Barang</th>
+                                    <th  style="width: 20%">Harga</th>
+                                    <th  style="width: 10%">Qty</th>
+                                    <th  style="width: 20%">Jumlah</th>
+                                    <th  style="width: 5%">Aksi</th>
                                 </tr>
                             </thead>
                         </table>
@@ -169,7 +173,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-2 ml-3" style="max-width:13%" >
             <div class="form-group">
                 <label for="">Uang muka</label>
                 <input id="uangmuka" type="text" value="0" class="form-control form-control-sm ">
@@ -191,6 +195,8 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 {{-- Modal Tambah --}}
