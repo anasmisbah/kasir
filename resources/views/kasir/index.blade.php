@@ -24,7 +24,7 @@
 @endpush
 
 @section('content')
-<div class="container-fluid ">
+<div class="container-fluid pt-2">
     <div class="card border-0">
         <div class="card-body">
     <div class="row">
@@ -67,12 +67,12 @@
         <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
             <div class="border rounded" style="background-color: #f5f6fa">
-                <h3 class="text-bold text-center pt-4 pb-4"  style="height:60%">Rp <span class="inputharga jml">0</span>,-</h3>
+                <h4 class="text-bold text-center pt-4 pb-4"  style="height:60%">Rp <span class="inputharga jml">0</span>,-</h4>
             </div>
         </div>
-        <div class="col-2 pb-1 " style="max-width:13%;padding-top:1.8rem">
+        <div class="col-2 pb-3 " style="max-width:13%;padding-top:1.8rem">
         <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
-            <a href="#" id="cetaknota" class="pt-4 text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%">Cetak Nota</a>
+            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2rem">Cetak Nota</a>
         </div>
     </div>
     <div class="row">
