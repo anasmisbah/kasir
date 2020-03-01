@@ -11,6 +11,15 @@
         max-height: 150px !important;
         overflow-y: scroll !important
     }
+    .small{
+        margin-left: 3rem;
+
+    }
+    @media (width:1030px){
+        .small{
+            margin-left: 2.5rem;
+        }
+    }
 </style>
 @endpush
 
@@ -107,7 +116,7 @@
                                     <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
-                            <div class="col-1 pl-5 pr-1" style="width: 5%;margin-left:3rem;">
+                            <div class="col-lg-1 small" >
                                 <div class="form-group" style="margin-top:30px">
                                     <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" >
                                         <i class="fa fa-plus"></i></button>
