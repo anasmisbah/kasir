@@ -33,6 +33,11 @@
     .page-link:hover{
         color: #39f;
     }
+
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 @endpush
 @section('breadcumb')

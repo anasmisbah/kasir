@@ -33,6 +33,10 @@
     .page-link:hover{
         color: #39f;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -84,7 +88,7 @@
                 </form>
             </div>
           @endif
-          <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
+          <table id="example1" style="width:100%" class="table table-striped compact">
             <thead>
               <tr>
                 <th class="py-2 text-center">No.</th>
@@ -122,8 +126,6 @@
 <script src="/adminlte/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $("#example1").DataTable({
