@@ -63,7 +63,7 @@
                 <h4 class="card-title mb-0">Daftar Penjualan</h4>
                 </div>
             </div>
-            <div class="col-12 pt-2 pb-2 mb-4 mt-2" style="background:#EBEBEB">
+            <div class="col-12 pt-3 pb-3 mb-4 mt-2" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
                   <div class="row">
                     <div class="col-md-4">
@@ -169,7 +169,7 @@
                       <input id="downloadble" type="hidden" name="pdf">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                       <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                      <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                      <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
                 </form>
@@ -333,7 +333,7 @@
               $totalpiutang =0;
               @endphp
               <tr>
-                <td class="text-center" colspan="10" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Data Penjualan</td>
+                <td class="text-center" colspan="10" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Daftar Penjualan</td>
              </tr>
             </tbody>
 

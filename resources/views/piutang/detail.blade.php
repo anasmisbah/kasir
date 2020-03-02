@@ -14,6 +14,16 @@
     .btn-warning:hover{
         color: white;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .border-bawah{
+        border-bottom: 1px solid black !important;
+    }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
     </style>
 @endpush
 @section('breadcumb')
@@ -46,7 +56,7 @@
               </tr>
               <tr>
                 <td style="width:15%">Tanggal</td>
-                <td>{{$bill->tanggal_nota}}</td>
+                <td>{{ $bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year." ".$bill->tanggal_nota->format('h:i:s')}} WIB</td>
               </tr>
               <tr>
                 <td style="width:15%">Cabang</td>
@@ -74,59 +84,64 @@
               </tr>
             </tbody>
           </table>
+          <table class="no-margin table table-stripped text-center" id="table">
+            <thead>
+              <tr>
+                <th class="text-center">No Nota Kas</th>
+                <th>Tanggal nota Kas</th>
+                <th>Sub Total Nota Kas</th>
+                <th>Diskon Nota Kas</th>
+                <th></th>
+                <th>Total Nota Kas</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+              $subtotal = 0;
+              @endphp
+              @foreach ($bill->transaction as $trans)
+              @php
+              $subtotal+=$trans->total_harga
+              @endphp
+              @endforeach
+              <tr>
+                <td class="text-center"><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td width="50%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
+                <td class="text-center">Rp <span class="harga">{{$subtotal}}</span>,-</td>
+                <td class="text-center" width="15%">Rp <span class="harga">{{$subtotal-$bill->total_nota}}</span>,-</td>
+                <td class="border-atas  text-right">Rp</td>
+                <td class="text-right"> <b><span class="harga">{{$bill->total_nota}}</span>,-</b></td>
+              </tr>
+              <tr class="text-center">
+                <td class="border-atas"></td>
+                <td class="border-atas"></td>
+                <td class="border-atas"></td>
+                <td class="border-atas">Uang Muka</td>
+                <td class="border-atas  text-right">Rp</td>
+                <td class="border-atas text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
+              </tr>
+              <tr class="text-center">
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td class="border-atas"><strong>Piutang</strong></td>
+                <td class="border-atas  text-right"> <b>Rp</b></td>
+                <td class="border-atas text-right"> <strong><span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
+              </tr>
+              <tr class="text-center">
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td class="border-atas border-bawah">Pembayaran</td>
+                <td class="border-atas border-bawah text-right">Rp</td>
+                <td class="border-atas border-bawah text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>  ,-</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- /.card-body -->
 
-        <table class="no-margin table table-stripped text-center" id="table">
-          <thead>
-            <tr>
-              <th>No Nota Kas</th>
-              <th>Tanggal nota Kas</th>
-              <th>Sub Total Nota Kas</th>
-              <th>Diskon</th>
-              <th>Total Nota Kas</th>
-            </tr>
-          </thead>
-          <tbody>
-            @php
-            $subtotal = 0;
-            @endphp
-            @foreach ($bill->transaction as $trans)
-            @php
-            $subtotal+=$trans->total_harga
-            @endphp
-            @endforeach
-            <tr>
-              <td class="text-center">{{$bill->no_nota_kas}}</td>
-              <td width="50%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
-              <td class="text-center">Rp <span class="harga">{{$subtotal}}</span>,-</td>
-              <td class="text-center" width="10%">Rp <span class="harga">{{$subtotal-$bill->total_nota}}</span>,-</td>
-              <td class="text-center">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
-            </tr>
-            <tr class="text-center">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Uang Muka</td>
-              <td>Rp <span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
-            </tr>
-            <tr class="text-center">
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td><strong>Piutang</strong></td>
-              <td> <strong>Rp <span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
-            </tr>
-            <tr class="text-center">
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td>Pembayaran</td>
-              <td>Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>  ,-</td>
-            </tr>
-          </tbody>
-        </table>
         <div class="card-footer text-right">
           <span style="font-size: 12px">
             <strong>Dibuat Pada : </strong>{{ $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
@@ -144,12 +159,11 @@
     $(function () {
         // Number Divide
         $(".harga").divide({
-            delimiter:',',
+            delimiter:'.',
             divideThousand:true
         });
     });
     </script>
-<script>
 <script>
   $('#piutang').click((e) => {
     e.preventDefault()

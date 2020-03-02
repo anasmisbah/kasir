@@ -36,6 +36,13 @@
     .filter{
         padding-right: 0rem !important;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .border-bawah{
+        border-bottom: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -54,7 +61,7 @@
                 <h4 class="card-title mb-0">Daftar Piutang</h4>
                 </div>
             </div>
-            <div class="col-7 pt-2 pb-2 mb-2"  style="background:#EBEBEB">
+            <div class="col-8 pt-3 pb-3 mb-4"  style="background:#EBEBEB;">
                 <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
                   <div class="row">
                     <div class="col-md-5">
@@ -68,14 +75,12 @@
                   </div>
                   <div class="row">
                     <div class="col-md-5">
-                      <div class="form-group">
                         <div class="input-group">
                           <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
                           <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                           </div>
                         </div>
-                      </div>
                     </div>
                     @if (auth()->user()->level_id == 1)
                     <div class="col-md-4">
@@ -92,35 +97,57 @@
                       <input id="downloadble" type="hidden" name="pdf">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                       <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                      <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
+                      <a href="javascript:void(0)" onClick="location.reload(false);" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
                 </form>
             </div>
-          <table id="example1" style="width:100%" class="table table-striped compact">
-            <thead>
-              <tr>
-                <th class="py-2">No.</th>
-                <th class="py-2">No. Nota Bon</th>
-                <th class="py-2">Nama</th>
-                <th class="py-2">Alamat</th>
-                <th class="py-2">Telepon</th>
-                <th class="py-2 text-right">Piutang</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($bills as $bill)
-              <tr>
-                <td class="py-2">{{$loop->iteration}}</td>
-                <td class="py-2"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td class="py-2">{{$bill->customer->alamat}}</td>
-                <td class="py-2">{{$bill->customer->telepon}}</td>
-                <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+            @if (Request::input('hari'))
+            <table id="example1" style="width:100%" class="table table-striped compact">
+              <thead>
+                <tr>
+                  <th class="py-2">No.</th>
+                  <th class="py-2">No. Nota Bon</th>
+                  <th class="py-2 text-center">Nama</th>
+                  <th class="py-2 text-center">Alamat</th>
+                  <th class="py-2 text-center">Telepon</th>
+                  <th class="py-2"></th>
+                  <th class="py-2">Piutang</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @foreach ($bills as $bill)
+                  <tr>
+                    <td class="py-2">{{$loop->iteration}}</td>
+                    <td class="py-2"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                    <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                    <td class="py-2">{{$bill->customer->alamat}}</td>
+                    <td class="py-2">{{$bill->customer->telepon}}</td>
+                    <td class="py-2 text-right">Rp</td>
+                    <td class="py-2 text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                  </tr>
+                  @endforeach
+              </tbody>
+            </table>
+            @else
+            <table id="empty_table" style="width:100%" class="table table-striped compact">
+                <thead>
+                  <tr>
+                    <th class="py-2">No.</th>
+                    <th class="py-2">No. Nota Bon</th>
+                    <th class="py-2">Nama</th>
+                    <th class="py-2">Alamat</th>
+                    <th class="py-2">Telepon</th>
+                    <th class="py-2 text-right">Piutang</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center" colspan="6" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Daftar Piutang</td>
+                    </tr>
+                </tbody>
+              </table>
+            @endif
         </div>
         <!-- /.card-body -->
       </div>
