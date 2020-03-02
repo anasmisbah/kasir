@@ -11,8 +11,8 @@
     <style>
         body {
             margin-top: 40px !important;
+            font-family: "Arial", Helvetica, sans-serif;
         }
-
         .hr-red {
             background-color: red !important;
             height: 5px !important;
@@ -109,6 +109,17 @@
         .border-bawah {
             border-bottom: 2px solid black !important;
         }
+        .title{
+            font-size: 14pt;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
 
     </style>
 </head>
@@ -116,38 +127,39 @@
 <body>
     <div class="container">
         <div class="row">
-                <div style="padding-left:20px" class="column-6">
-                    <h3 style="padding-top:-20px;">NOTA KAS</h3>
-                    <h4 class="mt-1" style="text-transform:uppercase">{{ $app->toko}}</h4>
-                    <div>{{$app->alamat}}</div>
+                <div style="padding-left:20px" class="column-5">
+                    <div style="margin-top:0px;" class="title">NOTA KAS</div>
+                    <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
+                    <div style="margin-top:5px">{{$app->alamat}}</div>
                     <div>{{$app->telepon}}</div>
                 </div>
                 <div class="column-2" style="text-align:right">
-                    <div>No. Nota Bon:</div>
+                    <div>No. Nota Kas:</div>
                     <div>Tanggal:</div>
                     <div>Pelanggan:</div>
                     <div>Alamat:</div>
 
                 </div>
-                <div class="column-5" style="margin-left:20px">
+                <div class="column-4" style="margin-left:20px">
                     <div>{{$bill->no_nota_kas}}</div>
-                    <div>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</div>
+                    <div>{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}} | {{$bill->tanggal_nota->format('h:i:s')}} WIB</div>
                     <div>{{$bill->customer->nama}}</div>
                     <div>{{$bill->customer->alamat}}
                     </div>
                     <p>{{$bill->customer->telepon}}</p>
                 </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:10px">
             <div class="col-md-12">
                 <table class="no-margin table table-hover" id="table">
                     <thead>
                         <tr class="border">
-                            <th width="7%" class="border border-bawah text-center">No</th>
-                            <th width="38%"class="border border-bawah text-center">Nama Barang</th>
-                            <th width="20%" class="border border-bawah text-center">Harga Satuan</th>
-                            <th width="15%" class="border border-bawah text-center">Qty(Kg)</th>
-                            <th width="20%" class="border border-bawah text-center">Jumlah</th>
+                            <th width="7%" class="text-center">No</th>
+                            <th width="36%"class="text-center">Nama Barang</th>
+                            <th width="15%" class="text-center">Harga Satuan</th>
+                            <th width="15%" class="text-center">Qty(Kg)</th>
+                            <th width="2%"></th>
+                            <th width="10%" class="text-center">Jumlah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -156,29 +168,23 @@
                         @endphp
                         @foreach ($bill->transaction as $trans)
 
-                        @if ($loop->iteration == 1)
-                        <tr>
-                            <td  class=" border text-center">{{$loop->iteration}}</td>
-                            <td class=" border text-center">{{$trans->supply->item->nama}}</td>
-                            <td class=" border text-center">{{ number_format($trans->supply->harga_cabang,0,',','.') }}</td>
-                            <td class=" border text-center" width="10%">{{$trans->kuantitas}}</td>
-                            <td class=" border text-center">Rp {{$trans->total_harga}},-</td>
-                        </tr>
-                        @elseif ($loop->iteration == count($bill->transaction))
+                        @if ($loop->iteration == count($bill->transaction))
                         <tr>
                             <td class="border-bawah text-center">{{$loop->iteration}}</td>
                             <td class="border-bawah text-center">{{$trans->supply->item->nama}}</td>
-                            <td class="border-bawah text-center">{{number_format($trans->supply->harga_cabang,0,',','.')}}</td>
+                            <td class="border-bawah text-right">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                             <td class="border-bawah text-center" width="10%">{{$trans->kuantitas}}</td>
-                            <td class="border-bawah text-center">Rp {{$trans->total_harga}},-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$trans->total_harga}}</span>,-</td>
                         </tr>
                         @else
                         <tr>
                             <td class="text-center">{{$loop->iteration}}</td>
                             <td  class="text-center">{{$trans->supply->item->nama}}</td>
-                            <td class="text-center">{{number_format($trans->supply->harga_cabang,0,',','.')}}</td>
+                            <td class="text-right">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                             <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
-                            <td class="text-center">Rp {{$trans->total_harga}},-</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{$trans->total_harga}}</span>,-</td>
                         </tr>
                         @endif
                         @php
@@ -188,31 +194,39 @@
 
                         <tr class="text-center">
                             <td>Status:</td>
-                            <td  style="text-align:left"><span> <strong>{{strtoupper($bill->status)}}</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Hormat Kami,</span></td>
+                            <td  style="text-align:left"><span> <strong>{{strtoupper($bill->status)}}</strong></span><span style="margin-left:60px">Hormat Kami,</span></td>
                             <td></td>
                             <td class="border-bawah">Sub Total</td>
-                            <td class="border-bawah">Rp {{$subtotal}},-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$subtotal}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td class="border-bawah" style="border: none"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
+                            <td class="border-bawah border"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
                             <td class="border-bawah"><b>TOTAL</b></td>
-                            <td class="border-bawah">Rp {{$bill->total_nota}} ,-</td>
+                            <td class="border-bawah text-right"> <b> Rp</b></td>
+                            <td class="border-bawah text-right"><b><span class="harga">{{$bill->total_nota}}</span>,-</b></td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"> <strong>{{$bill->user->employee->nama}}</strong></td>
-                            <td></td>
+                            <td style="border: none"></td>
                             <td class="border-bawah">Uang Muka</td>
-                            <td class="border-bawah">Rp {{$bill->jumlah_uang_nota}} ,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td class="border-bawah">Piutang</td>
-                            <td class="border-bawah">Rp {{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}} ,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            @if ($bill->kembalian_nota < 0)
+                                <td class="border-bawah text-right"><span class="harga">{{ abs($bill->kembalian_nota)}}</span>,-</td>
+                            @else
+                                <td class="border-bawah text-right">0,-</td>
+                            @endif
                         </tr>
                     </tbody>
                 </table>
@@ -234,6 +248,16 @@
 <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:'.',
+            divideThousand:true
+        });
+    });
+</script>
 <script>
     window.addEventListener("afterprint", function() {
         history.back();
