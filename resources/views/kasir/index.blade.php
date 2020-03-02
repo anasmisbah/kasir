@@ -15,6 +15,7 @@
         margin-left: 3rem;
 
     }
+
     @media (width:1030px){
         .small{
             margin-left: 2.5rem;
@@ -34,7 +35,7 @@
                     <label for="">No Nota Kas</label>
                     <input id="nonotakas" class="form-control form-control-sm" disabled type="text" value="{{$formatnnk}}">
                 </div>
-                <div class="col-12">
+                <div class="col-12 mt-3">
                     <label for="">Tanggal</label>
                     <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control form-control-sm" disabled type="text">
                 </div>
@@ -53,26 +54,28 @@
                         </div>
                         <button class="btn-sm btn-info create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
                     </div>
-                    <div class="form-group-sm">
+                    <div class="form-group-sm mt-3">
                         <label for="">Telepon</label>
                         <input id="teleponpelanggan" class="form-control form-control-sm" style="width:80%" disabled type="text">
                     </div>
                 </div>
                 <div class="col-7">
                     <label for="">Alamat</label>
-                    <textarea id="alamatpelanggan" rows="3" disabled class="form-control" style="resize: none;"></textarea>
+                    <div class="rounded p-2 border" style="background-color:#e8ecef; height:78%">
+                        <p id="alamatpelanggan"></p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
-            <div class="border rounded" style="background-color: #f5f6fa">
-                <h4 class="text-bold text-center pt-4 pb-4"  style="height:60%">Rp <span class="inputharga jml">0</span>,-</h4>
+            <div class="border rounded" style="background-color: #f5f6fa; height:75%">
+                <h4 class="text-bold text-center pb-4"  style="height:60%;padding-top:2.5rem">Rp <span class="inputharga jml">0</span>,-</h4>
             </div>
         </div>
-        <div class="col-2 pb-3 " style="max-width:13%;padding-top:1.8rem">
+        <div class="col-2 pb-2 " style="max-width:13%;padding-top:1.8rem">
         <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
-            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2rem">Cetak Nota</a>
+            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2.5rem; ">Cetak Nota</a>
         </div>
     </div>
     <div class="row">
