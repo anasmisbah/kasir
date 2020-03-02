@@ -54,7 +54,7 @@
         border-bottom: 0px;
       }
       .c-sidebar-nav{
-        padding-top: 48px;
+        margin-top: 48px;
       }
       .c-main{
           padding-top: 1rem;
@@ -69,7 +69,7 @@
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-        LOGO
+        <img height="50px" src="{{asset('/storage/'.$app->logo)}}" alt="">
       </div>
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'beranda'?'c-active':'' }}" href="{{ route('beranda') }}">
