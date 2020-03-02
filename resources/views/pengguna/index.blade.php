@@ -33,6 +33,10 @@
     .page-link:hover{
         color: #39f;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -55,14 +59,14 @@
                     <a class="btn btn-info"  href="{{ route('pengguna.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
-            <div class="col-4 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+            <div class="col-4 pt-3 pb-3 mb-4" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
                     <div class="row">
                         <div class="col-md-2">
                             <label for="cabang" class="">Cabang</label>
                         </div>
                       </div>
-                    <div class="row mb-2">
+                    <div class="row">
                       <div class="col-md-8">
                         <select class="form-control form-control-sm" name="cabang">
                           <option value="0">Semua</option>
@@ -94,10 +98,10 @@
             <tbody>
               @foreach ($users as $user)
               <tr>
-                <td class="py-2" min-height= "10px">{{$loop->iteration}}</td>
-                <td class="py-2" min-height= "10px"><a class="text-info" href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td class="py-2" min-height= "10px"><a class="text-info" href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td class="py-2" min-height= "10px">{{ $user->email }}</td>
+                <td class="py-2 text-left" min-height= "10px">{{$loop->iteration}}</td>
+                <td class="py-2 text-left" min-height= "10px"><a class="text-info" href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td class="py-2 text-left" min-height= "10px"><a class="text-info" href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                <td class="py-2 text-left" min-height= "10px">{{ $user->email }}</td>
                 <td class="py-2" min-height= "10px">{{ $user->level->nama }}</td>
                 <td class="py-2" min-height= "10px"><a class="text-info" href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
               </tr>
