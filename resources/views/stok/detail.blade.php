@@ -50,7 +50,7 @@
                   </tr>
                   <tr>
                     <td style="width:10%">Stok</td>
-                    <td>{{$supply->stok}}</td>
+                    <td>{{$supply->stok}} Kg</td>
                   </tr>
 
                 </tbody>
@@ -68,7 +68,7 @@
 
                 <div class="card-footer text-right" style="background:#C5C6C7">
                     <span style="font-size: 12px">
-                        <strong>Dibuat Pada: </strong>{{  $supply->created_at->dayName." | ".$supply->created_at->day." ".$supply->created_at->monthName." ".$supply->created_at->year}} | {{$supply->created_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$supply->createdBy->employee->id)}}" class="text-info">{{$supply->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $supply->updated_at->dayName." | ".$supply->updated_at->day." ".$supply->updated_at->monthName." ".$supply->updated_at->year}} | {{$supply->updated_at->format('h:i:s A')}} | {{$supply->updated_at->format('h:i:s A')}} | <a href="{{route('karyawan.detail',$supply->updatedBy->employee->id)}}" class="text-info">{{$supply->updatedBy->employee->nama}}</a>
+                        <strong>Dibuat Pada: </strong>{{  $supply->created_at->dayName." | ".$supply->created_at->day." ".$supply->created_at->monthName." ".$supply->created_at->year}} | {{$supply->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->createdBy->employee->id)}}" class="text-info">{{$supply->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $supply->updated_at->dayName." | ".$supply->updated_at->day." ".$supply->updated_at->monthName." ".$supply->updated_at->year}} | {{$supply->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->updatedBy->employee->id)}}" class="text-info">{{$supply->updatedBy->employee->nama}}</a>
                     </span>
                 </div>
     </div>
