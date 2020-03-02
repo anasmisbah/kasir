@@ -16,14 +16,34 @@
         th{
         text-align: center !important
         }
+        .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
+        body{
+            font-family: "Arial", Helvetica, sans-serif;
+        }
+        .title{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .sign{
+            font-size: 12px;
+        }
+        .foot{
+            font-weight: bold;
+        }
 </style>
 </head>
 <body>
     <div class="container">
-        <div class="row mt-4" >
-            <h4 class="text-center">LAPORAN PENJUALAN</h4>
-            <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
-            <h4 class="text-center">TAHUN {{$year->year}}</h4>
+        <div class="row" style="padding-top:10px">
+            <div class="text-center title">LAPORAN PENJUALAN</div>
+            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
+            <div class="text-center title">TAHUN {{$year->year}}</div>
             <br>
             <br>
 
@@ -32,9 +52,12 @@
                       <th class="border">No.</th>
                       <th class="border">Bulan</th>
                       <th class="border">Penjualan</th>
+                      <th></th>
                       <th class="border">Nominal</th>
                       <th class="border">Piutang</th>
+                      <th></th>
                       <th class="border">Nominal</th>
+                      <th></th>
                       <th class="border">Kas</th>
                     </tr>
                   <tbody>
@@ -46,35 +69,31 @@
                           $totalkas = 0;
                       @endphp
                     @foreach ($data as $item)
-                    @if ($loop->iteration == 1)
-                    <tr>
-                        <td class="border">{{$loop->iteration}}</td>
-                        <td class="border">{{$item['tanggal']}}</td>
-                        <td class="border">{{$item['penjualan']}}</td>
-                        <td class="border">Rp {{$item['nominal_penjualan']}},-</td>
-                        <td class="border">{{$item['piutang']}}</td>
-                        <td class="border">Rp {{ abs($item['nominal_piutang'])}},-</td>
-                        <td class="border">Rp {{$item['kas']}},-</td>
-                      </tr>
-                        @elseif ($loop->iteration == count($data))
+                    @if ($loop->iteration == count($data))
                         <tr>
                             <td class="border-bawah">{{$loop->iteration}}</td>
                             <td class="border-bawah">{{$item['tanggal']}}</td>
                             <td class="border-bawah">{{$item['penjualan']}}</td>
-                            <td class="border-bawah">Rp {{$item['nominal_penjualan']}},-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$item['nominal_penjualan']}}</span>,-</td>
                             <td class="border-bawah">{{$item['piutang']}}</td>
-                            <td class="border-bawah">Rp {{ abs($item['nominal_piutang'])}},-</td>
-                            <td class="border-bawah">Rp {{$item['kas']}},-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{ abs($item['nominal_piutang'])}}</span>,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$item['kas']}}</span>,-</td>
                           </tr>
                         @else
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item['tanggal']}}</td>
                             <td>{{$item['penjualan']}}</td>
-                            <td>Rp {{$item['nominal_penjualan']}},-</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{$item['nominal_penjualan']}}</span>,-</td>
                             <td>{{$item['piutang']}}</td>
-                            <td>Rp {{ abs($item['nominal_piutang'])}},-</td>
-                            <td>Rp {{$item['kas']}},-</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{ abs($item['nominal_piutang'])}}</span>,-</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{$item['kas']}}</span>,-</td>
                           </tr>
                         @endif
                     @php
@@ -86,23 +105,26 @@
                       @endphp
                     @endforeach
                   </tbody>
-                      <tr>
-                          <th class="border border-bawah"></th>
-                          <th class="border border-bawah">JUMLAH</th>
-                          <th class="border border-bawah">{{$totalpenjualan}}</th>
-                          <th class="border border-bawah">Rp {{$totalnominalpenjualan}},-</th>
-                          <th class="border border-bawah">{{$totalpiutang}}</th>
-                          <th class="border border-bawah">Rp {{abs($totalnominalpiutang)}},-</th>
-                          <th class="border border-bawah">Rp {{$totalkas}},-</th>
+                      <tr class="foot">
+                          <td class="border border-bawah"></td>
+                          <td class="border border-bawah">JUMLAH</td>
+                          <td class="border border-bawah">{{$totalpenjualan}}</td>
+                          <td class="border border-bawah text-right">Rp</td>
+                          <td class="border border-bawah text-right"> <span class="harga">{{$totalnominalpenjualan}}</span>,-</td>
+                          <td class="border border-bawah">{{$totalpiutang}}</td>
+                          <td class="border border-bawah text-right">Rp</td>
+                          <td class="border border-bawah text-right"> <span class="harga">{{abs($totalnominalpiutang)}}</span>,-</td>
+                          <td class="border border-bawah text-right">Rp</td>
+                          <td class="border border-bawah text-right"><span class="harga">{{$totalkas}}</span>,-</td>
                     </tr>
             </table>
         </div>
         <div class="row" style="margin-top:20px">
             <div class="col">
-                <p class="pull-right">
-                    {{$branch->nama}},{{$dateNow}} <br>
-                    Manager Cabang, <br><br><br><br>
-                    <strong>{{$branch->pimpinan}}</strong>
+                <p class="pull-right sign">
+                    {{$branch->nama}}, {{$dateNow->day.' '.$dateNow->monthName.' '.$dateNow->year}} <br>
+                    {{$user->employee->jabatan}}, <br><br><br><br>
+                    <strong>{{$user->employee->nama}}</strong>
                 </p>
             </div>
         </div>
@@ -110,6 +132,16 @@
     <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/adminlte/dist/js/adminlte.min.js"></script>
+    <script src="/adminlte/plugins/number-divider.min.js"></script>
+    <script>
+        $(function () {
+            // Number Divide
+            $(".harga").divide({
+                delimiter:'.',
+                divideThousand:true
+            });
+        });
+    </script>
     <script>
         window.addEventListener("afterprint", function() {
             history.back();

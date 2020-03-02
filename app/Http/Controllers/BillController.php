@@ -150,7 +150,7 @@ class BillController extends Controller
                             ->orderBy('tanggal_nota', 'asc')
                             ->orderBy('tanggal_nota','desc')->get()
                             ->groupBy(function($val) {
-                                return Carbon::parse($val->tanggal_nota)->format('m');
+                                return $val->tanggal_nota->monthName;
                           });
                         } else {
                             if ($request->cabang == "0") {
@@ -159,7 +159,7 @@ class BillController extends Controller
                                 ->orderBy('tanggal_nota', 'asc')
                                 ->orderBy('tanggal_nota','desc')->get()
                                 ->groupBy(function($val) {
-                                    return Carbon::parse($val->tanggal_nota)->format('m');
+                                    return $val->tanggal_nota->monthName;
                                 });
                             }else if($request->status == "0"){
                                 $bills = Bill::where('branch_id',$request->cabang)
@@ -167,7 +167,7 @@ class BillController extends Controller
                                 ->orderBy('tanggal_nota', 'asc')
                                 ->orderBy('tanggal_nota','desc')->get()
                                 ->groupBy(function($val) {
-                                    return Carbon::parse($val->tanggal_nota)->format('m');
+                                    return $val->tanggal_nota->monthName;
                                 });
                             }else{
                                 $bills = Bill::where('status',$request->status)
@@ -176,32 +176,33 @@ class BillController extends Controller
                                 ->orderBy('tanggal_nota', 'asc')
                                 ->orderBy('tanggal_nota','desc')->get()
                                 ->groupBy(function($val) {
-                                    return Carbon::parse($val->tanggal_nota)->format('m');
+                                    return $val->tanggal_nota->monthName;
                                 });
                             }
                         }
+                        $data = [];
 
-                    $data = [];
                     for ($i=1; $i <= 12; $i++) {
-                        $data["$i"]['tanggal'] = "$i";
-                        $data["$i"]['penjualan'] = 0;
-                        $data["$i"]['nominal_penjualan']=0;
-                        $data["$i"]['piutang'] =0;
-                        $data["$i"]['nominal_piutang']=0;
-                        $data["$i"]['kas']= 0;
+                        $namemonth = Carbon::create($request->tahun,$i)->monthName;
+                        $data[$namemonth]['tanggal'] = $namemonth;
+                        $data[$namemonth]['penjualan'] = 0;
+                        $data[$namemonth]['nominal_penjualan']=0;
+                        $data[$namemonth]['piutang'] =0;
+                        $data[$namemonth]['nominal_piutang']=0;
+                        $data[$namemonth]['kas']= 0;
                     }
                     foreach ($bills as $key => $bill) {
-                        $data[ltrim($key, '0')]['tanggal'] = ltrim($key, '0');
-                        $data[ltrim($key, '0')]['penjualan'] = $bill->where('status','lunas')->count();
-                        $data[ltrim($key, '0')]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
-                        $data[ltrim($key, '0')]['piutang'] = $bill->where('status','piutang')->count();
-                        $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
-                        $data[ltrim($key, '0')]['kas']= $data[ltrim($key, '0')]['nominal_penjualan'] - abs($data[ltrim($key, '0')]['nominal_piutang']);
+                        $data[$key]['tanggal'] = $key;
+                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
+                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
                     $year = Carbon::now()->year($request->tahun);
                     if($request->print){
 
-                        return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year'));
+                        return view('pdf.penjualan_tahun',compact('app','dateNow','branch','data','year','user'));
                     }
                     if ($request->pdf) {
                         $data = [
