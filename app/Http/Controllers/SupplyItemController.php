@@ -38,8 +38,8 @@ class SupplyItemController extends Controller
                     return $pdf->stream();
                     // return $pdf->download('stok.pdf');
                 }elseif ($request->print) {
-                    $date=Carbon::now()->format('d F Y');
-                return view('pdf.stok',compact('supplies','branch','app','date'));
+                $date=Carbon::now();
+                return view('pdf.stok',compact('supplies','branch','app','date','user'));
                 }
             }else{
                 $supplies = Supply::all();
