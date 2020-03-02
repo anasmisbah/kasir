@@ -60,15 +60,18 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label class="col-2">Logo</label>
-                    <div class="col-4">
-                        <img id="img_foto" width="125px" style="margin-bottom:3px" alt="logo"
-                            src="{{asset('/storage/'.$app->logo)}}">
+                    <label class="col-sm-2 col-form-label">Logo</label><br>
+                    <div class="ml-3">
+                        <img src="{{asset('/storage/'.$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                    </div>
+                    <div class="col-2 pt-5 pl-2">
+                        <div class="custom-input text-center" style="font-size:12px">
+                                <input type="file" id="foto" name="logo">
+                                <p style="z-index:9999; margin-top:-28px">
+                                        Unggah Logo
+                                    </p>
                         </div>
-                            <div class="col-2 custom-input text-center"style="font-size:12px">
-                                    <input type="file" id="foto" name="logo">
-                               <p style="z-index:9999; margin-top:-28px">Unggah Logo</p>
-                            </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2">Nama Aplikasi:</label>

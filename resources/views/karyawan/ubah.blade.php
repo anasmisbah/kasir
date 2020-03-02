@@ -58,20 +58,17 @@
                 @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label><br>
-                    <div class="col-sm-2">
+                    <div class="ml-3">
                         <img src="{{asset("/storage/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
                     </div>
-                    <div class="col-2 pt-5">
-                        <div class=" custom-input text-center" style="font-size:12px;">
+                    <div class="col-2 pt-5 pl-2">
+                        <div class="custom-input text-center" style="font-size:12px">
                                 <input type="file" id="foto" name="foto">
                                 <p style="z-index:9999; margin-top:-28px">
                                         Unggah Foto
                                     </p>
-                                </div>
-                                <div class="invalid-feedback">
-                                    {{$errors->first('foto')}}
-                                </div>
-                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
