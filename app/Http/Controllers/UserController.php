@@ -10,12 +10,16 @@ use App\Branch;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\APPlication;
 class UserController extends Controller
 {
     public function index(Request $request)
     {
         $users = User::all();
+        $user = Auth::user();
         $branches = Branch::all();
+        $app = Application::first();
+        $branch = $user->employee->branch;
         if ($request->all()) {
             if ($request->cabang == "0") {
                 $users = User::all();
@@ -35,8 +39,8 @@ class UserController extends Controller
                 return $pdf->stream();
                 // return $pdf->download('karyawan.pdf');
             }elseif ($request->print) {
-                    $date=Carbon::now()->format('d F Y');
-                return view('pdf.karyawan',compact('users','branch','app','date'));
+                    $dateNow=Carbon::now();
+                return view('print.pengguna',compact('users','branch','app','dateNow','user'));
             }
         }else{
             $users = User::all();
