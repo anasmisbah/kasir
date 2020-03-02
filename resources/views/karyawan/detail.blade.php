@@ -22,7 +22,7 @@
     <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
             <div>
-            <h4 class="card-title mb-0 text-bold">Detail Pelanggan</h4>
+            <h4 class="card-title mb-0 text-bold">Detail Karyawan</h4>
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
             <a class="btn btn-danger"  href="{{ route('karyawan.index') }}"><i class="fa fa-times"></i></a>
@@ -36,7 +36,7 @@
           </tr>
           <tr>
             <td style="width:10%">Nama</td>
-            <td>{{$employee->nama}}</td>
+            <td><b>{{$employee->nama}}</b></td>
           </tr>
           <tr>
             <td style="width:10%">Jenis Kelamin</td>
@@ -71,7 +71,7 @@
 
     <div class="card-footer text-right" style="background:#C5C6C7">
       <span style="font-size: 12px">
-        <strong>Dibuat Pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s A')}} | {{$employee->updated_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
+        <strong>Dibuat Pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s A')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
         </span>
     </div>
   </div>

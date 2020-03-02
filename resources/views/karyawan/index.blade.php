@@ -33,6 +33,11 @@
     .page-link:hover{
         color: #39f;
     }
+
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -56,14 +61,14 @@
                 </div>
             </div>
           @if (auth()->user()->level_id == 1)
-        <div class="col-4 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+        <div class="col-4 pt-3 pb-3 mb-4" style="background:#EBEBEB">
             <form id="form-filter" action="{{route('karyawan.index')}}" method="GET">
               <div class="row">
                   <div class="col-md-2">
                       <label for="cabang" class="">Cabang</label>
                   </div>
                 </div>
-              <div class="row mb-2">
+              <div class="row">
                 <div class="col-md-8">
                   <select class="form-control form-control-sm" name="cabang">
                     <option value="0">Semua</option>
