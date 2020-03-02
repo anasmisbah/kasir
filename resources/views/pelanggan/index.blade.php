@@ -58,14 +58,14 @@
                     </div>
                 </div>
           @if (auth()->user()->level_id == 1)
-            <div class="col-4 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+            <div class="col-4 pt-3 pb-3 mb-4" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
                     <div class="row">
                         <div class="col-md-2">
                             <label for="cabang" class="">Cabang</label>
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col-md-8">
                             <select class="form-control form-control-sm" name="cabang">
                             <option value="0">Semua</option>
@@ -78,7 +78,7 @@
                             <input id="downloadble" type="hidden" name="pdf">
                             <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                             <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                            <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
+                            <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                         </div>
                     </div>
                 </form>
@@ -87,9 +87,9 @@
           <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
-                <th class="py-2">No.</th>
-                <th class="py-2">Nama</th>
-                <th class="py-2">Alamat</th>
+                <th class="py-2 text-center">No.</th>
+                <th class="py-2 text-center">Nama</th>
+                <th class="py-2 text-center">Alamat</th>
                 <th class="py-2">Telepon</th>
                 <th class="py-2">Cabang</th>
               </tr>
@@ -97,7 +97,7 @@
             <tbody>
               @foreach ($customers as $customer)
               <tr>
-                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2 text-center">{{$loop->iteration}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
                 <td class="py-2">{{$customer->alamat}}</td>
                 <td class="py-2">{{$customer->telepon}}</td>
