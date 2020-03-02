@@ -13,54 +13,62 @@
     .border-bawah{
         border-bottom: 2px solid black !important;
     }
+    .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
+        body{
+            font-family: "Arial", Helvetica, sans-serif;
+        }
+        .title{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .sign{
+            font-size: 12px;
+        }
 </style>
 </head>
 <body id="body_print">
     <div class="container">
-        <div class="row mt-3" >
-            <h4 class="text-center">DAFTAR KARYAWAN</h4>
-            <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
+        <div class="row" style="padding-top:10px" >
+            <div class="text-center title">DAFTAR KARYAWAN</div>
+            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
 
             <br>
             <br>
 
             <table class="table table-hover">
                     <tr>
-                        <th class="border">No.</th>
-                        <th class="border">Nama</th>
-                        <th class="border">Jabatan</th>
-                        <th class="border">Alamat</th>
-                        <th class="border">Telepon</th>
-                        <th class="border">Cabang</th>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Jabatan</th>
+                        <th class="text-center">Alamat</th>
+                        <th class="text-center">Telepon</th>
+                        <th class="text-center">Cabang</th>
                     </tr>
                 <tbody>
                     @foreach ($employees as $employee)
-                        @if ($loop->iteration == 1)
-                        <tr>
-                            <td class="border">{{$loop->iteration}}</td>
-                            <td class="border">{{$employee->nama}}</td>
-                            <td class="border">{{$employee->jabatan}}</td>
-                            <td class="border">{{$employee->alamat}}</td>
-                            <td class="border">{{$employee->telepon}}</td>
-                            <td class="border">{{$employee->branch->nama}}</td>
-                        </tr>
-                        @elseif ($loop->iteration == count($employees))
+                        @if ($loop->iteration == count($employees))
                             <tr>
-                                <td class="border-bawah">{{$loop->iteration}}</td>
+                                <td class="border-bawah text-center">{{$loop->iteration}}</td>
                                 <td class="border-bawah">{{$employee->nama}}</td>
-                                <td class="border-bawah">{{$employee->jabatan}}</td>
+                                <td class="border-bawah text-center">{{$employee->jabatan}}</td>
                                 <td class="border-bawah">{{$employee->alamat}}</td>
-                                <td class="border-bawah">{{$employee->telepon}}</td>
-                                <td class="border-bawah">{{$employee->branch->nama}}</td>
+                                <td class="border-bawah text-center">{{$employee->telepon}}</td>
+                                <td class="border-bawah text-center">{{$employee->branch->nama}}</td>
                             </tr>
                         @else
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td class="text-center">{{$loop->iteration}}</td>
                             <td>{{$employee->nama}}</td>
-                            <td>{{$employee->jabatan}}</td>
+                            <td class="text-center">{{$employee->jabatan}}</td>
                             <td>{{$employee->alamat}}</td>
-                            <td>{{$employee->telepon}}</td>
-                            <td>{{$employee->branch->nama}}</td>
+                            <td class="text-center">{{$employee->telepon}}</td>
+                            <td class="text-center">{{$employee->branch->nama}}</td>
                         </tr>
                         @endif
                     @endforeach
@@ -69,10 +77,10 @@
         </div>
         <div class="row" style="margin-top:10px">
             <div class="col">
-                <p class="pull-right">
-                    {{$branch->nama}},{{$date}} <br>
-                    Manager Cabang, <br><br><br><br>
-                    <strong>{{$branch->pimpinan}}</strong>
+                <p class="pull-right sign">
+                    {{$branch->nama}},{{$date->day.' '.$date->monthName.' '.$date->year}} <br>
+                    {{$user->employee->jabatan}}, <br><br><br><br>
+                    <strong>{{$user->employee->nama}}</strong>
                 </p>
             </div>
         </div>

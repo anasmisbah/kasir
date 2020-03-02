@@ -78,7 +78,7 @@
                 <p class="pull-right sign">
                     {{$branch->nama}}, {{$date->day.' '.$date->monthName.' '.$date->year}} <br>
                     {{$user->employee->jabatan}}, <br><br><br><br>
-                    <strong>{{$user->employee->nama}}</strong>
+                    <strong>{{$user->employee->br}}</strong>
                 </p>
             </div>
         </div>
