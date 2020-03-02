@@ -108,6 +108,17 @@
         .border-bawah {
             border-bottom: 2px solid black !important;
         }
+        .title{
+            font-size: 14pt;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
     </style>
 </head>
 
@@ -115,39 +126,40 @@
     <div class="container">
 
         <div class="row">
-            <div style="padding-left:20px" class="column-6">
-                <h3 style="padding-top:-20px;">NOTA BON</h3>
-                <h4 class="mt-1" style="text-transform:uppercase">{{$app->toko}}</h4>
-                <div>{{$app->alamat}}</div>
+            <div style="padding-left:20px" class="column-5">
+                <div style="margin-top:0px;" class="title">NOTA BON</div>
+                <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
+                <div style="margin-top:5px">{{$app->alamat}}</div>
                 <div>{{$app->telepon}}</div>
 
             </div>
             <div class="column-2" style="text-align:right">
-                <p>No. Nota Bon:</p>
-                <p>Tanggal:</p>
-                <p>Pelanggan:</p>
-                <p>Alamat:</p>
+                <div>No. Nota Bon:</div>
+                <div>Tanggal:</div>
+                <div>divelanggan:</div>
+                <div>Alamat:</div>
             </div>
-            <div class="column-5" style="margin-left:20px">
-                <p>{{$bill->no_nota_kas}}</p>
-                <p>{{$bill->tanggal_nota->format('d F Y | h:i:s')}} WIB</p>
-                <p>{{$bill->customer->nama}}</p>
-                <p>{{$bill->customer->alamat}}
-                </p>
-                <p>{{$bill->customer->telepon}}</p>
+            <div class="column-4" style="margin-left:10px">
+                <div>{{$bill->no_nota_kas}}</div>
+                <div>{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year.' | '.$bill->tanggal_nota->format('h:i:s')}} WIB</div>
+                <div>{{$bill->customer->nama}}</div>
+                <div>{{$bill->customer->alamat}}
+                </div>
+                <div>{{$bill->customer->telepon}}</p>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-top:10px">
             <div class="col-md-12">
                 <table class="no-margin table table-hover" id="table">
                     <thead>
                         <tr>
-                            <th width="15%" class="border border-bawah text-center">No Nota Kas</th>
+                            <th width="18%" class="border border-bawah text-center">No Nota Kas</th>
                             <th width="25%"class="border border-bawah text-center">Tanggal nota Kas</th>
                             <th width="25%" class="border border-bawah text-center">Sub Total Nota Kas</th>
                             <th width="10%" class="border border-bawah text-center">Diskon</th>
-                            <th width="25%" class="border border-bawah text-center">Total Nota Kas</th>
+                            <th width="2%"></th>
+                            <th width="13%" class="border border-bawah text-center">Total Nota Kas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,35 +173,62 @@
                         @endforeach
                         <tr>
                             <td class="border-bawah text-center">{{$bill->no_nota_kas}}</td>
-                            <td class="border-bawah text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
-                            <td class="border-bawah text-center" >Rp {{$subtotal}}</td>
-                            <td class="border-bawah text-center" width="10%">Rp {{$subtotal-$bill->total_nota}}</td>
-                            <td class="border-bawah text-center">Rp {{$bill->total_nota}},-</td>
+                            <td class="border-bawah text-center">{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year}}</td>
+                            <td class="border-bawah text-center" >Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
+                            <td class="border-bawah text-center" width="10%">Rp 0,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
-                            <td class="text-left" colspan="2">Status:<b><i>{{strtoupper($bill->status)}}</i></b></td>
-                            <td><span>Hormat Kami,</span></td>
+                            <td>Status: <strong> <i> {{strtoupper($bill->status)}}</strong></i></td>
+                            <td ><span>Hormat Kami,</span></td>
+                            <td></td>
                             <td class="border-bawah">Uang Muka</td>
-                            <td class="border-bawah">Rp {{$bill->jumlah_uang_nota}},-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td class="border-bawah" ><strong>Piutang</strong></td>
-                            <td class="border-bawah"> <strong>Rp {{ abs($bill->kembalian_nota)}} ,-</strong></td>
+                            <td class="border-bawah text-right" ><strong>Rp</strong></td>
+                            <td class="border-bawah text-right"> <strong><span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
-                            <td style="border: none"></td>
                             <td style="border: none;"><b> {{$bill->user->employee->nama}} </b></td>
+                            <td style="border: none"></td>
                             <td class="border-bawah">Pembayaran</td>
-                            <td class="border-bawah">Rp {{abs($bill->kembalian_nota)}} ,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:'.',
+            divideThousand:true
+        });
+    });
+</script>
+    <script>
+        window.addEventListener("afterprint", function() {
+            history.back();
+        });
+        $("#body_print").ready(function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>

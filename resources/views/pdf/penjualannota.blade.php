@@ -140,7 +140,7 @@
                     <div>Alamat:</div>
 
                 </div>
-                <div class="column-4" style="margin-left:20px">
+                <div class="column-4" style="margin-left:10px">
                     <div>{{$bill->no_nota_kas}}</div>
                     <div>{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}} | {{$bill->tanggal_nota->format('h:i:s')}} WIB</div>
                     <div>{{$bill->customer->nama}}</div>
@@ -194,7 +194,7 @@
 
                         <tr class="text-center">
                             <td>Status:</td>
-                            <td  style="text-align:left"><span> <strong>{{strtoupper($bill->status)}}</strong></span><span style="margin-left:60px">Hormat Kami,</span></td>
+                            <td  style="text-align:left"><span> <strong><i>{{strtoupper($bill->status)}}</i></strong></span><span style="margin-left:60px">Hormat Kami,</span></td>
                             <td></td>
                             <td class="border-bawah">Sub Total</td>
                             <td class="border-bawah text-right">Rp</td>
