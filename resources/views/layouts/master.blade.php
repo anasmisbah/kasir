@@ -111,11 +111,11 @@
           <li class="c-header-nav-item d-md-down-none mx-2">
             <a class="c-header-nav-link" href="#">Hallo {{auth()->user()->employee->nama}}</a>
           </li>
-          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
+          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
             <div class="c-avatar"><img class="c-avatar-img" src="{{asset('/storage/'.auth()->user()->employee->foto)}}" alt="user@email.com"></div></a>
           </li>
-          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
+          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
             <i class="fa fa-power-off"></i>
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -140,7 +140,7 @@
           </div>
         </main>
         <footer class="c-footer">
-          <div class="m-auto" style=" font-size:12 ">Copyright 2020 | Developed with &hearts;</div>
+          <div class="m-auto" style=" font-size:12px ">Copyright 2020 | Developed with &hearts;</div>
         </footer>
       </div>
     </div>
