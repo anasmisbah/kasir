@@ -13,66 +13,80 @@
         .border-bawah{
             border-bottom: 2px solid black !important;
         }
+        body{
+            font-family: "Arial", Helvetica, sans-serif;
+        }
+        .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
+        .title{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .sign{
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row" >
-            <h4 class="text-center">LAPORAN PIUTANG</h4>
-            <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
-
+            <div class="text-center title">LAPORAN PIUTANG</div>
+            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
+            <div class="text-center title">TANGGAL {{$range}}</div>
             <br>
             <br>
-
-            <table class="table table-hover text-center">
-                <tr>
-                    <th  class="border">No.</th>
-                    <th  class="border">No Nota Bon</th>
-                    <th  class="border">Nama Pelanggan</th>
-                    <th  class="border">Alamat</th>
-                    <th  class="border">Hutang</th>
-                    <th  class="border">Cabang</th>
+            <table class="table table-hover">
+                <tr >
+                    <th class="text-center" >No.</th>
+                    <th class="text-center" >No Nota Bon</th>
+                    <th class="text-center">Tanggal</th>
+                    <th class="text-center" >Nama Pelanggan</th>
+                    <th class="text-center" width="30%">Alamat</th>
+                    <th class="text-center" width="2%"></th>
+                    <th class="text-center" width="10%">Hutang</th>
+                    <th class="text-center" >Cabang</th>
                 </tr>
                 <tbody>
                     @php
                         $total = 0;
                     @endphp
                     @foreach ($bills as $bill)
-                        @if ($loop->iteration == 1)
+                        @if ($loop->iteration == count($bills))
                         <tr>
-                            <td class="border">{{$loop->iteration}}</td>
-                            <td class="border">{{$bill->customer->nama}}</td>
-                            <td class="border">{{$bill->no_nota_kas}}</td>
-                            <td class="border">{{$bill->customer->alamat}}</td>
-                            <td class="border">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
-                            <td class="border">{{$bill->branch->nama}}</td>
-                        </tr>
-                        @elseif ($loop->iteration == count($customers))
-                        <tr>
-                            <td class="border-bawah">{{$loop->iteration}}</td>
+                            <td class="border-bawah text-center">{{$loop->iteration}}</td>
+                            <td class="border-bawah text-center">{{$bill->no_nota_kas}}</td>
+                            <td class="border-bawah text-center"> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                             <td class="border-bawah">{{$bill->customer->nama}}</td>
-                            <td class="border-bawah">{{$bill->no_nota_kas}}</td>
                             <td class="border-bawah">{{$bill->customer->alamat}}</td>
-                            <td class="border-bawah">Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
-                            <td class="border-bawah">{{$bill->branch->nama}}</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{  abs($bill->kembalian_nota)}}</span>,-</td>
+                            <td class="border-bawah text-center">{{$bill->branch->nama}}</td>
                         </tr>
                         @else
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$bill->no_nota_kas}}</td>
+                            <td class="text-center"> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                             <td>{{$bill->customer->nama}}</td>
-                            <td>{{$bill->no_nota_kas}}</td>
                             <td>{{$bill->customer->alamat}}</td>
-                            <td>Rp.{{  $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</td>
-                            <td>{{$bill->branch->nama}}</td>
+                            <td class=" text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{  abs($bill->kembalian_nota)}}</span>,-</td>
+                            <td class="text-center">{{$bill->branch->nama}}</td>
                         </tr>
                         @endif
                         @php
                             $total += abs($bill->kembalian_nota)
                         @endphp
                     @endforeach
-                    <tr class="text-center border-bawah">
-                        <td colspan="4"><strong>JUMLAH</strong></td>
-                        <td> <strong>Rp {{$total}},-</strong></td>
+                    <tr class="border-bawah">
+                        <td class="text-center" colspan="5"><strong>JUMLAH</strong></td>
+                        <td class="text-right"> <strong>Rp</strong></td>
+                        <td class="text-right"> <strong><span class="harga">{{$total}}</span>,-</strong></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -80,13 +94,35 @@
         </div>
         <div class="row" style="margin-top:10px">
             <div class="col">
-                <p class="pull-right">
-                    {{$branch->nama}},{{$date}} <br>
-                    Manager Cabang, <br><br><br><br>
+                <p class="pull-right sign">
+                    {{$branch->nama}}, {{$dateNow->day.' '.$dateNow->monthName.' '.$dateNow->year}} <br>
+                    {{$user->employee->jabatan}}, <br><br><br><br>
                     <strong>{{$branch->pimpinan}}</strong>
                 </p>
             </div>
         </div>
     </div>
+        <!-- jQuery -->
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/adminlte/dist/js/adminlte.min.js"></script>
+<script src="/adminlte/plugins/number-divider.min.js"></script>
+<script>
+    $(function () {
+        // Number Divide
+        $(".harga").divide({
+            delimiter:'.',
+            divideThousand:true
+        });
+    });
+</script>
+    <script>
+        window.addEventListener("afterprint", function() {
+            history.back();
+        });
+        $("#body_print").ready(function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>

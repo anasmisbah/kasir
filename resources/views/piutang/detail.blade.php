@@ -109,7 +109,7 @@
                 <td width="50%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
                 <td class="text-center">Rp <span class="harga">{{$subtotal}}</span>,-</td>
                 <td class="text-center" width="15%">Rp <span class="harga">{{$subtotal-$bill->total_nota}}</span>,-</td>
-                <td class="border-atas  text-right">Rp</td>
+                <td class="border-atas  text-right"> <b> Rp</b></td>
                 <td class="text-right"> <b><span class="harga">{{$bill->total_nota}}</span>,-</b></td>
               </tr>
               <tr class="text-center">

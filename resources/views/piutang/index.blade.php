@@ -94,9 +94,9 @@
                     @endif
 
                     <div class="col-md-3">
-                      <input id="downloadble" type="hidden" name="pdf">
+                      <input id="downloadble" type="hidden" name="print">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
-                      <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                      <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
                       <a href="javascript:void(0)" onClick="location.reload(false);" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
@@ -196,9 +196,9 @@
         $('#form-filter').attr('target','_self')
         $('#form-filter').submit()
     })
-    $('#btn-pdf').click((e)=>{
+    $('#btn-print').click((e)=>{
         e.preventDefault()
-        $('#downloadble').val('download')
+        $('#downloadble').val('bill')
         $('#form-filter').attr('target','_blank')
         $('#form-filter').submit()
         $('#downloadble').val('')

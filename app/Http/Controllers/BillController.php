@@ -475,7 +475,7 @@ class BillController extends Controller
         $user = Auth::user();
         $app = Application::first();
         $branch = $user->employee->branch;
-        $dateNow = Carbon::now()->format('d F Y');
+        $dateNow = Carbon::now();
         if ($user->level_id == 1) {
             if ($request->hari) {
                 $explodedatetime = explode(' ',$request->hari);
@@ -505,7 +505,10 @@ class BillController extends Controller
                 return $pdf->stream();
                 // return $pdf->download('piutang.pdf');
             }else if($request->print){
-                return view('pdf.piutang',compact('bills','app','dateNow','branch'));
+                $from = Carbon::create($explodeddateFrom[2],$explodeddateFrom[0],$explodeddateFrom[1]);
+                        $to = Carbon::create($explodeddateTo[2],$explodeddateTo[0],$explodeddateTo[1]);
+                        $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
+                return view('pdf.piutang',compact('bills','app','dateNow','branch','range','user'));
             }
         }else{
             if ($request->hari) {
@@ -566,7 +569,7 @@ class BillController extends Controller
             'kembalian_nota'=>0,
             'updated_by'=>$user->id
         ]);
-        return redirect()->route('penjualan.detail',$bill->id);
+        return redirect()->route('penjualan.detail',$newBill->id);
     }
 
     public function piutangFilter(Request $request)
