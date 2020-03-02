@@ -32,6 +32,10 @@
     .page-link:hover{
         color: #39f;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -57,7 +61,7 @@
             <thead>
               <tr>
                 <th style="width: 5%" class="py-2 text-left">No.</th>
-                <th style="width: 50%" class="py-2 text-left">Barang</th>
+                <th style="width: 50%" class="py-2 text-left">Nama Barang</th>
                 <th style="width: 20%" class="py-2 text-left">Jenis</th>
                 <th style="width: 15%" class="py-2 text-right">Harga</th>
               </tr>
