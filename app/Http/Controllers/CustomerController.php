@@ -38,8 +38,8 @@ class CustomerController extends Controller
                     return $pdf->stream();
                     // return $pdf->download('pelanggan.pdf');
                 }elseif ($request->print) {
-                    $date=Carbon::now()->format('d F Y');
-                    return view('pdf.pelanggan',compact('customers','branch','app','date'));
+                    $date=Carbon::now();
+                    return view('pdf.pelanggan',compact('customers','branch','app','date','user'));
                 }
             }else{
                 $customers = Customer::all();

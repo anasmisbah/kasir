@@ -13,46 +13,57 @@
         .border-bawah{
         border-bottom: 2px solid black !important;
         }
+        .table th{
+            border-top: 2px solid black !important;
+            border-bottom: 2px solid black !important;
+        }
+        body{
+            font-family: "Arial", Helvetica, sans-serif;
+        }
+        .title{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .table{
+            font-size: 12px;
+        }
+        .sign{
+            font-size: 12px;
+        }
     </style>
 </head>
 <body id="body_print">
     <div class="container">
-        <div class="row mt-3" >
-            <h4 class="text-center">DAFTAR PELANGGAN</h4>
-            <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
-
+        <div class="row" style="padding-top:10px">
+            <div class="text-center title">DAFTAR PELANGGAN</div>
+            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
             <br>
             <br>
-
             <table class="table table-hover text-center">
                     <tr>
-                        <th  class="border">No.</th>
-                        <th  class="border">Nama</th>
-                        <th  class="border">Alamat</th>
-                        <th  class="border">Telepon</th>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Alamat</th>
+                        <th class="text-center">Telepon</th>
+                        <th class="text-center">Cabang</th>
                     </tr>
                 <tbody>
                     @foreach ($customers as $customer)
-                        @if ($loop->iteration == 1)
-                        <tr>
-                            <td class="border">{{$loop->iteration}}</td>
-                            <td class="border">{{$customer->nama}}</td>
-                            <td class="border">{{$customer->alamat}}</td>
-                            <td class="border">{{$customer->telepon}}</td>
-                        </tr>
-                        @elseif ($loop->iteration == count($customers))
+                        @if ($loop->iteration == count($customers))
                         <tr>
                             <td class="border-bawah">{{$loop->iteration}}</td>
-                            <td class="border-bawah">{{$customer->nama}}</td>
-                            <td class="border-bawah">{{$customer->alamat}}</td>
+                            <td class="border-bawah text-left">{{$customer->nama}}</td>
+                            <td class="border-bawah text-left">{{$customer->alamat}}</td>
                             <td class="border-bawah">{{$customer->telepon}}</td>
+                            <td class="border-bawah">{{$customer->branch->nama}}</td>
                         </tr>
                         @else
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$customer->nama}}</td>
-                            <td>{{$customer->alamat}}</td>
+                            <td class="text-left">{{$customer->nama}}</td>
+                            <td class="text-left">{{$customer->alamat}}</td>
                             <td>{{$customer->telepon}}</td>
+                            <td>{{$customer->branch->nama}}</td>
                         </tr>
                         @endif
                     @endforeach
@@ -61,9 +72,9 @@
         </div>
         <div class="row" style="margin-top:10px">
             <div class="col">
-                <p class="pull-right">
-                    {{$branch->nama}},{{$date}} <br>
-                    Manager Cabang, <br><br><br><br>
+                <p class="pull-right sign">
+                    {{$branch->nama}},{{$date->day.' '.$date->monthName.' '.$date->year}} <br>
+                    {{$user->employee->jabatan}}, <br><br><br><br>
                     <strong>{{$branch->pimpinan}}</strong>
                 </p>
             </div>
