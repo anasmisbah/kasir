@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-
+    @php
+    use App\Application;
+    $app = Application::first();
+    @endphp
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +35,7 @@
         <div class="card">
             <div class="card-body rounded">
                     <div class="login-logo">
-                        <b>LOGO</b>
+                        <img height="100px" src="{{asset('/storage/'.$app->logo)}}" alt="">
                     </div>
 
                 <form action="{{ route('login') }}" method="post">
@@ -57,7 +60,7 @@
                         <!-- /.col -->
                         <div class="col">
                             <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-                            <p class="text-center mt-5 mb-0"> footernya</p>
+                            <p class="text-center mt-5 mb-0" style=" font-size:12px "> Copyright 2020 | Developed with &hearts;</p>
                         </div>
                         <!-- /.col -->
                     </div>
