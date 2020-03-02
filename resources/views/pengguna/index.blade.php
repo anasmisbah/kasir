@@ -59,7 +59,7 @@
                     <a class="btn btn-info"  href="{{ route('pengguna.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
-            <div class="col-4 pt-3 pb-3 mb-4" style="background:#EBEBEB">
+            <div class="col-5 pt-3 pb-3 mb-4" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
                     <div class="row">
                         <div class="col-md-2">

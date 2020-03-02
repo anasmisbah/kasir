@@ -62,7 +62,7 @@
                     </div>
                 </div>
           @if (auth()->user()->level_id == 1)
-            <div class="col-4 pt-3 pb-3 mb-4" style="background:#EBEBEB">
+            <div class="col-5 pt-3 pb-3 mb-4" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('pelanggan.index')}}" method="GET">
                     <div class="row">
                         <div class="col-md-2">

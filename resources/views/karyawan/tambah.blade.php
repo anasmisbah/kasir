@@ -14,6 +14,26 @@
     .card-title{
         color: black;
     }
+    div.custom-input {
+
+        max-width: 120px;
+        height: 35px;
+        content: attr(title)"asasa";
+        background-color: #3399fe !important;
+        color: #fff;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+
+    .custom-input input {
+        margin-top: 0px;
+        display: block !important;
+        width: 120px; !important;
+        height: 35px !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -38,13 +58,17 @@
                 @csrf
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Foto</label><br>
-                        <div class="col-sm-4">
+                        <div class="col-sm-">
                             <img src="{{asset('img/default.png')}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
-                            <div class="btn btn-info btn-file">
-                                Unggah Foto
-                                <input type="file" id="foto" name="foto">
-                            </div>
                         </div>
+                        <div class="col-2 pt-5">
+                            <div class="custom-input text-center" style="font-size:12px">
+                                    <input type="file" id="foto" name="foto">
+                                    <p style="z-index:9999; margin-top:-28px">
+                                            Unggah Foto
+                                        </p>
+                                    </div>
+                                </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Nama</label>
