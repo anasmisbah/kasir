@@ -101,5 +101,10 @@ class ItemController extends Controller
         return redirect()->route('barang.index');
     }
 
+    public function print()
+    {
+        return view('print.barang');
+    }
+
 
 }

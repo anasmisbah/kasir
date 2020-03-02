@@ -53,7 +53,7 @@
                   <h4 class="card-title mb-0">Daftar Barang</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <a class="btn btn-info" href="{{ route('barang.tambah') }}"><i class="fa fa-print"></i></a>
+                    <a class="btn btn-info" href="{{ route('barang.print') }}" target="_blank"><i class="fa fa-print"></i></a>
                     <a class="btn btn-info"  href="{{ route('barang.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
               </div>

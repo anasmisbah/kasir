@@ -23,7 +23,7 @@
         <div class="row mt-4" >
             <h4 class="text-center">LAPORAN PENJUALAN</h4>
             <h4 class="text-center">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</h4>
-            <h4 class="text-center">Tahun {{$year->year}}</h4>
+            <h4 class="text-center">TAHUN {{$year->year}}</h4>
             <br>
             <br>
 
@@ -107,5 +107,16 @@
             </div>
         </div>
     </div>
+    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/adminlte/dist/js/adminlte.min.js"></script>
+    <script>
+        window.addEventListener("afterprint", function() {
+            history.back();
+        });
+        $("#body_print").ready(function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>

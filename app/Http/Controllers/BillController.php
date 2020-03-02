@@ -27,7 +27,7 @@ class BillController extends Controller
         $bulan = [];
         $tahun =[];
         $bills = [];
-        $dateNow = Carbon::now()->format('d F Y');
+        $dateNow = Carbon::now();
         foreach ($billForDate as $key => $bill) {
             $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
             $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
@@ -63,6 +63,12 @@ class BillController extends Controller
                         $pdf = PDF::loadView('pdf.penjualan_hari', $data);
                         return $pdf->stream();
                         // return $pdf->download('penjualan.pdf');
+                    }
+                    if($request->print){
+                        $from = Carbon::create($explodeddateFrom[2],$explodeddateFrom[0],$explodeddateFrom[1]);
+                        $to = Carbon::create($explodeddateTo[2],$explodeddateTo[0],$explodeddateTo[1]);
+                        $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
+                        return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch','range','user'));
                     }
                 }else if($request->filter === "bulan"){
                     if ($request->cabang == "0" && $request->status == "0") {
@@ -120,7 +126,7 @@ class BillController extends Controller
                     }
                     $month = Carbon::now()->month($request->bulan);
                     if($request->print){
-                        return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month'));
+                        return view('pdf.penjualan_bulan',compact('app','dateNow','branch','data','month','user'));
                     }
                     if ($request->pdf) {
                         $data = [

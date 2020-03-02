@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
         Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
         Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
+        Route::get('/barang/print','ItemController@print')->name('barang.print');
 
         Route::get('/jenis', 'CategoryController@index')->name('jenis.index');
         Route::get('/jenis/tambah', 'CategoryController@create')->name('jenis.tambah');

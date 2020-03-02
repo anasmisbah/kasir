@@ -67,11 +67,11 @@
     $(function () {
         // Number Divide
         $(".harga").divide({
-            delimiter:',',
+            delimiter:'.',
             divideThousand:true
         });
     });
-    </script>
+</script>
 <script>
     $('#delete').click(()=>{
       swal({
