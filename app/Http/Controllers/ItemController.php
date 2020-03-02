@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Item;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Application;
+
 class ItemController extends Controller
 {
     public function index()
@@ -103,7 +106,11 @@ class ItemController extends Controller
 
     public function print()
     {
-        return view('print.barang');
+        $items = Item::all();
+        $dateNow = Carbon::now();
+        $user = Auth::user();
+        $app = Application::first();
+        return view('print.barang',compact('items','dateNow','user','app'));
     }
 
 
