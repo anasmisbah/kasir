@@ -11,6 +11,16 @@
     .btn-warning:hover{
         color: white;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .border-bawah{
+        border-bottom: 1px solid black !important;
+    }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
     </style>
 @endpush
 @section('breadcumb')
@@ -77,67 +87,71 @@
               </tr>
             </tbody>
           </table>
+          <table class=" table table-stripped text-center" id="table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Harga Satuan (Kg)</th>
+                <th>Qty(Kg)</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+              $subtotal = 0;
+              @endphp
+              @foreach ($bill->transaction as $trans)
+              <tr>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td width="50%">{{$trans->supply->item->nama}}</td>
+                <td class="text-center">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
+                <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
+                <td class="text-center">Rp <span class="harga">{{$trans->total_harga}}</span> ,-</td>
+              </tr>
+              @php
+              $subtotal+=$trans->total_harga
+              @endphp
+              @endforeach
+
+              <tr class="text-center">
+                <td class="border-atas"></td>
+                <td class="border-atas"></td>
+                <td class="border-atas"></td>
+                <td class="border-atas">Sub Total</td>
+                <td class="border-atas">Rp <span class="harga">{{$subtotal}}</span>,-</td>
+              </tr>
+              <tr class="text-center">
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td class="border-atas"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
+                <td class="border-atas"><b>TOTAL</b></td>
+                <td class="border-atas"><b>Rp <span class="harga">{{$bill->total_nota}}</span>,-</b></td>
+              </tr>
+              <tr class="text-center">
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td class="border-atas"></td>
+                <td class="border-atas">Uang Muka</td>
+                <td class="border-atas">Rp <span class="harga">{{$bill->jumlah_uang_nota}}</span>  ,-</td>
+              </tr>
+              <tr class="text-center">
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td style="border: none"></td>
+                <td class="border-atas border-bawah">Piutang</td>
+                @if ($bill->kembalian_nota < 0)
+                  <td class="border-atas border-bawah">Rp <span class="harga">{{ abs($bill->kembalian_nota)}}</span>,-</td>
+                @else
+                  <td class="border-atas border-bawah">Rp 0,-</span></td>
+                @endif
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- /.card-body -->
 
-        <table class="no-margin table table-stripped text-center" id="table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Barang</th>
-              <th>Harga Satuan</th>
-              <th>Qty(Kg)</th>
-              <th>Jumlah</th>
-            </tr>
-          </thead>
-          <tbody>
-            @php
-            $subtotal = 0;
-            @endphp
-            @foreach ($bill->transaction as $trans)
-            <tr>
-              <td class="text-center">{{$loop->iteration}}</td>
-              <td width="50%">{{$trans->supply->item->nama}}</td>
-              <td class="text-center">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
-              <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
-              <td class="text-center">Rp <span class="harga">{{$trans->total_harga}}</span> ,-</td>
-            </tr>
-            @php
-            $subtotal+=$trans->total_harga
-            @endphp
-            @endforeach
-
-            <tr class="text-center">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>Sub Total</td>
-              <td>Rp <span class="harga">{{$subtotal}}</span> ,-</td>
-            </tr>
-            <tr class="text-center">
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
-              <td><b>TOTAL</b></td>
-              <td>Rp <span class="harga">{{$bill->total_nota}}</span>  ,-</td>
-            </tr>
-            <tr class="text-center">
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td></td>
-              <td>Uang Muka</td>
-              <td>Rp <span class="harga">{{$bill->jumlah_uang_nota}}</span>  ,-</td>
-            </tr>
-            <tr class="text-center">
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td style="border: none"></td>
-              <td>Piutang</td>
-              <td>Rp <span class="harga">{{ $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota).",-":"-"}}</span>  ,-</td>
-            </tr>
-          </tbody>
-        </table>
         <div class="card-footer text-right">
           <span style="font-size: 12px">
             <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>

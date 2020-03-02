@@ -36,6 +36,16 @@
     .filter{
         padding-right: 0rem !important;
     }
+    .table thead th{
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .table tfoot th{
+        border-top: 1px solid black;
+    }
+    .border-bawah{
+        border-bottom: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -53,25 +63,25 @@
                 <h4 class="card-title mb-0">Daftar Penjualan</h4>
                 </div>
             </div>
-            <div class="col-12 pt-2 pb-2 mb-2" style="background:#EBEBEB">
+            <div class="col-12 pt-2 pb-2 mb-4 mt-2" style="background:#EBEBEB">
                 <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <div class="custom-control custom-radio">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
-                        <label for="radiohari" class="custom-control-label">Hari:</label>
+                        <label for="radiohari" class="custom-control-label">Per Hari</label>
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="custom-control custom-radio">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}}>
-                        <label for="radiobulan" class="custom-control-label">Bulan:</label>
+                        <label for="radiobulan" class="custom-control-label">Per Bulan</label>
                       </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 pr-0">
                       <div class="custom-control custom-radio">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
-                        <label for="radiotahun" class="custom-control-label">Tahun:</label>
+                        <label for="radiotahun" class="custom-control-label">Per Tahun</label>
                       </div>
                     </div>
                     @if (auth()->user()->level_id == 1)
@@ -89,17 +99,15 @@
 
                   </div>
                   <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
+                    <div class="col-md-4 pr-0">
                         <div class="input-group">
                           <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="filter form-control form-control-sm float-right " id="tanggal">
                           <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                           </div>
-                        </div>
                       </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 pr-0">
                       <select class="form-control form-control-sm" name="bulan">
                         <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Jan</option>
                         <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Feb</option>
@@ -115,14 +123,14 @@
                         <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Des</option>
                       </select>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 pr-0">
                       <select class="filter form-control form-control-sm" name="bulantahun">
                         @foreach ($tahun as $key=> $item)
                         <option value="{{$key}}" {{Request::input('filter') == 'bulan' ?Request::input('bulantahun') == $key ?'selected':'':''}}>{{$key}}</option>
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 pr-0">
                       <select class="filter form-control form-control-sm" name="tahun">
                         @foreach ($tahun as $key=> $item)
                         <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
@@ -130,7 +138,7 @@
                       </select>
                     </div>
                     @if (auth()->user()->level_id == 1)
-                    <div class="col-md-2">
+                    <div class="col-md-2 pr-0">
                       <select class="form-control form-control-sm" name="cabang">
                         <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                         @foreach ($branches as $branch)
@@ -157,27 +165,29 @@
                     </div>
                     @endif
 
-                    <div class="col-md-2">
+                    <div class="col-md-1 p-0">
                       <input id="downloadble" type="hidden" name="pdf">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                       <button id="btn-pdf" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                      <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-print"></i></a>
+                      <a href="#" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
                 </form>
             </div>
-          @if (!Request::input('filter') || Request::input('filter') == "hari" || Request::input('filter') == "cabang"|| Request::input('filter') == "status")
-          <table id="example1" style="width:100%" class="table table-striped display compact dt-responsive nowrap">
+          @if ( Request::input('filter') == "hari")
+          <table id="example1" style="width:100%" class="table table-striped display compact">
             <thead>
-              <tr>
-                <th class="py-2">No.</th>
-                <th class="py-2">No. Nota Kas</th>
-                <th class="py-2">Tanggal</th>
-                <th class="py-2">Pelanggan</th>
-                <th class="py-2 text-right">Total</th>
-                <th class="py-2 text-right">Piutang</th>
-                <th class="py-2">Status</th>
-                <th class="py-2">Cabang</th>
+              <tr class="header">
+                <th style="width:5%" class="py-2">No.</th>
+                <th style="width:15%" class="py-2">No. Nota Kas</th>
+                <th style="width:15%" class="py-2">Tanggal</th>
+                <th style="width:25%" class="py-2">Pelanggan</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="min-width:2%" class="py-2 text-center">Total</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="min-width:2%" class="py-2 text-center">Piutang</th>
+                <th style="width:10%" class="py-2">Status</th>
+                <th style="width:10%" class="py-2">Cabang</th>
               </tr>
             </thead>
             <tbody>
@@ -192,11 +202,13 @@
                 <td class="py-2"><a class="text-info" href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
                 <td class="py-2">{{$bill->tanggal_nota->format('d F Y')}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td class="py-2 text-right">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
+                <td class="py-2  text-right">Rp</td>
+                <td class="py-2  text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
+                <td class="py-2  text-right">Rp</td>
                 @if($bill->kembalian_nota < 0)
-                    <td class="py-2 text-right">Rp <span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                    <td class="py-2 text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                 @else
-                    <td class="py-2 text-right">-</td>
+                    <td class="py-2 text-right">0,-</td>
                 @endif
                   <td class="py-2">{{strtoupper($bill->status)}}</td>
                   <td class="py-2"><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
@@ -215,34 +227,41 @@
                 <th></th>
                 <th></th>
                 <th>Jumlah</th>
-                <th class="text-right">Rp <span class="harga">{{$total}}</span>,-</th>
-                <th class="text-right">Rp <span class="harga">{{$totalpiutang}}</span>,-</th>
+                <th class="py-2  text-right">Rp </th>
+                <th class="text-right"><span class="harga">{{$total}}</span>,-</th>
+                <th class="py-2  text-right">Rp </th>
+                <th class="text-right"><span class="harga">{{$totalpiutang}}</span>,-</th>
                 <th></th>
                 <th></th>
               </tr>
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Jumlah Kas</th>
-                <th class="text-right">Rp <span class="harga">{{$total-$totalpiutang}}</span>,-</th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah">Jumlah Kas</th>
+                <th class="py-2  text-right border-bawah">Rp </th>
+                <th class="text-right border-bawah"><span class="harga">{{$total-$totalpiutang}}</span>,-</th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
               </tr>
             </tfoot>
           </table>
           @elseif(Request::input('filter') == "bulan" || Request::input('filter') == "tahun")
-          <table id="table2" style="width:100%" class="table table-bordered table-striped display compact dt-responsive nowrap">
+          <table id="table2" style="width:100%" class="table table-striped display compact dt-responsive nowrap">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>{{Request::input('filter') == "bulan"?"Tanggal":"Bulan"}}</th>
-                <th>Penjualan</th>
-                <th class="text-right">Nominal</th>
-                <th>Piutang</th>
-                <th class="text-right">Nominal</th>
-                <th>Kas</th>
+                <th style="width:5%" class="text-center">No.</th>
+                <th style="width:20%" class="text-center">{{Request::input('filter') == "bulan"?"Tanggal":"Bulan"}}</th>
+                <th style="width:20%" class="text-center">Penjualan</th>
+                <th style="width:2%" class="text-right"></th>
+                <th style="min-width:5%" class="text-center">Nominal</th>
+                <th style="width:10%" class="text-center">Piutang</th>
+                <th style="width:2%" class="text-right"></th>
+                <th style="min-width:5%" class="text-center">Nominal</th>
+                <th style="width:2%" class="text-right"></th>
+                <th style="min-width:5%" class="text-center">Kas</th>
               </tr>
             </thead>
             <tbody>
@@ -255,13 +274,16 @@
               @endphp
               @foreach ($data as $item)
               <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$item['tanggal']}}</td>
-                <td>{{$item['penjualan']}}</td>
-                <td class="text-right">Rp {{$item['nominal_penjualan']}},-</td>
-                <td>{{$item['piutang']}}</td>
-                <td class="text-right">Rp <span class="harga">{{abs($item['nominal_piutang'])}}</span>,-</td>
-                <td class="text-right">Rp {{$item['kas']}},-</td>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td class="text-center">{{$item['tanggal']}}</td>
+                <td class="text-center">{{$item['penjualan']}}</td>
+                <td class="text-right">Rp</td>
+                <td class="text-right"><span class="harga">{{$item['nominal_penjualan']}}</span>,-</td>
+                <td class="text-center">{{$item['piutang']}}</td>
+                <td class="text-right">Rp</td>
+                <td class="text-right"><span class="harga">{{abs($item['nominal_piutang'])}}</span>,-</td>
+                <td class="text-right">Rp</td>
+                <td class="text-right"><span class="harga">{{$item['kas']}}</span>,-</td>
               </tr>
               @php
               $totalpenjualan +=$item['penjualan'] ;
@@ -275,13 +297,70 @@
 
             <tfoot>
               <tr>
+                <th class="border-bawah"></th>
+                <th class="border-bawah text-center">JUMLAH</th>
+                <th class="border-bawah text-center">{{$totalpenjualan}}</th>
+                <th class="border-bawah text-right">Rp</th>
+                <th class="text-right border-bawah"><span class="harga">{{$totalnominalpenjualan}}</span>,-</th>
+                <th class="border-bawah text-center">{{$totalpiutang}}</th>
+                <th class="border-bawah text-right">Rp</th>
+                <th class="text-right border-bawah"><span class="harga">{{abs($totalnominalpiutang)}}</span>,-</th>
+                <th class="border-bawah text-right">Rp</th>
+                <th class="text-right border-bawah"><span class="harga"> {{$totalkas}}</span>,-</th>
+              </tr>
+            </tfoot>
+          </table>
+          @else
+          <table id="empty_table" style="width:100%" class="table table-striped display compact">
+            <thead>
+              <tr class="header">
+                <th style="width:5%" class="py-2">No.</th>
+                <th style="width:15%" class="py-2">No. Nota Kas</th>
+                <th style="width:15%" class="py-2">Tanggal</th>
+                <th style="width:25%" class="py-2">Pelanggan</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="min-width:2%" class="py-2 text-center">Total</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="min-width:2%" class="py-2 text-center">Piutang</th>
+                <th style="width:10%" class="py-2">Status</th>
+                <th style="width:10%" class="py-2">Cabang</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+              $total = 0;
+              $totalkas = 0;
+              $totalpiutang =0;
+              @endphp
+              <tr>
+                <td class="text-center" colspan="10" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Data Penjualan</td>
+             </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
                 <th></th>
-                <th>JUMLAH</th>
-                <th>{{$totalpenjualan}}</th>
-                <th class="text-right">Rp <span class="harga">{{$totalnominalpenjualan}}</span>,-</th>
-                <th>{{$totalpiutang}}</th>
-                <th class="text-right">Rp <span class="harga">{{abs($totalnominalpiutang)}}</span>,-</th>
-                <th class="text-right">Rp {{$totalkas}},-</th>
+                <th></th>
+                <th></th>
+                <th>Jumlah</th>
+                <th class="py-2  text-right">Rp </th>
+                <th class="text-right"><span class="harga">{{$total}}</span>,-</th>
+                <th class="py-2  text-right">Rp </th>
+                <th class="text-right"><span class="harga">{{$totalpiutang}}</span>,-</th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah">Jumlah Kas</th>
+                <th class="py-2  text-right border-bawah">Rp </th>
+                <th class="text-right border-bawah"><span class="harga">{{$total-$totalpiutang}}</span>,-</th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
+                <th class="border-bawah"></th>
               </tr>
             </tfoot>
           </table>
@@ -308,8 +387,6 @@
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script src="/adminlte/plugins/moment/moment.min.js"></script>
 <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script>
   $(function() {
     $("#example1").DataTable({
@@ -408,5 +485,7 @@
             $('#radiostatus').data('id','0');
         }
     })
+
+
 </script>
 @endpush
