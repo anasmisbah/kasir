@@ -69,10 +69,10 @@
             <tbody>
               @foreach ($items as $item)
               <tr>
-                <td style="width: 5%" class="min-padding text-left">{{ $loop->iteration }}</td>
-                <td style="width: 50%" class="min-padding"><a class="text-info" href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
-                <td style="width: 20%" class="min-padding text-left"><a class="text-info" href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
-                <td style="width: 15%" class="min-padding text-right">Rp <span class="harga">{{$item->harga}}</span>,-</td>
+                <td style="width: 5%" class="py-2 text-left">{{ $loop->iteration }}</td>
+                <td style="width: 50%" class="py-2"><a class="text-info" href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
+                <td style="width: 20%" class="py-2 text-left"><a class="text-info" href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
+                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$item->harga}}</span>,-</td>
               </tr>
               @endforeach
           </table>

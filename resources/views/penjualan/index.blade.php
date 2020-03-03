@@ -46,6 +46,20 @@
     .border-bawah{
         border-bottom: 1px solid black !important;
     }
+    @media (min-width: 768px){
+        .col-md-4 {
+            max-width: 30%;
+        }
+        .col-md-2.butn {
+            max-width: 10% !important;
+        }
+        .col-md-1.thn{
+            min-width: 9.5% !important;
+        }
+        .col-md-2.cbng {
+            max-width: 16% !important;
+        }
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -78,14 +92,14 @@
                         <label for="radiobulan" class="custom-control-label">Per Bulan</label>
                       </div>
                     </div>
-                    <div class="col-md-1 pr-0">
+                    <div class="thn col-md-1 pr-0">
                       <div class="custom-control custom-radio">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
                         <label for="radiotahun" class="custom-control-label">Per Tahun</label>
                       </div>
                     </div>
                     @if (auth()->user()->level_id == 1)
-                    <div class="col-md-2">
+                    <div class="cbng col-md-2">
                         <label for="radiocabang">Cabang</label>
                     </div>
                     <div class="col-md-1">
@@ -130,7 +144,7 @@
                         @endforeach
                       </select>
                     </div>
-                    <div class="col-md-1 pr-0">
+                    <div class="thn col-md-1 pr-0">
                       <select class="filter form-control form-control-sm" name="tahun">
                         @foreach ($tahun as $key=> $item)
                         <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
@@ -138,7 +152,7 @@
                       </select>
                     </div>
                     @if (auth()->user()->level_id == 1)
-                    <div class="col-md-2 pr-0">
+                    <div class="cbng col-md-2 pr-0">
                       <select class="form-control form-control-sm" name="cabang">
                         <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
                         @foreach ($branches as $branch)
@@ -165,7 +179,7 @@
                     </div>
                     @endif
 
-                    <div class="col-md-1 p-0">
+                    <div class="butn col-md-2 p-0">
                       <input id="downloadble" type="hidden" name="print">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                       <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
