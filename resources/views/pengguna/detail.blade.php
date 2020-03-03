@@ -23,7 +23,7 @@
                 <h4 class="card-title mb-0 text-bold">Detail Pengguna</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                <a class="btn btn-danger"  href="{{ route('pengguna.index') }}"><i class="fa fa-times"></i></a>
+                <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
             <table class="table table-striped">

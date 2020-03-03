@@ -45,7 +45,7 @@
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     <a class="btn btn-secondary mr-5" style="width: 78px !important;" id="piutang" href="{{ route('piutang.lunas',$bill->id) }}"><i class="fa fa-check"></i></a>
-                    <a class="btn btn-danger"  href="{{ route('piutang.index') }}"><i class="fa fa-times"></i></a>
+                    <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
           <table class="table table-striped">

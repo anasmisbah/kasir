@@ -52,7 +52,7 @@
                         @method('DELETE')
                         </form>
                     <a class="btn btn-warning mr-5" style="width: 78px !important;" href="" id="delete" ><i class=" fa fa-trash"></i></a>
-                <a class="btn btn-danger"  href="{{ route('penjualan.index') }}"><i class="fa fa-times"></i></a>
+                <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
           <table class="table table-striped">
