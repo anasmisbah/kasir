@@ -3,7 +3,7 @@
 @push('css')
 <style>
     .scrollable {
-        height: 150px !important;
+        height: 165px !important;
         overflow-y: scroll !important
     }
 
@@ -12,14 +12,33 @@
         overflow-y: scroll !important
     }
     .small{
-        margin-left: 3rem;
-
+        margin-left: 0rem;
     }
 
     @media (width:1030px){
         .small{
-            margin-left: 2.5rem;
+            margin-left: 0.5rem;
         }
+    }
+    .form-control.btnadd{
+        width: 80%;
+    }
+    .row.kasir{
+        margin-top: 100px;
+    }
+    .col-4.barang{
+        max-width: 30%;
+    }
+    table thead tr th{
+        border-top: 1px solid black !important;
+        border-bottom: 1px solid black !important;
+    }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
+    .borderan {
+        border-top: 1px solid black !important;
+        border-bottom: 1px solid black !important;
     }
 </style>
 @endpush
@@ -52,7 +71,7 @@
                             <div class="list-group position-relative" id="list-pelanggan">
                             </div>
                         </div>
-                        <button class="btn-sm btn-info create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
+                        <button class="btn-sm btn-primary create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="form-group-sm mt-3">
                         <label for="">Telepon</label>
@@ -69,16 +88,16 @@
         </div>
         <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
-            <div class="border rounded" style="background-color: #f5f6fa; height:75%">
-                <h4 class="text-bold text-center pb-4"  style="height:60%;padding-top:2.5rem">Rp <span class="inputharga jml">0</span>,-</h4>
+            <div class="border rounded text-center" style="background-color: #f5f6fa; height:75%;padding-top:2.5rem;">
+                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="inputharga harga jml">0</span>,-</span>
             </div>
         </div>
         <div class="col-2 pb-2 " style="max-width:13%;padding-top:1.8rem">
         <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
-            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-info btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2.5rem; ">Cetak Nota</a>
+            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-primary btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2.5rem;font-size:20px !important">Cetak Nota</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row kasir">
         <div class="col-11" style="max-width:85%">
             <div class="row">
                 <div class="col-12">
@@ -90,7 +109,7 @@
                                     <input id="kodebarang" type="text" disabled id="kode" class="form-control form-control-sm " style="width:100%">
                                 </div>
                             </div>
-                            <div class="col-3 ">
+                            <div class="col-4 barang">
                                 <div class="form-group">
                                     <label for="">Nama Barang</label>
                                     <input type="text" disabled name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
@@ -103,7 +122,7 @@
                             <div class="col-2" style="width: 20%">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm inputharga">
+                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm inputharga harga">
                                 </div>
                             </div>
                             <div class="col-1" >
@@ -116,12 +135,12 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
+                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga harga">
                                 </div>
                             </div>
                             <div class="col-lg-1 small" >
-                                <div class="form-group" style="margin-top:30px">
-                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-info form-control form-control-sm" >
+                                <div class="form-group" style="margin-top:30px;margin-left:30px">
+                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-primary form-control btnadd form-control-sm" >
                                         <i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
@@ -131,7 +150,7 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="col-12">
+                <div class="col-12 pb-0" style="height:30px">
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-sm"  id="tableBarang">
                             <thead>
@@ -140,7 +159,7 @@
                                     <th  style="width: 10%">Kode</th>
                                     <th  style="width: 30%">Nama Barang</th>
                                     <th  style="width: 20%">Harga</th>
-                                    <th  style="width: 10%">Qty</th>
+                                    <th  style="width: 10%">Qty (Kg)</th>
                                     <th  style="width: 20%">Jumlah</th>
                                     <th  style="width: 5%">Aksi</th>
                                 </tr>
@@ -152,7 +171,7 @@
             <div class="row">
                 <div class="col-12">
                     <section class="scrollable">
-                        <table class="table table-sm" id="tableBarang">
+                        <table class="table table-sm text-center" id="tableBarang">
                             <tbody>
                             </tbody>
                         </table>
@@ -165,19 +184,26 @@
                         <table class="table table-sm" id="tableBarang">
                             <tfoot>
                                 <tr>
-                                    <td colspan="4"></td>
-                                    <td class="border-top border-bawah text-center"> Sub Total</td>
-                                    <td class="border-top border-bawah">Rp <span id="total" class="inputharga">0</span>,-
+                                    <td  style="width: 5%"  class="border-atas"></td>
+                                    <td  style="width: 10%" class="border-atas"></td>
+                                    <td  style="width: 30%" class="border-atas"></td>
+                                    <td  style="width: 20%" class="border-atas"></td>
+                                    <td  style="width: 10%" class="border-atas text-center"> Sub Total</td>
+                                    <td  style="width: 20%" class="border-atas text-right">Rp <span id="total" class="inputharga harga">0</span>,-
                                     </td>
+                                    <td  style="width: 5%" class="border-atas"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" style="border: none"></td>
-                                    <td style="border:none" class="text-right pr-2">
+                                    <td  style="border: none;width: 5%"></td>
+                                    <td  style="border: none;width: 10%"></td>
+                                    <td  style="border: none;width: 30%"></td>
+                                    <td style="border:none;width: 20%" class="text-right pr-2">
                                         Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px"></span>
                                     </td>
-                                    <td class="border-top border-bottom text-bold text-center">TOTAL</td>
-                                    <td class="border-top border-bottom text-bold">Rp <span id="total" class="inputharga jml">0</span>,-
+                                    <td  style="width: 10%" class="borderan text-bold text-center">TOTAL</td>
+                                    <td style="width: 20%" class="borderan text-bold text-right">Rp <span id="total" class="inputharga harga jml">0</span>,-
                                     </td>
+                                    <td  style="border: none;width: 5%"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -188,11 +214,11 @@
         <div class="col-2 ml-3" style="max-width:13%" >
             <div class="form-group">
                 <label for="">Uang muka</label>
-                <input id="uangmuka" type="text" value="0" class="form-control form-control-sm ">
+                <input id="uangmuka" type="text" value="0" placeholder="0" class="form-control form-control-sm ">
             </div>
             <div class="form-group">
                 <label for="">Uang kembali</label>
-                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm">
+                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm harga">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
@@ -216,8 +242,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close btn-sm" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">Membuat Pelanggan</h4>
             </div>
             <div class="modal-body">
                 <div class="box-error" id="box_error_modal_plus"></div>
@@ -254,7 +279,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="submit" id="add">
+                <button class="btn btn-primary" type="submit" id="add">
                     <span class="glyphicon glyphicon-plus"></span> Tambah
                 </button>
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup
@@ -285,6 +310,13 @@
             }
         });
     });
+
+    function numberformat(){
+        $(".harga").divide({
+            delimiter: '.',
+            divideThousand: true
+        });
+    }
 </script>
 <script>
     function getpelanggan(id) {
@@ -379,6 +411,7 @@
                 $("#tambahbarang").removeAttr('disabled')
                 $("#searchbarang").val(data.supply.item.nama)
                 $('#stok').val(data.supply.stok);
+                numberformat();
             },
         });
     }
@@ -525,8 +558,7 @@
                                        ${data.customer.nama}
                                   </option>`);
                 $('#plus').modal('hide');
-                $("#selectpelanggan option[value='" + data.customer.id + "']").prop('selected',
-                    true);
+                $('#searchpelanggan').val(data.customer.nama)
                 $('#alamatpelanggan').html(data.customer.alamat)
                 $('#teleponpelanggan').val(data.customer.telepon)
                 $("#cetaknota").removeClass('disabled')
@@ -572,10 +604,10 @@
                 hitungdiskon();
             }
         } else {
-            alert("masukkan Kuantitan barang Terlebih Dahulu")
+            alert("masukkan jumlah Kuantitas barang Terlebih Dahulu")
         }
 
-
+        numberformat();
 
 
     });
@@ -598,13 +630,13 @@
         if ($lastRow.length == 0) {
 
             const markup = '<tr data-id=1>\
-                                    <td>1</td>\
-                                    <td>' + $('#kodebarang').val() + '</td>\
-                                    <td>' + $('#searchbarang').val() + '</td>\
-                                    <td>' + $('#hargabarang').val() + '</td>\
-                                    <td>' + $('#qtybarang').val() + '</td>\
-                                    <td>' + $('#jumlahbarang').val() + '</td>\
-                                    <td>\
+                                    <td style="width: 5%">1</td>\
+                                    <td style="width: 10%">' + $('#kodebarang').val() + '</td>\
+                                    <td style="width: 30%" class="text-left">' + $('#searchbarang').val() + '</td>\
+                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#hargabarang').val() + '</span>,-</td>\
+                                    <td style="width: 10%">' + $('#qtybarang').val() + '</td>\
+                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#jumlahbarang').val() + '</span>,-</td>\
+                                    <td style="width: 5%">\
                                         <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=1><i class="fas fa-trash"></a>\
                                     </td>\
                                 </tr>'
@@ -613,13 +645,13 @@
             const $cloneRow = $lastRow.clone();
             const lastNo = $cloneRow.find('td').eq(0).text();
             const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + '>\
-                                    <td>' + (parseInt(lastNo) + 1) + '</td>\
-                                    <td>' + $('#kodebarang').val() + '</td>\
-                                    <td>' + $('#searchbarang').val() + '</td>\
-                                    <td>' + $('#hargabarang').val() + '</td>\
-                                    <td>' + $('#qtybarang').val() + '</td>\
-                                    <td>' + $('#jumlahbarang').val() + '</td>\
-                                    <td>\
+                                    <td style="width: 5%">' + (parseInt(lastNo) + 1) + '</td>\
+                                    <td style="width: 10%">' + $('#kodebarang').val() + '</td>\
+                                    <td style="width: 30%" class="text-left">' + $('#searchbarang').val() + '</td>\
+                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#hargabarang').val() + '</span>,-</td>\
+                                    <td style="width: 10%">' + $('#qtybarang').val() + '</td>\
+                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#jumlahbarang').val() + '</span>,-</td>\
+                                    <td style="width: 5%">\
                                         <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
                 (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
                                     </td>\

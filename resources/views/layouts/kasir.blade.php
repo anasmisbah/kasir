@@ -24,6 +24,9 @@
         .container {
             max-width: 100%;
         }
+        .navbar-dark{
+            background-color: #1F2833;
+        }
   </style>
 </head>
 <body class="hold-transition layout-top-nav text-sm">
@@ -35,7 +38,7 @@
       <a href="{{route('kasir.index')}}" class="navbar-brand">
         <img src="{{asset("/storage/".$app->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">{{ $app->toko }}</span>
+        <span class="brand-text font-weight-light"></span>
       </a>
 
       <!-- Right navbar links -->
@@ -43,7 +46,10 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Halo {{auth()->user()->username}}</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item d-none d-sm-inline-block">
+            <img src="{{asset("/storage/".auth()->user()->employee->foto)}}" alt="AdminLTE Logo" class="img-circle" width="30px">
+        </li>
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
              <i class="fas fa-user"></i>
           </a>
@@ -64,7 +70,7 @@
             </a>
             <div class="dropdown-divider"></div>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();" data-slide="true">
