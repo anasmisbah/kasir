@@ -71,6 +71,28 @@
       <div class="c-sidebar-brand d-lg-down-none">
         <img height="50px" src="{{asset('/storage/'.$app->logo)}}" alt="">
       </div>
+      @if (auth()->user()->level_id == 2)
+      <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'beranda'?'c-active':'' }}" href="{{ route('beranda') }}">
+            <i class="c-sidebar-nav-icon fa fa-home"></i> Beranda</a>
+          </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'penjualan'?'c-active':'' }}" href="{{ route('penjualan.index') }}">
+          <i class="c-sidebar-nav-icon fa fa-shopping-cart"></i> Penjualan</a></li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'piutang'?'c-active':'' }}" href="{{ route('piutang.index') }}">
+          <i class="c-sidebar-nav-icon fa fa-credit-card"></i> Piutang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'pelanggan'?'c-active':'' }}" href="{{ route('pelanggan.index') }}">
+          <i class="c-sidebar-nav-icon fa fa-users"></i> Pelanggan</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'stok'?'c-active':'' }}" href="{{ route('stok.index') }}">
+          <i class="c-sidebar-nav-icon fa fa-list"></i> Stok Barang</a>
+        </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'karyawan'?'c-active':'' }}" href="{{ route('karyawan.index') }}">
+          <i class="c-sidebar-nav-icon fa fa-user"></i> Karyawan</a>
+        </li>
+        </li>
+      </ul>
+      @else
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'beranda'?'c-active':'' }}" href="{{ route('beranda') }}">
             <i class="c-sidebar-nav-icon fa fa-home"></i> Beranda</a>
@@ -105,6 +127,7 @@
           <i class="c-sidebar-nav-icon fa fa-info-circle"></i> Tentang</a>
         </li>
       </ul>
+      @endif
     </div>
     <div class="c-wrapper c-fixed-components">
       <header class="c-header c-header-dark c-header-fixed c-header-with-subheader">

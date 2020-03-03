@@ -89,7 +89,7 @@
         <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
             <div class="border rounded text-center" style="background-color: #f5f6fa; height:75%;padding-top:2.5rem;">
-                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="inputharga harga jml">0</span>,-</span>
+                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="inputharga jml">0</span>,-</span>
             </div>
         </div>
         <div class="col-2 pb-2 " style="max-width:13%;padding-top:1.8rem">
@@ -189,7 +189,7 @@
                                     <td  style="width: 30%" class="border-atas"></td>
                                     <td  style="width: 20%" class="border-atas"></td>
                                     <td  style="width: 10%" class="border-atas text-center"> Sub Total</td>
-                                    <td  style="width: 20%" class="border-atas text-right">Rp <span id="total" class="inputharga harga">0</span>,-
+                                    <td  style="width: 20%" class="border-atas text-right">Rp <span id="total" class="inputharga">0</span>,-
                                     </td>
                                     <td  style="width: 5%" class="border-atas"></td>
                                 </tr>

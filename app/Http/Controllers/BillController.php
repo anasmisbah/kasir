@@ -535,6 +535,12 @@ class BillController extends Controller
                 return $pdf->stream();
                 // return $pdf->download('piutang.pdf');
             }
+            if($request->print){
+                $from = Carbon::create($explodeddateFrom[2],$explodeddateFrom[0],$explodeddateFrom[1]);
+                        $to = Carbon::create($explodeddateTo[2],$explodeddateTo[0],$explodeddateTo[1]);
+                        $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
+                return view('pdf.piutang',compact('bills','app','dateNow','branch','range','user'));
+            }
         }
 
         return view('piutang.index',compact('bills','branches'));

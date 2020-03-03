@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./adminlte/dist/css/adminlte.min.css">
+    <link rel="shortcut icon" href="{{asset('/storage/'.$app->logo)}}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>

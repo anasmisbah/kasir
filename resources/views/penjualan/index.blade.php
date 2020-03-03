@@ -214,7 +214,7 @@
               <tr>
                 <td  class="py-2">{{$loop->iteration}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td class="py-2">{{$bill->tanggal_nota->format('d F Y')}}</td>
+                <td class="py-2">{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td class="py-2  text-right">Rp</td>
                 <td class="py-2  text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>

@@ -85,8 +85,8 @@
                 </div>
               </div>
             </form>
-            @endif
         </div>
+        @endif
           <table id="example1" style="width:100%" class="display table table-striped compact">
             <thead>
               <tr>
