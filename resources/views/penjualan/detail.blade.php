@@ -177,7 +177,7 @@
               @endphp
               <tr>
                 <td class="text-center">{{$bill->no_nota_kas}}</td>
-                <td width="45%" class="text-center">{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year}}</td>
+                <td width="40%" class="text-center">{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year}}</td>
                 <td class="text-center">Rp <span class="harga">{{$bill->total_nota}}</span>,-</td>
                 <td class="text-center" width="15%">Rp 0,-</td>
                 <td class="border-atas  text-right">Rp</td>
