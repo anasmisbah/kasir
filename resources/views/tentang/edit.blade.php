@@ -43,6 +43,8 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Memperbarui</a></li>
 @endsection
 @section('content')
+<section class="content">
+    <div class="row">
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -97,9 +99,42 @@
                     <label class="col-2">Alamat:</label>
                     <div class="col-10"><input type="text" value="{{ old('alamat')?old('alamat'):$app->alamat }}"
                             class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}"
-                            name="alamat" placeholder="Masukkan Alamat Karyawan">
+                            name="alamat" placeholder="Masukkan Alamat">
                         <div class="invalid-feedback">
                             {{$errors->first('alamat')}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Kelurahan:</label>
+                    <div class="col-10"><input type="text" value="{{ old('kelurahan')?old('kelurahan'):$app->kelurahan }}"
+                            class="form-control form-control-sm {{ $errors->first('kelurahan')?'is-invalid':'' }}"
+                            name="kelurahan" placeholder="Masukkan kelurahan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kelurahan')}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Kecamatan:</label>
+                    <div class="col-10"><input type="text" value="{{ old('kecamatan')?old('kecamatan'):$app->kecamatan }}"
+                            class="form-control form-control-sm {{ $errors->first('kecamatan')?'is-invalid':'' }}"
+                            name="kecamatan" placeholder="Masukkan kecamatan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kecamatan')}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Kota:</label>
+                    <div class="col-10"><input type="text" value="{{ old('kota')?old('kota'):$app->kota }}"
+                            class="form-control form-control-sm {{ $errors->first('kota')?'is-invalid':'' }}"
+                            name="kota" placeholder="Masukkan kota">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kota')}}
                         </div>
 
                     </div>
@@ -133,6 +168,8 @@
         </div>
     </div>
 </div>
+    </div>
+</section>
 @endsection
 
 @push('script')

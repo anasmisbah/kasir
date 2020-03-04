@@ -35,6 +35,18 @@
             <td>{{$app->alamat}}</td>
           </tr>
           <tr>
+            <td style="width:10%">Kelurahan</td>
+            <td>{{$app->kelurahan}}</td>
+          </tr>
+          <tr>
+            <td style="width:10%">Kecamatan</td>
+            <td>{{$app->kecamatan}}</td>
+          </tr>
+          <tr>
+            <td style="width:10%">Kota</td>
+            <td>{{$app->kota}}</td>
+          </tr>
+          <tr>
             <td style="width:10%">Telepon</td>
             <td>{{$app->telepon}}</td>
           </tr>

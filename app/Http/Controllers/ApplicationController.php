@@ -56,6 +56,9 @@ class ApplicationController extends Controller
             'toko'=>'required',
             'alamat'=>'required',
             'telepon'=>'required',
+            'kelurahan'=>'required',
+            'kecamatan'=>'required',
+            'kota'=>'required'
         ]);
 
         $app = Application::findOrFail($request->id);
@@ -65,6 +68,9 @@ class ApplicationController extends Controller
             'toko'=>$request->toko,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
+            'kelurahan'=>$request->kelurahan,
+            'kecamatan'=>$request->kecamatan,
+            'kota'=>$request->kota,
             'updated_by'=>Auth::user()->id
         ]);
         if ($request->file('logo')) {

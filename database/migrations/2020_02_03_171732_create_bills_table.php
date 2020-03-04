@@ -15,7 +15,7 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('tanggal_nota');
+            $table->timestamp('tanggal_nota')->nullable();
             $table->double('diskon');
             $table->double('total_nota');
             $table->double('jumlah_uang_nota');
