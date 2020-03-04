@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Application;
 use Carbon\Carbon;
 use PDF;
+use Illuminate\Support\Str;
+use File;
 class EmployeeController extends Controller
 {
     public function index(Request $request)
@@ -93,6 +95,14 @@ class EmployeeController extends Controller
             $foto = $request->file('foto')->store('fotos','public');
         }
 
+        if ($request->file('foto')) {
+            $request->validate([
+                'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
+            ]);
+            $foto = 'fotos/'.time().Str::slug($request->nama).'.'.$request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->move('uploads/fotos', $foto);
+        }
+
         $newEmployee = Employee::create([
             'nama'=>$request->nama,
             'jenis_kelamin'=>$request->jenis_kelamin,
@@ -137,16 +147,18 @@ class EmployeeController extends Controller
             'telepon'=>$request->telepon,
             'updated_by'=>Auth::user()->id
         ]);
-
         if ($request->file('foto')) {
             $request->validate([
                 'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
             ]);
-            if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists(storage_path('app/public/'.$updateEmployee->foto))) {
-                Storage::delete('public/'.$updateEmployee->foto);
+            if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists('uploads/'.$updateEmployee->foto)) {
+                File::delete('uploads/'.$updateEmployee->foto);
             }
+            $foto = 'fotos/'.time().Str::slug($request->nama).'.'.$request->file('foto')->getClientOriginalExtension();
+            $request->file('foto')->move('uploads/fotos', $foto);
+
             $updateEmployee->update([
-                'foto'=> $request->file('foto')->store('fotos','public')
+                'foto'=> $foto
             ]);
         }
 

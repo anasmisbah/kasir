@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
+use File;
 class ApplicationController extends Controller
 {
     public function index()
@@ -66,16 +67,18 @@ class ApplicationController extends Controller
             'telepon'=>$request->telepon,
             'updated_by'=>Auth::user()->id
         ]);
-
         if ($request->file('logo')) {
             $request->validate([
                 'logo'=>'mimes:jpeg,bmp,png,jpg,ico',
             ]);
-            if (!($app->logo == "logo/default.jpg") && file_exists(storage_path('app/public/'.$app->logo))) {
-                Storage::delete('public/'.$app->logo);
+            if (!($app->logo == "logos/default.jpg") && file_exists('uploads/'.$app->logo)) {
+                File::delete('uploads/'.$app->logo);
             }
+            $logo = 'logos/'.time().Str::slug($request->nama).'.'.$request->file('logo')->getClientOriginalExtension();
+            $request->file('logo')->move('uploads/logos', $logo);
+
             $app->update([
-                'logo'=> $request->file('logo')->store('logo','public')
+                'logo'=> $logo
             ]);
         }
 
