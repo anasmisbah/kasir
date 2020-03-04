@@ -43,8 +43,6 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Memperbarui</a></li>
 @endsection
 @section('content')
-<section class="content">
-    <div class="row">
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -168,8 +166,6 @@
         </div>
     </div>
 </div>
-    </div>
-</section>
 @endsection
 
 @push('script')

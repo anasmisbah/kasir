@@ -44,8 +44,6 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Stok Barang</a></li>
 @endsection
 @section('content')
-<section class="content">
-  <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -118,9 +116,6 @@
     </div>
     <!-- /.col -->
   </div>
-  <!-- /.row -->
-</section>
-<!-- /.content -->
 @endsection
 
 @push('script')

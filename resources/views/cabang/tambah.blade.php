@@ -20,15 +20,13 @@
 <li class="breadcrumb-item active"><a href="#"  class="text-info">Membuat</a></li>
 @endsection
 @section('content')
-    <div class="row">
-      <!-- left column -->
-      <div class="col-md-12 mt-3">
+      <div class="col-md-12">
         <!-- general form elements -->
         <div class="card">
             <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <h4 class="card-title mb-0 text-bold">Membuat Cabang Barang</h4>
+                    <h4 class="card-title mb-0 text-bold">Membuat Cabang</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
@@ -74,5 +72,4 @@
             </div>
         </div>
       </div>
-    </div>
 @endsection

@@ -44,9 +44,6 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Pelanggan</a></li>
 @endsection
 @section('content')
-
-<section class="content">
-  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-header">
@@ -115,10 +112,6 @@
       <!-- /.card -->
     </div>
     <!-- /.col -->
-  </div>
-  <!-- /.row -->
-</section>
-<!-- /.content -->
 @endsection
 
 @push('script')

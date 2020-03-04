@@ -57,11 +57,23 @@
         margin-top: 48px;
       }
       .c-main{
-          padding-top: 1rem;
+          padding-top: 20px;
           color: black;
+          padding-bottom: 20px
       }
       .table{
           color:black;
+      }
+      div .container-fluid{
+          padding: 0px 10px;
+      }
+      @media (min-width: 768px){
+        div .container-fluid{
+          padding: 0px 5px !important;
+      }
+      }
+      .card {
+          margin-bottom: 0px;
       }
     </style>
     @stack('css')

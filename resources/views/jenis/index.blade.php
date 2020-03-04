@@ -45,9 +45,6 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Jenis</a></li>
 @endsection
 @section('content')
-<!-- Main content -->
-<section class="content">
-  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -86,10 +83,6 @@
       <!-- /.card -->
     </div>
     <!-- /.col -->
-  </div>
-  <!-- /.row -->
-</section>
-<!-- /.content -->
 <form class="d-inline" id="form-delete" method="POST">
   @csrf
   @method('DELETE')

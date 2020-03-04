@@ -16,7 +16,7 @@
 @endsection
 @section('content')
 <div class="col-12">
-    <div class="card mt-3">
+    <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>

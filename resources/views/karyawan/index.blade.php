@@ -46,9 +46,6 @@
 @endsection
 
 @section('content')
-
-<section class="content">
-  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -118,10 +115,6 @@
       <!-- /.card -->
     </div>
     <!-- /.col -->
-  </div>
-  <!-- /.row -->
-</section>
-<!-- /.content -->
 @endsection
 
 @push('script')

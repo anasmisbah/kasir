@@ -33,8 +33,6 @@
 @endsection
 
 @section('content')
-  <div class="row">
-    <!-- left column -->
     <div class="col-md-12">
       <!-- general form elements -->
       <div class="card">
@@ -149,7 +147,6 @@
         </div>
       </div>
     </div>
-  </div>
 @endsection
 
 @push('script')
