@@ -40,7 +40,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
-                        <img src="{{asset("/storage/fotos/default.jpg")}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
+                        <img src="{{asset("/uploads/fotos/default.jpg")}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -128,7 +128,7 @@ $(document).on('change', '#selectkaryawan', function () {
             'id': $("#selectkaryawan").val(),
         },
         success: function (data) {
-            $('#img_foto').attr('src','/storage/'+data.foto)
+            $('#img_foto').attr('src','/uploads/'+data.foto)
             $('#cabang').val(data.branch.nama)
         },
     });

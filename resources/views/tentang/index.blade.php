@@ -20,7 +20,7 @@
         <tbody>
           <tr>
             <td style="width:10%">Logo</td>
-            <td><img src="{{asset("/storage/".$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo"></td>
+            <td><img src="{{asset("/uploads/".$app->logo)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo"></td>
           </tr>
           <tr>
             <td style="width:10%">Nama Aplikasi</td>

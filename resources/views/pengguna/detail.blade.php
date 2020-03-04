@@ -30,7 +30,7 @@
                 <tbody>
                   <tr>
                     <td style="width:10%">Avatar</td>
-                    <td><img src="{{asset("/storage/".$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo"></td>
+                    <td><img src="{{asset("/uploads/".$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo"></td>
                   </tr>
                   <tr>
                     <td style="width:10%">Nama</td>

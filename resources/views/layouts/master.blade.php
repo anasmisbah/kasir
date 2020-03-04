@@ -16,7 +16,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="shortcut icon" href="{{asset('/storage/'.$app->logo)}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <!-- Main styles for this application-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    <link href="{{asset('/adminlte/css/style.css')}}" rel="stylesheet">
@@ -69,7 +69,7 @@
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-        <img height="50px" src="{{asset('/storage/'.$app->logo)}}" alt="">
+        <img height="50px" src="{{asset('/uploads/'.$app->logo)}}" alt="">
       </div>
       @if (auth()->user()->level_id == 2)
       <ul class="c-sidebar-nav">
@@ -136,7 +136,7 @@
             <a class="c-header-nav-link" href="#">Hallo {{auth()->user()->employee->nama}}</a>
           </li>
           <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
-            <div class="c-avatar"><img class="c-avatar-img" src="{{asset('/storage/'.auth()->user()->employee->foto)}}" alt="user@email.com"></div></a>
+            <div class="c-avatar"><img class="c-avatar-img" src="{{asset('/uploads/'.auth()->user()->employee->foto)}}" alt="user@email.com"></div></a>
           </li>
           <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">

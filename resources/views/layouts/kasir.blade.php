@@ -9,7 +9,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="shortcut icon" href="{{asset("/storage/".$app->logo)}}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{asset("/uploads/".$app->logo)}}" type="image/x-icon">
 
   <title>Kasir | {{ $app->toko }}</title>
 
@@ -36,7 +36,7 @@
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-dark text-sm">
     <div class="container">
       <a href="{{route('kasir.index')}}" class="navbar-brand">
-        <img src="{{asset("/storage/".$app->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{asset("/uploads/".$app->logo)}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light"></span>
       </a>
@@ -47,7 +47,7 @@
             <a href="#" class="nav-link">Halo {{auth()->user()->username}}</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <img src="{{asset("/storage/".auth()->user()->employee->foto)}}" alt="AdminLTE Logo" class="img-circle" width="30px">
+            <img src="{{asset("/uploads/".auth()->user()->employee->foto)}}" alt="AdminLTE Logo" class="img-circle" width="30px">
         </li>
         {{-- <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -57,7 +57,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="{{asset("/storage/".auth()->user()->employee->foto)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="{{asset("/uploads/".auth()->user()->employee->foto)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     {{auth()->user()->employee->nama}}
