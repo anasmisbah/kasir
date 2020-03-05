@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./adminlte/dist/css/adminlte.min.css">
-    <link rel="shortcut icon" href="{{asset('/storage/'.$app->logo)}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
@@ -36,13 +36,13 @@
         <div class="card">
             <div class="card-body rounded">
                     <div class="login-logo">
-                        <img height="100px" src="{{asset('/storage/'.$app->logo)}}" alt="">
+                        <img height="100px" src="{{asset('/uploads/'.$app->logo)}}" alt="">
                     </div>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3 mt-5">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="text" name="username" class="form-control" placeholder="Masukkan Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
