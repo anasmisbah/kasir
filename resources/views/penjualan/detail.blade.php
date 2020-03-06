@@ -21,6 +21,10 @@
     .border-atas{
         border-top: 1px solid black !important;
     }
+    .table-data th,.table-data td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+    }
     </style>
 @endpush
 @section('breadcumb')
@@ -92,11 +96,12 @@
             </tbody>
           </table>
           @if ($bill->status == 'lunas' || $bill->status == 'piutang')
-            <table class=" table table-stripped text-center" id="table">
+            <table class=" table table-stripped text-center table-data" id="table">
                 <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
+                    <th></th>
                     <th>Harga Satuan (Kg)</th>
                     <th>Qty(Kg)</th>
                     <th></th>
@@ -111,7 +116,8 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td width="50%">{{$trans->supply->item->nama}}</td>
-                    <td class="text-center">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
+                    <td>Rp</td>
+                    <td class="text-right"><span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                     <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
                     <td class="text-right">Rp</td>
                     <td class="text-right"><span class="harga">{{$trans->total_harga}}</span> ,-</td>
@@ -125,11 +131,13 @@
                     <td class="border-atas"></td>
                     <td class="border-atas"></td>
                     <td class="border-atas"></td>
+                    <td class="border-atas"></td>
                     <td class="border-atas">Sub Total</td>
                     <td class="text-right border-atas">Rp</td>
                     <td class="border-atas text-right"><span class="harga">{{$subtotal}}</span>,-</td>
                 </tr>
                 <tr class="text-center">
+                    <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td class="border-atas"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
@@ -140,12 +148,14 @@
                 <tr class="text-center">
                     <td style="border: none"></td>
                     <td style="border: none"></td>
+                    <td style="border: none"></td>
                     <td class="border-atas"></td>
                     <td class="border-atas">Uang Muka</td>
                     <td class="text-right border-atas">Rp</td>
                     <td class="border-atas text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>  ,-</td>
                 </tr>
                 <tr class="text-center">
+                    <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
@@ -160,7 +170,7 @@
                 </tbody>
             </table>
           @else
-          <table class="no-margin table table-stripped text-center" id="table">
+          <table class="no-margin table table-stripped text-center table-data" id="table">
             <thead>
               <tr>
                 <th class="text-center">No Nota Kas</th>

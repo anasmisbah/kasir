@@ -24,6 +24,10 @@
     .border-atas{
         border-top: 1px solid black !important;
     }
+    .table-data th,.table-data td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+    }
     </style>
 @endpush
 @section('breadcumb')
@@ -82,7 +86,7 @@
               </tr>
             </tbody>
           </table>
-          <table class="no-margin table table-stripped text-center" id="table">
+          <table class="no-margin table table-stripped text-center table-data" id="table">
             <thead>
               <tr>
                 <th class="text-center">No Nota Kas</th>
