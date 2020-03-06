@@ -75,6 +75,13 @@
       .card {
           margin-bottom: 0px;
       }
+      .c-footer.c-footer-fixed{
+          position: fixed !important;
+          margin-left: 200px;
+      }
+      .card{
+          margin-bottom: 40px
+      }
     </style>
     @stack('css')
   </head>
@@ -175,7 +182,7 @@
             </div>
           </div>
         </main>
-        <footer class="c-footer">
+        <footer class="c-footer c-footer-fixed">
           <div class="m-auto" style=" font-size:12px ">Copyright 2020 | Developed with &hearts;</div>
         </footer>
       </div>

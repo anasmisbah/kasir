@@ -87,7 +87,7 @@
           <table id="example1" style="width:100%" class="table table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="py-2 text-left">No.</th>
+                <th style="width: 5%" class="py-2 text-center">No.</th>
                 <th style="width: 30%" class="py-2 text-left">Nama Barang</th>
                 <th style="width: 15%" class="py-2 text-center">Cabang</th>
                 <th style="width: 10%" class="py-2 text-center">Stok (Kg)</th>
@@ -102,7 +102,7 @@
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td  class="min-padding text-left">{{ $loop->iteration }}</td>
+                <td  class="min-padding text-center">{{ $loop->iteration }}</td>
                 <td  class="min-padding text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
                 <td  class="min-padding text-center"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
                 <td  class="min-padding text-center">{{$supply->stok}}</td>

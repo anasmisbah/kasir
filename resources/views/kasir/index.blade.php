@@ -71,7 +71,7 @@
                             <div class="list-group position-relative" id="list-pelanggan">
                             </div>
                         </div>
-                        <button class="btn-sm btn-primary create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-sm btn-primary create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="form-group-sm mt-3">
                         <label for="">Telepon</label>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-lg-1 small" >
                                 <div class="form-group" style="margin-top:30px;margin-left:30px">
-                                    <button disabled type="button" id="tambahbarang" class="btn-sm btn-primary form-control btnadd form-control-sm" >
+                                    <button disabled type="button" id="tambahbarang" class="btn btn-sm btn-primary form-control btnadd form-control-sm" >
                                         <i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
