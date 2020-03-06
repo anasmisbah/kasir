@@ -4,6 +4,7 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <style>
+
     .min-padding{
         padding-top: 0.3rem !important;
         padding-bottom: 0.3rem !important;
@@ -37,6 +38,10 @@
     .table thead th{
         border-top: 1px solid black;
         border-bottom: 1px solid black;
+    }
+    .table th,.table td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
     }
 </style>
 @endpush

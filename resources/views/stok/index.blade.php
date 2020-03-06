@@ -4,9 +4,9 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <style>
-    .min-padding{
-        padding-top: 0.2rem !important;
-        padding-bottom: 0.2rem !important;
+    .table th,.table td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
     }
     .form-control-sm{
         padding-right: 1rem;
@@ -88,24 +88,30 @@
             <thead>
               <tr>
                 <th style="width: 5%" class="py-2 text-left">No.</th>
-                <th style="width: 25%" class="py-2 text-left">Nama Barang</th>
-                <th style="width: 15%" class="py-2 text-left">Cabang</th>
-                <th style="width: 10%" class="py-2 text-left">Stok (Kg)</th>
-                <th style="width: 15%" class="py-2 text-right">Harga Pusat</th>
-                <th style="width: 15%" class="py-2 text-right">Harga Cabang</th>
-                <th style="width: 15%" class="py-2 text-right">Selisih</th>
+                <th style="width: 30%" class="py-2 text-left">Nama Barang</th>
+                <th style="width: 15%" class="py-2 text-center">Cabang</th>
+                <th style="width: 10%" class="py-2 text-center">Stok (Kg)</th>
+                <th></th>
+                <th style="min-width: 10%" class="py-2 text-right">Harga Pusat</th>
+                <th></th>
+                <th style="min-width: 10%" class="py-2 text-right">Harga Cabang</th>
+                <th></th>
+                <th style="min-width: 5%" class="py-2 text-right">Selisih</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td style="width: 5%" class="min-padding text-left">{{ $loop->iteration }}</td>
-                <td style="width: 25%" class="min-padding text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td style="width: 15%" class="min-padding text-left"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td style="width: 10%" class="min-padding">{{$supply->stok}}</td>
-                <td style=" width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td style="width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td style="width: 15%" class="min-padding text-right">Rp <span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td  class="min-padding text-left">{{ $loop->iteration }}</td>
+                <td  class="min-padding text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                <td  class="min-padding text-center"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td  class="min-padding text-center">{{$supply->stok}}</td>
+                <td class="min-padding text-right">Rp</td>
+                <td  class="min-padding text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
+                <td class="min-padding text-right">Rp</td>
+                <td  class="min-padding text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td class="min-padding text-right">Rp</td>
+                <td  class="min-padding text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach
           </table>

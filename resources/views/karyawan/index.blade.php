@@ -4,10 +4,6 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
 <style>
-    .min-padding{
-        padding-top: 0.2rem !important;
-        padding-bottom: 0.2rem !important;
-    }
     .form-control-sm{
         padding-right: 1rem;
     }
@@ -37,6 +33,11 @@
     .table thead th{
         border-top: 1px solid black;
         border-bottom: 1px solid black;
+    }
+
+    .table th,.table td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
     }
 </style>
 @endpush
@@ -86,7 +87,7 @@
         @endif
           <table id="example1" style="width:100%" class="display table table-striped compact">
             <thead>
-              <tr>
+              <tr class="text-center">
                 <th class="py-2">No.</th>
                 <th class="py-2">Nama</th>
                 <th class="py-2">Jabatan</th>
@@ -98,12 +99,12 @@
             <tbody>
               @foreach ($employees as $employee)
               <tr>
-                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2 text-center">{{$loop->iteration}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
                 <td class="py-2">{{$employee->jabatan}}</td>
                 <td class="py-2">{{$employee->alamat}}</td>
-                <td class="py-2">{{$employee->telepon}}</td>
-                <td class="py-2"><a class="text-info" href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                <td class="py-2 text-center">{{$employee->telepon}}</td>
+                <td class="py-2 text-center"><a class="text-info" href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
               </tr>
               @endforeach
 

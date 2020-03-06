@@ -3,6 +3,10 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <style>
+    .table th,.table td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+    }
     .min-padding{
         padding-top: 0.2rem !important;
         padding-bottom: 0.2rem !important;
@@ -58,19 +62,21 @@
           <table id="example1" style="width:100%" class="table table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="py-2 text-left">No.</th>
-                <th style="width: 50%" class="py-2 text-left">Nama Barang</th>
-                <th style="width: 20%" class="py-2 text-left">Jenis</th>
-                <th style="width: 15%" class="py-2 text-right">Harga</th>
+                <th style="width: 5%" class="py-2 text-center">No.</th>
+                <th style="width: 60%" class="py-2 text-center">Nama Barang</th>
+                <th style="width: 20%" class="py-2 text-center">Jenis</th>
+                <th class="py-2 text-right" style="width: 3%"></th>
+                <th style="min-width: 10%" class="py-2 text-center">Harga</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($items as $item)
               <tr>
-                <td style="width: 5%" class="py-2 text-left">{{ $loop->iteration }}</td>
-                <td style="width: 50%" class="py-2"><a class="text-info" href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
-                <td style="width: 20%" class="py-2 text-left"><a class="text-info" href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
-                <td style="width: 15%" class="py-2 text-right">Rp <span class="harga">{{$item->harga}}</span>,-</td>
+                <td  class="py-2 text-center">{{ $loop->iteration }}</td>
+                <td  class="py-2"><a class="text-info" href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
+                <td class="py-2 text-center"><a class="text-info" href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
+                <td class="py-2 text-right">Rp</td>
+                <td class="py-2 text-right"><span class="harga">{{$item->harga}}</span>,-</td>
               </tr>
               @endforeach
           </table>

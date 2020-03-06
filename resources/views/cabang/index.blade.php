@@ -38,6 +38,10 @@
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
+    .table th,.table td{
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -60,22 +64,22 @@
           <table id="example1" style="width:100%" class="table table-striped compact dt-responsive nowrap">
             <thead>
               <tr>
-                <th class="py-2">No.</th>
-                <th class="py-2">Nama Cabang</th>
-                <th class="py-2">Alamat</th>
-                <th class="py-2">Telepon</th>
-                <th class="py-2">Pimpinan</th>
+                <th style="width:5%" class="py-2 text-center">No.</th>
+                <th style="width:15%" class="py-2 text-center">Nama Cabang</th>
+                <th style="width:35%" class="py-2 text-center">Alamat</th>
+                <th style="width:10%" class="py-2 text-center">Telepon</th>
+                <th style="width:10%" class="py-2 text-center">Pimpinan</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($branches as $branch)
               <tr>
-                <td class="py-2">{{$loop->iteration}}</td>
+                <td class="py-2 text-center">{{$loop->iteration}}</td>
                 <td class="py-2"><a class="text-info" href="{{route('cabang.detail', $branch->id)}}">{{$branch->nama}}</a></td>
                 <td class="py-2">{{$branch->alamat}}</td>
-                <td class="py-2">{{$branch->telepon}}</td>
-                <td class="py-2">{{$branch->pimpinan}}</td>
+                <td class="py-2 text-center">{{$branch->telepon}}</td>
+                <td class="py-2 text-center">{{$branch->pimpinan}}</td>
               </tr>
               @endforeach
           </table>

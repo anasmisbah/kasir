@@ -38,7 +38,7 @@
             <form role="form-horizontal" action="{{route('pengguna.simpan')}}" method="POST">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Foto</label>
+                    <label class="col-sm-2 col-form-label">Avatar</label>
                     <div class="col-sm-10">
                         <img src="{{asset("/uploads/fotos/default.jpg")}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     </div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Nama Pengguna</label>
+                    <label class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10"><input type="text" value="{{ old('username')}}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('username')}}
