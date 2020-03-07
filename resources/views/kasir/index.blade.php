@@ -24,7 +24,7 @@
         width: 80%;
     }
     .row.kasir{
-        margin-top: 100px;
+        margin-top: 55px;
     }
     .col-4.barang{
         max-width: 30%;
@@ -45,7 +45,7 @@
 
 @section('content')
 <div class="container-fluid pt-2">
-    <div class="card border-0">
+    <div class="card border-0 mb-0">
         <div class="card-body">
     <div class="row">
         <div class="col-2 border rounded mr-2 pb-2" style="background-color: #f5f6fa" >
@@ -89,7 +89,7 @@
         <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
             <label for="">TOTAL</label>
             <div class="border rounded text-center" style="background-color: #f5f6fa; height:75%;padding-top:2.5rem;">
-                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="inputharga jml">0</span>,-</span>
+                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="totalpembayaran">0</span>,-</span>
             </div>
         </div>
         <div class="col-2 pb-2 " style="max-width:13%;padding-top:1.8rem">
@@ -122,7 +122,7 @@
                             <div class="col-2" style="width: 20%">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm inputharga harga">
+                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-1" >
@@ -135,7 +135,7 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga harga">
+                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-lg-1 small" >
@@ -161,7 +161,7 @@
                                     <th  style="width: 20%">Harga</th>
                                     <th  style="width: 10%">Qty (Kg)</th>
                                     <th  style="width: 20%">Jumlah</th>
-                                    <th  style="width: 5%">Aksi</th>
+                                    <th  style="width: 5%;padding-right:0.9rem !important">Aksi</th>
                                 </tr>
                             </thead>
                         </table>
@@ -187,23 +187,27 @@
                                     <td  style="width: 5%"  class="border-atas"></td>
                                     <td  style="width: 10%" class="border-atas"></td>
                                     <td  style="width: 30%" class="border-atas"></td>
-                                    <td  style="width: 20%" class="border-atas"></td>
+                                    <td style="width: 3%" class="border-atas"></td>
+                                    <td  style="width: 17%" class="border-atas"></td>
                                     <td  style="width: 10%" class="border-atas text-center"> Sub Total</td>
-                                    <td  style="width: 20%" class="border-atas text-right">Rp <span id="total" class="inputharga">0</span>,-
+                                    <td style="width: 3%" class="borderan text-bold text-right">Rp</td>
+                                    <td  style="width: 17%" class="border-atas text-right"><span id="subtotal" class="">0</span>,-
                                     </td>
                                     <td  style="width: 5%" class="border-atas"></td>
                                 </tr>
                                 <tr>
-                                    <td  style="border: none;width: 5%"></td>
-                                    <td  style="border: none;width: 10%"></td>
-                                    <td  style="border: none;width: 30%"></td>
-                                    <td style="border:none;width: 20%" class="text-right pr-2">
-                                        Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px"></span>
+                                    <td  style="border: none;"></td>
+                                    <td  style="border: none;"></td>
+                                    <td  style="border: none;"></td>
+                                    <td style="border: none;"></td>
+                                    <td style="border:none;" class="text-right pr-2">
+                                        Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px;height:25px"></span>
                                     </td>
-                                    <td  style="width: 10%" class="borderan text-bold text-center">TOTAL</td>
-                                    <td style="width: 20%" class="borderan text-bold text-right">Rp <span id="total" class="inputharga harga jml">0</span>,-
+                                    <td   class="borderan text-bold text-center">TOTAL</td>
+                                    <td  class="borderan text-bold text-right">Rp</td>
+                                    <td  class="borderan text-bold text-right"><span class=" totalpembayaran">0</span>,-
                                     </td>
-                                    <td  style="border: none;width: 5%"></td>
+                                    <td  style="border: none;"></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -214,11 +218,11 @@
         <div class="col-2 ml-3" style="max-width:13%" >
             <div class="form-group">
                 <label for="">Uang muka</label>
-                <input id="uangmuka" type="text" value="0" placeholder="0" class="form-control form-control-sm ">
+                <input id="uangmuka" type="text" value="0" placeholder="0" class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <label for="">Uang kembali</label>
-                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm harga">
+                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm ">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
@@ -295,6 +299,9 @@
 <script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/sweetalert.min.js"></script>
 <script>
+
+    // =================== NUMBER FORMAT DIVIDER
+
     $(function() {
 
         // Number Divide
@@ -317,8 +324,13 @@
             divideThousand: true
         });
     }
+    // ==================END FORMAT
 </script>
 <script>
+    // PART  PELANGGAN
+
+    let pelanggan ={}
+
     function getpelanggan(id) {
         let url = "{{ route('pelanggan.data') }}"
         const containerlist = $('#list-pelanggan')
@@ -337,6 +349,13 @@
 
                 $('#idpelanggan').val(data.customer.id)
                 $('#searchbarang').removeAttr('disabled')
+
+                pelanggan = {
+                    id:data.customer.id,
+                    nama:data.customer.nama,
+                    telepon:data.customer.telepon,
+                    alamat:data.customer.alamat
+                }
             },
         });
     }
@@ -390,8 +409,41 @@
 
             },
         });
-
     })
+
+    $(document).on('click', '#tambahpelanggan', function() {
+        $('#plus').modal('show');
+        $('#addnamapelanggan').val('')
+        $('#addalamatpelanggan').val('')
+        $('#addteleponpelanggan').val('')
+    });
+
+    $('.modal-footer').on('click', '#add', function() {
+        $('#add').attr('disabled', true)
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('kasir.pelanggan.simpan') }}",
+            data: new FormData($("#form-add-pelanggan")[0]),
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                $("#selectpelanggan").append(`<option value="${data.customer.id}">
+                                       ${data.customer.nama}
+                                  </option>`);
+                $('#plus').modal('hide');
+                $('#searchpelanggan').val(data.customer.nama)
+                $('#alamatpelanggan').html(data.customer.alamat)
+                $('#teleponpelanggan').val(data.customer.telepon)
+                $("#cetaknota").removeClass('disabled')
+            },
+        });
+
+    });
+    // ====== END PART PELANGGAN ====
+
+    // ======= PART  BARANG =======
+
+    let barang = {}
 
     function getbarang(id) {
         let url = "{{ route('stok.data') }}"
@@ -406,12 +458,19 @@
             },
             success: function(data) {
                 $('#kodebarang').val(data.supply.id)
-                $('#hargabarang').val(data.supply.harga_cabang)
+                $('#hargabarang').val('Rp '+data.supply.harga_cabang+',-')
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
                 $("#searchbarang").val(data.supply.item.nama)
                 $('#stok').val(data.supply.stok);
                 numberformat();
+
+                barang = {
+                    id: data.supply.id,
+                    nama:data.supply.item.nama,
+                    stok:data.supply.stok,
+                    harga_cabang:data.supply.harga_cabang,
+                }
             },
         });
     }
@@ -438,11 +497,6 @@
             },
         });
     });
-    // $( "#searchbarang" ).focusout(function(){
-    //     const containerlist = $('#list-barang')
-    //     containerlist.html('')
-
-    // })
     $("#searchbarang").focus(function() {
         let keyword = $(this).val()
         let url = "{{ route('barang.datajson') }}"
@@ -455,7 +509,6 @@
                 'keyword': keyword,
             },
             success: function(data) {
-
                 var list = data.map((item) => {
                     return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
                 })
@@ -465,48 +518,236 @@
 
             },
         });
+    });
+    // $( "#searchbarang" ).focusout(function(){
+    //     const containerlist = $('#list-barang')
+    //     containerlist.html('')
 
-    })
+    // })
+
+    //======== END PART BARANG ===========
 
 
+    //======== PART KASIR ============
 
-    $(document).on('click', '#tambahpelanggan', function() {
-        $('#plus').modal('show');
-        $('#addnamapelanggan').val('')
-        $('#addalamatpelanggan').val('')
-        $('#addteleponpelanggan').val('')
+    let arrayBarang = new Array;
+
+    // variabel barang selected
+    let qty = 0
+    let jumlah = 0;
+
+    // Variabel Nota Pembelian
+    let totalPembayaran = 0;
+    let subTotalPembayaran = 0;
+    let totalDiskon = 0;
+    let diskon = 0;
+    let uangkembalian = 0;
+    let uangMuka = 0;
+
+    $("#qtybarang").keyup(function() {
+        let harga = barang.harga_cabang
+        qty = $(this).val()
+        jumlah = harga * qty
+        text = jumlah.toLocaleString(['ban', 'id'])
+        $("#jumlahbarang").val('Rp '+text)
     });
 
+    $(document).on('click', '#tambahbarang', function() {
+        if ($('#qtybarang').val() != 0) {
+
+            if (parseInt($('#stok').val())< parseInt($('#qtybarang').val())) {
+                alert(`nilai kuantitas melebihi stok yang tersedia yaitu ${barang.stok} Kg`)
+                $("#qtybarang").val('')
+                $("#jumlahbarang").val(0)
+            } else {
+
+                arrayBarang.push({
+                    id:barang.id,
+                    nama:barang.nama,
+                    harga:barang.harga_cabang,
+                    qty:qty,
+                    total:jumlah,
+                })
+                refreshDataTableBarang();
+                tambahTotalPembayaran();
+                uangkembali()
+                hitungdiskon();
+                checkStatus();
+                showNominal();
+                numberformat();
+
+                $("#qtybarang").val('')
+                $("#kodebarang").val('')
+                $("#hargabarang").val('')
+                $("#searchbarang").val('')
+                $("#jumlahbarang").val(0)
+                $('#diskon').removeAttr('disabled')
+                $("#cetaknota").removeClass('disabled')
+
+
+            }
+        } else {
+            alert("masukkan jumlah Kuantitas barang Terlebih Dahulu")
+        }
+
+
+
+    });
+
+    function tambahTotalPembayaran() {
+        totalPembayaran+=jumlah
+        subTotalPembayaran+=jumlah
+    }
+
+    function kurangTotalPembayaran(nominal) {
+        subTotalPembayaran= subTotalPembayaran - nominal;
+        if (subTotalPembayaran == 0) {
+            totalPembayaran = 0;
+        } else {
+            totalPembayaran = totalPembayaran - nominal;
+        }
+    }
+
+    function uangkembali() {
+        uangkembalian = uangMuka - totalPembayaran
+    }
+
+    function hitungdiskon() {
+        const diskon = $('#diskon').val()
+        if (subTotalPembayaran == 0) {
+            totalDiskon = 0;
+        } else {
+            totalDiskon = (subTotalPembayaran * diskon) / 100
+            totalPembayaran = subTotalPembayaran - totalDiskon
+        }
+
+    }
+
+
+
+    function checkStatus() {
+        if (uangkembalian < 0) {
+            $('#status').val("PIUTANG")
+        } else {
+            $('#status').val("LUNAS")
+        }
+    }
+
+    function showNominal(){
+        $("#subtotal").html(subTotalPembayaran.toLocaleString(['ban', 'id']))
+        $('#uangkembali').val('Rp '+uangkembalian.toLocaleString(['ban', 'id']))
+        $(".totalpembayaran").html(totalPembayaran.toLocaleString(['ban', 'id']))
+        numberformat()
+    }
+
+    $("#uangmuka").keyup(function() {
+        uangMuka = $(this).val()
+
+        if (!(uangMuka)) {
+            uangMuka =0
+        } else {
+            uangkembali();
+            showNominal();
+        }
+        checkStatus()
+    });
+
+    $("#diskon").keyup(function() {
+        diskon = $(this).val()
+        hitungdiskon();
+        uangkembali();
+        showNominal();
+    });
+
+    function refreshDataTableBarang() {
+        const $findRow = $('#tableBarang tbody tr');
+        $findRow.remove();
+        const table = $('#tableBarang tbody')
+        var list = arrayBarang.map((item,key) => {
+                    return '<tr data-id=' + key + '>\
+                                    <td style="width: 5%">' + (key+1) + '</td>\
+                                    <td style="width: 10%">' + item.id + '</td>\
+                                    <td style="width: 30%" class="text-left">' + item.nama + '</td>\
+                                    <td style="width: 3%" class="text-right">Rp</td>\
+                                    <td style="width: 17%" class="text-right"><span class="harga">' + item.harga + '</span>,-</td>\
+                                    <td style="width: 10%">' + item.qty + '</td>\
+                                    <td style="width: 3%" class="text-right">Rp</td>\
+                                    <td style="width: 17%" class="text-right"><span class="">' + item.total.toLocaleString(['ban', 'id']) + '</span>,-</td>\
+                                    <td style="width: 5%" class="text-right">\
+                                        <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
+                key + '><i class="fa fa-trash"></a>\
+                                    </td>\
+                                </tr>'
+                })
+        list.forEach((item) => {
+            table.append(item)
+        })
+    }
+
+    $('#tableBarang tbody').on('click', '.delete-barang', function(e) {
+        const id = $(this).data('id')
+        removeRow(id)
+        uangkembali();
+        refreshDataTableBarang()
+        hitungdiskon();
+        checklastrow();
+        showNominal();
+        checkStatus();
+    });
+
+    function removeRow(id) {
+        const removeBarang = arrayBarang[id];
+        kurangTotalPembayaran(removeBarang.total)
+        arrayBarang.splice(id, 1);
+    }
+
+    function checklastrow(){
+        if (arrayBarang.length == 0) {
+            $('#cetaknota').addClass('disabled')
+        }
+    }
+
+
+
+
+
     $(document).on('click', '#cetaknota', function() {
-        const total_nota = $(".jml").html()
+        const total_nota = totalPembayaran
         let diskon = $('#diskon').val();
         if (!diskon) {
             diskon = 0
         }
-        const jumlah_uang_nota = $('#uangmuka').val();
-        const kembalian_nota = $('#uangkembali').val()
+        const jumlah_uang_nota = uangMuka
+        const kembalian_nota = uangkembalian
         const status = $('#status').val()
         const customer_id = $('#idpelanggan').val()
         const no_nota_kas = $('#nonotakas').val();
 
+        var items = arrayBarang.map((item,key)=>{
+                return {
+                    no_urut:key+1,
+                    supply_id:item.id,
+                    kuantitas:item.qty,
+                    total_harga:item.total
+                    }
+        })
 
-        var items = new Array
+        // const $lastRow = $('table tbody tr:last');
+        // const lastNo = $lastRow.find('td').eq(0).text();
+        // for (let index = 1; index <= lastNo; index++) {
+        //     const $findRow = $('table tbody tr[data-id="' + index + '"]');
+        //     const no_urut = $findRow.find('td').eq(0).text()
+        //     const supply_id = $findRow.find('td').eq(1).text()
+        //     const kuantitas = $findRow.find('td').eq(4).text()
+        //     const total_harga = $findRow.find('td').eq(5).text()
+        //     items.push({
+        //         no_urut,
+        //         supply_id,
+        //         kuantitas,
+        //         total_harga
+        //     })
+        // }
 
-        const $lastRow = $('table tbody tr:last');
-        const lastNo = $lastRow.find('td').eq(0).text();
-        for (let index = 1; index <= lastNo; index++) {
-            const $findRow = $('table tbody tr[data-id="' + index + '"]');
-            const no_urut = $findRow.find('td').eq(0).text()
-            const supply_id = $findRow.find('td').eq(1).text()
-            const kuantitas = $findRow.find('td').eq(4).text()
-            const total_harga = $findRow.find('td').eq(5).text()
-            items.push({
-                no_urut,
-                supply_id,
-                kuantitas,
-                total_harga
-            })
-        }
 
 
         var data = {
@@ -519,6 +760,8 @@
             no_nota_kas,
             items
         }
+        console.log(data);
+
         const url = "{{ route('kasir.simpan.nota') }}"
         $.ajax({
             type: 'get',
@@ -545,84 +788,8 @@
 
     });
 
-    $('.modal-footer').on('click', '#add', function() {
-        $('#add').attr('disabled', true)
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('kasir.pelanggan.simpan') }}",
-            data: new FormData($("#form-add-pelanggan")[0]),
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                $("#selectpelanggan").append(`<option value="${data.customer.id}">
-                                       ${data.customer.nama}
-                                  </option>`);
-                $('#plus').modal('hide');
-                $('#searchpelanggan').val(data.customer.nama)
-                $('#alamatpelanggan').html(data.customer.alamat)
-                $('#teleponpelanggan').val(data.customer.telepon)
-                $("#cetaknota").removeClass('disabled')
-            },
-        });
-
-    });
-
-    $("#qtybarang").keyup(function() {
-        let harga = $('#hargabarang').val()
-        let qty = $(this).val()
-        let total = harga * qty
-        $("#jumlahbarang").val(total)
-    });
-
-
-
-    $(document).on('click', '#tambahbarang', function() {
-        if ($('#qtybarang').val() != 0) {
-            console.log();
-
-            if (parseInt($('#stok').val())< parseInt($('#qtybarang').val())) {
-                alert("nilai kuantitas melibihi stok yang tersedia")
-                $("#qtybarang").val('')
-                $("#jumlahbarang").val(0)
-            } else {
-                addNewRow();
-                const total = $("#total").html()
-                const jmlbarang = $('#jumlahbarang').val()
-                const totalan = parseInt(total) + parseInt(jmlbarang)
-                $("#total").html(totalan)
-
-                const uangMuka = $("#uangmuka").val()
-                uangkembali(uangMuka)
-
-                $("#qtybarang").val('')
-                $("#kodebarang").val('')
-                $("#hargabarang").val('')
-                $("#searchbarang").val('')
-                $("#jumlahbarang").val(0)
-                $('#diskon').removeAttr('disabled')
-                $("#cetaknota").removeClass('disabled')
-                hitungdiskon();
-            }
-        } else {
-            alert("masukkan jumlah Kuantitas barang Terlebih Dahulu")
-        }
-
-        numberformat();
-
-
-    });
-
-    $('#tableBarang tbody').on('click', '.delete-barang', function(e) {
-        const id = $(this).data('id')
-
-        removeRow(id)
-        hitungdiskon();
-        const uangMuka = $("#uangmuka").val()
-        uangkembali(uangMuka)
-
-    });
-
-    function addNewRow() {
+// OLD
+function addNewRow() {
         // ambil baris tabel terakhir
         const $lastRow = $('table tbody tr:last');
         const kodebarang = $('#kodebarang').val()
@@ -658,65 +825,6 @@
                                 </tr>'
             table.append(markup);
 
-        }
-    }
-
-    function removeRow(id) {
-        const $findRow = $('table tbody tr[data-id="' + id + '"]');
-        const total = $("#total").html()
-        const jmlbarang = $findRow.find('td').eq(5).text()
-        const totalan = parseInt(total) - parseInt(jmlbarang)
-        $("#total").html(totalan)
-
-
-
-        $findRow.remove();
-        checklastrow();
-    }
-
-    function checklastrow(){
-        const lastRow = $('table tbody tr:last');
-        if (!(lastRow.length)) {
-            console.log(lastRow);
-            $('#cetaknota').addClass('disabled')
-        }
-    }
-
-    $("#uangmuka").keyup(function() {
-        let uangmuka = $(this).val()
-        uangkembali(uangmuka);
-    });
-
-    $("#diskon").keyup(function() {
-        hitungdiskon();
-    });
-
-    function hitungdiskon() {
-        let total = $("#total").html()
-        const diskon = $('#diskon').val()
-
-        const hasildiskon = (total * diskon) / 100
-
-        total = total - hasildiskon
-        $(".jml").html(total)
-
-        let uangmuka = $('#uangmuka').val()
-        uangkembali(uangmuka);
-    }
-
-    function uangkembali(nilai) {
-        const total = $(".jml").html()
-        const kembali = parseInt(nilai) - parseInt(total)
-
-        $('#uangkembali').val(kembali)
-        checkStatus(kembali);
-    }
-
-    function checkStatus(kembali) {
-        if (kembali < 0) {
-            $('#status').val("PIUTANG")
-        } else {
-            $('#status').val("LUNAS")
         }
     }
 </script>
