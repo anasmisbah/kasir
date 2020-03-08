@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <title>Nota Bon</title>
     <style>
         body {
@@ -119,6 +120,10 @@
             border-top: 2px solid black !important;
             border-bottom: 2px solid black !important;
         }
+        .table th,.table td{
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+        }
     </style>
 </head>
 
@@ -129,7 +134,7 @@
             <div style="padding-left:20px" class="column-5">
                 <div style="margin-top:0px;" class="title">NOTA BON</div>
                 <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
-                <div style="margin-top:5px">{{$app->alamat}}</div>
+                <div style="margin-top:5px">{{$app->alamat}} {{$app->kelurahan}} {{$app->kecamatan}} {{$app->kota}}</div>
                 <div>{{$app->telepon}}</div>
 
             </div>

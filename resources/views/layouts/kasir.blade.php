@@ -27,6 +27,9 @@
         .navbar-dark{
             background-color: #1F2833;
         }
+        .content-wrapper{
+            background: #EBEBEB;
+        }
   </style>
 </head>
 <body class="hold-transition layout-top-nav text-sm">
@@ -95,10 +98,10 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer text-center">
+    <footer class="main-footer text-center" style="background-color:#C5C6C7">
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+        <div style="font-size:14px">Copyright 2020 | Developed with &hearts;</div>
+    </footer>
 </div>
 <!-- ./wrapper -->
 

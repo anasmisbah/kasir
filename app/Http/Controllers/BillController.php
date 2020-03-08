@@ -240,18 +240,11 @@ class BillController extends Controller
                 }
                 $filter = $request->filter;
             }
-            if ($request->pdf) {
-                $data = [
-                    'bills'=>$bills,
-                    'branch'=> $branch,
-                    'app'=>$app,
-                    'dateNow'=>Carbon::now()->format('d F Y')
-                ];
-                $pdf = PDF::loadView('pdf.penjualan_hari', $data);
-                return $pdf->stream();
-                // return $pdf->download('penjualan.pdf');
-            }else if($request->print){
-                return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch'));
+            if($request->print){
+                $from = Carbon::now();
+                $to = Carbon::now();
+                $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
+                return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch','range','user'));
             }
             // dd($bills);
         }else{
@@ -423,6 +416,12 @@ class BillController extends Controller
                 return $pdf->stream();
                 // return $pdf->download('penjualan.pdf');
             }
+            if($request->print){
+                $from = Carbon::now();
+                $to = Carbon::now();
+                $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
+                return view('pdf.penjualan_hari',compact('bills','app','dateNow','branch','range','user'));
+            }
         }
 
 
@@ -556,7 +555,7 @@ class BillController extends Controller
         $newBill = Bill::create([
             'user_id'=>$bill->user_id,
             'tanggal_nota'=>$tgllunas,
-            'diskon'=>$bill->diskon,
+            'diskon'=>0,
             'total_nota'=>abs($bill->kembalian_nota),
             'jumlah_uang_nota'=>abs($bill->kembalian_nota),
             'kembalian_nota'=>0,
@@ -569,10 +568,7 @@ class BillController extends Controller
         ]);
 
         $bill->update([
-            'status'=>'lunas',
-            'jumlah_uang_nota'=>$bill->total_nota,
-            'total_nota'=>($bill->total_nota - abs($bill->kembalian_nota)),
-            'kembalian_nota'=>0,
+            'status'=>'pelunasan',
             'updated_by'=>$user->id
         ]);
         return redirect()->route('penjualan.detail',$newBill->id);

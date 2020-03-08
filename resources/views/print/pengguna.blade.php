@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <title>Daftar Pengguna</title>
     <style>
         .border{
@@ -29,6 +30,10 @@
         }
         .sign{
             font-size: 12px;
+        }
+        .table th,.table td{
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
         }
     </style>
 </head>
@@ -77,7 +82,7 @@
         <div class="row" style="margin-top:10px">
             <div class="col">
                 <p class="pull-right sign">
-                    {{$user->employee->branch->nama}},{{$dateNow->day.' '.$dateNow->monthName.' '.$dateNow->year}} <br>
+                    {{$app->kota}},{{$dateNow->day.' '.$dateNow->monthName.' '.$dateNow->year}} <br>
                     {{$user->employee->jabatan}}, <br><br><br><br>
                     <strong>{{$user->employee->branch->pimpinan}}</strong>
                 </p>
