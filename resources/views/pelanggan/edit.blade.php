@@ -38,15 +38,30 @@
                 @method('PUT')
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->nama}}" class="form-control form-control-sm" name="nama" placeholder="Masukkan Nama Cabang"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('nama')?old('nama'):$customer->nama }}" class="form-control form-control-sm  {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama Pelanggan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->alamat}}" class="form-control form-control-sm" name="alamat" placeholder="Masukkan Alamat Karyawan"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('alamat')?old('alamat'):$customer->alamat }}"  class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Pelanggan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('alamat')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" value="{{$customer->telepon}}" class="form-control form-control-sm" name="telepon" placeholder="Masukkan Telepon Karwayan"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('telepon')?old('telepon'):$customer->telepon }}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Nomor Telepon Pelanngan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>

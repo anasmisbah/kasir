@@ -37,15 +37,30 @@
                 @csrf
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="nama" placeholder="Masukkan Nama Pelanggan"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('nama')}}" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" name="nama" placeholder="Masukkan Nama Pelanggan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="alamat" placeholder="Masukkan Alamat Pelanggan"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('alamat')}}" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" name="alamat" placeholder="Masukkan Alamat Pelanggan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('alamat')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Telepon</label>
-                    <div class="col-sm-10"><input type="text" class="form-control form-control-sm" name="telepon" placeholder="Masukkan Telepon Pelanggan"></div>
+                    <div class="col-sm-10">
+                        <input type="text" value="{{ old('telepon')}}" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }}" name="telepon" placeholder="Masukkan Telepon Pelanggan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
