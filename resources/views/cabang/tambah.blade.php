@@ -39,28 +39,40 @@
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="nama" class="form-control form-control-sm" id="inputEmail3" placeholder="Nama">
+                        <input type="text" value="{{ old('nama')}}" name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="inputEmail3" placeholder="Nama">
+                        <div class="invalid-feedback">
+                            {{$errors->first('nama')}}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Telepon</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="telepon" class="form-control form-control-sm" id="inputEmail3" placeholder="Telepon">
+                        <input type="text" value="{{ old('telepon')}}" name="telepon" class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }}" id="inputEmail3" placeholder="Telepon">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Pimpinan</label>
                     <div class="col-sm-10">
-                    <input type="text"  name="pimpinan" class="form-control form-control-sm" id="inputEmail3" placeholder="Pimpinan">
+                        <input type="text" value="{{ old('pimpinan')}}" name="pimpinan" class="form-control form-control-sm {{ $errors->first('pimpinan')?'is-invalid':'' }}" id="inputEmail3" placeholder="Pimpinan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('pimpinan')}}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                     <div class="col-sm-10">
-                        <textarea name="alamat" class="form-control form-control-sm" rows="3" placeholder="Alamat"></textarea>
+                        <textarea name="alamat" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" rows="3" placeholder="Alamat">{{ old('alamat')}}</textarea>
+                        <div class="invalid-feedback">
+                            {{$errors->first('alamat')}}
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
