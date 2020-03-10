@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Cabang</label>
-                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang"></div>
+                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang {{$supply->branch->nama}}"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Selisih</label>

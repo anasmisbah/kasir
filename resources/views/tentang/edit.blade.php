@@ -77,7 +77,7 @@
                     <label class="col-2">Nama Aplikasi:</label>
                     <div class="col-10"><input type="text" value="{{ old('nama')?old('nama'):$app->nama }}"
                             class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}"
-                            name="nama" placeholder="Masukkan Nama">
+                            name="nama" placeholder="Masukkan Nama Aplikasi">
                         <div class="invalid-feedback">
                             {{$errors->first('nama')}}
                         </div>
@@ -87,7 +87,7 @@
                     <label class="col-2">Nama Toko:</label>
                     <div class="col-10"><input type="text" value="{{ old('toko')?old('toko'):$app->toko }}"
                             class="form-control form-control-sm {{ $errors->first('toko')?'is-invalid':'' }}"
-                            name="toko" placeholder="Masukkan Jabatan">
+                            name="toko" placeholder="Masukkan Nama Toko">
                         <div class="invalid-feedback">
                             {{$errors->first('toko')}}
                         </div>
@@ -141,7 +141,7 @@
                     <label class="col-2">Telepon</label>
                     <div class="col-10"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}"
                             class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}"
-                            name="telepon" placeholder="Masukkan Telepon Karwayan">
+                            name="telepon" placeholder="Masukkan Nomor Telepon">
                         <div class="invalid-feedback">
                             {{$errors->first('telepon')}}
                         </div>
