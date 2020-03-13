@@ -38,7 +38,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Avatar</label>
+                    <label class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
                         <img src="{{asset("/uploads/".$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     </div>
@@ -53,7 +53,7 @@
                     </select></div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Username</label>
+                    <label class="col-sm-2 col-form-label">Nama Pengguna</label>
                     <div class="col-sm-10"><input type="text" value="{{ old('username')?old('username'):$user->username }}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('username')}}
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control form-control-sm  {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Karyawan">
+                    <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control form-control-sm  {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('email')}}
                         </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password" placeholder="Masukkan Password Karyawan"></div>
+                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password" placeholder="Masukkan Password Pengguna"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Level</label>
@@ -89,7 +89,7 @@
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat Pada: </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}} | {{$user->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->createdBy->employee->id)}}">{{$user->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}} | {{$user->updated_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->updatedBy->employee->id)}}">{{$user->updatedBy->employee->nama}}</a>
+                <strong>Dibuat pada: </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}} | {{$user->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->createdBy->employee->id)}}">{{$user->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}} | {{$user->updated_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->updatedBy->employee->id)}}">{{$user->updatedBy->employee->nama}}</a>
             </span>
         </div>
     </div>
@@ -107,7 +107,7 @@ $(function () {
 $(document).on('change', '#selectkaryawan', function () {
     let url = "{{ route('karyawan.data') }}"
 
-    // $('#foto').attr('src','/storage/'+data.foto)
+    // $('#foto').attr('src','/uploads/'+data.foto)
     $.ajax({
         type: 'get',
         url: url,

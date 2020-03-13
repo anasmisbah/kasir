@@ -28,7 +28,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                    <h4 class="card-title mb-0 text-bold">Membuat Pengguna</h4>
+                    <h4 class="card-title mb-0 text-bold">Menambahkan Pengguna</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     <a class="btn btn-danger" href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
@@ -38,7 +38,7 @@
             <form role="form-horizontal" action="{{route('pengguna.simpan')}}" method="POST">
                 @csrf
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Avatar</label>
+                    <label class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-10">
                         <img src="{{asset("/uploads/fotos/default.jpg")}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     </div>
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('username')}}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
+                    <label class="col-sm-2 col-form-label">Nama Pengguna</label>
+                    <div class="col-sm-10"><input type="text" value="{{ old('username')}}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan nama pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('username')}}
                         </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10"><input type="email" value="{{ old('email')}}" class="form-control form-control-sm {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Karyawan">
+                    <div class="col-sm-10"><input type="email" value="{{ old('email')}}" class="form-control form-control-sm {{ $errors->first('email')?'is-invalid':'' }}" name="email" placeholder="Masukkan Email Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('email')}}
                         </div>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm {{ $errors->first('password')?'is-invalid':'' }}" name="password" placeholder="Masukkan Password Karyawan">
+                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm {{ $errors->first('password')?'is-invalid':'' }}" name="password" placeholder="Masukkan Password Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('password')}}
                         </div>
@@ -120,7 +120,7 @@ $(function () {
 $(document).on('change', '#selectkaryawan', function () {
     let url = "{{ route('karyawan.data') }}"
 
-    // $('#foto').attr('src','/storage/'+data.foto)
+    // $('#foto').attr('src','/uploads/'+data.foto)
     $.ajax({
         type: 'get',
         url: url,

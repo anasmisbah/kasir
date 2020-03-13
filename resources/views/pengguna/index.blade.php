@@ -34,12 +34,9 @@
         color: #39f;
     }
     .table thead th{
+      text-align: center;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
-    }
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
     }
 </style>
 @endpush
@@ -49,6 +46,9 @@
 @endsection
 
 @section('content')
+
+<section class="content">
+  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -76,21 +76,21 @@
                           @endforeach
                         </select>
                       </div>
-                      <div class="col-md-4 text-center">
+                      <div class="col-md-4">
                         <input id="downloadble" type="hidden" name="print">
                         <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                         <button id="btn-print" type="submit" class="btn btn-sm btn-info" ><i class="fa fa-print"></i></button>
-                        <a href="{{route('pengguna.index')}}" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                        <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                       </div>
                     </div>
                 </form>
             </div>
-          <table id="example1" style="width:100%" class="table table-striped display compact dt-responsive nowrap">
+          <table id="example1" style="width:100%" class="table table-sm table-striped display compact">
             <thead>
-              <tr class="text-center">
-                <th class="py-2">No.</th>
+              <tr>
+                <th class="py-2">No</th>
                 <th class="py-2">Nama Pengguna</th>
-                <th class="py-2">Nama lengkap</th>
+                <th class="py-2">Nama Lengkap</th>
                 <th class="py-2">Email</th>
                 <th class="py-2">Level</th>
                 <th class="py-2">Cabang</th>
@@ -99,12 +99,12 @@
             <tbody>
               @foreach ($users as $user)
               <tr>
-                <td class="py-2 text-center" min-height= "10px">{{$loop->iteration}}</td>
-                <td class="py-2 text-left" min-height= "10px"><a class="text-info" href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td class="py-2 text-left" min-height= "10px"><a class="text-info" href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td class="py-2 text-left" min-height= "10px">{{ $user->email }}</td>
-                <td class="py-2 text-center" min-height= "10px">{{ $user->level->nama }}</td>
-                <td class="py-2 text-center" min-height= "10px"><a class="text-info" href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td><a class="text-info" href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                <td><a class="text-info" href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                <td class="text-center">{{ $user->email }}</td>
+                <td class="text-center">{{ $user->level->nama }}</td>
+                <td class="text-center"><a class="text-info" href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
               </tr>
               @endforeach
             </tbody>
@@ -115,6 +115,10 @@
       <!-- /.card -->
     </div>
     <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
 @endsection
 
 @push('script')

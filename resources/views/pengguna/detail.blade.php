@@ -26,7 +26,7 @@
                 <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
-            <table class="table table-striped">
+            <table class="table table-sm table-striped">
                 <tbody>
                   <tr>
                     <td style="width:10%">Avatar</td>
@@ -34,7 +34,7 @@
                   </tr>
                   <tr>
                     <td style="width:10%">Nama</td>
-                    <td>{{$user->employee->nama}}</td>
+                    <td><strong>{{$user->employee->nama}}</strong></td>
                   </tr>
                   <tr>
                     <td style="width:10%">Username</td>
@@ -66,7 +66,7 @@
 
             <div class="card-footer text-right" style="background:#C5C6C7">
                 <span style="font-size: 12px">
-                    <strong>Dibuat Pada: </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}} | {{$user->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->createdBy->employee->id)}}">{{$user->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}} | {{$user->updated_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->updatedBy->employee->id)}}">{{$user->updatedBy->employee->nama}}</a>
+                    <strong>Dibuat pada: </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}} | {{$user->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->createdBy->employee->id)}}">{{$user->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}} | {{$user->updated_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$user->updatedBy->employee->id)}}">{{$user->updatedBy->employee->nama}}</a>
                 </span>
             </div>
         </div>
