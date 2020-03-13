@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Log in</title>
+    <title>Masuk | {{$app->nama}}</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,19 +19,15 @@
     <link rel="stylesheet" href="/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./adminlte/dist/css/adminlte.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
     .card{
         border: 3px solid;
+        border-color: #6c757d;
     }
-    .login-page{
-        background-color: #EBEBEB
-    }
-    .btn-primary{
-        background-color: #038ACA
-    }
+
     </style>
 </head>
 
@@ -41,13 +37,13 @@
         <div class="card">
             <div class="card-body rounded">
                     <div class="login-logo">
-                        <img height="100px" src="{{asset('/uploads/'.$app->logo)}}" alt="">
+                        <img height="30px" src="{{asset('/uploads/'.$app->logo)}}" alt="">
                     </div>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3 mt-5">
-                        <input type="text" name="username" class="form-control" placeholder="Masukkan Username">
+                        <input type="text" name="username" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -55,7 +51,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -65,8 +61,8 @@
                     <div class="row">
                         <!-- /.col -->
                         <div class="col">
-                            <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-                            <p class="text-center mt-5 mb-0" style=" font-size:12px "> Copyright 2020 | Developed with &hearts;</p>
+                            <button type="submit" class="btn btn-secondary btn-block">LOGIN</button>
+                            <p class="text-center mt-5 mb-0" style="font-size:12px">&copy; {{ now()->year }} | Developed with <span style="color:#b71c1c">&hearts;</span> by </p>
                         </div>
                         <!-- /.col -->
                     </div>
