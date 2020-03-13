@@ -114,8 +114,8 @@
             font-size: 14pt;
             font-weight: bold;
         }
-        .table{
-            font-size: 12px;
+        body{
+            font-size: 12pt !important;
         }
         .table th{
             border-top: 2px solid black !important;
@@ -160,9 +160,10 @@
                     <thead>
                         <tr class="border">
                             <th width="7%" class="text-center">No</th>
-                            <th width="36%"class="text-center">Nama Barang</th>
-                            <th width="15%" class="text-center">Harga Satuan</th>
-                            <th width="15%" class="text-center">Qty(Kg)</th>
+                            <th width="34%"class="text-center">Nama Barang</th>
+                            <th width="2%"></th>
+                            <th width="17%" class="text-center">Harga Satuan</th>
+                            <th width="13%" class="text-center">Qty(Kg)</th>
                             <th width="2%"></th>
                             <th width="10%" class="text-center">Jumlah</th>
                         </tr>
@@ -177,7 +178,8 @@
                         <tr>
                             <td class="border-bawah text-center">{{$loop->iteration}}</td>
                             <td class="border-bawah text-center">{{$trans->supply->item->nama}}</td>
-                            <td class="border-bawah text-right">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                             <td class="border-bawah text-center" width="10%">{{$trans->kuantitas}}</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$trans->total_harga}}</span>,-</td>
@@ -186,7 +188,8 @@
                         <tr>
                             <td class="text-center">{{$loop->iteration}}</td>
                             <td  class="text-center">{{$trans->supply->item->nama}}</td>
-                            <td class="text-right">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                             <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
                             <td class="text-right">Rp</td>
                             <td class="text-right"><span class="harga">{{$trans->total_harga}}</span>,-</td>
@@ -199,13 +202,15 @@
 
                         <tr class="text-center">
                             <td>Status:</td>
-                            <td  style="text-align:left"><span> <strong><i>{{strtoupper($bill->status)}}</i></strong></span><span style="margin-left:60px">Hormat Kami,</span></td>
+                            <td  style="text-align:left"><span> <strong><i>{{strtoupper($bill->status)}}</i></strong></span><span style="margin-left:20px">Hormat Kami,</span></td>
+                            <td></td>
                             <td></td>
                             <td class="border-bawah">Sub Total</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$subtotal}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
+                            <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td class="border-bawah border"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
@@ -217,11 +222,13 @@
                             <td style="border: none"></td>
                             <td style="border: none"> <strong>{{$bill->user->employee->nama}}</strong></td>
                             <td style="border: none"></td>
+                            <td style="border: none"></td>
                             <td class="border-bawah">Uang Muka</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
+                            <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>
                             <td style="border: none"></td>

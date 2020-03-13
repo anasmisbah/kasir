@@ -22,14 +22,14 @@
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14px;
+            font-size: 14pt;
             font-weight: bold;
         }
-        .table{
-            font-size: 12px;
+        body{
+            font-size: 12pt;
         }
         .sign{
-            font-size: 12px;
+            font-size: 12pt;
         }
         .table th,.table td{
             padding-top: 0.3rem !important;
@@ -49,7 +49,9 @@
                         <th class="text-center">No.</th>
                         <th class="text-center">Nama Barang</th>
                         <th class="text-center">Cabang</th>
+                        <th style="width:3%"></th>
                         <th class="text-center">Harga Pusat</th>
+                        <th style="width:3%"></th>
                         <th class="text-center">Harga Cabang</th>
                         <th class="text-center">Stok (Kg)</th>
                     </tr>
@@ -60,8 +62,10 @@
                             <td class="border-bawah text-center">{{$loop->iteration}}</td>
                             <td class="border-bawah">{{$supply->item->nama}}</td>
                             <td class="border-bawah text-center">{{$supply->branch->nama}}</td>
-                            <td class="border-bawah text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                            <td class="border-bawah text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                             <td class="border-bawah text-center">{{$supply->stok}}</td>
                         </tr>
                         @else
@@ -69,8 +73,10 @@
                             <td class="text-center">{{$loop->iteration}}</td>
                             <td class="">{{$supply->item->nama}}</td>
                             <td class="text-center">{{$supply->branch->nama}}</td>
-                            <td class=" text-right">Rp <span class="harga">{{$supply->item->harga}}</span>,-</td>
-                            <td class=" text-right">Rp <span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                            <td class=" text-right">Rp</td>
+                            <td class=" text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
+                            <td class=" text-right">Rp</td>
+                            <td class=" text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
                             <td class="text-center">{{$supply->stok}}</td>
                         </tr>
                         @endif

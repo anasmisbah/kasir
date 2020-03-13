@@ -113,8 +113,8 @@
             font-size: 14pt;
             font-weight: bold;
         }
-        .table{
-            font-size: 12px;
+        body{
+            font-size: 12pt;
         }
         .table th{
             border-top: 2px solid black !important;
@@ -160,11 +160,11 @@
                     <thead>
                         <tr>
                             <th width="18%" class="border border-bawah text-center">No Nota Kas</th>
-                            <th width="25%"class="border border-bawah text-center">Tanggal nota Kas</th>
+                            <th width="22%"class="border border-bawah text-center">Tanggal nota Kas</th>
                             <th width="25%" class="border border-bawah text-center">Sub Total Nota Kas</th>
-                            <th width="10%" class="border border-bawah text-center">Diskon</th>
+                            <th width="7%" class="border border-bawah text-center">Diskon</th>
                             <th width="2%"></th>
-                            <th width="13%" class="border border-bawah text-center">Total Nota Kas</th>
+                            <th width="18%" class="border border-bawah text-center">Total Nota Kas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,9 +185,8 @@
                             <td class="border-bawah text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
                         </tr>
                         <tr class="text-center">
-                            <td>Status: <strong> <i> {{strtoupper($bill->status)}}</strong></i></td>
-                            <td ><span>Hormat Kami,</span></td>
-                            <td></td>
+                            <td colspan="2" class="text-left">Status: <strong> <i> {{strtoupper($bill->status)}}</strong></i></td>
+                            <td class="text-left"><span>Hormat Kami,</span></td>
                             <td class="border-bawah">Uang Muka</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
@@ -202,8 +201,8 @@
                         </tr>
                         <tr class="text-center">
                             <td style="border: none"></td>
-                            <td style="border: none;"><b> {{$bill->user->employee->nama}} </b></td>
                             <td style="border: none"></td>
+                            <td style="border: none;" class="text-left"><b> {{$bill->user->employee->nama}} </b></td>
                             <td class="border-bawah">Pembayaran</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>

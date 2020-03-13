@@ -22,14 +22,14 @@
             border-bottom: 2px solid black !important;
         }
         .title{
-            font-size: 14px;
+            font-size: 14pt;
             font-weight: bold;
         }
-        .table{
-            font-size: 12px;
+        body{
+            font-size: 12pt;
         }
         .sign{
-            font-size: 12px;
+            font-size: 12pt;
         }
         .table th,.table td{
             padding-top: 0.3rem !important;

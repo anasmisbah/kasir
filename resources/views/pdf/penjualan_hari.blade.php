@@ -22,14 +22,14 @@
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14px;
+            font-size: 14pt;
             font-weight: bold;
         }
-        .table{
-            font-size: 12px;
+        body{
+            font-size: 12pt;
         }
         .sign{
-            font-size: 12px;
+            font-size: 12pt;
         }
         .table th,.table td{
             padding-top: 0.3rem !important;
