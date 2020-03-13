@@ -26,7 +26,12 @@
     .card{
         border: 3px solid;
     }
-
+    .login-page{
+        background-color: #EBEBEB
+    }
+    .btn-primary{
+        background-color: #038ACA
+    }
     </style>
 </head>
 

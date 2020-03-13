@@ -122,7 +122,7 @@
                             <div class="col-2" style="width: 20%">
                                 <div class="form-group">
                                     <label for="">Harga</label>
-                                    <input type="text" id="hargabarang" disabled id="harga" value="0" class="form-control form-control-sm">
+                                    <input type="text" id="hargabarang" disabled id="harga" value="Rp 0;-" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-1" >
@@ -135,7 +135,7 @@
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled value="0" id="jumlah" class="form-control form-control-sm inputharga">
+                                    <input id="jumlahbarang" type="text" disabled value="Rp 0,-" id="jumlah" class="form-control form-control-sm inputharga">
                                 </div>
                             </div>
                             <div class="col-lg-1 small" >
@@ -218,11 +218,11 @@
         <div class="col-2 ml-3" style="max-width:13%" >
             <div class="form-group">
                 <label for="">Uang muka</label>
-                <input id="uangmuka" type="text" value="0" placeholder="0" class="form-control form-control-sm">
+                <input id="uangmuka" type="text" placeholder="Rp 0,-" class="form-control form-control-sm">
             </div>
             <div class="form-group">
                 <label for="">Uang kembali</label>
-                <input id="uangkembali" type="text" value="0" disabled class="form-control form-control-sm ">
+                <input id="uangkembali" type="text" value="Rp 0,-" disabled class="form-control form-control-sm ">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
@@ -640,11 +640,13 @@
         numberformat()
     }
 
-    $("#uangmuka").keyup(function() {
+    $("#uangmuka").keyup(function(keys) {
         uangMuka = $(this).val()
-
+        
         if (!(uangMuka)) {
             uangMuka =0
+            uangkembali();
+            showNominal();
         } else {
             uangkembali();
             showNominal();
