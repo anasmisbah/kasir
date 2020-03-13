@@ -14,9 +14,9 @@ class AddCityColumn extends Migration
     public function up()
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->string('kelurahan');
             $table->string('kecamatan');
             $table->string('kota');
+            $table->string('provinsi');
         });
     }
 
@@ -28,9 +28,9 @@ class AddCityColumn extends Migration
     public function down()
     {
         Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('kelurahan');
             $table->dropColumn('kecamatan');
             $table->dropColumn('kota');
+            $table->dropColumn('provinsi');
         });
     }
 }

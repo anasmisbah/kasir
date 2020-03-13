@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     protected $fillable = [
-        'nama', 'toko', 'alamat', 'telepon','logo','created_by','updated_by','kelurahan','kecamatan','kota'
+        'nama', 'toko', 'alamat', 'telepon','logo','created_by','updated_by','provinsi','kecamatan','kota'
     ];
 
     public function createdBy()

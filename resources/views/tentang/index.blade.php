@@ -16,7 +16,7 @@
                 <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
             </div>
         </div>
-      <table class="table table-striped">
+      <table class="table table-sm table-striped">
         <tbody>
           <tr>
             <td style="width:10%">Logo</td>
@@ -24,19 +24,19 @@
           </tr>
           <tr>
             <td style="width:10%">Nama Aplikasi</td>
-            <td>{{$app->nama}}</td>
+            <td><strong>{{$app->nama}}</strong></td>
           </tr>
           <tr>
             <td style="width:10%">Nama Toko</td>
-            <td>{{$app->toko}}</td>
+            <td><strong>{{$app->toko}}</strong></td>
+          </tr>
+          <tr>
+            <td style="width:10%">Telepon</td>
+            <td>{{$app->telepon}}</td>
           </tr>
           <tr>
             <td style="width:10%">Alamat</td>
             <td>{{$app->alamat}}</td>
-          </tr>
-          <tr>
-            <td style="width:10%">Kelurahan</td>
-            <td>{{$app->kelurahan}}</td>
           </tr>
           <tr>
             <td style="width:10%">Kecamatan</td>
@@ -47,8 +47,8 @@
             <td>{{$app->kota}}</td>
           </tr>
           <tr>
-            <td style="width:10%">Telepon</td>
-            <td>{{$app->telepon}}</td>
+            <td style="width:10%">Provinsi</td>
+            <td>{{$app->provinsi}}</td>
           </tr>
         </tbody>
       </table>
@@ -57,7 +57,7 @@
 
     <div class="card-footer text-right" style="background:#C5C6C7">
       <span style="font-size: 12px">
-        <strong>Dibuat Pada: </strong>{{  $app->created_at->dayName." | ".$app->created_at->day." ".$app->created_at->monthName." ".$app->created_at->year}} | {{$app->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$app->createdBy->employee->id)}}" class="text-info">{{$app->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $app->updated_at->dayName." | ".$app->updated_at->day." ".$app->updated_at->monthName." ".$app->updated_at->year}} | {{$app->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$app->updatedBy->employee->id)}}"  class="text-info">{{$app->updatedBy->employee->nama}}</a>
+        <strong>Dibuat pada: </strong>{{  $app->created_at->dayName." | ".$app->created_at->day." ".$app->created_at->monthName." ".$app->created_at->year}} | {{$app->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$app->createdBy->employee->id)}}" class="text-info">{{$app->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $app->updated_at->dayName." | ".$app->updated_at->day." ".$app->updated_at->monthName." ".$app->updated_at->year}} | {{$app->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$app->updatedBy->employee->id)}}"  class="text-info">{{$app->updatedBy->employee->nama}}</a>
       </span>
     </div>
   </div>

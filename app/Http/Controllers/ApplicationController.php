@@ -56,7 +56,7 @@ class ApplicationController extends Controller
             'toko'=>'required',
             'alamat'=>'required',
             'telepon'=>'required',
-            'kelurahan'=>'required',
+            'provinsi'=>'required',
             'kecamatan'=>'required',
             'kota'=>'required'
         ]);
@@ -68,7 +68,7 @@ class ApplicationController extends Controller
             'toko'=>$request->toko,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
-            'kelurahan'=>$request->kelurahan,
+            'provinsi'=>$request->provinsi,
             'kecamatan'=>$request->kecamatan,
             'kota'=>$request->kota,
             'updated_by'=>Auth::user()->id

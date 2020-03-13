@@ -77,7 +77,7 @@
                     <label class="col-2">Nama Aplikasi:</label>
                     <div class="col-10"><input type="text" value="{{ old('nama')?old('nama'):$app->nama }}"
                             class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}"
-                            name="nama" placeholder="Masukkan Nama Aplikasi">
+                            name="nama" placeholder="Masukkan Nama">
                         <div class="invalid-feedback">
                             {{$errors->first('nama')}}
                         </div>
@@ -87,9 +87,19 @@
                     <label class="col-2">Nama Toko:</label>
                     <div class="col-10"><input type="text" value="{{ old('toko')?old('toko'):$app->toko }}"
                             class="form-control form-control-sm {{ $errors->first('toko')?'is-invalid':'' }}"
-                            name="toko" placeholder="Masukkan Nama Toko">
+                            name="toko" placeholder="Masukkan Jabatan">
                         <div class="invalid-feedback">
                             {{$errors->first('toko')}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Telepon</label>
+                    <div class="col-10"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}"
+                            class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}"
+                            name="telepon" placeholder="Masukkan Telepon Karwayan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('telepon')}}
                         </div>
                     </div>
                 </div>
@@ -97,20 +107,9 @@
                     <label class="col-2">Alamat:</label>
                     <div class="col-10"><input type="text" value="{{ old('alamat')?old('alamat'):$app->alamat }}"
                             class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}"
-                            name="alamat" placeholder="Masukkan Alamat">
+                            name="alamat" placeholder="Masukkan Alamat Karyawan">
                         <div class="invalid-feedback">
                             {{$errors->first('alamat')}}
-                        </div>
-
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2">Kelurahan:</label>
-                    <div class="col-10"><input type="text" value="{{ old('kelurahan')?old('kelurahan'):$app->kelurahan }}"
-                            class="form-control form-control-sm {{ $errors->first('kelurahan')?'is-invalid':'' }}"
-                            name="kelurahan" placeholder="Masukkan kelurahan">
-                        <div class="invalid-feedback">
-                            {{$errors->first('kelurahan')}}
                         </div>
 
                     </div>
@@ -127,10 +126,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2">Kota:</label>
+                    <label class="col-2">Kabupaten/Kota:</label>
                     <div class="col-10"><input type="text" value="{{ old('kota')?old('kota'):$app->kota }}"
                             class="form-control form-control-sm {{ $errors->first('kota')?'is-invalid':'' }}"
-                            name="kota" placeholder="Masukkan kota">
+                            name="kota" placeholder="Masukkan kabupaten/kota">
                         <div class="invalid-feedback">
                             {{$errors->first('kota')}}
                         </div>
@@ -138,13 +137,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2">Telepon</label>
-                    <div class="col-10"><input type="text" value="{{ old('telepon')?old('telepon'):$app->telepon }}"
-                            class="form-control form-control-sm {{ $errors->first('telepon')?'is-invalid':'' }} {{ $errors->first('telepon')?'is-invalid':'' }}"
-                            name="telepon" placeholder="Masukkan Nomor Telepon">
+                    <label class="col-2">Provinsi:</label>
+                    <div class="col-10"><input type="text" value="{{ old('provinsi')?old('provinsi'):$app->provinsi }}"
+                            class="form-control form-control-sm {{ $errors->first('provinsi')?'is-invalid':'' }}"
+                            name="provinsi" placeholder="Masukkan provinsi">
                         <div class="invalid-feedback">
-                            {{$errors->first('telepon')}}
+                            {{$errors->first('provinsi')}}
                         </div>
+
                     </div>
                 </div>
                 <button type="submit" class="btn  btn-info float-right " style="width: 78px !important;"><i
@@ -153,11 +153,11 @@
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat Pada:
+                <strong>Dibuat pada:
                 </strong>{{  $app->created_at->dayName." | ".$app->created_at->day." ".$app->created_at->monthName." ".$app->created_at->year}}
                 | {{$app->created_at->format('h:i:s')}} WIB | <a
                     href="{{route('karyawan.detail',$app->createdBy->employee->id)}}"
-                    class="text-info">{{$app->createdBy->employee->nama}}</a> / <strong>Diubah Pada:
+                    class="text-info">{{$app->createdBy->employee->nama}}</a> / <strong>Diubah pada:
                 </strong>{{  $app->updated_at->dayName." | ".$app->updated_at->day." ".$app->updated_at->monthName." ".$app->updated_at->year}}
                 | {{$app->updated_at->format('h:i:s')}} WIB | <a
                     href="{{route('karyawan.detail',$app->updatedBy->employee->id)}}"
