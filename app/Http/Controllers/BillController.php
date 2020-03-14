@@ -615,15 +615,8 @@ class BillController extends Controller
         $customers = $branch->customer;
         $supplies = $branch->supply;
         $date = Carbon::now();
-        $lastBill = Bill::select('id')->orderBy('id','desc')->first();
-        if (!$lastBill) {
-            $formatnnk = $branch->id."". Auth::user()->employee->id ."0".$date->day."".$date->month."".$date->year;
-
-        }else{
-
-            $formatnnk = $branch->id."". Auth::user()->employee->id."" .($lastBill->id+1)."".$date->day."".$date->month."".$date->year;
-        }
-
+        $lastBill = Bill::select('id')->where('branch_id',$branch->id)->whereDate('tanggal_nota',$date)->count();
+        $formatnnk = $branch->kode."".$date->format('ymd')."".str_pad(($lastBill+1),3,'0',STR_PAD_LEFT);
         return view('kasir.index',compact('branch','customers','supplies','formatnnk'));
     }
 
