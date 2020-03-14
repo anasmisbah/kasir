@@ -36,12 +36,12 @@
     }
 
     .table thead th{
+        text-align: center;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
     }
 </style>
 @endpush
@@ -61,21 +61,21 @@
                   <a class="btn btn-info"  href="{{ route('jenis.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
-          <table id="example1" style="width:100%" class="table table-striped compact">
+          <table id="example1" style="width:100%" class="table table-sm table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="py-2">No</th>
-                <th class="py-2 text-left">Jenis Barang</th>
-                <th class="py-2" style="width:10%">Aksi</th>
+                <th style="width: 5%">No</th>
+                <th style="width:85%">Jenis Barang</th>
+                <th style="width:10%">Aksi</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($categories as $category)
               <tr>
-                <td class="min-padding">{{ $loop->iteration }}</td>
-                <td class="min-padding text-left"> <a href="{{route('jenis.detail',$category->id)}}" class="text-info"> {{ $category->nama }}</a>
+                <td class="text-center" >{{ $loop->iteration }}</td>
+                <td class="text-center"> <a href="{{route('jenis.detail',$category->id)}}" class="text-info"> {{ $category->nama }}</a>
                 </td>
-                <td class="min-padding" style="width:10%">
+                <td class="text-center">
                   <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
                     <i class="fa fa-trash"></i></button>
                 </td>
