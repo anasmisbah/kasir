@@ -8,26 +8,10 @@
         padding-right: 1rem;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
-    }
-    .page-item.active .page-link{
-        background-color: #39f;
-        border-color: #39f;
     }
     .btn-warning{
         color: white;
-    }
-    .page-link{
-        color: #39f;
-    }
-    .page-link:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
-    }
-    .page-link:hover{
-        color: #39f;
     }
     .table thead th{
         text-align: center;
@@ -41,7 +25,7 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item active"><a href="#" class="text-info">Stok Barang</a></li>
+<li class="breadcrumb-item active"><a href="#" >Stok Barang</a></li>
 @endsection
 @section('content')
     <div class="col-md-12">
@@ -53,7 +37,7 @@
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     @if (auth()->user()->level_id == 2)
-                    <a class="btn btn-info"  href="{{ route('stok.tambah') }}"><i class="fa fa-plus"></i></a>
+                    <a class="btn btn-primary"  href="{{ route('stok.tambah') }}"><i class="fa fa-plus"></i></a>
                     @endif
                 </div>
               </div>
@@ -76,9 +60,9 @@
                           </div>
                           <div class="col-md-4">
                             <input id="downloadble" type="hidden" name="print">
-                            <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
-                            <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                            <a href="{{route('stok.index')}}" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                            <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                            <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                            <a href="{{route('stok.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
                           </div>
                         </div>
                     </div>
@@ -103,8 +87,8 @@
               @foreach ($supplies as $supply)
               <tr>
                 <td  class="text-center">{{ $loop->iteration }}</td>
-                <td  class="text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td  class="text-center"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td  class="text-left"><a  href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                <td  class="text-center"><a  href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
                 <td  class="text-center">{{$supply->stok}}</td>
                 <td class="text-right">Rp</td>
                 <td  class="text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>

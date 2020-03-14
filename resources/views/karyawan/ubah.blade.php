@@ -43,16 +43,16 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <div class="d-flex justify-content-between mb-3">
-                <div>
-                    <h4 class="card-title mb-0 text-bold">Memperbarui Karyawan</h4>
-                </div>
-                <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <button type="submit" class="btn  btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
-                    <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
-                </div>
-            </div>
             <form role="form-horizontal" action="{{route('karyawan.perbarui',$employee->id)}}" method="POST" enctype="multipart/form-data">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <h4 class="card-title mb-0 text-bold">Memperbarui Karyawan</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                        <button type="submit" class="btn  btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                        <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
                 @csrf
                 @method('PUT')
                 <div class="form-group row">

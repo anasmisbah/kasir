@@ -10,8 +10,6 @@
         margin-bottom: .5rem !important;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
     }
     .card-title{
@@ -22,24 +20,25 @@
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
 <li class="breadcrumb-item">Stok Barang</li>
-<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+<li class="breadcrumb-item active"><a href="#"  >Memperbarui</a></li>
 @endsection
 
 @section('content')
 <div class="col-12 ">
     <div class="card">
         <div class="card-body">
-        <div class="d-flex justify-content-between mb-3">
-            <div>
-            <h4 class="card-title mb-0 text-bold">Memperbarui Stok Barang</h4>
-            </div>
-            <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-            <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
-            </div>
-        </div>
-        <form role="form-horizontal" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
-            @csrf
-            @method('PUT')
+            <form role="form-horizontal" action="{{route('stok.perbarui',$supply->id)}}" method="POST">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <h4 class="card-title mb-0 text-bold">Memperbarui Stok Barang</h4>
+                    </div>
+                    <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                        <button type="submit" class="btn btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                        <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                @csrf
+                @method('PUT')
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
                         <div class="col-sm-10"><select id="barang" class="form-control form-control-sm select2" name="item_id">
@@ -78,13 +77,12 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </form>
             </div>
 
             <div class="card-footer text-right" style="background:#C5C6C7">
                 <span style="font-size: 12px">
-                    <strong>Dibuat Pada: </strong>{{  $supply->created_at->dayName." | ".$supply->created_at->day." ".$supply->created_at->monthName." ".$supply->created_at->year}} | {{$supply->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->createdBy->employee->id)}}" class="text-info">{{$supply->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $supply->updated_at->dayName." | ".$supply->updated_at->day." ".$supply->updated_at->monthName." ".$supply->updated_at->year}} | {{$supply->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->updatedBy->employee->id)}}" class="text-info">{{$supply->updatedBy->employee->nama}}</a>
+                    <strong>Dibuat pada: </strong>{{  $supply->created_at->dayName." | ".$supply->created_at->day." ".$supply->created_at->monthName." ".$supply->created_at->year}} | {{$supply->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->createdBy->employee->id)}}" >{{$supply->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $supply->updated_at->dayName." | ".$supply->updated_at->day." ".$supply->updated_at->monthName." ".$supply->updated_at->year}} | {{$supply->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$supply->updatedBy->employee->id)}}" >{{$supply->updatedBy->employee->nama}}</a>
                 </span>
                 </div>
             </div>
