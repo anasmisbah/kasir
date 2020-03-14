@@ -4,37 +4,21 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <style>
-
-    .min-padding{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
-    }
     .form-control-sm{
         padding-right: 1rem;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
     }
-    .page-item.active .page-link{
-        background-color: #39f;
-        border-color: #39f;
-    }
     .btn-warning{
+        color: white;
+    }
+    .btn-warning:hover{
         color: white;
     }
     .page-link{
         color: #39f;
     }
-    .page-link:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
-    }
-    .page-link:hover{
-        color: #39f;
-    }
-
     .table thead th{
         text-align: center;
         border-top: 1px solid black;
@@ -47,7 +31,7 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item active"><a href="#" class="text-info">Jenis</a></li>
+<li class="breadcrumb-item active"><a href="#" >Jenis</a></li>
 @endsection
 @section('content')
     <div class="col-12">
@@ -58,7 +42,7 @@
                   <h4 class="card-title mb-0">Daftar jenis Barang</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                  <a class="btn btn-info"  href="{{ route('jenis.tambah') }}"><i class="fa fa-plus"></i></a>
+                  <a class="btn btn-primary"  href="{{ route('jenis.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
           <table id="example1" style="width:100%" class="table table-sm table-striped compact">
@@ -73,7 +57,7 @@
               @foreach ($categories as $category)
               <tr>
                 <td class="text-center" >{{ $loop->iteration }}</td>
-                <td class="text-center"> <a href="{{route('jenis.detail',$category->id)}}" class="text-info"> {{ $category->nama }}</a>
+                <td class="text-center"> <a href="{{route('jenis.detail',$category->id)}}" > {{ $category->nama }}</a>
                 </td>
                 <td class="text-center">
                   <button onclick="hapus({{$category->id}},'{{$category->nama}}')" data-nama="{{$category->nama}}" type="submit" class="btn btn-warning btn-sm">
