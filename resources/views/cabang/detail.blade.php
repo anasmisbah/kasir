@@ -41,6 +41,10 @@
                 <td><strong>{{$branch->nama}}</strong> </td>
               </tr>
               <tr>
+                <td style="width:10%">Kode Cabang</td>
+                <td>{{$branch->kode}}</td>
+              </tr>
+              <tr>
                 <td style="width:10%">Alamat</td>
                 <td>{{$branch->alamat}}</td>
               </tr>

@@ -43,6 +43,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="kode" class="col-sm-2 col-form-label">Kode</label>
+                    <div class="col-sm-10">
+                        <input type="text"  value="{{ old('kode')?old('kode'):$branch->kode }}" name="kode" class="form-control form-control-sm {{ $errors->first('kode')?'is-invalid':'' }}" id="kode" placeholder="kode">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kode')}}
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Telepon</label>

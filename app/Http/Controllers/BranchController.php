@@ -32,6 +32,7 @@ class BranchController extends Controller
             'alamat'=>'required',
             'telepon'=>'required',
             'pimpinan'=>'required',
+            'kode'=>'required'
         ]);
 
         $newBranch = Branch::create([
@@ -39,6 +40,7 @@ class BranchController extends Controller
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
+            'kode'=>$request->kode,
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
@@ -60,6 +62,7 @@ class BranchController extends Controller
             'alamat'=>'required',
             'telepon'=>'required',
             'pimpinan'=>'required',
+            'kode'=>'required'
         ]);
 
         $updatedBranch = Branch::findOrFail($request->id);
@@ -69,6 +72,7 @@ class BranchController extends Controller
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
+            'kode'=>$request->kode,
             'updated_by'=>Auth::user()->id
         ]);
 
