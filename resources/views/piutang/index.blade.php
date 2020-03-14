@@ -43,9 +43,8 @@
     .border-bawah{
         border-bottom: 1px solid black !important;
     }
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
     }
 </style>
 @endpush
@@ -66,7 +65,7 @@
                 <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
                   <div class="row">
                     <div class="col-md-5">
-                        <label for="hari" class="">Pilih Tanggal</label>
+                        <label for="hari" class="">Tanggal</label>
                     </div>
                     @if (auth()->user()->level_id ==1)
                     <div class="col-md-2">
@@ -104,49 +103,47 @@
                 </form>
             </div>
             @if (Request::input('hari'))
-            <table id="example1" style="width:100%" class="table table-striped compact">
+            <table id="example1" style="width:100%" class="table table-sm table-striped">
               <thead>
                 <tr>
-                  <th style="width:5%" class="py-2 text-center">No.</th>
-                  <th style="width:10%" class="py-2 text-center">No. Nota Bon</th>
-                  <th style="width:15%" class="py-2 text-center">Nama</th>
-                  <th style="width:20%" class="py-2 text-center">Alamat</th>
-                  <th style="width:10%" class="py-2 text-center">Telepon</th>
-                  <th style="width:10%" class="py-2 text-center">Cabang</th>
-                  <th style="width:3%" class="py-2 text-right"></th>
-                  <th style="width:10%" class="py-2 text-center">Piutang</th>
+                  <th style="width:3%" class="text-center">No.</th>
+                  <th style="width:10%" class="text-center">No. Nota Bon</th>
+                  <th style="width:15%" class="text-center">Nama Pelanggan</th>
+                  <th style="width:25%" class="text-center">Alamat</th>
+                  <th style="width:10%" class="text-center">Telepon</th>
+                  <th style="width:3%" class="text-right"></th>
+                  <th style="width:10%" class="text-center">Piutang</th>
                 </tr>
               </thead>
               <tbody>
                   @foreach ($bills as $bill)
                   <tr>
-                    <td class="py-2 text-center">{{$loop->iteration}}</td>
-                    <td class="py-2 text-center"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                    <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                    <td class="py-2">{{$bill->customer->alamat}}</td>
-                    <td class="py-2 text-center">{{$bill->customer->telepon}}</td>
-                    <td class="py-2 text-center"><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}">{{$bill->branch->nama}}</a></td>
-                    <td class="py-2 text-right">Rp</td>
-                    <td class="py-2 text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                    <td class=" text-center">{{$loop->iteration}}</td>
+                    <td class=" text-center"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                    <td ><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                    <td >{{$bill->customer->alamat}}</td>
+                    <td class="text-center">{{$bill->customer->telepon}}</td>
+                    <td class="text-right">Rp</td>
+                    <td class="text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                   </tr>
                   @endforeach
               </tbody>
             </table>
             @else
-            <table id="empty_table" style="width:100%" class="table table-striped compact">
+            <table id="empty_table" style="width:100%" class="table table-sm compact">
                 <thead>
                   <tr>
-                    <th class="py-2">No.</th>
-                    <th class="py-2">No. Nota Bon</th>
-                    <th class="py-2">Nama</th>
-                    <th class="py-2">Alamat</th>
-                    <th class="py-2">Telepon</th>
-                    <th class="py-2 text-right">Piutang</th>
+                    <th class="">No.</th>
+                    <th class="">No. Nota Bon</th>
+                    <th class="">Nama</th>
+                    <th class="">Alamat</th>
+                    <th class="">Telepon</th>
+                    <th class=" text-right">Piutang</th>
                   </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="text-center" colspan="6" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Daftar Piutang</td>
+                        <td class="text-center border-bawah" colspan="7" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Daftar Piutang</td>
                     </tr>
                 </tbody>
               </table>
