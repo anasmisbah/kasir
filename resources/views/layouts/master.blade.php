@@ -16,7 +16,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <!-- Main styles for this application-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    <link href="{{asset('/adminlte/css/style.css')}}" rel="stylesheet">
@@ -57,11 +57,23 @@
         margin-top: 48px;
       }
       .c-main{
-          padding-top: 1rem;
+          padding-top: 20px;
           color: black;
+          padding-bottom: 20px
       }
       .table{
           color:black;
+      }
+      div .container-fluid{
+          padding: 0px 10px;
+      }
+      @media (min-width: 768px){
+            div .container-fluid{
+            padding: 0px 5px !important;
+        }
+      }
+      .card {
+          margin-bottom: 0px;
       }
       .card-footer{
         background-color: #C5C6C7;
@@ -70,13 +82,16 @@
           position: fixed !important;
           margin-left: 200px;
       }
+      .card{
+          margin-bottom: 40px
+      }
     </style>
     @stack('css')
   </head>
   <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-        <img src="{{asset('/uploads/'.$app->logo)}}" alt="" style="margin-left:10px; height:25px;">
+        <img height="50px" src="{{asset('/uploads/'.$app->logo)}}" alt="" style="margin-left:10px; height:25px;">
       </div>
       @if (auth()->user()->level_id == 2)
       <ul class="c-sidebar-nav">
@@ -171,7 +186,7 @@
           </div>
         </main>
         <footer class="c-footer c-footer-fixed">
-          <div class="m-auto" style="font-size:12px">&copy; {{ now()->year }} | Developed with <span style="color:#b71c1c">&hearts;</span> by <img src="{{asset('/img/logo-dev.png')}}" alt="logo-dev" height="10px"></div>
+            <div class="m-auto" style="font-size:12px">&copy; {{ now()->year }} | Developed with <span style="color:#b71c1c">&hearts;</span> by <img src="{{asset('/img/logo-dev.png')}}" alt="logo-dev" height="10px"></div>
         </footer>
       </div>
     </div>
