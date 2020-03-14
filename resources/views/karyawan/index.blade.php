@@ -8,26 +8,10 @@
         padding-right: 1rem;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
-    }
-    .page-item.active .page-link{
-        background-color: #39f;
-        border-color: #39f;
     }
     .btn-warning{
         color: white;
-    }
-    .page-link{
-        color: #39f;
-    }
-    .page-link:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
-    }
-    .page-link:hover{
-        color: #39f;
     }
 
     .table thead th{
@@ -42,7 +26,7 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item active"><a href="#" class="text-info">Karyawan</a></li>
+<li class="breadcrumb-item active"><a href="#" >Karyawan</a></li>
 @endsection
 
 @section('content')
@@ -54,7 +38,7 @@
                 <h4 class="card-title mb-0">Daftar Karyawan</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <a class="btn btn-info"  href="{{ route('karyawan.tambah') }}"><i class="fa fa-plus"></i></a>
+                    <a class="btn btn-primary"  href="{{ route('karyawan.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
           @if (auth()->user()->level_id == 1)
@@ -76,9 +60,9 @@
                 </div>
                 <div class="col-md-4 text-center">
                   <input id="downloadble" type="hidden" name="print">
-                  <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class=" fa fa-eye"></i></button>
-                  <button id="btn-print" type="submit" class="btn btn-sm btn-info" ><i class=" fa fa-print"></i></button>
-                  <a href="{{route('karyawan.index')}}" class="btn btn-sm btn-info "><i class=" fa fa-refresh"></i></a>
+                  <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class=" fa fa-eye"></i></button>
+                  <button id="btn-print" type="submit" class="btn btn-sm btn-primary" ><i class=" fa fa-print"></i></button>
+                  <a href="{{route('karyawan.index')}}" class="btn btn-sm btn-primary "><i class=" fa fa-refresh"></i></a>
                 </div>
               </div>
             </form>
@@ -99,11 +83,11 @@
               @foreach ($employees as $employee)
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
-                <td><a class="text-info" href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                <td><a  href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
                 <td class="text-center">{{$employee->jabatan}}</td>
                 <td>{{$employee->alamat}}</td>
                 <td class="text-center">{{$employee->telepon}}</td>
-                <td class="text-center"><a class="text-info" href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                <td class="text-center"><a  href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
               </tr>
               @endforeach
 

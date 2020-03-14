@@ -6,8 +6,6 @@
         margin-bottom: .5rem !important;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
     }
     .card-title{
@@ -18,7 +16,7 @@
         max-width: 120px;
         height: 35px;
         content: attr(title)"asasa";
-        background-color: #3399fe !important;
+        background-color: #321fdb !important;
         color: #fff;
         overflow: hidden;
         border-radius: 5px;
@@ -38,7 +36,7 @@
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
 <li class="breadcrumb-item">Karyawan</li>
-<li class="breadcrumb-item active"><a href="#"  class="text-info">Memperbarui</a></li>
+<li class="breadcrumb-item active"><a href="#"  >Memperbarui</a></li>
 @endsection
 
 @section('content')
@@ -50,6 +48,7 @@
                     <h4 class="card-title mb-0 text-bold">Memperbarui Karyawan</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
+                    <button type="submit" class="btn  btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
                     <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
@@ -125,12 +124,11 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
             </form>
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s A')}} | <a class="text-info" href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
+                <strong>Dibuat pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s A')}} | <a  href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s')}} WIB | <a  href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
             </span>
         </div>
     </div>
