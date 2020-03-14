@@ -26,11 +26,11 @@
             <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
             </div>
         </div>
-      <table class="table table-striped">
+      <table class="table table-sm table-striped">
         <tbody>
           <tr>
             <td style="width:10%">Nama</td>
-            <td>{{$item->nama}}</td>
+            <td><strong>{{$item->nama}}</strong></td>
           </tr>
           <tr>
             <td style="width:10%">Jenis</td>
