@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pengguna</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('username')}}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan nama pengguna">
+                    <div class="col-sm-10"><input type="text" value="{{ old('username')}}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}" name="username" placeholder="Masukkan Nama Pengguna">
                         <div class="invalid-feedback">
                             {{$errors->first('username')}}
                         </div>
