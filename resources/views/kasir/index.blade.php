@@ -1,445 +1,486 @@
-@extends('layouts.kasir')
-
-@push('css')
-<style>
-    .scrollable {
-        height: 165px !important;
-        overflow-y: scroll !important
-    }
-
-    .scrollable-list {
-        max-height: 150px !important;
-        overflow-y: scroll !important
-    }
-    .small{
-        margin-left: 0rem;
-    }
-
-    @media (width:1030px){
-        .small{
-            margin-left: 0.5rem;
+<!DOCTYPE html>
+<html lang="en">
+    @php
+    use App\Application;
+    $app = Application::first();
+    @endphp
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- App Desc -->
+    <meta name="description" content="Halaman Login" />
+    <meta name="author" content="tukangkode.id" />
+    <title>Kasir | App</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon" />
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css">
+    <!--
+            [if lt IE 9]>
+                <script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]
+    -->
+    <style>
+        body {
+            height: 100%;
+            overflow: hidden;
+            background-color: rgb(235, 235, 235);
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
         }
-    }
-    .form-control.btnadd{
-        width: 80%;
-    }
-    .row.kasir{
-        margin-top: 55px;
-    }
-    .col-4.barang{
-        max-width: 30%;
-    }
-    table thead tr th{
-        border-top: 1px solid black !important;
-        border-bottom: 1px solid black !important;
-    }
-    .border-atas{
-        border-top: 1px solid black !important;
-    }
-    .borderan {
-        border-top: 1px solid black !important;
-        border-bottom: 1px solid black !important;
-    }
-</style>
-@endpush
 
-@section('content')
-<div class="container-fluid pt-2">
-    <div class="card border-0 mb-0">
-        <div class="card-body">
-    <div class="row">
-        <div class="col-2 border rounded mr-2 pb-2" style="background-color: #f5f6fa" >
-            <div class="row">
-                <div class="col-12">
-                    <label for="">No Nota Kas</label>
-                    <input id="nonotakas" class="form-control form-control-sm" disabled type="text" value="{{$formatnnk}}">
-                </div>
-                <div class="col-12 mt-3">
-                    <label for="">Tanggal</label>
-                    <input value="{{ \Carbon\Carbon::now()->format('d F Y') }}" class="form-control form-control-sm" disabled type="text">
-                </div>
+        .c-header-dark {
+            background-color: rgb(31, 40, 51) !important;
+        }
+
+        .tombol-kasir input,
+        .tombol-kasir button {
+            height: 115px;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        .border-full {
+            border-top: 1px solid #000 !important;
+            border-bottom: 1px solid #000 !important;
+        }
+
+        .border-atas {
+            border-top: 1px solid #000 !important;
+        }
+
+        .border-bawah {
+            border-bottom: 1px solid #000 !important;
+        }
+
+        .border-kanan-kiri {
+            border-radius: 0 !important;
+            border-right: none !important;
+            border-left: none !important;
+        }
+
+        .border-kanan {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            border-right: none !important;
+        }
+
+        .border-kiri {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-left: none !important;
+        }
+
+        .tombol-aksi {
+            width: 70px;
+            color: #fff;
+        }
+
+        .scrollable {
+            height: 165px !important;
+            overflow-y: scroll !important
+        }
+
+        .scrollable-list {
+            max-height: 150px !important;
+            overflow-y: scroll !important
+        }
+        .btn-warning:hover{
+            color: #fff
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="c-header c-sticky-top c-header-dark px-3">
+        <a class="c-header-brand" href="#">
+            <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi">
+        </a>
+        <div class="c-header-nav ml-auto">
+            <span class="c-header-nav-item text-light">Selamat datang,</span>
+            <a class="c-header-nav-item c-header-nav-link" href="#">{{auth()->user()->employee->nama}}</a>
+            <div class="c-header-nav-item c-header-nav-link">
+                <img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar">
+            </div>
+            <a class="c-header-nav-item c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i></a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+    </header>
+    <!-- End of header -->
+    <!-- Section Kasir -->
+    <!-- Row 1 -->
+    <div class="row col-md-12 mx-0 my-3">
+        <!-- Nota -->
+        <div class="col-md-2 border rounded bg-white border-kanan">
+            <div class="form-group mt-3">
+                <label for="">Nota Kas</label>
+                <input type="text" id="nonotakas" class="form-control" disabled value="{{$formatnnk}}">
+            </div>
+            <div class="form-group">
+                <label for="">Tanggal</label>
+                <input type="text" class="form-control" disabled value="{{\Carbon\Carbon::now()->format('d F Y | H:i:s').' WIB' }}">
             </div>
         </div>
-        <div class="col-6 border rounded mr-2" style="background-color: #f5f6fa">
-            <div class="row">
-                <div class="col-5">
-                    <div class="form-group-sm">
-                        <input type="hidden" id="idpelanggan">
-                        <label for="">Nama Pelanggan</label> <br>
-                        <input type="text" name="" id="searchpelanggan" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Pelanggan" style="width:80%" id="">
-                        <div class="position-absolute scrollable-list" style="z-index:999; width:77%">
-                            <div class="list-group position-relative" id="list-pelanggan">
-                            </div>
+        <!-- Pelanggan -->
+        <div class="col-md-2 border rounded bg-white border-kanan-kiri ">
+            <div class="form-group mt-3">
+                <label for="">Nama Pelanggan</label>
+                <div class="input-group">
+                    <input type="text" id="searchpelanggan" class="form-control" placeholder="Nama pelanggan">
+                    <div class="position-absolute scrollable-list card" style="z-index:999;margin-top:40px;border:none;width:90%">
+                        <div class="list-group list-group-flush position-relative" id="list-pelanggan">
                         </div>
-                        <button class="btn btn-sm btn-primary create-modal d-inline" id="tambahpelanggan"><i class="fa fa-plus"></i></button>
                     </div>
-                    <div class="form-group-sm mt-3">
-                        <label for="">Telepon</label>
-                        <input id="teleponpelanggan" class="form-control form-control-sm" style="width:80%" disabled type="text">
-                    </div>
-                </div>
-                <div class="col-7">
-                    <label for="">Alamat</label>
-                    <div class="rounded p-2 border" style="background-color:#e8ecef; height:78%">
-                        <p id="alamatpelanggan"></p>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="tambahpelanggan" >
+                            <i class="fas fa-plus my-0"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-3 mr-2 pr-2 " style="max-width:17.5%" >
-            <label for="">TOTAL</label>
-            <div class="border rounded text-center" style="background-color: #f5f6fa; height:75%;padding-top:2.5rem;">
-                <span class="text-bold text-center pb-4"  style="font-size:20px !important">Rp <span class="totalpembayaran">0</span>,-</span>
+            <div class="form-group">
+                <label for="">Telepon</label>
+                <input id="teleponpelanggan" type="text" class="form-control" disabled >
             </div>
         </div>
-        <div class="col-2 pb-2 " style="max-width:13%;padding-top:1.8rem">
-        <!-- <div class="col-2 border rounded" style="padding-top: 50px; padding-bottom:35px"> -->
-            <a href="#" id="cetaknota" class=" text-bold disabled btn btn-primary btn-lg btn-cetak" style="width:100%; height:100%; padding-top:2.5rem;font-size:20px !important">Cetak Nota</a>
+        <div class="col-md-4 border rounded bg-white pl-0 border-kanan-kiri">
+            <div class="form-group mt-3">
+                <label for="">Alamat</label>
+                <textarea class="form-control" rows="5" disabled id="alamatpelanggan"></textarea>
+            </div>
         </div>
+        <!-- Tombol -->
+        <form class="col-md-4 border rounded bg-white border-kiri">
+            <div class="form-row">
+                <div class="form-group col-md-6 mt-3 tombol-kasir">
+                    <label for="">TOTAL</label>
+                    <input type="text" class="form-control font-weight-bold" disabled id="totalan" placeholder="Rp 0,-">
+                </div>
+                <div class="form-group col-md-6 mt-3 tombol-kasir">
+                    <label class="text-white">Cetak Nota</label>
+                    <button id="cetaknota" type="button" class="btn btn-primary btn-block font-weight-bold" disabled>Cetak Nota</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="row kasir">
-        <div class="col-11" style="max-width:85%">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form">
-                        <div class="row ">
-                            <div class="col-3" style="max-width:20%">
-                                <div class="form-group" style="margin-left:4rem">
-                                    <label for="">Kode</label>
-                                    <input id="kodebarang" type="text" disabled id="kode" class="form-control form-control-sm " style="width:100%">
-                                </div>
-                            </div>
-                            <div class="col-4 barang">
-                                <div class="form-group">
-                                    <label for="">Nama Barang</label>
-                                    <input type="text" disabled name="" id="searchbarang" class="form-control form-control-sm d-inline" placeholder="Masukkan Nama Barang" style="width:100%" id="">
-                                    <div class="position-absolute scrollable-list" style="z-index:999; width:97%">
-                                        <div class="list-group position-relative" id="list-barang">
-                                        </div>
+    <!-- End of row 1 -->
+    <!-- Row 2 -->
+    <div class="row col-md-12 mx-0">
+        <!-- Group 01 -->
+        <div class="col-md-10 border rounded bg-white px-3 border-kanan">
+            <!-- Input barang -->
+            <div class="row pt-2 mx-0">
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            <td width="4%"></td>
+                            <td width="15%">
+                                <label for="">Kode</label>
+                                <input id="kodebarang" type="text" class="form-control" disabled placeholder="IK001">
+                            </td>
+                            <td width="32%">
+                                <label for="">Nama Barang</label>
+                                <input disabled type="text" id="searchbarang" class="form-control" placeholder="Nama barang">
+                                <div class="position-absolute list-group-flush card scrollable-list" style="z-index:999; width:32%">
+                                    <div class="list-group position-relative" id="list-barang">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-2" style="width: 20%">
-                                <div class="form-group">
-                                    <label for="">Harga</label>
-                                    <input type="text" id="hargabarang" disabled id="harga" value="Rp 0;-" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="col-1" >
-                                <div class="form-group">
-                                    <label for="">Qty</label>
-                                    <input type="hidden" id="stok">
-                                    <input id="qtybarang" type="number" step="0.01" disabled id="qty" placeholder="0" class="form-control form-control-sm">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label for="">Jumlah</label>
-                                    <input id="jumlahbarang" type="text" disabled value="Rp 0,-" id="jumlah" class="form-control form-control-sm inputharga">
-                                </div>
-                            </div>
-                            <div class="col-lg-1 small" >
-                                <div class="form-group" style="margin-top:30px;margin-left:30px">
-                                    <button disabled type="button" id="tambahbarang" class="btn btn-sm btn-primary form-control btnadd form-control-sm" >
-                                        <i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                            </td>
+                            <td width="15%">
+                                <label for="">Harga</label>
+                                <input type="text" id="hargabarang" class="form-control" disabled placeholder="Rp 0,-">
+                            </td>
+                            <td width="9%">
+                                <label for="">Qty (Kg)</label>
+                                <input type="number" id="qtybarang" step="0.01" class="form-control" placeholder="0">
+                            </td>
+                            <td width="15%">
+                                <label for="">Jumlah</label>
+                                <input type="text" id="jumlahbarang" class="form-control" disabled placeholder="Rp 0,-">
+                            </td>
+                            <td width="10%" style="padding-top: 33px;">
+                                <button id="tambahbarang" type="button" class="btn btn-primary tombol-aksi" disabled>
+                                    <i class="fas fa-plus my-0"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="row mt-1">
-                <div class="col-12 pb-0" style="height:30px">
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class="table table-sm"  id="tableBarang">
-                            <thead>
-                                <tr class="text-center">
-                                    <th  style="width: 5%">No</th>
-                                    <th  style="width: 10%">Kode</th>
-                                    <th  style="width: 30%">Nama Barang</th>
-                                    <th  style="width: 20%">Harga</th>
-                                    <th  style="width: 10%">Qty (Kg)</th>
-                                    <th  style="width: 20%">Jumlah</th>
-                                    <th  style="width: 5%;padding-right:0.9rem !important">Aksi</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
+            <!-- Daftar Barang -->
+            <!-- Table head -->
+            <div class="row mx-0">
+                <table class="table table-borderless my-0">
+                    <thead>
+                        <tr class="border-atas border-bawah">
+                            <th width="4%" class="text-center">No</th>
+                            <th width="15%" class="text-center">Kode</th>
+                            <th width="31%" class="text-center">Nama Barang</th>
+                            <th width="14%" class="text-center">Harga</th>
+                            <th width="9%" class="text-center">Qty (Kg)</th>
+                            <th width="17%" colspan="2" class="text-center">Jumlah</th>
+                            <th width="10%" class="text-center">Aksi</th>
+                        </tr>
+                        <tr>
+                            <td class="py-1"></td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <section class="scrollable">
-                        <table class="table table-sm text-center" id="tableBarang">
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </section>
-                </div>
+            <!-- Table body -->
+            <div class="row mx-0" id="tableBarang" style="height: 165px; overflow-y: scroll;">
+                <table class="table my-0">
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
-            <div class="row mt-1">
-                <div class="col-12">
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class="table table-sm" id="tableBarang">
-                            <tfoot>
-                                <tr>
-                                    <td  style="width: 5%"  class="border-atas"></td>
-                                    <td  style="width: 10%" class="border-atas"></td>
-                                    <td  style="width: 30%" class="border-atas"></td>
-                                    <td style="width: 3%" class="border-atas"></td>
-                                    <td  style="width: 17%" class="border-atas"></td>
-                                    <td  style="width: 10%" class="border-atas text-center"> Sub Total</td>
-                                    <td style="width: 3%" class="borderan text-bold text-right">Rp</td>
-                                    <td  style="width: 17%" class="border-atas text-right"><span id="subtotal" class="">0</span>,-
-                                    </td>
-                                    <td  style="width: 5%" class="border-atas"></td>
-                                </tr>
-                                <tr>
-                                    <td  style="border: none;"></td>
-                                    <td  style="border: none;"></td>
-                                    <td  style="border: none;"></td>
-                                    <td style="border: none;"></td>
-                                    <td style="border:none;" class="text-right pr-2">
-                                        Diskon (%) <span><input type="text" name="" id="diskon" class="form-control form-control-sm d-inline" disabled style="width:50px;height:25px"></span>
-                                    </td>
-                                    <td   class="borderan text-bold text-center">TOTAL</td>
-                                    <td  class="borderan text-bold text-right">Rp</td>
-                                    <td  class="borderan text-bold text-right"><span class=" totalpembayaran">0</span>,-
-                                    </td>
-                                    <td  style="border: none;"></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+            <!-- Table foot -->
+            <div class="row mx-0">
+                <table class="table table-borderless">
+                    <tfoot>
+                        <tr>
+                            <td width="4%" class="border-atas"></td>
+                            <td width="15%" class="border-atas"></td>
+                            <td width="30%" class="border-atas"></td>
+                            <td width="14%" class="border-atas"></td>
+                            <td width="9%" class="text-right border-full">Sub Total</td>
+                            <td width="3%" class="text-right border-full">Rp</td>
+                            <td width="14%" class="text-right border-full"><span id="subtotal" class="">0</span>,-</td>
+                            <td width="11%" class="border-atas"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td width="14%" class="text-right py-2 border-full">
+                                Diskon <span><input disabled type="text" name="" id="diskon" class="form-control form-control-sm d-inline" style="width:50px">
+                                    %</span>
+                            </td>
+                            <td class="text-right border-full"><strong>TOTAL</strong></td>
+                            <td class="text-right border-full"><strong>Rp</strong></td>
+                            <td class="text-right border-full"><strong><span class=" totalpembayaran">0</span>,-</strong></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-        <div class="col-2 ml-3" style="max-width:13%" >
-            <div class="form-group">
-                <label for="">Uang muka</label>
-                <input id="uangmuka" type="text" placeholder="Rp 0,-" class="form-control form-control-sm">
+        <!-- Group 02 -->
+        <div class="col-md-2 border rounded bg-white border-kiri">
+            <div class="form-group mt-3">
+                <label for="">Uang Muka</label>
+                <input id="uangmuka" type="text"  class="form-control" value="Rp 0,-">
             </div>
             <div class="form-group">
-                <label for="">Uang kembali</label>
-                <input id="uangkembali" type="text" value="Rp 0,-" disabled class="form-control form-control-sm ">
+                <label for="">Uang Kembali</label>
+                <input id="uangkembali" type="text" class="form-control" disabled placeholder="Rp 0,-">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
-                <input id="status" type="text" disabled class="form-control form-control-sm">
+                <input id="status" type="text" class="form-control" disabled placeholder="LUNAS">
             </div>
             <div class="form-group">
                 <label for="">Kasir</label>
-                <input type="text" value="{{auth()->user()->employee->nama}}" disabled class="form-control form-control-sm">
+                <input type="text" class="form-control" disabled value="{{auth()->user()->employee->nama}}">
             </div>
-            <div class="form-group mt-4">
-                <a href="#" onClick="window.location.reload();" style="width:100%" class="btn btn-danger">Reset</a>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-
-{{-- Modal Tambah --}}
-<div id="plus" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Membuat Pelanggan</h4>
-            </div>
-            <div class="modal-body">
-                <div class="box-error" id="box_error_modal_plus"></div>
-                <form action="" method="post" id="form-add-pelanggan" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="branch_id" value="{{$branch->id}}">
-                    <div class="form-group row add">
-                        <label class="control-label col-sm-2" for="date">Nama</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <input type="text" id="addnamapelanggan" class="form-control" id="nama" name="nama" placeholder="Nama Pelanggan">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row add">
-                        <label class="control-label col-sm-2" for="date">Telepon</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <input type="text" id="addteleponpelanggan" class="form-control" id="telepon" name="telepon" placeholder="Nomor Telepon">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group row add">
-                        <label class="control-label col-sm-2" for="date">Alamat</label>
-                        <div class="col-sm-10">
-                            <div class="input-group">
-                                <input type="text" id="addalamatpelanggan" class="form-control" id="alamat" name="alamat" placeholder="Alamat Pelanggan">
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="submit" id="add">
-                    <span class="glyphicon glyphicon-plus"></span> Tambah
-                </button>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup
-                </button>
+            <br>
+            <div class="my-3">
+                <button type="button" class="btn btn-danger btn-block font-weight-bold">Reset</button>
             </div>
         </div>
     </div>
-</div>
-{{-- /modal tambah --}}
-@endsection
+    <!-- End of row 2 -->
+    <!-- End of section kasir -->
+    <!-- Modal pelanggan -->
+    <div class="modal fade" id="pelangganModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Menambahkan Pelanggan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" id="form-add-pelanggan">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="branch_id" value="{{$branch->id}}">
+                        <div class="form-group">
+                            <label for="addnamapelanggan" class="col-form-label">Nama</label>
+                            <input type="text" class="form-control" id="addnamapelanggan" name="nama" placeholder="Nama pelanggan">
+                        </div>
+                        <div class="form-group">
+                            <label for="addteleponpelanggan" class="col-form-label">Telepon</label>
+                            <input type="text" class="form-control" id="addteleponpelanggan" name="telepon" placeholder="Nomor telepon">
+                        </div>
+                        <div class="form-group">
+                            <label for="addalamatpelanggan" class="col-form-label">Alamat</label>
+                            <textarea class="form-control" id="addalamatpelanggan" name="alamat" placeholder="Alamat Pelanggan"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" id="add" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- End of modal pelanggan -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+    <!-- jQuery -->
+    <script src="/adminlte/plugins/number-divider.min.js"></script>
+    <script src="/adminlte/plugins/sweetalert.min.js"></script>
+    <script>
 
-@push('script')
-<script src="/adminlte/plugins/number-divider.min.js"></script>
-<script src="/adminlte/plugins/sweetalert.min.js"></script>
-<script>
+        // =================== NUMBER FORMAT DIVIDER
 
-    // =================== NUMBER FORMAT DIVIDER
+        $(function() {
 
-    $(function() {
+            // Number Divide
+            $("#inputharga").divide({
+                delimiter: '.',
+                divideThousand: true
+            });
 
-        // Number Divide
-        $("#inputharga").divide({
-            delimiter: '.',
-            divideThousand: true
+            // Cegah Paid Amount Diisi dengan Huruf
+            $(".inputharga").on('keypress', function(keys) {
+                if (keys.keyCode > 31 && (keys.keyCode < 48 || keys.keyCode > 57)) {
+                    keys.preventDefault();
+                }
+            });
         });
 
-        // Cegah Paid Amount Diisi dengan Huruf
-        $(".inputharga").on('keypress', function(keys) {
-            if (keys.keyCode > 31 && (keys.keyCode < 48 || keys.keyCode > 57)) {
-                keys.preventDefault();
+        function numberformat(){
+            $(".harga").divide({
+                delimiter: '.',
+                divideThousand: true
+            });
+        }
+        // ==================END FORMAT
+
+        // PART  PELANGGAN
+
+        let pelanggan ={}
+
+        function getpelanggan(id) {
+            let url = "{{ route('pelanggan.data') }}"
+            const containerlist = $('#list-pelanggan')
+            containerlist.html('')
+
+            $.ajax({
+                type: 'get',
+                url: url,
+                data: {
+                    'id': id,
+                },
+                success: function(data) {
+                    $('#alamatpelanggan').val(data.customer.alamat)
+                    $('#teleponpelanggan').val(data.customer.telepon)
+                    $('#searchpelanggan').val(data.customer.nama)
+
+                    $('#idpelanggan').val(data.customer.id)
+                    $('#searchbarang').removeAttr('disabled')
+
+                    pelanggan = {
+                        id:data.customer.id,
+                        nama:data.customer.nama,
+                        telepon:data.customer.telepon,
+                        alamat:data.customer.alamat
+                    }
+                },
+            });
+        }
+
+
+        $("#searchpelanggan").keyup(function() {
+            let keyword = $(this).val()
+            let url = "{{ route('pelanggan.datajson') }}"
+            const containerlist = $('#list-pelanggan')
+            containerlist.html('')
+            if (keyword != '') {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: {
+                        'keyword': keyword,
+                    },
+                    success: function(data) {
+                        var list = data.map((item) => {
+                            return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
+                        })
+                        list.forEach((item) => {
+                            containerlist.append(item)
+                        })
+
+                    },
+                });
             }
         });
-    });
 
-    function numberformat(){
-        $(".harga").divide({
-            delimiter: '.',
-            divideThousand: true
-        });
-    }
-    // ==================END FORMAT
-</script>
-<script>
-    // PART  PELANGGAN
+        // $("#searchpelanggan").focus(function() {
 
-    let pelanggan ={}
+        //     let keyword = $(this).val()
+        //     let url = "{{ route('pelanggan.datajson') }}"
+        //     const containerlist = $('#list-pelanggan')
+        //     containerlist.html('')
+        //     $.ajax({
+        //         type: 'get',
+        //         url: url,
+        //         data: {
+        //             'keyword': keyword,
+        //         },
+        //         success: function(data) {
+        //             var list = data.map((item) => {
+        //                 return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
+        //             })
+        //             list.forEach((item) => {
+        //                 containerlist.append(item)
+        //             })
 
-    function getpelanggan(id) {
-        let url = "{{ route('pelanggan.data') }}"
-        const containerlist = $('#list-pelanggan')
-        containerlist.html('')
+        //         },
+        //     });
+        // })
 
-        $.ajax({
-            type: 'get',
-            url: url,
-            data: {
-                'id': id,
-            },
-            success: function(data) {
-                $('#alamatpelanggan').html(data.customer.alamat)
-                $('#teleponpelanggan').val(data.customer.telepon)
-                $('#searchpelanggan').val(data.customer.nama)
-
-                $('#idpelanggan').val(data.customer.id)
-                $('#searchbarang').removeAttr('disabled')
-
-                pelanggan = {
-                    id:data.customer.id,
-                    nama:data.customer.nama,
-                    telepon:data.customer.telepon,
-                    alamat:data.customer.alamat
-                }
-            },
-        });
-    }
-
-
-    $("#searchpelanggan").keyup(function() {
-        let keyword = $(this).val()
-        let url = "{{ route('pelanggan.datajson') }}"
-        const containerlist = $('#list-pelanggan')
-        containerlist.html('')
-        $.ajax({
-            type: 'get',
-            url: url,
-            data: {
-                'keyword': keyword,
-            },
-            success: function(data) {
-                var list = data.map((item) => {
-                    return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
-                })
-                list.forEach((item) => {
-                    containerlist.append(item)
-                })
-
-            },
-        });
-    });
-    // $( "#searchpelanggan" ).focusout(function(){
-    //     const containerlist = $('#list-pelanggan')
-    //     containerlist.html('')
-
-    // })
-    $("#searchpelanggan").focus(function() {
-        let keyword = $(this).val()
-        let url = "{{ route('pelanggan.datajson') }}"
-        const containerlist = $('#list-pelanggan')
-        containerlist.html('')
-        $.ajax({
-            type: 'get',
-            url: url,
-            data: {
-                'keyword': keyword,
-            },
-            success: function(data) {
-                var list = data.map((item) => {
-                    return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
-                })
-                list.forEach((item) => {
-                    containerlist.append(item)
-                })
-
-            },
-        });
-    })
-
-    $(document).on('click', '#tambahpelanggan', function() {
-        $('#plus').modal('show');
-        $('#addnamapelanggan').val('')
-        $('#addalamatpelanggan').val('')
-        $('#addteleponpelanggan').val('')
-    });
-
-    $('.modal-footer').on('click', '#add', function() {
-        $('#add').attr('disabled', true)
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('kasir.pelanggan.simpan') }}",
-            data: new FormData($("#form-add-pelanggan")[0]),
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                $("#selectpelanggan").append(`<option value="${data.customer.id}">
-                                       ${data.customer.nama}
-                                  </option>`);
-                $('#plus').modal('hide');
-                $('#searchpelanggan').val(data.customer.nama)
-                $('#alamatpelanggan').html(data.customer.alamat)
-                $('#teleponpelanggan').val(data.customer.telepon)
-                $("#cetaknota").removeClass('disabled')
-            },
+        $(document).on('click', '#tambahpelanggan', function() {
+            $('#pelangganModal').modal('show');
+            $('#addnamapelanggan').val('')
+            $('#addalamatpelanggan').val('')
+            $('#addteleponpelanggan').val('')
         });
 
-    });
-    // ====== END PART PELANGGAN ====
+        $('.modal-footer').on('click', '#add', function() {
+            $('#add').attr('disabled', true)
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('kasir.pelanggan.simpan') }}",
+                data: new FormData($("#form-add-pelanggan")[0]),
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    $('#pelangganModal').modal('hide');
+                    $('#searchpelanggan').val(data.customer.nama)
+                    $('#alamatpelanggan').html(data.customer.alamat)
+                    $('#teleponpelanggan').val(data.customer.telepon)
+                    $("#cetaknota").removeClass('disabled')
+                },
+            });
+
+        });
+        // ====== END PART PELANGGAN ====
 
     // ======= PART  BARANG =======
 
@@ -458,7 +499,7 @@
             },
             success: function(data) {
                 $('#kodebarang').val(data.supply.id)
-                $('#hargabarang').val('Rp '+data.supply.harga_cabang+',-')
+                $('#hargabarang').val('Rp '+data.supply.harga_cabang.toLocaleString(['ban', 'id'])+',-')
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
                 $("#searchbarang").val(data.supply.item.nama)
@@ -480,45 +521,47 @@
         let url = "{{ route('barang.datajson') }}"
         const containerlist = $('#list-barang')
         containerlist.html('')
-        $.ajax({
-            type: 'get',
-            url: url,
-            data: {
-                'keyword': keyword,
-            },
-            success: function(data) {
-                var list = data.map((item) => {
-                    return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
-                })
-                list.forEach((item) => {
-                    containerlist.append(item)
-                })
+        if (keyword != '') {
+            $.ajax({
+                type: 'get',
+                url: url,
+                data: {
+                    'keyword': keyword,
+                },
+                success: function(data) {
+                    var list = data.map((item) => {
+                        return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
+                    })
+                    list.forEach((item) => {
+                        containerlist.append(item)
+                    })
 
-            },
-        });
+                },
+            });
+        }
     });
-    $("#searchbarang").focus(function() {
-        let keyword = $(this).val()
-        let url = "{{ route('barang.datajson') }}"
-        const containerlist = $('#list-barang')
-        containerlist.html('')
-        $.ajax({
-            type: 'get',
-            url: url,
-            data: {
-                'keyword': keyword,
-            },
-            success: function(data) {
-                var list = data.map((item) => {
-                    return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
-                })
-                list.forEach((item) => {
-                    containerlist.append(item)
-                })
+    // $("#searchbarang").focus(function() {
+    //     let keyword = $(this).val()
+    //     let url = "{{ route('barang.datajson') }}"
+    //     const containerlist = $('#list-barang')
+    //     containerlist.html('')
+    //     $.ajax({
+    //         type: 'get',
+    //         url: url,
+    //         data: {
+    //             'keyword': keyword,
+    //         },
+    //         success: function(data) {
+    //             var list = data.map((item) => {
+    //                 return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
+    //             })
+    //             list.forEach((item) => {
+    //                 containerlist.append(item)
+    //             })
 
-            },
-        });
-    });
+    //         },
+    //     });
+    // });
     // $( "#searchbarang" ).focusout(function(){
     //     const containerlist = $('#list-barang')
     //     containerlist.html('')
@@ -526,7 +569,6 @@
     // })
 
     //======== END PART BARANG ===========
-
 
     //======== PART KASIR ============
 
@@ -547,20 +589,18 @@
     $("#qtybarang").keyup(function() {
         let harga = barang.harga_cabang
         qty = $(this).val()
-        jumlah = harga * qty
+        jumlah = Math.round(harga * qty)
         text = jumlah.toLocaleString(['ban', 'id'])
         $("#jumlahbarang").val('Rp '+text)
     });
 
     $(document).on('click', '#tambahbarang', function() {
         if ($('#qtybarang').val() != 0) {
-
-            if (parseInt($('#stok').val())< parseInt($('#qtybarang').val())) {
+            if (parseInt(barang.stok)< parseInt($('#qtybarang').val())) {
                 alert(`nilai kuantitas melebihi stok yang tersedia yaitu ${barang.stok} Kg`)
                 $("#qtybarang").val('')
                 $("#jumlahbarang").val(0)
             } else {
-
                 arrayBarang.push({
                     id:barang.id,
                     nama:barang.nama,
@@ -582,9 +622,10 @@
                 $("#searchbarang").val('')
                 $("#jumlahbarang").val(0)
                 $('#diskon').removeAttr('disabled')
-                $("#cetaknota").removeClass('disabled')
+                $("#cetaknota").removeAttr('disabled')
 
-
+                barang = {}
+                $("#tambahbarang").attr('disabled','disabled')
             }
         } else {
             alert("masukkan jumlah Kuantitas barang Terlebih Dahulu")
@@ -617,7 +658,7 @@
         if (subTotalPembayaran == 0) {
             totalDiskon = 0;
         } else {
-            totalDiskon = (subTotalPembayaran * diskon) / 100
+            totalDiskon = Math.round((subTotalPembayaran * diskon) / 100)
             totalPembayaran = subTotalPembayaran - totalDiskon
         }
 
@@ -635,14 +676,29 @@
 
     function showNominal(){
         $("#subtotal").html(subTotalPembayaran.toLocaleString(['ban', 'id']))
-        $('#uangkembali').val('Rp '+uangkembalian.toLocaleString(['ban', 'id']))
+        $('#uangkembali').val('Rp '+uangkembalian.toLocaleString(['ban', 'id'])+',-')
         $(".totalpembayaran").html(totalPembayaran.toLocaleString(['ban', 'id']))
+        $("#totalan").val('Rp '+totalPembayaran.toLocaleString(['ban', 'id'])+',-')
         numberformat()
     }
 
+    $("#uangmuka").focusin(()=>{
+        let uang = $("#uangmuka").val()
+        uang = uang.split(" ")
+        uang = uang[1].split(",")[0]
+        $("#uangmuka").val(uang)
+    })
+
+    $("#uangmuka").focusout(()=>{
+        // uang = "Rp "+uang.toLocaleString(['ban', 'id'])+",-"
+        console.log(uangMuka.toLocaleString(['ban', 'id']));
+
+        $("#uangmuka").val('Rp '+uangMuka.toLocaleString(['ban', 'id'])+',-')
+    })
+
     $("#uangmuka").keyup(function(keys) {
-        uangMuka = $(this).val()
-        
+        uangMuka = parseInt($(this).val())
+
         if (!(uangMuka)) {
             uangMuka =0
             uangkembali();
@@ -667,20 +723,29 @@
         const table = $('#tableBarang tbody')
         var list = arrayBarang.map((item,key) => {
                     return '<tr data-id=' + key + '>\
-                                    <td style="width: 5%">' + (key+1) + '</td>\
-                                    <td style="width: 10%">' + item.id + '</td>\
-                                    <td style="width: 30%" class="text-left">' + item.nama + '</td>\
-                                    <td style="width: 3%" class="text-right">Rp</td>\
-                                    <td style="width: 17%" class="text-right"><span class="harga">' + item.harga + '</span>,-</td>\
-                                    <td style="width: 10%">' + item.qty + '</td>\
-                                    <td style="width: 3%" class="text-right">Rp</td>\
-                                    <td style="width: 17%" class="text-right"><span class="">' + item.total.toLocaleString(['ban', 'id']) + '</span>,-</td>\
-                                    <td style="width: 5%" class="text-right">\
-                                        <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
+                                    <td width="4%" class="text-center">' + (key+1) + '</td>\
+                                    <td width="15%" class="text-center">' + item.id + '</td>\
+                                    <td width="31%">' + item.nama + '</td>\
+                                    <td width="14%" class="text-center">Rp <span class="harga">' + item.harga + '</span>,-</td>\
+                                    <td width="9%" class="text-center">' + item.qty + '</td>\
+                                    <td width="3%" class="text-right">Rp</td>\
+                                    <td width="14%" class="text-right"><span class="">' + item.total.toLocaleString(['ban', 'id']) + '</span>,-</td>\
+                                    <td width="10%" class="py-1" style="padding-left: 20px;">\
+                                        <button type="button"  class="btn btn-warning tombol-aksi delete-barang" data-id=' +
                 key + '><i class="fa fa-trash"></a>\
                                     </td>\
                                 </tr>'
                 })
+        list.push('                        <tr>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                            <td class="py-1"></td>\
+                        </tr>')
         list.forEach((item) => {
             table.append(item)
         })
@@ -722,7 +787,7 @@
         const jumlah_uang_nota = uangMuka
         const kembalian_nota = uangkembalian
         const status = $('#status').val()
-        const customer_id = $('#idpelanggan').val()
+        const customer_id = pelanggan.id
         const no_nota_kas = $('#nonotakas').val();
 
         var items = arrayBarang.map((item,key)=>{
@@ -789,46 +854,6 @@
         });
 
     });
-
-// OLD
-function addNewRow() {
-        // ambil baris tabel terakhir
-        const $lastRow = $('table tbody tr:last');
-        const kodebarang = $('#kodebarang').val()
-        const table = $('#tableBarang tbody')
-        if ($lastRow.length == 0) {
-
-            const markup = '<tr data-id=1>\
-                                    <td style="width: 5%">1</td>\
-                                    <td style="width: 10%">' + $('#kodebarang').val() + '</td>\
-                                    <td style="width: 30%" class="text-left">' + $('#searchbarang').val() + '</td>\
-                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#hargabarang').val() + '</span>,-</td>\
-                                    <td style="width: 10%">' + $('#qtybarang').val() + '</td>\
-                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#jumlahbarang').val() + '</span>,-</td>\
-                                    <td style="width: 5%">\
-                                        <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=1><i class="fas fa-trash"></a>\
-                                    </td>\
-                                </tr>'
-            table.prepend(markup);
-        } else {
-            const $cloneRow = $lastRow.clone();
-            const lastNo = $cloneRow.find('td').eq(0).text();
-            const markup = '<tr data-id=' + (parseInt(lastNo) + 1) + '>\
-                                    <td style="width: 5%">' + (parseInt(lastNo) + 1) + '</td>\
-                                    <td style="width: 10%">' + $('#kodebarang').val() + '</td>\
-                                    <td style="width: 30%" class="text-left">' + $('#searchbarang').val() + '</td>\
-                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#hargabarang').val() + '</span>,-</td>\
-                                    <td style="width: 10%">' + $('#qtybarang').val() + '</td>\
-                                    <td style="width: 20%" class="text-right">Rp <span class="harga">' + $('#jumlahbarang').val() + '</span>,-</td>\
-                                    <td style="width: 5%">\
-                                        <button href="#"  class="btn btn-warning text-white btn-sm delete-barang" data-id=' +
-                (parseInt(lastNo) + 1) + '><i class="fas fa-trash"></a>\
-                                    </td>\
-                                </tr>'
-            table.append(markup);
-
-        }
-    }
-</script>
-
-@endpush
+    </script>
+</body>
+</html>
