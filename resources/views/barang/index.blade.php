@@ -37,6 +37,9 @@
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -59,11 +62,11 @@
           <table id="example1" style="width:100%" class="table table-sm table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="text-center">No.</th>
-                <th style="width: 60%" class="text-center">Nama Barang</th>
-                <th style="width: 20%" class="text-center">Jenis</th>
+                <th style="width: 5%">No.</th>
+                <th style="width: 60%">Nama Barang</th>
+                <th style="width: 20%">Jenis</th>
                 <th class="text-right" style="width: 3%"></th>
-                <th style="min-width: 10%" class="text-center">Harga</th>
+                <th style="min-width: 10%">Harga</th>
               </tr>
             </thead>
             <tbody>
