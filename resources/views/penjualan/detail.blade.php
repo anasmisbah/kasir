@@ -21,10 +21,6 @@
     .border-atas{
         border-top: 1px solid black !important;
     }
-    .table-data th,.table-data td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
-    }
     </style>
 @endpush
 @section('breadcumb')
@@ -46,7 +42,7 @@
                 <h4 class="card-title mb-0 text-bold">Detail Penjualan</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    @if ($bill->status == 'lunas' || $bill->status == 'piutang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
+                    @if ($bill->status == 'lunas' || $bill->status == 'piutang')
                     <a target="_blank" class="btn btn-info mr-2" style="width: 78px !important;" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
                     @else
                     <a target="_blank" class="btn btn-info mr-2" style="width: 78px !important;" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
@@ -59,53 +55,52 @@
                 <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
-          <table class="table table-striped">
+          <table class="table table-sm table-striped">
             <tbody>
               <tr>
-                <td style="width:15%">No Nota Kas</td>
-                <td> <strong>{{$bill->no_nota_kas}}</strong> </td>
+                <td style="width:15%;">Nota Kas</td>
+                <td><strong>{{$bill->no_nota_kas}}</strong></td>
               </tr>
               <tr>
-                <td style="width:15%">Tanggal</td>
-                <td>{{ $bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year." ".$bill->tanggal_nota->format('h:i:s')}} WIB</td>
+                <td>Tanggal</td>
+                <td>{{ $bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year." | ".$bill->tanggal_nota->format('h:i:s')}} WIB</td>
               </tr>
               <tr>
-                <td style="width:15%">Cabang</td>
-                <td><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}"> <b> {{$bill->branch->nama}} </b></a></td>
+                <td>Cabang</td>
+                <td><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}"> {{$bill->branch->nama}}</a></td>
               </tr>
               <tr>
-                <td style="width:15%">Nama Pelanggan</td>
-                <td><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}"> <b> {{$bill->customer->nama}}</b></a></td>
+                <td>Nama Pelanggan</td>
+                <td><strong><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></strong></td>
               </tr>
               <tr>
-                <td style="width:15%">Alamat</td>
+                <td>Alamat</td>
                 <td>{{$bill->customer->alamat}}</td>
               </tr>
               <tr>
-                <td style="width:15%">Telepon</td>
+                <td>Telepon</td>
                 <td>{{$bill->customer->telepon}}</td>
               </tr>
               <tr>
-                <td style="width:15%">Kasir</td>
+                <td>Kasir</td>
                 <td><a class="text-info" href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
               </tr>
               <tr>
-                <td style="width:15%">Status</td>
+                <td>Status</td>
                 <td><b>{{ strtoupper($bill->status) }}</b></td>
               </tr>
             </tbody>
           </table>
-          @if ($bill->status == 'lunas' || $bill->status == 'piutang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
-            <table class=" table table-stripped text-center table-data" id="table">
+          @if ($bill->status == 'lunas' || $bill->status == 'piutang')
+            <table class="table table-sm table-stripped text-center" id="table">
                 <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th></th>
-                    <th>Harga Satuan (Kg)</th>
-                    <th>Qty(Kg)</th>
-                    <th></th>
-                    <th>Jumlah</th>
+                    <th class="py-2">No</th>
+                    <th class="py-2">Nama Barang</th>
+                    <th class="py-2">Harga Satuan (Kg)</th>
+                    <th class="py-2">Qty(Kg)</th>
+                    <th class="py-2"></th>
+                    <th class="py-2">Jumlah</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -116,8 +111,7 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td width="50%">{{$trans->supply->item->nama}}</td>
-                    <td>Rp</td>
-                    <td class="text-right"><span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
+                    <td class="text-center">Rp <span class="harga">{{$trans->supply->harga_cabang}}</span>,-</td>
                     <td class="text-center" width="10%">{{$trans->kuantitas}}</td>
                     <td class="text-right">Rp</td>
                     <td class="text-right"><span class="harga">{{$trans->total_harga}}</span> ,-</td>
@@ -131,13 +125,11 @@
                     <td class="border-atas"></td>
                     <td class="border-atas"></td>
                     <td class="border-atas"></td>
-                    <td class="border-atas"></td>
                     <td class="border-atas">Sub Total</td>
                     <td class="text-right border-atas">Rp</td>
                     <td class="border-atas text-right"><span class="harga">{{$subtotal}}</span>,-</td>
                 </tr>
                 <tr class="text-center">
-                    <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td class="border-atas"> Diskon &nbsp;&nbsp;{{$bill->diskon}}%</td>
@@ -148,14 +140,12 @@
                 <tr class="text-center">
                     <td style="border: none"></td>
                     <td style="border: none"></td>
-                    <td style="border: none"></td>
                     <td class="border-atas"></td>
                     <td class="border-atas">Uang Muka</td>
                     <td class="text-right border-atas">Rp</td>
                     <td class="border-atas text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>  ,-</td>
                 </tr>
                 <tr class="text-center">
-                    <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
@@ -170,10 +160,10 @@
                 </tbody>
             </table>
           @else
-          <table class="no-margin table table-stripped text-center table-data" id="table">
+          <table class="no-margin table table-sm table-stripped text-center" id="table">
             <thead>
               <tr>
-                <th class="text-center">No Nota Kas</th>
+                <th class="text-center">Nota Kas</th>
                 <th>Tanggal nota Kas</th>
                 <th>Sub Total Nota Kas</th>
                 <th>Diskon Nota Kas</th>
@@ -226,7 +216,7 @@
 
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat Pada : </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}}  | {{$bill->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat pada: </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}}  | {{$bill->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>

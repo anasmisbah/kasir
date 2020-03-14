@@ -60,10 +60,6 @@
             max-width: 16% !important;
         }
     }
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
-    }
 </style>
 @endpush
 @section('breadcumb')
@@ -71,6 +67,8 @@
 <li class="breadcrumb-item active"><a href="#" class="text-info">Penjualan</a></li>
 @endsection
 @section('content')
+<section class="content">
+  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -79,7 +77,7 @@
                 <h4 class="card-title mb-0">Daftar Penjualan</h4>
                 </div>
             </div>
-            <div class="col-12 pt-3 pb-3 mb-4 mt-2" style="background:#EBEBEB">
+            <div class="col-12 pt-3 pb-3 mb-4 mt-2" style="background:#ebebeb">
                 <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
                   <div class="row">
                     <div class="col-md-4">
@@ -125,18 +123,18 @@
                     </div>
                     <div class="col-md-1 pr-0">
                       <select class="form-control form-control-sm" name="bulan">
-                        <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Jan</option>
-                        <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Feb</option>
-                        <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Mar</option>
-                        <option value="04" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '04' ?'selected':'':''}}>Apr</option>
+                        <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Januari</option>
+                        <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Februari</option>
+                        <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Maret</option>
+                        <option value="04" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '04' ?'selected':'':''}}>April</option>
                         <option value="05" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '05' ?'selected':'':''}}>Mei</option>
-                        <option value="06" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '06' ?'selected':'':''}}>Jun</option>
-                        <option value="07" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '07' ?'selected':'':''}}>Jul</option>
-                        <option value="08" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '08' ?'selected':'':''}}>Agu</option>
-                        <option value="09" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '09' ?'selected':'':''}}>Sep</option>
-                        <option value="10" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '10' ?'selected':'':''}}>Okt</option>
-                        <option value="11" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '11' ?'selected':'':''}}>Nov</option>
-                        <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Des</option>
+                        <option value="06" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '06' ?'selected':'':''}}>Juni</option>
+                        <option value="07" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '07' ?'selected':'':''}}>Juli</option>
+                        <option value="08" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '08' ?'selected':'':''}}>Agustus</option>
+                        <option value="09" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '09' ?'selected':'':''}}>September</option>
+                        <option value="10" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '10' ?'selected':'':''}}>Oktober</option>
+                        <option value="11" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '11' ?'selected':'':''}}>November</option>
+                        <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Desember</option>
                       </select>
                     </div>
                     <div class="col-md-1 pr-0">
@@ -165,43 +163,43 @@
                     <div class="col-md-2">
                       <select class="form-control form-control-sm" name="status">
                         <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
-                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>LUNAS</option>
-                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>PIUTANG</option>
-                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>PELUNASAN</option>
+                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
+                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
+                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
                       </select>
                     </div>
                     @else
                     <div class="col-md-2">
                       <select class="form-control form-control-sm" name="status">
                         <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
-                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>LUNAS</option>
-                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>PIUTANG</option>
-                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>PELUNASAN</option>
+                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
+                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
+                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
                       </select>
                     </div>
                     @endif
 
-                    <div class="butn col-md-2 p-0 text-center">
+                    <div class="butn col-md-2 p-0">
                       <input id="downloadble" type="hidden" name="print">
                       <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                       <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                      <a href="{{route('penjualan.index')}}" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                      <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
                 </form>
             </div>
           @if ( Request::input('filter') == "hari")
-          <table id="example1" style="width:100%" class="table table-striped display compact">
+          <table id="example1" style="width:100%" class="table table-sm table-striped display compact">
             <thead>
               <tr class="header">
-                <th style="width:5%" class="py-2 text-center">No.</th>
-                <th style="width:15%" class="py-2 text-center">No. Nota Kas</th>
-                <th style="width:15%" class="py-2 text-center">Tanggal</th>
-                <th style="width:25%" class="py-2 text-center">Pelanggan</th>
+                <th style="width:5%" class="py-2 text-center">No</th>
+                <th style="width:10%" class="py-2 text-center">Nota Kas</th>
+                <th style="width:17%" class="py-2 text-center">Tanggal</th>
+                <th style="width:24%" class="py-2 text-center">Pelanggan</th>
                 <th style="width:2%" class="py-2 text-right"></th>
-                <th style="min-width:2%" class="py-2 text-center">Total</th>
+                <th style="width:14%" class="py-2 text-center">Total</th>
                 <th style="width:2%" class="py-2 text-right"></th>
-                <th style="min-width:2%" class="py-2 text-center">Piutang</th>
+                <th style="width:14%" class="py-2 text-center">Piutang</th>
                 <th style="width:10%" class="py-2 text-center">Status</th>
                 <th style="width:10%" class="py-2 text-center">Cabang</th>
               </tr>
@@ -214,20 +212,20 @@
               @endphp
               @foreach ($bills as $bill)
               <tr>
-                <td  class="py-2 text-center">{{$loop->iteration}}</td>
-                <td class="py-2 text-center"><a class="text-info" href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                <td class="py-2 text-center">{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
-                <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
-                <td class="py-2  text-right">Rp</td>
-                <td class="py-2  text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
-                <td class="py-2  text-right">Rp</td>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td class="text-center"><a class="text-info" href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="text-center">{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
+                <td><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td class="text-right">Rp</td>
+                <td class="text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
+                <td class="text-right">Rp</td>
                 @if($bill->kembalian_nota < 0)
-                    <td class="py-2 text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
+                    <td class="text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>
                 @else
-                    <td class="py-2 text-right">0,-</td>
+                    <td class="text-right">0,-</td>
                 @endif
-                  <td class="py-2 text-center">{{strtoupper($bill->status)}}</td>
-                  <td class="py-2 text-center"><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
+                  <td class="text-center">{{strtoupper($bill->status)}}</td>
+                  <td class="text-center"><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
               $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
@@ -242,10 +240,10 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th>Jumlah</th>
-                <th class="py-2  text-right">Rp </th>
+                <th class="text-right">Jumlah</th>
+                <th class="text-right">Rp </th>
                 <th class="text-right"><span class="harga">{{$total}}</span>,-</th>
-                <th class="py-2  text-right">Rp </th>
+                <th class="text-right">Rp </th>
                 <th class="text-right"><span class="harga">{{$totalpiutang}}</span>,-</th>
                 <th></th>
                 <th></th>
@@ -254,8 +252,8 @@
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
-                <th class="border-bawah">Jumlah Kas</th>
-                <th class="py-2  text-right border-bawah">Rp </th>
+                <th class="border-bawah text-right">Jumlah Kas</th>
+                <th class="text-right border-bawah">Rp </th>
                 <th class="text-right border-bawah"><span class="harga">{{$total-$totalpiutang}}</span>,-</th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
@@ -265,19 +263,19 @@
             </tfoot>
           </table>
           @elseif(Request::input('filter') == "bulan" || Request::input('filter') == "tahun")
-          <table id="table2" style="width:100%" class="table table-striped display compact dt-responsive nowrap">
+          <table id="table2" style="width:100%" class="table table-sm table-striped display compact dt-responsive nowrap">
             <thead>
               <tr>
-                <th style="width:5%" class="text-center">No.</th>
-                <th style="width:20%" class="text-center">{{Request::input('filter') == "bulan"?"Tanggal":"Bulan"}}</th>
-                <th style="width:20%" class="text-center">Penjualan</th>
-                <th style="width:2%" class="text-right"></th>
-                <th style="min-width:5%" class="text-center">Nominal</th>
-                <th style="width:10%" class="text-center">Piutang</th>
-                <th style="width:2%" class="text-right"></th>
-                <th style="min-width:5%" class="text-center">Nominal</th>
-                <th style="width:2%" class="text-right"></th>
-                <th style="min-width:5%" class="text-center">Kas</th>
+                <th style="width:5%" class="py-2 text-center">No</th>
+                <th style="width:10%" class="py-2 text-center">{{Request::input('filter') == "bulan"?"Tanggal":"Bulan"}}</th>
+                <th style="width:15%" class="py-2 text-center">Penjualan</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="width:13%" class="py-2 text-center">Nominal</th>
+                <th style="width:15%" class="py-2 text-center">Piutang</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="width:13%" class="py-2 text-center">Nominal</th>
+                <th style="width:2%" class="py-2 text-right"></th>
+                <th style="width:13%" class="py-2 text-center">Kas</th>
               </tr>
             </thead>
             <tbody>
@@ -327,19 +325,19 @@
             </tfoot>
           </table>
           @else
-          <table id="empty_table" style="width:100%" class="table table-striped display compact">
+          <table id="empty_table" style="width:100%" class="table table-sm display compact">
             <thead>
               <tr class="header">
-                <th style="width:5%" class="py-2">No.</th>
-                <th style="width:15%" class="py-2">No. Nota Kas</th>
-                <th style="width:15%" class="py-2">Tanggal</th>
-                <th style="width:25%" class="py-2">Pelanggan</th>
+                <th style="width:5%" class="py-2 text-center">No</th>
+                <th style="width:15%" class="py-2 text-center">Nota Kas</th>
+                <th style="width:15%" class="py-2 text-center">Tanggal</th>
+                <th style="width:25%" class="py-2 text-center">Pelanggan</th>
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="min-width:2%" class="py-2 text-center">Total</th>
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="min-width:2%" class="py-2 text-center">Piutang</th>
-                <th style="width:10%" class="py-2">Status</th>
-                <th style="width:10%" class="py-2">Cabang</th>
+                <th style="width:10%" class="py-2 text-center">Status</th>
+                <th style="width:10%"class="py-2 text-center">Cabang</th>
               </tr>
             </thead>
             <tbody>
@@ -349,19 +347,19 @@
               $totalpiutang =0;
               @endphp
               <tr>
-                <td class="text-center" colspan="10" style="font-size:12px">Silahkan Pilih Filter Untuk Melihat Daftar Penjualan</td>
+                <td class="text-center border-bawah" colspan="10" style="font-size:12px">Silahkan pilih filter untuk melihat daftar penjualan!</td>
              </tr>
             </tbody>
 
-            <tfoot>
+            {{-- <tfoot>
               <tr>
                 <th></th>
                 <th></th>
                 <th></th>
                 <th>Jumlah</th>
-                <th class="py-2  text-right">Rp </th>
+                <th class="text-right">Rp </th>
                 <th class="text-right"><span class="harga">{{$total}}</span>,-</th>
-                <th class="py-2  text-right">Rp </th>
+                <th class="text-right">Rp </th>
                 <th class="text-right"><span class="harga">{{$totalpiutang}}</span>,-</th>
                 <th></th>
                 <th></th>
@@ -371,14 +369,14 @@
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah">Jumlah Kas</th>
-                <th class="py-2  text-right border-bawah">Rp </th>
+                <th class="text-right border-bawah">Rp </th>
                 <th class="text-right border-bawah"><span class="harga">{{$total-$totalpiutang}}</span>,-</th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
                 <th class="border-bawah"></th>
               </tr>
-            </tfoot>
+            </tfoot> --}}
           </table>
           @endif
         </div>
@@ -387,6 +385,12 @@
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
+  </div>
+  <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
 @endsection
 
 @push('script')
@@ -495,7 +499,5 @@
             $('#radiostatus').data('id','0');
         }
     })
-
-
 </script>
 @endpush
