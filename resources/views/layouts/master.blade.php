@@ -12,15 +12,22 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <title>{{ ucfirst(Request::segment(1)) }} | {{$app->nama}}</title>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
     <!-- Main styles for this application-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
    <link href="{{asset('/adminlte/css/style.css')}}" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+        }
       .c-sidebar{
         width: 200px;
       }

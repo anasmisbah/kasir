@@ -11,7 +11,7 @@
     <!-- App Desc -->
     <meta name="description" content="Halaman Login" />
     <meta name="author" content="tukangkode.id" />
-    <title>Kasir | App</title>
+    <title>Kasir | {{$app->nama}}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon" />
     <!-- Font -->
