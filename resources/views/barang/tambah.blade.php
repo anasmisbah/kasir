@@ -7,8 +7,6 @@
         margin-bottom: .5rem !important;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
     }
     .card-title{
@@ -19,21 +17,22 @@
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
 <li class="breadcrumb-item">Barang</li>
-<li class="breadcrumb-item active"><a href="#"  class="text-info">Membuat</a></li>
+<li class="breadcrumb-item active"><a href="#">Membuat</a></li>
 @endsection
 @section('content')
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <form class="form" action="{{route('barang.simpan')}}" method="POST">
                     <div class="d-flex justify-content-between mb-3">
                         <div>
-                        <h4 class="card-title mb-0 text-bold">Menambahkan Barang</h4>
+                            <h4 class="card-title mb-0 text-bold">Menambahkan Barang</h4>
                         </div>
                         <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                        <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
+                            <button type="submit" class="btn btn-info mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                            <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                         </div>
                     </div>
-                <form class="form" action="{{route('barang.simpan')}}" method="POST">
                     @csrf
                     <div class="form-group row">
                         <label for="inputEmail3"  class="col-sm-2 col-form-label">Nama</label>
@@ -68,7 +67,6 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn  btn-info float-right" style="width: 78px !important;"><i class="fa fa-save"></i></button>
                 </form>
             </div>
             <div class="card-footer" style="background:#C5C6C7">
