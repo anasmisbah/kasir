@@ -51,8 +51,6 @@
 <li class="breadcrumb-item active"><a href="#" >Penjualan</a></li>
 @endsection
 @section('content')
-<section class="content">
-  <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
@@ -363,7 +361,6 @@
             </tfoot> --}}
           </table>
           @endif
-        </div>
         </form>
       </div>
       <!-- /.card-body -->
@@ -371,10 +368,6 @@
     <!-- /.card -->
   </div>
   <!-- /.col -->
-  </div>
-  <!-- /.row -->
-</section>
-<!-- /.content -->
 @endsection
 
 @push('script')
