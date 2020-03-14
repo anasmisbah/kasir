@@ -27,11 +27,11 @@
                 <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
-          <table class="table table-striped">
+          <table class="table table-sm table-striped">
             <tbody>
               <tr>
                 <td style="width:10%">Nama</td>
-                <td> <strong>{{$branch->nama}}</strong> </td>
+                <td><strong>{{$branch->nama}}</strong> </td>
               </tr>
               <tr>
                 <td style="width:10%">Alamat</td>
@@ -58,7 +58,7 @@
 
         <div class="card-footer text-right" style="background:#C5C6C7">
           <span style="font-size: 12px">
-            <strong>Dibuat Pada: </strong>{{  $branch->created_at->dayName." | ".$branch->created_at->day." ".$branch->created_at->monthName." ".$branch->created_at->year}} | {{$branch->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$branch->createdBy->employee->id)}}" class="text-info">{{$branch->createdBy->employee->nama}}</a> / <strong>Diubah Pada: </strong>{{  $branch->updated_at->dayName." | ".$branch->updated_at->day." ".$branch->updated_at->monthName." ".$branch->updated_at->year}} | {{$branch->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$branch->updatedBy->employee->id)}}" class="text-info">{{$branch->updatedBy->employee->nama}}</a>
+            <strong>Dibuat pada: </strong>{{  $branch->created_at->dayName." | ".$branch->created_at->day." ".$branch->created_at->monthName." ".$branch->created_at->year}} | {{$branch->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$branch->createdBy->employee->id)}}" class="text-info">{{$branch->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $branch->updated_at->dayName." | ".$branch->updated_at->day." ".$branch->updated_at->monthName." ".$branch->updated_at->year}} | {{$branch->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$branch->updatedBy->employee->id)}}" class="text-info">{{$branch->updatedBy->employee->nama}}</a>
         </span>
         </div>
       </div>
