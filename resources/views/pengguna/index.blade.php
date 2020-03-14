@@ -38,6 +38,9 @@
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
+    }
 </style>
 @endpush
 @section('breadcumb')
