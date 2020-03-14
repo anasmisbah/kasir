@@ -12,26 +12,10 @@
         padding-right: 1rem;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
-    }
-    .page-item.active .page-link{
-        background-color: #39f;
-        border-color: #39f;
     }
     .btn-warning{
         color: white;
-    }
-    .page-link{
-        color: #39f;
-    }
-    .page-link:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
-    }
-    .page-link:hover{
-        color: #39f;
     }
     .filter{
         padding-right: 0rem !important;
@@ -64,7 +48,7 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item active"><a href="#" class="text-info">Penjualan</a></li>
+<li class="breadcrumb-item active"><a href="#" >Penjualan</a></li>
 @endsection
 @section('content')
 <section class="content">
@@ -181,8 +165,8 @@
 
                     <div class="butn col-md-2 p-0">
                       <input id="downloadble" type="hidden" name="print">
-                      <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
-                      <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                      <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                      <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
                       <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
@@ -213,9 +197,9 @@
               @foreach ($bills as $bill)
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
-                <td class="text-center"><a class="text-info" href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="text-center"><a  href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
                 <td class="text-center">{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
-                <td><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                <td><a  href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td class="text-right">Rp</td>
                 <td class="text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
                 <td class="text-right">Rp</td>
@@ -225,7 +209,7 @@
                     <td class="text-right">0,-</td>
                 @endif
                   <td class="text-center">{{strtoupper($bill->status)}}</td>
-                  <td class="text-center"><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
+                  <td class="text-center"><a  href="{{route('cabang.detail',$bill->branch->id)}}">{{ $bill->branch->nama }}</a></td>
               </tr>
               @php
               $temppiutang = $bill->kembalian_nota < 0 ?abs($bill->kembalian_nota):0;
