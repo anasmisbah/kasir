@@ -34,6 +34,9 @@
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -71,7 +74,7 @@
                               @endforeach
                             </select>
                           </div>
-                          <div class="col-md-4 text-center">
+                          <div class="col-md-4">
                             <input id="downloadble" type="hidden" name="print">
                             <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
                             <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
@@ -84,31 +87,31 @@
           <table id="example1" style="width:100%" class="table table-sm table-striped compact">
             <thead>
               <tr>
-                <th style="width: 5%" class="py-2 text-center">No.</th>
-                <th style="width: 30%" class="py-2 text-left">Nama Barang</th>
-                <th style="width: 15%" class="py-2 text-center">Cabang</th>
-                <th style="width: 10%" class="py-2 text-center">Stok (Kg)</th>
+                <th style="width: 5%" >No.</th>
+                <th style="width: 30%">Nama Barang</th>
+                <th style="width: 15%" >Cabang</th>
+                <th style="width: 10%" >Stok (Kg)</th>
                 <th></th>
-                <th style="min-width: 10%" class="py-2 text-right">Harga Pusat</th>
+                <th style="min-width: 10%">Harga Pusat</th>
                 <th></th>
-                <th style="min-width: 10%" class="py-2 text-right">Harga Cabang</th>
+                <th style="min-width: 10%">Harga Cabang</th>
                 <th></th>
-                <th style="min-width: 5%" class="py-2 text-right">Selisih</th>
+                <th style="min-width: 5%">Selisih</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($supplies as $supply)
               <tr>
-                <td  class="min-padding text-center">{{ $loop->iteration }}</td>
-                <td  class="min-padding text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td  class="min-padding text-center"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td  class="min-padding text-center">{{$supply->stok}}</td>
-                <td class="min-padding text-right">Rp</td>
-                <td  class="min-padding text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td class="min-padding text-right">Rp</td>
-                <td  class="min-padding text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td class="min-padding text-right">Rp</td>
-                <td  class="min-padding text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                <td  class="text-center">{{ $loop->iteration }}</td>
+                <td  class="text-left"><a class="text-info" href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                <td  class="text-center"><a class="text-info" href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                <td  class="text-center">{{$supply->stok}}</td>
+                <td class="text-right">Rp</td>
+                <td  class="text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
+                <td class="text-right">Rp</td>
+                <td  class="text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                <td class="text-right">Rp</td>
+                <td  class="text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
               </tr>
               @endforeach
           </table>
