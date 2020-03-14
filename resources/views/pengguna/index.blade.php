@@ -21,6 +21,9 @@
     table.dataTable.table-sm > thead > tr > th{
         padding-right: 0;
     }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -78,16 +81,21 @@
             </thead>
             <tbody>
               @foreach ($users as $user)
-              <tr>
-                <td class="text-center">{{$loop->iteration}}</td>
-                <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                <td class="text-center">{{ $user->email }}</td>
-                <td class="text-center">{{ $user->level->nama }}</td>
-                <td class="text-center"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
-              </tr>
+                    <tr>
+                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                        <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                        <td class="text-center">{{ $user->email }}</td>
+                        <td class="text-center">{{ $user->level->nama }}</td>
+                        <td class="text-center"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                    </tr>
               @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-atas p-0" colspan="6"></td>
+                </tr>
+            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->

@@ -26,6 +26,9 @@
     table.dataTable.table-sm > thead > tr > th{
         padding-right: 0;
     }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -108,6 +111,11 @@
                   </tr>
                   @endforeach
               </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="border-atas p-0" colspan="7"></td>
+                    </tr>
+                </tfoot>
             </table>
             @else
             <table id="empty_table" style="width:100%" class="table table-sm compact">

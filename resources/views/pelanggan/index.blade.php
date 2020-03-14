@@ -25,6 +25,9 @@
     table.dataTable.table-sm > thead > tr > th{
         padding-right: 0;
     }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -93,6 +96,12 @@
                 <td><a  href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
               @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-atas p-0" colspan="5"></td>
+                </tr>
+            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->

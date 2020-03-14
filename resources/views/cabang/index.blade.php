@@ -21,6 +21,9 @@
     table.dataTable.table-sm > thead > tr > th{
         padding-right: 0;
     }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -61,6 +64,12 @@
                 <td class="text-center">{{$branch->pimpinan}}</td>
               </tr>
               @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-atas p-0" colspan="6"></td>
+                </tr>
+            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->

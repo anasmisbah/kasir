@@ -22,6 +22,9 @@
     table.dataTable.table-sm > thead > tr > th{
         padding-right: 0;
     }
+    .border-atas{
+        border-top: 1px solid black !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -81,17 +84,22 @@
             </thead>
             <tbody>
               @foreach ($employees as $employee)
-              <tr>
-                <td class="text-center">{{$loop->iteration}}</td>
-                <td><a  href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
-                <td class="text-center">{{$employee->jabatan}}</td>
-                <td>{{$employee->alamat}}</td>
-                <td class="text-center">{{$employee->telepon}}</td>
-                <td class="text-center"><a  href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
-              </tr>
+                    <tr>
+                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td><a  href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                        <td class="text-center">{{$employee->jabatan}}</td>
+                        <td>{{$employee->alamat}}</td>
+                        <td class="text-center">{{$employee->telepon}}</td>
+                        <td class="text-center"><a  href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                    </tr>
               @endforeach
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-atas p-0" colspan="6"></td>
+                </tr>
+            </tfoot>
           </table>
         </div>
         <!-- /.card-body -->
