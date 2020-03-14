@@ -40,6 +40,10 @@
     .table th,.table td{
         padding-top: 0.3rem !important;
         padding-bottom: 0.3rem !important;
+        text-align: center;
+    }
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
     }
 </style>
 @endpush
@@ -89,24 +93,24 @@
                 </form>
             </div>
           @endif
-          <table id="example1" style="width:100%" class="table table-striped compact">
+          <table id="example1" style="width:100%" class="table table-sm table-striped compact">
             <thead>
-              <tr class="text-center">
-                <th class="py-2">No.</th>
-                <th class="py-2">Nama</th>
-                <th class="py-2">Alamat</th>
-                <th class="py-2">Telepon</th>
-                <th class="py-2">Cabang</th>
+              <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Telepon</th>
+                <th>Cabang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($customers as $customer)
               <tr>
-                <td class="py-2 text-center">{{$loop->iteration}}</td>
-                <td class="py-2"><a class="text-info" href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
-                <td class="py-2">{{$customer->alamat}}</td>
-                <td class="py-2 text-center">{{$customer->telepon}}</td>
-                <td class="py-2 text-center"><a class="text-info" href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td class="text-left"><a class="text-info" href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
+                <td>{{$customer->alamat}}</td>
+                <td>{{$customer->telepon}}</td>
+                <td><a class="text-info" href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
               @endforeach
           </table>
