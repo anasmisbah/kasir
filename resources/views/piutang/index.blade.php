@@ -4,34 +4,14 @@
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
 <style>
-    .min-padding{
-        padding-top: 0.2rem !important;
-        padding-bottom: 0.2rem !important;
-    }
     .form-control-sm{
         padding-right: 1rem;
     }
     .form-control.form-control-sm:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
         color: black;
-    }
-    .page-item.active .page-link{
-        background-color: #39f;
-        border-color: #39f;
     }
     .btn-warning{
         color: white;
-    }
-    .page-link{
-        color: #39f;
-    }
-    .page-link:focus{
-        border-color: #39f;
-        box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
-    }
-    .page-link:hover{
-        color: #39f;
     }
     .filter{
         padding-right: 0rem !important;
@@ -50,7 +30,7 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item active"><a href="#" class="text-info">Piutang</a></li>
+<li class="breadcrumb-item active"><a href="#" >Piutang</a></li>
 @endsection
 @section('content')
     <div class="col-12">
@@ -95,9 +75,9 @@
 
                     <div class="col-md-3 text-center">
                       <input id="downloadble" type="hidden" name="print">
-                      <button type="submit" id="btn-filter" class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button>
-                      <button id="btn-print" type="submit" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
-                      <a href="{{route('piutang.index')}}" class="btn btn-sm btn-info"><i class="fa fa-refresh"></i></a>
+                      <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                      <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                      <a href="{{route('piutang.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
                     </div>
                   </div>
                 </form>
@@ -119,8 +99,8 @@
                   @foreach ($bills as $bill)
                   <tr>
                     <td class=" text-center">{{$loop->iteration}}</td>
-                    <td class=" text-center"><a class="text-info" href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
-                    <td ><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
+                    <td class=" text-center"><a  href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                    <td ><a  href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                     <td >{{$bill->customer->alamat}}</td>
                     <td class="text-center">{{$bill->customer->telepon}}</td>
                     <td class="text-right">Rp</td>

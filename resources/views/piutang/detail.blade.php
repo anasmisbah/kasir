@@ -29,7 +29,7 @@
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
 <li class="breadcrumb-item">Piutang</li>
-<li class="breadcrumb-item active"><a href="#"  class="text-info">Detail</a></li>
+<li class="breadcrumb-item active"><a href="#"  >Detail</a></li>
 @endsection
 
 @section('content')
@@ -58,11 +58,11 @@
               </tr>
               <tr>
                 <td>Cabang</td>
-                <td><a class="text-info" href="{{route('cabang.detail',$bill->branch->id)}}"> {{$bill->branch->nama}}</a></td>
+                <td><a  href="{{route('cabang.detail',$bill->branch->id)}}"> {{$bill->branch->nama}}</a></td>
               </tr>
               <tr>
                 <td>Nama Pelanggan</td>
-                <td><strong><a class="text-info" href="{{route('pelanggan.detail',$bill->customer->id)}}"> {{$bill->customer->nama}}</a></strong></td>
+                <td><strong><a  href="{{route('pelanggan.detail',$bill->customer->id)}}"> {{$bill->customer->nama}}</a></strong></td>
               </tr>
               <tr>
                 <td>Alamat</td>
@@ -74,7 +74,7 @@
               </tr>
               <tr>
                 <td>Kasir</td>
-                <td><a class="text-info" href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
+                <td><a  href="{{route('karyawan.detail',$bill->user->employee->id)}}">{{$bill->user->employee->nama}}</a></td>
               </tr>
               <tr>
                 <td>Status</td>
@@ -142,7 +142,7 @@
 
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat pada: </strong>{{ $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | {{$bill->created_at->format('h:i:s')}} WIB | <a class="text-info" href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat pada: </strong>{{ $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}} | {{$bill->created_at->format('h:i:s')}} WIB | <a  href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>
