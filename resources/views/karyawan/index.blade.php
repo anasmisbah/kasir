@@ -31,13 +31,12 @@
     }
 
     .table thead th{
+        text-align: center;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
-
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
+    table.dataTable.table-sm > thead > tr > th{
+        padding-right: 0;
     }
 </style>
 @endpush
@@ -85,26 +84,26 @@
             </form>
         </div>
         @endif
-          <table id="example1" style="width:100%" class="display table table-striped compact">
+          <table id="example1" style="width:100%" class="display table table-sm table-striped compact">
             <thead>
-              <tr class="text-center">
-                <th class="py-2">No.</th>
-                <th class="py-2">Nama</th>
-                <th class="py-2">Jabatan</th>
-                <th class="py-2">Alamat</th>
-                <th class="py-2">Telepon</th>
-                <th class="py-2">cabang</th>
+              <tr>
+                <th class="py-2" style="width:5%">No</th>
+                <th class="py-2" style="width:15%">Nama</th>
+                <th class="py-2" style="width:13%">Jabatan</th>
+                <th class="py-2" style="width:44%">Alamat</th>
+                <th class="py-2" style="width:10%">Telepon</th>
+                <th class="py-2" style="width:13%">Cabang</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($employees as $employee)
               <tr>
-                <td class="py-2 text-center">{{$loop->iteration}}</td>
-                <td class="py-2"><a class="text-info" href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
-                <td class="py-2">{{$employee->jabatan}}</td>
-                <td class="py-2">{{$employee->alamat}}</td>
-                <td class="py-2 text-center">{{$employee->telepon}}</td>
-                <td class="py-2 text-center"><a class="text-info" href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td><a class="text-info" href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
+                <td class="text-center">{{$employee->jabatan}}</td>
+                <td>{{$employee->alamat}}</td>
+                <td class="text-center">{{$employee->telepon}}</td>
+                <td class="text-center"><a class="text-info" href="{{route('cabang.detail',$employee->branch->id)}}">{{$employee->branch->nama}}</a></td>
               </tr>
               @endforeach
 
