@@ -60,13 +60,14 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Cabang</label>
                     <div class="col-sm-10"><input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang {{$supply->branch->nama}}"></div>
+                    <div class="invalid-feedback">
+                        {{$errors->first('harga_cabang')}}
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Selisih</label>
                     <div class="col-sm-10"><input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control form-control-sm inputharga" name="harga_selisih" placeholder="selisih"></div>
-                    <div class="invalid-feedback">
-                        {{$errors->first('harga_cabang')}}
-                    </div>
+
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Stok</label>

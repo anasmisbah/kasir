@@ -6,9 +6,6 @@
     .form-group{
         margin-bottom: .5rem !important;
     }
-    .form-group{
-        margin-bottom: .5rem !important;
-    }
     .form-control.form-control-sm:focus{
         border-color: #39f;
         box-shadow: 0 0 0 0.2rem rgba(51, 153, 255, 0.25);
@@ -31,7 +28,7 @@
         <div class="card-body">
         <div class="d-flex justify-content-between mb-3">
             <div>
-            <h4 class="card-title mb-0 text-bold">Membuat Stok Barang</h4>
+            <h4 class="card-title mb-0 text-bold">Menambahkan Stok Barang</h4>
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
             <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>

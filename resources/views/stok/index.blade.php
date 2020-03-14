@@ -4,10 +4,6 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <style>
-    .table th,.table td{
-        padding-top: 0.3rem !important;
-        padding-bottom: 0.3rem !important;
-    }
     .form-control-sm{
         padding-right: 1rem;
     }
@@ -34,6 +30,7 @@
         color: #39f;
     }
     .table thead th{
+        text-align: center;
         border-top: 1px solid black;
         border-bottom: 1px solid black;
     }
@@ -84,7 +81,7 @@
                     </div>
             @endif
           </form>
-          <table id="example1" style="width:100%" class="table table-striped compact">
+          <table id="example1" style="width:100%" class="table table-sm table-striped compact">
             <thead>
               <tr>
                 <th style="width: 5%" class="py-2 text-center">No.</th>
