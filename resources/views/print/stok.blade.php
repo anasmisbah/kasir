@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
-    <title>Daftar Stok Barang</title>
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <title>Stok Barang Cetak | {{$app->nama}}</title>
     <style>
         .border{
                 border-top: 1px solid black !important;
-            }
+        }
         .border-bawah{
         border-bottom: 1px solid black !important;
         }
         .table th{
+            text-align: center;
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
@@ -31,6 +32,10 @@
         .sign{
             font-size: 12px;
         }
+
+        .table th, .table td{
+        padding: 0.4rem !important;
+        }
     </style>
 </head>
 <body>
@@ -43,14 +48,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">No.</th>
-                        <th class="text-center">Nama Barang</th>
-                        <th class="text-center">Cabang</th>
+                        <th>No.</th>
+                        <th>Nama Barang</th>
+                        <th>Cabang</th>
                         <th style="width:3%"></th>
-                        <th class="text-center">Harga Pusat</th>
+                        <th>Harga Pusat</th>
                         <th style="width:3%"></th>
-                        <th class="text-center">Harga Cabang</th>
-                        <th class="text-center">Stok (Kg)</th>
+                        <th>Harga Cabang</th>
+                        <th>Stok (Kg)</th>
                     </tr>
                 </thead>
                 <tbody>

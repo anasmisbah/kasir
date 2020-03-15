@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
-    <title>Laporan Piutang</title>
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <title>Piutang Cetak | {{$app->nama}}</title>
     <style>
         .border{
             border-top: 1px solid black !important;
@@ -18,6 +18,7 @@
             font-family: "Arial", Helvetica, sans-serif;
         }
         .table th{
+            text-align: center;
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
@@ -31,6 +32,9 @@
         .sign{
             font-size: 12px;
         }
+        .table th, .table td{
+        padding: 0.4rem !important;
+        }
     </style>
 </head>
 <body>
@@ -42,16 +46,18 @@
             <br>
             <br>
             <table class="table">
-                <tr class="text-center">
-                    <th >No.</th>
-                    <th >No Nota Bon</th>
-                    <th>Tanggal</th>
-                    <th >Nama Pelanggan</th>
-                    <th width="30%">Alamat</th>
-                    <th width="2%"></th>
-                    <th width="10%">Hutang</th>
-                    <th >Cabang</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th >No.</th>
+                        <th >No Nota Bon</th>
+                        <th>Tanggal</th>
+                        <th >Nama Pelanggan</th>
+                        <th width="30%">Alamat</th>
+                        <th width="2%"></th>
+                        <th width="10%">Hutang</th>
+                        <th >Cabang</th>
+                    </tr>
+                </thead>
                 <tbody>
                     @php
                         $total = 0;

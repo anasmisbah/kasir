@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
-    <title>Daftar Pengguna</title>
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <title>Pengguna Cetak | {{$app->nama}}</title>
     <style>
         .border{
             border-top: 1px solid black !important;
@@ -15,6 +15,7 @@
         border-bottom: 1px solid black !important;
         }
         .table th{
+            text-align: center;
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
@@ -31,6 +32,9 @@
         .sign{
             font-size: 12px;
         }
+        .table th, .table td{
+            padding: 0.4rem !important;
+        }
     </style>
 </head>
 <body id="body_print">
@@ -42,14 +46,16 @@
             <br>
             <br>
             <table class="table text-center">
+                <thead>
                     <tr>
-                        <th class="text-center">No.</th>
-                        <th class="text-center">Nama Pengguna</th>
-                        <th class="text-center">Nama Lengkap</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Level</th>
-                        <th class="text-center">Cabang</th>
+                        <th>No.</th>
+                        <th>Nama Pengguna</th>
+                        <th>Nama Lengkap</th>
+                        <th>Email</th>
+                        <th>Level</th>
+                        <th>Cabang</th>
                     </tr>
+                </thead>
                 <tbody>
                     @foreach ($users as $item)
                         @if ($loop->iteration == count($users))
@@ -67,8 +73,8 @@
                             <td class="text-left">{{$item->username}}</td>
                             <td class="text-left">{{$item->employee->nama}}</td>
                             <td class="text-left">{{$item->email}}</td>
-                            <td class="">{{$item->level->nama}}</td>
-                            <td class="">{{$item->employee->branch->nama}}</td>
+                            <td>{{$item->level->nama}}</td>
+                            <td>{{$item->employee->branch->nama}}</td>
                         </tr>
                         @endif
                     @endforeach

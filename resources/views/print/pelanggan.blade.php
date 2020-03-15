@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
-    <title>Daftar Pelanggan</title>
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <title>Pelanggan Cetak | {{$app->nama}}</title>
     <style>
         .border{
             border-top: 1px solid black !important;
@@ -15,6 +15,7 @@
         border-bottom: 1px solid black !important;
         }
         .table th{
+            text-align: center;
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
@@ -31,6 +32,9 @@
         .sign{
             font-size: 12px;
         }
+        .table th, .table td{
+        padding: 0.4rem !important;
+        }
     </style>
 </head>
 <body id="body_print">
@@ -43,11 +47,11 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th class="text-center">No.</th>
-                        <th class="text-center">Nama</th>
-                        <th class="text-center">Alamat</th>
-                        <th class="text-center">Telepon</th>
-                        <th class="text-center">Cabang</th>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Telepon</th>
+                        <th>Cabang</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
-    <title>Nota Bon</title>
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
+    <title>Nota Bon Cetak | {{$app->nama}}</title>
     <style>
         body {
             margin-top: 40px !important;
@@ -115,14 +115,17 @@
         }
         body{
             font-size: 12px;
+
+        }
+        body {
+            font-family: "Arial", Helvetica, sans-serif;
         }
         .table th{
             border-top: 1px solid black !important;
             border-bottom: 1px solid black !important;
         }
         .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
+            padding:0.4rem;
         }
     </style>
 </head>
@@ -131,20 +134,20 @@
     <div class="container">
 
         <div class="row">
-            <div style="padding-left:20px" class="column-5">
+            <div style="padding-left:20px" class="column-7">
                 <div style="margin-top:0px;" class="title">NOTA BON</div>
                 <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
-                <div style="margin-top:5px">{{$app->alamat}} {{$app->kelurahan}} {{$app->kecamatan}} {{$app->kota}}</div>
+                <div style="margin-top:5px">{{$app->alamat}}, {{$app->kecamatan}}, {{$app->kota}}, {{$app->provinsi}}</div>
                 <div>{{$app->telepon}}</div>
 
             </div>
-            <div class="column-2" style="text-align:right">
+            <div class="column-1" style="text-align:right">
                 <div>No. Nota Bon:</div>
                 <div>Tanggal:</div>
                 <div>divelanggan:</div>
                 <div>Alamat:</div>
             </div>
-            <div class="column-4" style="margin-left:10px">
+            <div class="column-3" style="margin-left:10px">
                 <div>{{$bill->no_nota_kas}}</div>
                 <div>{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year.' | '.$bill->tanggal_nota->format('h:i:s')}} WIB</div>
                 <div>{{$bill->customer->nama}}</div>
