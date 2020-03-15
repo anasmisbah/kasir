@@ -47,8 +47,10 @@ class BillController extends Controller
                             $bills = Bill::where('status',$request->status)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
                         }else if($request->status == "0"){
                             $bills = Bill::where('branch_id',$request->cabang)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
+                            $branch = Branch::findOrFail($request->cabang);
                         }else{
                             $bills = Bill::where('branch_id',$request->cabang)->where('status',$request->status)->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->orderBy('tanggal_nota','desc')->get();
+                            $branch = Branch::findOrFail($request->cabang);
                         }
                     }
                     if($request->print){
@@ -82,6 +84,7 @@ class BillController extends Controller
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                     });
+                            $branch = Branch::findOrFail($request->cabang);
                         }else{
                             $bills = Bill::where('status',$request->status)
                                     ->where('branch_id',$request->cabang)
@@ -91,6 +94,7 @@ class BillController extends Controller
                                     ->groupBy(function($val) {
                                         return Carbon::parse($val->tanggal_nota)->format('d');
                                     });
+                            $branch = Branch::findOrFail($request->cabang);
                         }
                     }
                     $data = [];
@@ -142,6 +146,7 @@ class BillController extends Controller
                                 ->groupBy(function($val) {
                                     return $val->tanggal_nota->monthName;
                                 });
+                                $branch = Branch::findOrFail($request->cabang);
                             }else{
                                 $bills = Bill::where('status',$request->status)
                                 ->where('branch_id',$request->cabang)
@@ -151,6 +156,7 @@ class BillController extends Controller
                                 ->groupBy(function($val) {
                                     return $val->tanggal_nota->monthName;
                                 });
+                                $branch = Branch::findOrFail($request->cabang);
                             }
                         }
                         $data = [];
@@ -179,25 +185,7 @@ class BillController extends Controller
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
-                }else if($request->filter === "status"){
-                    if ($request->filter2 === "cabang") {
-                        if ($request->cabang == "0") {
-                            $bills = Bill::where('status',$request->status)
-                            ->orderBy('tanggal_nota','desc')->get();
-
-                        } else {
-                            $bills = Bill::where([
-                                ['status',$request->status],
-                                ['branch_id',$request->cabang]
-                                ])
-                            ->orderBy('tanggal_nota','desc')->get();
-                        }
-                    }else{
-                        $bills = Bill::where('status',$request->status)
-                        ->orderBy('tanggal_nota','desc')->get();
-                    }
                 }
-                $filter = $request->filter;
             }
             if($request->print){
                 $from = Carbon::now();
@@ -205,7 +193,6 @@ class BillController extends Controller
                 $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
                 return view('print.penjualan_hari',compact('bills','app','dateNow','branch','range','user'));
             }
-            // dd($bills);
         }else{
             if ($request) {
                 if ($request->filter === "hari") {
@@ -346,30 +333,11 @@ class BillController extends Controller
         return view('penjualan.detail',compact('bill'));
     }
 
-    public function create()
-    {
-        $customers = Auth::user()->employee->branch->customer;
-        // TODO return view()
-    }
-
-    public function search($key)
-    {
-        # code...
-    }
-
     public function delete($id)
     {
         $bill = Bill::findOrFail($id);
         $bill->delete();
         return redirect()->route('penjualan.index');
-    }
-
-    public function filter(Request $request)
-    {
-        $bills = null;
-
-
-
     }
 
     //menu Piutang
@@ -396,6 +364,7 @@ class BillController extends Controller
                         ['branch_id','=',$request->cabang],
                         ['status','=','piutang']
                         ])->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    $branch = Branch::findOrFail($request->cabang);
                 }
 
             }
@@ -557,67 +526,5 @@ class BillController extends Controller
         ];
 
         return view('print.penjualannota',compact('bill','app'));
-    }
-
-    public function store(Request $request)
-    {
-        $user = Auth::user();
-        $request->validate([
-            'user_id'=>'required',
-            'tanggal_nota'=>'required',
-            'diskon'=>'required',
-            'total_nota'=>'required',
-            'jumlah_uang_nota'=>'required',
-            'kembalian_nota'=>'required',
-            'status'=>'required',
-            'customer_id'=>'required'
-        ]);
-
-        // TODO no_nota_kas
-        $newBill = Bill::create([
-            'user_id'=>$user->id,
-            'tanggal_nota'=>$request->tanggal_nota,
-            'diskon'=>$request->diskon,
-            'total_nota'=>$request->total_nota,
-            'jumlah_uang_nota'=>$request->jumlah_uang_nota,
-            'kembalian_nota'=>$request->kembalian_nota,
-            'status'=>$request->status,
-            'branch_id'=>$user->employee->branch_id,
-            'customer_id'=>$request->customer_id
-        ]);
-
-        $transaksi = [
-            [
-                'total_harga'=>60000,
-                'kuantitas'=>100,
-                'supply_id'=>1
-            ],
-            [
-                'total_harga'=>60000,
-                'kuantitas'=>100,
-                'supply_id'=>1
-            ],
-            [
-                'total_harga'=>60000,
-                'kuantitas'=>100,
-                'supply_id'=>1
-            ],
-            [
-                'total_harga'=>60000,
-                'kuantitas'=>100,
-                'supply_id'=>1
-            ],
-        ];
-
-        foreach ($transaksi as $key => $item) {
-            $newBill->transaksi()->create([
-                'no_urut'=>$key,
-                'total_harga'=>$item->total_harga,
-                'kuantitas'=>$item->kuantitas,
-                'supply_id'=>$item->supply_id
-            ]);
-        }
-
-        return $newBill;
     }
 }

@@ -41,7 +41,7 @@
     <div class="container">
         <div class="row" style="padding-top:10px">
             <div class="text-center title">DAFTAR PENGGUNA</div>
-            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($user->employee->branch->nama) }}</div>
+            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
             <div class="text-center title">PER TANGGAL {{$dateNow->day.' '.strtoupper($dateNow->monthName).' '.$dateNow->year}}</div>
             <br>
             <br>
