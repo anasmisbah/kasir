@@ -9,31 +9,27 @@
     <title>Daftar Pengguna</title>
     <style>
         .border{
-            border-top: 2px solid black !important;
+            border-top: 1px solid black !important;
         }
         .border-bawah{
-        border-bottom: 2px solid black !important;
+        border-bottom: 1px solid black !important;
         }
         .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         body{
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
         body{
-            font-size: 12pt;
+            font-size: 12px;
         }
         .sign{
-            font-size: 12pt;
-        }
-        .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -45,7 +41,7 @@
             <div class="text-center title">PER TANGGAL {{$dateNow->day.' '.strtoupper($dateNow->monthName).' '.$dateNow->year}}</div>
             <br>
             <br>
-            <table class="table table-hover text-center">
+            <table class="table text-center">
                     <tr>
                         <th class="text-center">No.</th>
                         <th class="text-center">Nama Pengguna</th>
