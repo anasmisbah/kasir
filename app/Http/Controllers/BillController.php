@@ -435,8 +435,8 @@ class BillController extends Controller
         $bill =Bill::findOrFail($id);
         $user = Auth::user();
         $tgllunas = Carbon::now();
-        $lastBill = Bill::select('id')->orderBy('id','desc')->first();
-        $formatnnk = $bill->branch_id."". $bill->user->employee_id."" .($lastBill->id+1)."".$tgllunas->day."".$tgllunas->month."".$tgllunas->year;
+        $lastBill = Bill::select('id')->where('branch_id',$bill->branch_id)->whereDate('tanggal_nota',$tgllunas)->count();
+        $formatnnk = $bill->branch->kode."".$tgllunas->format('ymd')."".str_pad(($lastBill+1),3,'0',STR_PAD_LEFT);
         $newBill = Bill::create([
             'user_id'=>$bill->user_id,
             'tanggal_nota'=>$tgllunas,
