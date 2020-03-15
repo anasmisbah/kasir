@@ -87,13 +87,7 @@ class EmployeeController extends Controller
             'telepon'=>'required'
         ]);
 
-        $foto='';
-        if ($request->file('foto')) {
-            $request->validate([
-                'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
-            ]);
-            $foto = $request->file('foto')->store('fotos','public');
-        }
+        $foto='fotos/default.jpg';
 
         if ($request->file('foto')) {
             $request->validate([
@@ -114,7 +108,6 @@ class EmployeeController extends Controller
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
-
         return redirect()->route('karyawan.index');
     }
 
