@@ -9,37 +9,31 @@
     <title>Laporan Penjualan</title>
 <style>
         .border{
-        border-top: 2px solid black !important;
+        border-top: 1px solid black !important;
         }
         .border-bawah{
-        border-bottom: 2px solid black !important;
-        }
-        th{
-        text-align: center !important
+        border-bottom: 1px solid black !important;
         }
         .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            text-align: center;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         body{
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
         body{
-            font-size: 12pt;
+            font-size: 12px;
         }
         .sign{
-            font-size: 12pt;
+            font-size: 12px;
         }
         .foot{
             font-weight: bold;
-        }
-        .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
         }
 </style>
 </head>
@@ -52,19 +46,21 @@
             <br>
             <br>
 
-            <table class="table table-hover text-center">
+            <table class="table text-center">
+                <thead>
                     <tr>
-                      <th class="border">No.</th>
-                      <th class="border">Bulan</th>
-                      <th class="border">Penjualan</th>
-                      <th></th>
-                      <th class="border">Nominal</th>
-                      <th class="border">Piutang</th>
-                      <th></th>
-                      <th class="border">Nominal</th>
-                      <th></th>
-                      <th class="border">Kas</th>
-                    </tr>
+                          <th style="width:5%">No</th>
+                          <th style="width:10%">Bulan</th>
+                          <th style="width:15%">Penjualan</th>
+                          <th style="width:2%"></th>
+                          <th style="width:13%">Nominal</th>
+                          <th style="width:15%">Piutang</th>
+                          <th style="width:2%"></th>
+                          <th style="width:13%">Nominal</th>
+                          <th style="width:2%"></th>
+                          <th style="width:13%">Kas</th>
+                        </tr>
+                    </thead>
                   <tbody>
                       @php
                           $totalpenjualan = 0;
@@ -109,19 +105,19 @@
                           $totalkas += $item['kas'];
                       @endphp
                     @endforeach
+                    <tr class="foot">
+                        <td class=" border-bawah"></td>
+                        <td class=" border-bawah">JUMLAH</td>
+                        <td class=" border-bawah">{{$totalpenjualan}}</td>
+                        <td class=" border-bawah text-right">Rp</td>
+                        <td class=" border-bawah text-right"> <span class="harga">{{$totalnominalpenjualan}}</span>,-</td>
+                        <td class=" border-bawah">{{$totalpiutang}}</td>
+                        <td class=" border-bawah text-right">Rp</td>
+                        <td class=" border-bawah text-right"> <span class="harga">{{abs($totalnominalpiutang)}}</span>,-</td>
+                        <td class=" border-bawah text-right">Rp</td>
+                        <td class=" border-bawah text-right"><span class="harga">{{$totalkas}}</span>,-</td>
+                  </tr>
                   </tbody>
-                      <tr class="foot">
-                          <td class="border border-bawah"></td>
-                          <td class="border border-bawah">JUMLAH</td>
-                          <td class="border border-bawah">{{$totalpenjualan}}</td>
-                          <td class="border border-bawah text-right">Rp</td>
-                          <td class="border border-bawah text-right"> <span class="harga">{{$totalnominalpenjualan}}</span>,-</td>
-                          <td class="border border-bawah">{{$totalpiutang}}</td>
-                          <td class="border border-bawah text-right">Rp</td>
-                          <td class="border border-bawah text-right"> <span class="harga">{{abs($totalnominalpiutang)}}</span>,-</td>
-                          <td class="border border-bawah text-right">Rp</td>
-                          <td class="border border-bawah text-right"><span class="harga">{{$totalkas}}</span>,-</td>
-                    </tr>
             </table>
         </div>
         <div class="row" style="margin-top:20px">

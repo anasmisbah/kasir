@@ -9,31 +9,27 @@
     <title>Laporan Piutang</title>
     <style>
         .border{
-            border-top: 2px solid black !important;
+            border-top: 1px solid black !important;
         }
         .border-bawah{
-            border-bottom: 2px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         body{
             font-family: "Arial", Helvetica, sans-serif;
         }
         .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
         body{
-            font-size: 12pt;
+            font-size: 12px;
         }
         .sign{
-            font-size: 12pt;
-        }
-        .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -45,16 +41,16 @@
             <div class="text-center title">TANGGAL {{$range}}</div>
             <br>
             <br>
-            <table class="table table-hover">
-                <tr >
-                    <th class="text-center" >No.</th>
-                    <th class="text-center" >No Nota Bon</th>
-                    <th class="text-center">Tanggal</th>
-                    <th class="text-center" >Nama Pelanggan</th>
-                    <th class="text-center" width="30%">Alamat</th>
-                    <th class="text-center" width="2%"></th>
-                    <th class="text-center" width="10%">Hutang</th>
-                    <th class="text-center" >Cabang</th>
+            <table class="table">
+                <tr class="text-center">
+                    <th >No.</th>
+                    <th >No Nota Bon</th>
+                    <th>Tanggal</th>
+                    <th >Nama Pelanggan</th>
+                    <th width="30%">Alamat</th>
+                    <th width="2%"></th>
+                    <th width="10%">Hutang</th>
+                    <th >Cabang</th>
                 </tr>
                 <tbody>
                     @php

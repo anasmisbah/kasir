@@ -5,35 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="{{asset('/uploads/'.$app->logo)}}" type="image/x-icon">
     <title>Daftar Karyawan</title>
 <style>
     .border{
-            border-top: 2px solid black !important;
+            border-top: 1px solid black !important;
     }
     .border-bawah{
-        border-bottom: 2px solid black !important;
+        border-bottom: 1px solid black !important;
     }
     .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         body{
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
-        body{
-            font-size: 12pt;
+        .table{
+            font-size: 12px;
         }
         .sign{
-            font-size: 12pt;
-        }
-        .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
+            font-size: 12px;
         }
 </style>
 </head>
@@ -46,8 +41,9 @@
             <br>
             <br>
 
-            <table class="table table-hover">
-                    <tr>
+            <table class="table">
+                <thead>
+                <tr>
                         <th class="text-center">No.</th>
                         <th class="text-center">Nama</th>
                         <th class="text-center">Jabatan</th>
@@ -55,6 +51,7 @@
                         <th class="text-center">Telepon</th>
                         <th class="text-center">Cabang</th>
                     </tr>
+                    </thead>
                 <tbody>
                     @foreach ($employees as $employee)
                         @if ($loop->iteration == count($employees))

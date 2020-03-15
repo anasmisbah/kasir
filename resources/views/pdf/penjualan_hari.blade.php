@@ -9,32 +9,33 @@
     <title>Laporan Penjualan</title>
 <style>
         .border{
-            border-top: 2px solid black !important;
+            border-top: 1px solid black !important;
         }
         .border-bawah{
-            border-bottom: 2px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            text-align: center;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
+        }
+        .table td{
+            line-height: 34px;
         }
         body{
             font-family: "Arial", Helvetica, sans-serif;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
         body{
-            font-size: 12pt;
+            font-size: 12px;
         }
         .sign{
-            font-size: 12pt;
+            font-size: 12px;
         }
-        .table th,.table td{
-            padding-top: 0.3rem !important;
-            padding-bottom: 0.3rem !important;
-        }
+
 </style>
 </head>
 <body id="body_print">
@@ -45,19 +46,21 @@
             <div class="text-center title">TANGGAL {{$range}}</div>
             <br>
             <br>
-            <table class="table table-hover">
+            <table class="table">
+                <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>No. Nota</th>
-                        <th>Tanggal</th>
-                        <th>Pelanggan</th>
-                        <th></th>
-                        <th>Total</th>
-                        <th></th>
-                        <th>Piutang</th>
-                        <th>Status</th>
-                        <th>Cabang</th>
+                        <th style="width:5%">No</th>
+                        <th style="width:10%">Nota Kas</th>
+                        <th style="width:17%">Tanggal</th>
+                        <th style="width:28%">Pelanggan</th>
+                        <th style="width:2%"></th>
+                        <th style="width:12%">Total</th>
+                        <th style="width:2%"></th>
+                        <th style="width:12%">Piutang</th>
+                        <th style="width:10%">Status</th>
+                        <th style="width:10%">Cabang</th>
                     </tr>
+                </thead>
                 <tbody>
                     @php
                         $total = 0;
@@ -67,9 +70,9 @@
                     @foreach ($bills as $bill)
                         @if ($loop->iteration == count($bills))
                         <tr>
-                            <td  class="border-bawah">{{$loop->iteration}}</td>
-                            <td  class="border-bawah">{{$bill->no_nota_kas}}</td>
-                            <td class="border-bawah"> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
+                            <td  class="text-center border-bawah">{{$loop->iteration}}</td>
+                            <td  class="text-center border-bawah">{{$bill->no_nota_kas}}</td>
+                            <td class="text-center border-bawah"> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                             <td  class="border-bawah">{{$bill->customer->nama}}</td>
                             <td  class="border-bawah">Rp</td>
                             <td  class="border-bawah text-right"> <span class="harga">{{$bill->total_nota}}</span>,-</td>
@@ -79,14 +82,14 @@
                             @else
                                 <td class="border-bawah text-right">0,-</td>
                             @endif
-                            <td  class="border-bawah">{{  strtoupper($bill->status)}}</td>
-                            <td  class="border-bawah">{{$bill->branch->nama}}</td>
+                            <td  class="text-center border-bawah">{{  strtoupper($bill->status)}}</td>
+                            <td  class="text-center border-bawah">{{$bill->branch->nama}}</td>
                         </tr>
                         @else
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$bill->no_nota_kas}}</td>
-                            <td> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$bill->no_nota_kas}}</td>
+                            <td class="text-center"> {{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                             <td>{{$bill->customer->nama}}</td>
                             <td  >Rp</td>
                             <td class="text-right"><span class="harga">{{$bill->total_nota}}</span>,-</td>
@@ -97,8 +100,8 @@
                             @else
                                 <td class="text-right">0,-</td>
                             @endif
-                            <td>{{  strtoupper($bill->status)}}</td>
-                            <td>{{$bill->branch->nama}}</td>
+                            <td class="text-center">{{  strtoupper($bill->status)}}</td>
+                            <td class="text-center">{{$bill->branch->nama}}</td>
                         </tr>
                         @endif
                         @php
@@ -112,11 +115,11 @@
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
-                        <td class="border-bawah">JUMLAH</td>
-                        <td  class="border-bawah">Rp</td>
-                        <td class="border-bawah text-right"><span class="harga">{{$total}}</span>,-</td>
-                        <td  class="border-bawah">Rp</td>
-                        <td class="border-bawah text-right"><span class="harga">{{$totalpiutang}}</span>,-</td>
+                        <td class="border-bawah"> <b> JUMLAH</b></td>
+                        <td  class="border-bawah"><b>Rp</td>
+                        <td class="border-bawah text-right"><b><span class="harga">{{$total}}</span>,-</b></td>
+                        <td  class="border-bawah"><b>Rp</b></td>
+                        <td class="border-bawah text-right"><b><span class="harga">{{$totalpiutang}}</span>,-</b></td>
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
                     </tr>
@@ -124,9 +127,9 @@
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
-                        <td class="border-bawah">JUMLAH KAS</td>
-                        <td  class="border-bawah">Rp</td>
-                        <td class="border-bawah text-right"><span class="harga">{{$total-$totalpiutang}}</span> ,-</td>
+                        <td class="border-bawah"> <b> JUMLAH KAS</b></td>
+                        <td  class="border-bawah"><b>Rp</b></td>
+                        <td class="border-bawah text-right"><b><span class="harga">{{$total-$totalpiutang}}</span> ,-</b></td>
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>
                         <td class="border-bawah"></td>

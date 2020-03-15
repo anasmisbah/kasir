@@ -104,22 +104,22 @@
         }
 
         .border {
-            border-top: 2px solid black !important;
+            border-top: 1px solid black !important;
         }
 
         .border-bawah {
-            border-bottom: 2px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         .title{
-            font-size: 14pt;
+            font-size: 14px;
             font-weight: bold;
         }
         body{
-            font-size: 12pt !important;
+            font-size: 12px !important;
         }
         .table th{
-            border-top: 2px solid black !important;
-            border-bottom: 2px solid black !important;
+            border-top: 1px solid black !important;
+            border-bottom: 1px solid black !important;
         }
         .table th,.table td{
             padding-top: 0.3rem !important;
