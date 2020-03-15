@@ -92,6 +92,12 @@
       .card{
           margin-bottom: 40px
       }
+      .c-header-dark {
+            background-color: rgb(31, 40, 51) !important;
+        }
+        .c-subheader{
+            margin-left:200px;
+        }
     </style>
     @stack('css')
   </head>
@@ -158,33 +164,32 @@
       </ul>
       @endif
     </div>
+        <header class="c-header c-header-dark c-header-fixed c-header-with-subheader">
+            <a class="c-header-brand px-3" href="#">
+                <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi">
+            </a>
+            <div class="c-header-nav ml-auto px-3">
+                <span class="c-header-nav-item text-light">Selamat datang,</span>
+                <a class="c-header-nav-item c-header-nav-link" href="#">{{auth()->user()->employee->nama}}</a>
+                <div class="c-header-nav-item c-header-nav-link">
+                    <img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar">
+                </div>
+                <a class="c-header-nav-item c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+          <div class="c-subheader px-3">
+            <!-- Breadcrumb-->
+            <ol class="breadcrumb border-0 m-0">
+              @yield('breadcumb')
+              <!-- Breadcrumb Menu-->
+            </ol>
+          </div>
+        </header>
     <div class="c-wrapper c-fixed-components">
-      <header class="c-header c-header-dark c-header-fixed c-header-with-subheader">
-        <ul class="c-header-nav ml-auto mr-4">
-          <li class="c-header-nav-item d-md-down-none mx-2">
-            <a class="c-header-nav-link" href="#">Hallo {{auth()->user()->employee->nama}}</a>
-          </li>
-          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="#">
-            <div class="c-avatar"><img class="c-avatar-img" src="{{asset('/uploads/'.auth()->user()->employee->foto)}}" alt="user@email.com"></div></a>
-          </li>
-          <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-            <i class="fa fa-power-off"></i>
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-              </form>
-          </li>
-        </ul>
-        <div class="c-subheader px-3">
-          <!-- Breadcrumb-->
-          <ol class="breadcrumb border-0 m-0">
-            @yield('breadcumb')
-            <!-- Breadcrumb Menu-->
-          </ol>
-        </div>
-      </header>
-      <div class="c-body">
+      <div class="c-body" style="margin-top:100px">
         <main class="c-main">
           <div class="container-fluid">
             <div class="fade-in">
