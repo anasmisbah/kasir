@@ -419,12 +419,19 @@
                         'keyword': keyword,
                     },
                     success: function(data) {
-                        var list = data.map((item) => {
-                            return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
-                        })
-                        list.forEach((item) => {
-                            containerlist.append(item)
-                        })
+                        containerlist.html('')
+                        if (data.length != 0) {
+                            var list = data.map((item) => {
+                                return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
+                            })
+                            list.forEach((item) => {
+                                containerlist.append(item)
+                            })
+                        } else {
+                            containerlist.append(`<li class="list-group-item" >Pelanggan tidak ditemukan</li>`)
+                        }
+
+
 
                     },
                 });
@@ -475,7 +482,15 @@
                     $('#searchpelanggan').val(data.customer.nama)
                     $('#alamatpelanggan').html(data.customer.alamat)
                     $('#teleponpelanggan').val(data.customer.telepon)
-                    $("#cetaknota").removeClass('disabled')
+
+                    $('#searchbarang').removeAttr('disabled')
+
+                    pelanggan = {
+                        id:data.customer.id,
+                        nama:data.customer.nama,
+                        telepon:data.customer.telepon,
+                        alamat:data.customer.alamat
+                    }
                 },
             });
 
@@ -529,12 +544,19 @@
                     'keyword': keyword,
                 },
                 success: function(data) {
-                    var list = data.map((item) => {
-                        return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
-                    })
-                    list.forEach((item) => {
-                        containerlist.append(item)
-                    })
+                    containerlist.html('')
+                    if (data.length != 0) {
+                        var list = data.map((item) => {
+                            return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
+                        })
+                        list.forEach((item) => {
+                            containerlist.append(item)
+                        })
+                    } else {
+                        containerlist.append(`<li class="list-group-item">Barang tidak ditemukan</li>`)
+                    }
+
+
 
                 },
             });
@@ -683,16 +705,14 @@
     }
 
     $("#uangmuka").focusin(()=>{
-        let uang = $("#uangmuka").val()
-        uang = uang.split(" ")
-        uang = uang[1].split(",")[0]
-        $("#uangmuka").val(uang)
+        // let uang = $("#uangmuka").val()
+        // uang = uang.split(" ")
+        // uang = uang[1].split(",")[0]
+        $("#uangmuka").val(uangMuka)
     })
 
     $("#uangmuka").focusout(()=>{
         // uang = "Rp "+uang.toLocaleString(['ban', 'id'])+",-"
-        console.log(uangMuka.toLocaleString(['ban', 'id']));
-
         $("#uangmuka").val('Rp '+uangMuka.toLocaleString(['ban', 'id'])+',-')
     })
 

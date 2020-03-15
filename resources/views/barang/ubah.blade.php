@@ -90,7 +90,7 @@ $(function () {
 
     // Number Divide
     $("#inputharga").divide({
-        delimiter:',',
+        delimiter:'.',
         divideThousand:true
     });
 

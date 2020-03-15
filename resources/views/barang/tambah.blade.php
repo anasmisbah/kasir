@@ -29,7 +29,7 @@
                             <h4 class="card-title mb-0 text-bold">Menambahkan Barang</h4>
                         </div>
                         <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                            <button type="submit" class="btn btn-info mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
+                            <button type="submit" class="btn btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
                             <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                         </div>
                     </div>

@@ -38,7 +38,6 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/barang/{id}', 'ItemController@update')->name('barang.perbarui');
         Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
         Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
-        Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
         Route::get('/barang/print','ItemController@print')->name('barang.print');
 
         Route::get('/jenis', 'CategoryController@index')->name('jenis.index');
@@ -105,6 +104,8 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/karyawan/detail/{id}','EmployeeController@show')->name('karyawan.detail');
         Route::delete('/karyawan/hapus/{id}','EmployeeController@delete')->name('karyawan.hapus');
         Route::get('/pengguna/getEmployeeJson','EmployeeController@getEmployeeJson')->name('karyawan.data');
+
+        Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
 
     });
 

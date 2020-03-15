@@ -23,7 +23,7 @@
                 <h4 class="card-title mb-0 text-bold">Detail Barang</h4>
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                <a href="{{route('barang.ubah',$item->id)}}" class="btn mr-2 btn-info" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                <a href="{{route('barang.ubah',$item->id)}}" class="btn mr-2 btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
                 <form class="d-inline" id="form-delete" action="{{route('barang.hapus', $item->id)}}" method="POST">
                     @csrf
                     @method('DELETE')

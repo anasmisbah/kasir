@@ -118,8 +118,8 @@ class BillController extends Controller
                     }
                     foreach ($bills as $key => $bill) {
                         $data[ltrim($key, '0')]['tanggal'] = ltrim($key, '0');
-                        $data[ltrim($key, '0')]['penjualan'] = $bill->where('status','lunas')->count();
-                        $data[ltrim($key, '0')]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[ltrim($key, '0')]['penjualan'] = $bill->count();
+                        $data[ltrim($key, '0')]['nominal_penjualan']=$bill->sum('total_nota');
                         $data[ltrim($key, '0')]['piutang'] = $bill->where('status','piutang')->count();
                         $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[ltrim($key, '0')]['kas']= $data[ltrim($key, '0')]['nominal_penjualan'] - abs($data[ltrim($key, '0')]['nominal_piutang']);
@@ -193,8 +193,8 @@ class BillController extends Controller
                     }
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
-                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
-                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['penjualan'] = $bill->count();
+                        $data[$key]['nominal_penjualan']=$bill->sum('total_nota');
                         $data[$key]['piutang'] = $bill->where('status','piutang')->count();
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
@@ -320,8 +320,8 @@ class BillController extends Controller
                     }
                     foreach ($bills as $key => $bill) {
                         $data[ltrim($key, '0')]['tanggal'] = ltrim($key, '0');
-                        $data[ltrim($key, '0')]['penjualan'] = $bill->where('status','lunas')->count();
-                        $data[ltrim($key, '0')]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[ltrim($key, '0')]['penjualan'] = $bill->count();
+                        $data[ltrim($key, '0')]['nominal_penjualan']=$bill->sum('total_nota');
                         $data[ltrim($key, '0')]['piutang'] = $bill->where('status','piutang')->count();
                         $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[ltrim($key, '0')]['kas']= $data[ltrim($key, '0')]['nominal_penjualan'] - abs($data[ltrim($key, '0')]['nominal_piutang']);
@@ -378,8 +378,8 @@ class BillController extends Controller
                     }
                     foreach ($bills as $key => $bill) {
                         $data[$key]['tanggal'] = $key;
-                        $data[$key]['penjualan'] = $bill->where('status','lunas')->count();
-                        $data[$key]['nominal_penjualan']=$bill->where('status','lunas')->sum('total_nota');
+                        $data[$key]['penjualan'] = $bill->count();
+                        $data[$key]['nominal_penjualan']=$bill->sum('total_nota');
                         $data[$key]['piutang'] = $bill->where('status','piutang')->count();
                         $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
