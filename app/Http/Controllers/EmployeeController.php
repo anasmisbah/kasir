@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Application;
 use Carbon\Carbon;
-use PDF;
 use Illuminate\Support\Str;
 use File;
 class EmployeeController extends Controller
@@ -31,19 +30,9 @@ class EmployeeController extends Controller
                     $employees = Employee::where('branch_id',$request->cabang)->get();
                     $branch = Branch::findOrFail($request->cabang);
                 }
-                if ($request->pdf) {
-                    $data = [
-                        'employees'=>$employees,
-                        'branch'=> $branch,
-                        'app'=>$app,
-                        'date'=>Carbon::now()->format('d F Y')
-                    ];
-                    $pdf = PDF::loadView('pdf.karyawan', $data);
-                    return $pdf->stream();
-                    // return $pdf->download('karyawan.pdf');
-                }elseif ($request->print) {
+                if ($request->print) {
                         $date=Carbon::now();
-                    return view('pdf.karyawan',compact('employees','branch','app','date','user'));
+                    return view('print.karyawan',compact('employees','branch','app','date','user'));
                 }
             }else{
                 $employees = Employee::all();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Branch;
-use PDF;
 use App\Application;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,6 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-
         $user = Auth::user();
         $branches = Branch::all();
         $app = Application::first();
@@ -26,20 +24,9 @@ class CustomerController extends Controller
                     $customers = Customer::where('branch_id',$request->cabang)->get();
                     $branch = Branch::findOrFail($request->cabang);
                 }
-                if ($request->pdf) {
-
-                    $data = [
-                        'customers'=>$customers,
-                        'branch'=> $branch,
-                        'app'=>$app,
-                        'date'=>Carbon::now()->format('d F Y')
-                    ];
-                    $pdf = PDF::loadView('pdf.pelanggan', $data);
-                    return $pdf->stream();
-                    // return $pdf->download('pelanggan.pdf');
-                }elseif ($request->print) {
+                if ($request->print) {
                     $date=Carbon::now();
-                    return view('pdf.pelanggan',compact('customers','branch','app','date','user'));
+                    return view('print.pelanggan',compact('customers','branch','app','date','user'));
                 }
             }else{
                 $customers = Customer::all();
@@ -105,7 +92,6 @@ class CustomerController extends Controller
     {
         $branches = Branch::all();
         return view('pelanggan.tambah',compact('branches'));
-        // TODO return view()
     }
 
     public function store(Request $request)
@@ -192,23 +178,4 @@ class CustomerController extends Controller
             return $customers;
         }
     }
-
-    public function pdf(Request $request)
-    {
-        if ($request->filter === "cabang") {
-            if($request->cabang === 0){
-                $customers = Customer::all();
-
-                return $customers;
-            }else{
-                $customers = Customer::where('branch_id',$request->cabang)->get();
-                return $customers;
-            }
-        }else{
-            $customers = Customer::all();
-            return $customers;
-        }
-    }
-
-
 }

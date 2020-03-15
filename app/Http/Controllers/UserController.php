@@ -28,17 +28,7 @@ class UserController extends Controller
                             ->join('branches', 'employees.branch_id', '=', 'branches.id')->where('branch_id',$request->cabang)->get();
                 $branch = Branch::findOrFail($request->cabang);
             }
-            if ($request->pdf) {
-                $data = [
-                    'users'=>$users,
-                    'branch'=> $branch,
-                    'app'=>$app,
-                    'date'=>Carbon::now()->format('d F Y')
-                ];
-                $pdf = PDF::loadView('pdf.karyawan', $data);
-                return $pdf->stream();
-                // return $pdf->download('karyawan.pdf');
-            }elseif ($request->print) {
+            if ($request->print) {
                     $dateNow=Carbon::now();
                 return view('print.pengguna',compact('users','branch','app','dateNow','user'));
             }

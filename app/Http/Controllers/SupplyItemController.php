@@ -10,7 +10,6 @@ use App\Branch;
 use App\User;
 use App\APPlication;
 use Carbon\Carbon;
-use PDF;
 class SupplyItemController extends Controller
 {
     public function index(Request $request)
@@ -27,19 +26,9 @@ class SupplyItemController extends Controller
                     $supplies = Supply::where('branch_id',$request->cabang)->get();
                     $branch = Branch::findOrFail($request->cabang);
                 }
-                if ($request->pdf) {
-                    $data = [
-                        'supplies'=>$supplies,
-                        'branch'=> $branch,
-                        'app'=>$app,
-                        'date'=>Carbon::now()->format('d F Y')
-                    ];
-                    $pdf = PDF::loadView('pdf.stok', $data);
-                    return $pdf->stream();
-                    // return $pdf->download('stok.pdf');
-                }elseif ($request->print) {
+                if ($request->print) {
                 $date=Carbon::now();
-                return view('pdf.stok',compact('supplies','branch','app','date','user'));
+                return view('print.stok',compact('supplies','branch','app','date','user'));
                 }
             }else{
                 $supplies = Supply::all();

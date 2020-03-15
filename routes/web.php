@@ -124,11 +124,6 @@ Route::middleware(['auth'])->group(function (){
 
 });
 
-Route::get('preview', function () {
-    return view('layouts.print');
-});
-Route::get('print', 'PrintController@preview');
-
 
 
 
