@@ -32,7 +32,10 @@ class BranchController extends Controller
             'alamat'=>'required',
             'telepon'=>'required',
             'pimpinan'=>'required',
-            'kode'=>'required'
+            'kode'=>'required',
+            'provinsi'=>'required',
+            'kecamatan'=>'required',
+            'kota'=>'required',
         ]);
 
         $newBranch = Branch::create([
@@ -41,6 +44,9 @@ class BranchController extends Controller
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
             'kode'=>$request->kode,
+            'provinsi'=>$request->provinsi,
+            'kecamatan'=>$request->kecamatan,
+            'kota'=>$request->kota,
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
@@ -62,7 +68,10 @@ class BranchController extends Controller
             'alamat'=>'required',
             'telepon'=>'required',
             'pimpinan'=>'required',
-            'kode'=>'required'
+            'kode'=>'required',
+            'provinsi'=>'required',
+            'kecamatan'=>'required',
+            'kota'=>'required'
         ]);
 
         $updatedBranch = Branch::findOrFail($request->id);
@@ -73,25 +82,13 @@ class BranchController extends Controller
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
             'kode'=>$request->kode,
+            'provinsi'=>$request->provinsi,
+            'kecamatan'=>$request->kecamatan,
+            'kota'=>$request->kota,
             'updated_by'=>Auth::user()->id
         ]);
 
         return redirect()->route('cabang.index');
-    }
-
-    public function search(Request $request)
-    {
-        if ($request->keyword) {
-            $categories = Branch::where('nama', 'LIKE', "%{$request->keyword}%")->get();
-                            // ->orWhere('alamat', 'LIKE', "%{$request->keyword}%")
-                            // ->orWhere('telepon', 'LIKE', "%{$request->keyword}%")
-                            // ->orWhere('pimpinan', 'LIKE', "%{$request->keyword}%")
-
-            return $categories;
-        }else{
-            $categories = Branch::all();
-            return $categories;
-        }
     }
 
     public function delete($id)

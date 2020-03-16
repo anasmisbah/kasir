@@ -59,7 +59,7 @@
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
                 <td><a  href="{{route('cabang.detail', $branch->id)}}">{{$branch->nama}}</a></td>
-                <td>{{$branch->alamat}}</td>
+                <td>{{$branch->alamat}}, {{$branch->kecamatan}}, {{$branch->kota}}, {{$branch->provinsi}}</td>
                 <td class="text-center">{{$branch->telepon}}</td>
                 <td class="text-center">{{$branch->pimpinan}}</td>
               </tr>

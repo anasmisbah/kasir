@@ -74,12 +74,47 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10">
-                        <textarea value="{{ old('alamat')?old('alamat'):$branch->alamat }}" name="alamat" class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}" rows="3" placeholder="Alamat">{{ old('alamat')?old('alamat'):$branch->alamat }}</textarea>
+                    <label class="col-2">Alamat:</label>
+                    <div class="col-10"><input type="text" value="{{ old('alamat')?old('alamat'):$branch->alamat }}"
+                            class="form-control form-control-sm {{ $errors->first('alamat')?'is-invalid':'' }}"
+                            name="alamat" placeholder="Masukkan Alamat Karyawan">
                         <div class="invalid-feedback">
                             {{$errors->first('alamat')}}
                         </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Kecamatan:</label>
+                    <div class="col-10"><input type="text" value="{{ old('kecamatan')?old('kecamatan'):$branch->kecamatan }}"
+                            class="form-control form-control-sm {{ $errors->first('kecamatan')?'is-invalid':'' }}"
+                            name="kecamatan" placeholder="Masukkan kecamatan">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kecamatan')}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Kabupaten/Kota:</label>
+                    <div class="col-10"><input type="text" value="{{ old('kota')?old('kota'):$branch->kota }}"
+                            class="form-control form-control-sm {{ $errors->first('kota')?'is-invalid':'' }}"
+                            name="kota" placeholder="Masukkan kabupaten/kota">
+                        <div class="invalid-feedback">
+                            {{$errors->first('kota')}}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2">Provinsi:</label>
+                    <div class="col-10"><input type="text" value="{{ old('provinsi')?old('provinsi'):$branch->provinsi }}"
+                            class="form-control form-control-sm {{ $errors->first('provinsi')?'is-invalid':'' }}"
+                            name="provinsi" placeholder="Masukkan provinsi">
+                        <div class="invalid-feedback">
+                            {{$errors->first('provinsi')}}
+                        </div>
+
                     </div>
                 </div>
             </form>

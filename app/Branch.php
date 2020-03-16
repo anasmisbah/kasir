@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     protected $fillable = [
-        'nama', 'alamat', 'telepon','pimpinan','created_by','updated_by','kode'
+        'nama', 'alamat', 'telepon','pimpinan','created_by','updated_by','kode','provinsi','kecamatan','kota'
     ];
 
     public function supply()
