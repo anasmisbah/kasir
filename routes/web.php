@@ -15,6 +15,11 @@ Route::get('/', function () {
     return redirect()->route('beranda');
 });
 
+Route::get('/reset',function()
+{
+    return view('auth.passwords.reset');
+});
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function (){
@@ -59,7 +64,15 @@ Route::middleware(['auth'])->group(function (){
     });
 
     Route::middleware(['cabang'])->group(function (){
+        Route::get('/pelanggan/tambah', 'CustomerController@create')->name('pelanggan.tambah');
+        Route::post('/pelanggan/simpan','CustomerController@store')->name('pelanggan.simpan');
+        Route::get('/pelanggan/ubah/{id}', 'CustomerController@edit')->name('pelanggan.ubah');
+        Route::put('/pelanggan/{id}', 'CustomerController@update')->name('pelanggan.perbarui');
 
+        Route::get('/stok/tambah', 'SupplyItemController@create')->name('stok.tambah');
+        Route::post('/stok/simpan','SupplyItemController@store')->name('stok.simpan');
+        Route::get('/stok/ubah/{id}', 'SupplyItemController@edit')->name('stok.ubah');
+        Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
 
     });
     Route::middleware(['cabangutama'])->group(function (){
@@ -82,19 +95,11 @@ Route::middleware(['auth'])->group(function (){
 
 
         Route::get('/pelanggan', 'CustomerController@index')->name('pelanggan.index');
-        Route::get('/pelanggan/tambah', 'CustomerController@create')->name('pelanggan.tambah');
-        Route::post('/pelanggan/simpan','CustomerController@store')->name('pelanggan.simpan');
-        Route::get('/pelanggan/ubah/{id}', 'CustomerController@edit')->name('pelanggan.ubah');
-        Route::put('/pelanggan/{id}', 'CustomerController@update')->name('pelanggan.perbarui');
         Route::get('/pelanggan/detail/{id}','CustomerController@show')->name('pelanggan.detail');
         Route::delete('/pelanggan/hapus/{id}','CustomerController@delete')->name('pelanggan.hapus');
 
 
         Route::get('/stok', 'SupplyItemController@index')->name('stok.index');
-        Route::get('/stok/tambah', 'SupplyItemController@create')->name('stok.tambah');
-        Route::post('/stok/simpan','SupplyItemController@store')->name('stok.simpan');
-        Route::get('/stok/ubah/{id}', 'SupplyItemController@edit')->name('stok.ubah');
-        Route::put('/stok/{id}', 'SupplyItemController@update')->name('stok.perbarui');
         Route::get('/stok/detail/{id}','SupplyItemController@show')->name('stok.detail');
         Route::delete('/stok/hapus/{id}','SupplyItemController@delete')->name('stok.hapus');
 

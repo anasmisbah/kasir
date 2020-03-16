@@ -165,8 +165,15 @@
       @endif
     </div>
         <header class="c-header c-header-dark c-header-fixed c-header-with-subheader">
-            <a class="c-header-brand px-3" href="#">
-                <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi">
+            <a class="c-header-brand px-3" href="#" style="font-size:18px">
+                <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi" style="margin-right:10px">
+                @if (auth()->user()->level_id == 1)
+                Pusat
+                @else
+                Cabang {{ ucfirst(auth()->user()->employee->branch->nama) }}
+                @endif
+                {{-- <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi" style="margin-right:10px"> CABANG {{ strtoupper(auth()->user()->employee->branch->nama) }} --}}
+
             </a>
             <div class="c-header-nav ml-auto px-3">
                 <span class="c-header-nav-item text-light">Selamat datang,</span>

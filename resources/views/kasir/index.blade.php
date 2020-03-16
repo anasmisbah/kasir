@@ -28,6 +28,10 @@
             <![endif]
     -->
     <style>
+        html{
+            position: relative;
+            min-height: 100%;
+        }
         body {
             height: 100%;
             overflow: hidden;
@@ -35,10 +39,22 @@
             font-family: 'Lato', sans-serif;
             font-weight: 400;
             font-size: 14px;
+            margin-bottom: 40px;
         }
 
         .c-header-dark {
             background-color: rgb(31, 40, 51) !important;
+        }
+
+        .c-footer{
+            position: absolute;
+            color: #1f2833;
+            font-size: 12px;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background-color: rgb(197, 198, 199)
         }
 
         .tombol-kasir input,
@@ -120,7 +136,7 @@
     <!-- End of header -->
     <!-- Section Kasir -->
     <!-- Row 1 -->
-    <div class="row col-md-12 mx-0 my-3">
+    <div class="row col-md-12 mx-0 mb-3 mt-4">
         <!-- Nota -->
         <div class="col-md-2 border rounded bg-white border-kanan">
             <div class="form-group mt-3">
@@ -302,6 +318,15 @@
     </div>
     <!-- End of row 2 -->
     <!-- End of section kasir -->
+
+    <footer class="c-footer">
+        <p class="mx-auto">
+            &copy; 2020-{{now()->year}} | Develop with
+            <span style="color:#b71c1c"> <i class="fas fa-heart"></i> </span>
+            by
+            <a href=""><img src="{{asset('img/logo-dev.png')}}" alt="Logo" height="12px"></a>
+        </p>
+    </footer>
     <!-- Modal pelanggan -->
     <div class="modal fade" id="pelangganModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
