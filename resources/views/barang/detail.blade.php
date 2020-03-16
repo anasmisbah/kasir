@@ -23,14 +23,16 @@
                 <h4 class="card-title mb-0 text-bold">Detail Barang</h4>
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                <a href="{{route('barang.ubah',$item->id)}}" class="btn mr-2 btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
-                <form class="d-inline" id="form-delete" action="{{route('barang.hapus', $item->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                </form>
-                <button type="submit" id="delete" class="btn btn-warning mr-5" style="width: 78px !important;">
-                    <i class="fa fa-trash"></i>
-                </button>
+                @if (auth()->user()->level_id == 1)
+                    <a href="{{route('barang.ubah',$item->id)}}" class="btn mr-2 btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                    <form class="d-inline" id="form-delete" action="{{route('barang.hapus', $item->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button type="submit" id="delete" class="btn btn-warning mr-5" style="width: 78px !important;">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                @endif
                 <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
             </div>
         </div>

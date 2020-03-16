@@ -28,7 +28,6 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/cabang/simpan','BranchController@store')->name('cabang.simpan');
         Route::get('/cabang/ubah/{id}', 'BranchController@edit')->name('cabang.ubah');
         Route::put('/cabang/{id}', 'BranchController@update')->name('cabang.perbarui');
-        Route::get('/cabang/detail/{id}','BranchController@show')->name('cabang.detail');
         Route::delete('/cabang/hapus/{id}','BranchController@delete')->name('cabang.hapus');
 
         Route::get('/barang', 'ItemController@index')->name('barang.index');
@@ -36,7 +35,6 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/barang/simpan','ItemController@store')->name('barang.simpan');
         Route::get('/barang/ubah/{id}', 'ItemController@edit')->name('barang.ubah');
         Route::put('/barang/{id}', 'ItemController@update')->name('barang.perbarui');
-        Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
         Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
         Route::get('/barang/print','ItemController@print')->name('barang.print');
 
@@ -45,7 +43,6 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/jenis/simpan','CategoryController@store')->name('jenis.simpan');
         Route::get('/jenis/ubah/{id}', 'CategoryController@edit')->name('jenis.ubah');
         Route::put('/jenis/{id}', 'CategoryController@update')->name('jenis.perbarui');
-        Route::get('/jenis/detail/{id}','CategoryController@show')->name('jenis.detail');
         Route::delete('/jenis/hapus/{id}','CategoryController@delete')->name('jenis.hapus');
 
         Route::get('/pengguna', 'UserController@index')->name('pengguna.index');
@@ -66,6 +63,11 @@ Route::middleware(['auth'])->group(function (){
 
     });
     Route::middleware(['cabangutama'])->group(function (){
+
+        // DETAIL PAGE
+        Route::get('/jenis/detail/{id}','CategoryController@show')->name('jenis.detail');
+        Route::get('/barang/detail/{id}','ItemController@show')->name('barang.detail');
+        Route::get('/cabang/detail/{id}','BranchController@show')->name('cabang.detail');
 
 
         Route::get('/penjualan', 'BillController@index')->name('penjualan.index');
