@@ -51,11 +51,13 @@
                         <th>No.</th>
                         <th>Nama Barang</th>
                         <th>Cabang</th>
+                        <th>Stok (Kg)</th>
                         <th style="width:3%"></th>
                         <th>Harga Pusat</th>
                         <th style="width:3%"></th>
                         <th>Harga Cabang</th>
-                        <th>Stok (Kg)</th>
+                        <th style="width:3%"></th>
+                        <th>Selisih</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,22 +67,26 @@
                             <td class="border-bawah text-center">{{$loop->iteration}}</td>
                             <td class="border-bawah">{{$supply->item->nama}}</td>
                             <td class="border-bawah text-center">{{$supply->branch->nama}}</td>
+                            <td class="border-bawah text-center">{{$supply->stok}}</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                            <td class="border-bawah text-center">{{$supply->stok}}</td>
+                            <td class="border-bawah text-right">Rp</td>
+                            <td class="border-bawah text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
                         </tr>
                         @else
                         <tr>
                             <td class="text-center">{{$loop->iteration}}</td>
                             <td class="">{{$supply->item->nama}}</td>
                             <td class="text-center">{{$supply->branch->nama}}</td>
+                            <td class="text-center">{{$supply->stok}}</td>
                             <td class=" text-right">Rp</td>
                             <td class=" text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
                             <td class=" text-right">Rp</td>
                             <td class=" text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                            <td class="text-center">{{$supply->stok}}</td>
+                            <td class="text-right">Rp</td>
+                            <td class="text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
                         </tr>
                         @endif
                     @endforeach
