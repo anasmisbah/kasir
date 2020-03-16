@@ -37,19 +37,7 @@
           </tr>
           <tr>
             <td style="width:10%">Alamat</td>
-            <td>{{$app->alamat}}</td>
-          </tr>
-          <tr>
-            <td style="width:10%">Kecamatan</td>
-            <td>{{$app->kecamatan}}</td>
-          </tr>
-          <tr>
-            <td style="width:10%">Kota</td>
-            <td>{{$app->kota}}</td>
-          </tr>
-          <tr>
-            <td style="width:10%">Provinsi</td>
-            <td>{{$app->provinsi}}</td>
+            <td>{{$app->alamat}}, {{$app->kecamatan}}, {{$app->kota}}, {{$app->provinsi}}</td>
           </tr>
         </tbody>
       </table>
@@ -63,24 +51,3 @@
   </div>
 </div>
 @endsection
-
-@push('script')
-<script>
-  //menampilkan foto setiap ada perubahan pada modal tambah
-  $('#foto').on('change', function() {
-    readURL(this);
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        $('#img_foto').attr('src', e.target.result);
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-</script>
-@endpush
