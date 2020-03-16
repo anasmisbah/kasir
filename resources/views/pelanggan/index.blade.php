@@ -85,7 +85,7 @@
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
                 <td class="text-left"><a  href="{{route('pelanggan.detail', $customer->id)}}">{{$customer->nama}}</a></td>
-                <td>{{$customer->alamat}}</td>
+                <td class="text-left">{{$customer->alamat}}</td>
                 <td>{{$customer->telepon}}</td>
                 <td><a  href="{{route('cabang.detail', $customer->branch->id)}}">{{$customer->branch->nama}}</a></td>
               </tr>
