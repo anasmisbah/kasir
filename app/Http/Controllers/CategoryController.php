@@ -29,11 +29,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'=>'required'
+            'nama'=>'required',
+            'kode'=>'required'
         ]);
 
         $newCategory = Category::create([
             'nama'=>$request->nama,
+            'kode'=>$request->kode,
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
@@ -51,11 +53,13 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nama'=>'required'
+            'nama'=>'required',
+            'kode'=>'required'
         ]);
         $updatedCategory = Category::findOrFail($request->id);
         $updatedCategory->update([
             'nama'=>$request->nama,
+            'kode'=>$request->kode,
             'updated_by'=>Auth::user()->id
         ]);
         return redirect()->route('jenis.index');

@@ -47,8 +47,9 @@
             <thead>
               <tr>
                 <th style="width:5%">No</th>
+                <th style="width:6%">Kode Cabang</th>
                 <th style="width:15%">Nama Cabang</th>
-                <th style="width:50%">Alamat</th>
+                <th style="width:44%">Alamat</th>
                 <th style="width:10%">Telepon</th>
                 <th style="width:20%">Pimpinan</th>
               </tr>
@@ -58,6 +59,7 @@
               @foreach ($branches as $branch)
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
+                <td class="text-center">{{$branch->kode}}</td>
                 <td><a  href="{{route('cabang.detail', $branch->id)}}">{{$branch->nama}}</a></td>
                 <td>{{$branch->alamat}}, {{$branch->kecamatan}}, {{$branch->kota}}, {{$branch->provinsi}}</td>
                 <td class="text-center">{{$branch->telepon}}</td>

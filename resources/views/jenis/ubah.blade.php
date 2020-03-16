@@ -7,6 +7,9 @@
     .card-title{
         color: black;
     }
+    .form-group{
+        margin-bottom: .5rem !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -32,9 +35,18 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                        <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{ old('nama')?old('nama'):$category->nama }}" name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="inputEmail3" placeholder="Nama">
+                            <input type="text" value="{{ old('kode')?old('kode'):$category->kode }}" name="kode" class="form-control form-control-sm {{ $errors->first('kode')?'is-invalid':'' }}" id="kode" placeholder="kode">
+                            <div class="invalid-feedback">
+                                {{$errors->first('kode')}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{ old('nama')?old('nama'):$category->nama }}" name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="nama" placeholder="Nama">
                             <div class="invalid-feedback">
                                 {{$errors->first('nama')}}
                             </div>
@@ -45,7 +57,7 @@
 
           <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat pada: </strong>{{  $category->created_at->dayName." | ".$category->created_at->day." ".$category->created_at->monthName." ".$category->created_at->year}} | {{$category->created_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$category->createdBy->employee->id)}}" >{{$category->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $category->updated_at->dayName." | ".$category->updated_at->day." ".$category->updated_at->monthName." ".$category->updated_at->year}} | {{$category->updated_at->format('h:i:s')}} WIB | <a href="{{route('karyawan.detail',$category->updatedBy->employee->id)}}" >{{$category->updatedBy->employee->nama}}</a>
+                <strong>Dibuat pada: </strong>{{  $category->created_at->dayName." | ".$category->created_at->day." ".$category->created_at->monthName." ".$category->created_at->year}} | {{$category->created_at->format('H:i:s')}} WIB | <a href="{{route('karyawan.detail',$category->createdBy->employee->id)}}" >{{$category->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $category->updated_at->dayName." | ".$category->updated_at->day." ".$category->updated_at->monthName." ".$category->updated_at->year}} | {{$category->updated_at->format('H:i:s')}} WIB | <a href="{{route('karyawan.detail',$category->updatedBy->employee->id)}}" >{{$category->updatedBy->employee->nama}}</a>
             </span>
           </div>
         </div>

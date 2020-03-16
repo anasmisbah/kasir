@@ -52,7 +52,8 @@
             <thead>
               <tr>
                 <th style="width: 5%">No</th>
-                <th style="width:85%">Jenis Barang</th>
+                <th style="width: 7%">Kode Jenis</th>
+                <th style="width:78%">Jenis Barang</th>
                 <th style="width:10%">Aksi</th>
               </tr>
             </thead>
@@ -60,6 +61,7 @@
               @foreach ($categories as $category)
               <tr>
                 <td class="text-center" >{{ $loop->iteration }}</td>
+                <td class="text-center" >{{ $category->kode }}</td>
                 <td class="text-center"> <a href="{{route('jenis.detail',$category->id)}}" > {{ $category->nama }}</a>
                 </td>
                 <td class="text-center">
@@ -70,7 +72,7 @@
               @endforeach
               <tfoot>
                 <tr>
-                    <td class="border-atas p-0" colspan="3"></td>
+                    <td class="border-atas p-0" colspan="4"></td>
                 </tr>
             </tfoot>
           </table>
