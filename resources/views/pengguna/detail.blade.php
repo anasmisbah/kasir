@@ -23,7 +23,7 @@
                     <h4 class="card-title mb-0 text-bold">Detail Pengguna</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <a href="{{route('pengguna.ubah',$user->id)}}" class="btn btn-primary mr-2" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                    {{-- <a href="{{route('pengguna.ubah',$user->id)}}" class="btn btn-primary mr-2" style="width: 78px !important;"><i class="fa fa-edit"></i></a> --}}
                     <form class="d-inline" id="form-delete" action="{{route('pengguna.hapus', $user->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
