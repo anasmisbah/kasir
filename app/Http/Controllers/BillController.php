@@ -407,7 +407,7 @@ class BillController extends Controller
         $lastBill = Bill::select('id')->where('branch_id',$bill->branch_id)->whereDate('tanggal_nota',$tgllunas)->count();
         $formatnnk = $bill->branch->kode."".$tgllunas->format('ymd')."".str_pad(($lastBill+1),3,'0',STR_PAD_LEFT);
         $newBill = Bill::create([
-            'user_id'=>$bill->user_id,
+            'user_id'=>$user->id,
             'tanggal_nota'=>$tgllunas,
             'diskon'=>0,
             'total_nota'=>abs($bill->kembalian_nota),

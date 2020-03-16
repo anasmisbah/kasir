@@ -188,7 +188,11 @@
               @foreach ($bills as $bill)
               <tr>
                 <td class="text-center">{{$loop->iteration}}</td>
+                @if ($bill->status == 'utang')
+                <td class="text-center"><a  href="{{route('piutang.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                @else
                 <td class="text-center"><a  href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                @endif
                 <td class="text-center">{{$bill->tanggal_nota->day.' '.$bill->tanggal_nota->monthName.' '.$bill->tanggal_nota->year}}</td>
                 <td><a  href="{{route('pelanggan.detail',$bill->customer->id)}}">{{$bill->customer->nama}}</a></td>
                 <td class="text-right">Rp</td>

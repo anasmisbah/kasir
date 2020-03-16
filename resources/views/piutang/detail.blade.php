@@ -168,7 +168,7 @@
     console.log(url);
 
       swal({
-      title: "apakah anda yakin melakukan pelunasan?",
+      title: "Apakah Anda yakin ingin melakukan pelunasan?",
       icon: "warning",
       buttons: true,
       dangerMode: true,
