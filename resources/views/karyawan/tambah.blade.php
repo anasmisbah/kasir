@@ -64,8 +64,8 @@
                             <div class="custom-input text-center" style="font-size:12px">
                                     <input type="file" id="foto" name="foto">
                                     <p style="z-index:9999; margin-top:-28px">
-                                            Unggah Foto
-                                        </p>
+                                        Unggah Foto
+                                    </p>
                             </div>
                         </div>
                     </div>
@@ -112,6 +112,7 @@
                             </div>
                         </div>
                     </div>
+                    @if (auth()->user()->level_id == 1)
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Cabang</label>
                         <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('branch_id')?'is-invalid':'' }}" name="branch_id">
@@ -124,6 +125,9 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                        <input type="hidden" name="branch_id" value="{{auth()->user()->employee->branch_id}}">
+                    @endif
                 </form>
             </div>
 
