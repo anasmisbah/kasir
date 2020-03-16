@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/reset',function()
 {
-    return view('auth.passwords.reset');
+    return view('auth.passwords.email');
 });
 
 Auth::routes();
