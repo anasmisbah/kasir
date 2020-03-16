@@ -109,12 +109,12 @@
             <table id="empty_table" style="width:100%" class="table table-sm compact">
                 <thead>
                   <tr>
-                    <th class="">No.</th>
-                    <th class="">No. Nota Bon</th>
-                    <th class="">Nama</th>
-                    <th class="">Alamat</th>
-                    <th class="">Telepon</th>
-                    <th class=" text-right">Piutang</th>
+                    <th>No.</th>
+                    <th>No. Nota Bon</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
+                    <th>Piutang</th>
                   </tr>
                 </thead>
                 <tbody>

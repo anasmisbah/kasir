@@ -45,7 +45,7 @@
             <div class="text-center title">PER TANGGAL {{$dateNow->day.' '.strtoupper($dateNow->monthName).' '.$dateNow->year}}</div>
             <br>
             <br>
-            <table class="table table-hover text-center">
+            <table class="table text-center">
                 <thead>
                     <tr>
                         <th>No.</th>

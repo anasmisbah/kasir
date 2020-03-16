@@ -159,7 +159,7 @@
 
         <div class="row" style="margin-top:10px">
             <div class="col-md-12">
-                <table class="no-margin table table-hover" id="table">
+                <table class="no-margin table" id="table">
                     <thead>
                         <tr>
                             <th width="18%" class="border border-bawah text-center">No Nota Kas</th>
