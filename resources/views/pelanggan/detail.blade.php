@@ -24,16 +24,18 @@
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                 @if (auth()->user()->level_id == 2)
-                    <a href="{{route('pelanggan.ubah',$customer->id)}}" class="btn mr-2 btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('pelanggan.ubah',$customer->id)}}" class="btn btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
                 @endif
-                <form class="d-inline" id="form-delete" action="{{route('pelanggan.hapus', $customer->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                </form>
-                <button id="delete" type="submit" class="btn mr-5  btn-warning" style="width: 78px !important;">
-                    <i class="fa fa-trash"></i>
-                </button>
-                <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
+                @if (auth()->user()->level_id == 1)
+                    <form class="d-inline" id="form-delete" action="{{route('pelanggan.hapus', $customer->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                    <button id="delete" type="submit" class="btn ml-2  btn-warning" style="width: 78px !important;">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                @endif
+                <a class="btn btn-danger ml-5"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
             </div>
         </div>
         <table class="table table-sm table-striped">

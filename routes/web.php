@@ -35,13 +35,12 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/cabang/{id}', 'BranchController@update')->name('cabang.perbarui');
         Route::delete('/cabang/hapus/{id}','BranchController@delete')->name('cabang.hapus');
 
-        Route::get('/barang', 'ItemController@index')->name('barang.index');
         Route::get('/barang/tambah', 'ItemController@create')->name('barang.tambah');
         Route::post('/barang/simpan','ItemController@store')->name('barang.simpan');
         Route::get('/barang/ubah/{id}', 'ItemController@edit')->name('barang.ubah');
         Route::put('/barang/{id}', 'ItemController@update')->name('barang.perbarui');
         Route::delete('/barang/hapus/{id}','ItemController@delete')->name('barang.hapus');
-        Route::get('/barang/print','ItemController@print')->name('barang.print');
+
 
         Route::get('/jenis', 'CategoryController@index')->name('jenis.index');
         Route::get('/jenis/tambah', 'CategoryController@create')->name('jenis.tambah');
@@ -113,6 +112,8 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/pengguna/getEmployeeJson','EmployeeController@getEmployeeJson')->name('karyawan.data');
 
         Route::get('/barang/getjsonitem','ItemController@getJsonItem')->name('barang.data');
+        Route::get('/barang', 'ItemController@index')->name('barang.index');
+        Route::get('/barang/print','ItemController@print')->name('barang.print');
 
     });
 

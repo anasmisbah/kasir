@@ -44,9 +44,9 @@
                     <h4 class="card-title mb-0">Daftar Pelanggan Toko</h4>
                     </div>
                     <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                        @if (auth()->user()->level_id == 2)
+                        {{-- @if (auth()->user()->level_id == 2)
                         <a class="btn btn-primary"  href="{{ route('pelanggan.tambah') }}"><i class="fa fa-plus"></i></a>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
           @if (auth()->user()->level_id == 1)

@@ -119,6 +119,9 @@
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'pelanggan'?'c-active':'' }}" href="{{ route('pelanggan.index') }}">
           <i class="c-sidebar-nav-icon fa fa-users"></i> Pelanggan</a>
         </li>
+        <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'barang'?'c-active':'' }}" href="{{ route('barang.index') }}">
+            <i class="c-sidebar-nav-icon fa fa-th-large"></i> Barang</a>
+        </li>
         <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link {{ Request::segment(1) == 'stok'?'c-active':'' }}" href="{{ route('stok.index') }}">
           <i class="c-sidebar-nav-icon fa fa-list"></i> Stok Barang</a>
         </li>

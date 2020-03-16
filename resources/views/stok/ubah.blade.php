@@ -41,7 +41,7 @@
                 @method('PUT')
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
-                        <div class="col-sm-10"><select id="barang" class="form-control form-control-sm select2" name="item_id">
+                        <div class="col-sm-10"><select disabled id="barang" class="form-control form-control-sm select2" name="item_id">
                             @foreach ($items as $item)
                                 <option value="{{$item->id}}" {{$item->id == $supply->item_id?"selected":""}}>{{$item->nama}}</option>
                             @endforeach

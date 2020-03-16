@@ -39,7 +39,9 @@
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     <a class="btn btn-primary" href="{{ route('barang.print') }}" target="_blank"><i class="fa fa-print"></i></a>
-                    <a class="btn btn-primary"  href="{{ route('barang.tambah') }}"><i class="fa fa-plus"></i></a>
+                    @if (auth()->user()->level_id == 1)
+                        <a class="btn btn-primary"  href="{{ route('barang.tambah') }}"><i class="fa fa-plus"></i></a>
+                    @endif
                 </div>
               </div>
           <table id="example1" style="width:100%" class="table table-sm table-striped compact">
