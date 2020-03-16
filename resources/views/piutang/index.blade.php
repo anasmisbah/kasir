@@ -56,15 +56,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <label for="cabang" class="">Cabang</label>
-                        <select class="form-control form-control-sm" name="cabang">
-                            <option value="0">Semua</option>
-                            @foreach ($branches as $branch)
-                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    @if (auth()->user()->level_id == 1)
+                        <div class="col">
+                            <label for="cabang" class="">Cabang</label>
+                            <select class="form-control form-control-sm" name="cabang">
+                                <option value="0">Semua</option>
+                                @foreach ($branches as $branch)
+                                <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
                   <div class="col" style="margin-top:28px">
                     <input id="downloadble" type="hidden" name="print">
                     <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
