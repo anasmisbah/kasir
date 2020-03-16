@@ -715,7 +715,7 @@
 
     function checkStatus() {
         if (uangkembalian < 0) {
-            $('#status').val("PIUTANG")
+            $('#status').val("UTANG")
         } else {
             $('#status').val("LUNAS")
         }

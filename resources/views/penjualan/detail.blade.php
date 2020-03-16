@@ -42,7 +42,7 @@
                 <h4 class="card-title mb-0 text-bold">Detail Penjualan</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    @if ($bill->status == 'lunas' || $bill->status == 'piutang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
+                    @if ($bill->status == 'lunas' || $bill->status == 'utang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
                     <a target="_blank" class="btn btn-primary mr-2" style="width: 78px !important;" href="{{ route('penjualan.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
                     @else
                     <a target="_blank" class="btn btn-primary mr-2" style="width: 78px !important;" href="{{ route('piutang.cetaknota',$bill->id) }}"><i class=" fa fa-print"></i></a>
@@ -91,7 +91,7 @@
               </tr>
             </tbody>
           </table>
-          @if ($bill->status == 'lunas' || $bill->status == 'piutang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
+          @if ($bill->status == 'lunas' || $bill->status == 'utang' || ($bill->status == 'pelunasan' && $bill->kembalian_nota < 0))
             <table class="table table-sm table-stripped text-center" id="table">
                 <thead>
                 <tr>
@@ -149,7 +149,7 @@
                     <td style="border: none"></td>
                     <td style="border: none"></td>
                     <td style="border: none"></td>
-                    <td class="border-atas border-bawah">Piutang</td>
+                    <td class="border-atas border-bawah">Utang</td>
                     <td class="text-right border-atas border-bawah">Rp</td>
                     @if ($bill->kembalian_nota < 0)
                     <td class="border-atas border-bawah text-right"><span class="harga">{{ abs($bill->kembalian_nota)}}</span>,-</td>
@@ -195,7 +195,7 @@
                 <td style="border: none"></td>
                 <td style="border: none"></td>
                 <td style="border: none"></td>
-                <td class="border-atas"><strong>Piutang</strong></td>
+                <td class="border-atas"><strong>Utang</strong></td>
                 <td class="border-atas  text-right"> <b>Rp</b></td>
                 <td class="border-atas text-right"> <strong><span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
               </tr>

@@ -141,7 +141,7 @@
                         <select class="form-control form-control-sm" name="status">
                             <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
                             <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
-                            <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
+                            <option value="utang" {{Request::input('status') == 'utang' ?'selected':''}}>Utang</option>
                             <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
                         </select>
                     </div>
@@ -174,7 +174,7 @@
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="width:14%" class="py-2 text-center">Total</th>
                 <th style="width:2%" class="py-2 text-right"></th>
-                <th style="width:14%" class="py-2 text-center">Piutang</th>
+                <th style="width:14%" class="py-2 text-center">Utang</th>
                 <th style="width:10%" class="py-2 text-center">Status</th>
                 <th style="width:10%" class="py-2 text-center">Cabang</th>
               </tr>
@@ -246,7 +246,7 @@
                 <th style="width:15%" class="py-2 text-center">Penjualan</th>
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="width:13%" class="py-2 text-center">Nominal</th>
-                <th style="width:15%" class="py-2 text-center">Piutang</th>
+                <th style="width:15%" class="py-2 text-center">Utang</th>
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="width:13%" class="py-2 text-center">Nominal</th>
                 <th style="width:2%" class="py-2 text-right"></th>
@@ -310,7 +310,7 @@
                 <th style="width:2%" class="py-2 text-right"></th>
                 <th style="min-width:2%" class="py-2 text-center">Total</th>
                 <th style="width:2%" class="py-2 text-right"></th>
-                <th style="min-width:2%" class="py-2 text-center">Piutang</th>
+                <th style="min-width:2%" class="py-2 text-center">Utang</th>
                 <th style="width:10%" class="py-2 text-center">Status</th>
                 <th style="width:10%"class="py-2 text-center">Cabang</th>
               </tr>

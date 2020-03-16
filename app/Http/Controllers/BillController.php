@@ -111,8 +111,8 @@ class BillController extends Controller
                         $data[ltrim($key, '0')]['tanggal'] = ltrim($key, '0');
                         $data[ltrim($key, '0')]['penjualan'] = $bill->count();
                         $data[ltrim($key, '0')]['nominal_penjualan']=$bill->sum('total_nota');
-                        $data[ltrim($key, '0')]['piutang'] = $bill->where('status','piutang')->count();
-                        $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[ltrim($key, '0')]['piutang'] = $bill->where('status','utang')->count();
+                        $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','utang')->sum('kembalian_nota');
                         $data[ltrim($key, '0')]['kas']= $data[ltrim($key, '0')]['nominal_penjualan'] - abs($data[ltrim($key, '0')]['nominal_piutang']);
                     }
                     $month = Carbon::now()->month($request->bulan);
@@ -174,8 +174,8 @@ class BillController extends Controller
                         $data[$key]['tanggal'] = $key;
                         $data[$key]['penjualan'] = $bill->count();
                         $data[$key]['nominal_penjualan']=$bill->sum('total_nota');
-                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
-                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['piutang'] = $bill->where('status','utang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','utang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
                     $year = Carbon::now()->year($request->tahun);
@@ -257,8 +257,8 @@ class BillController extends Controller
                         $data[ltrim($key, '0')]['tanggal'] = ltrim($key, '0');
                         $data[ltrim($key, '0')]['penjualan'] = $bill->count();
                         $data[ltrim($key, '0')]['nominal_penjualan']=$bill->sum('total_nota');
-                        $data[ltrim($key, '0')]['piutang'] = $bill->where('status','piutang')->count();
-                        $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[ltrim($key, '0')]['piutang'] = $bill->where('status','utang')->count();
+                        $data[ltrim($key, '0')]['nominal_piutang']=$bill->where('status','utang')->sum('kembalian_nota');
                         $data[ltrim($key, '0')]['kas']= $data[ltrim($key, '0')]['nominal_penjualan'] - abs($data[ltrim($key, '0')]['nominal_piutang']);
                     }
                     $month = Carbon::now()->month($request->bulan);
@@ -302,8 +302,8 @@ class BillController extends Controller
                         $data[$key]['tanggal'] = $key;
                         $data[$key]['penjualan'] = $bill->count();
                         $data[$key]['nominal_penjualan']=$bill->sum('total_nota');
-                        $data[$key]['piutang'] = $bill->where('status','piutang')->count();
-                        $data[$key]['nominal_piutang']=$bill->where('status','piutang')->sum('kembalian_nota');
+                        $data[$key]['piutang'] = $bill->where('status','utang')->count();
+                        $data[$key]['nominal_piutang']=$bill->where('status','utang')->sum('kembalian_nota');
                         $data[$key]['kas']= $data[$key]['nominal_penjualan'] - abs($data[$key]['nominal_piutang']);
                     }
                     $year = Carbon::now()->year($request->tahun);
@@ -358,11 +358,11 @@ class BillController extends Controller
                 $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
 
                 if ($request->cabang == "0") {
-                    $bills = Bill::where('status','piutang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
+                    $bills = Bill::where('status','utang')->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                 } else {
                     $bills = Bill::where([
                         ['branch_id','=',$request->cabang],
-                        ['status','=','piutang']
+                        ['status','=','utang']
                         ])->whereBetween('tanggal_nota',[$dateFrom,$dateTo])->get();
                     $branch = Branch::findOrFail($request->cabang);
                 }
@@ -383,7 +383,7 @@ class BillController extends Controller
                 $dateTo =  $explodeddateTo[2]."-".$explodeddateTo[0]."-".$explodeddateTo[1]." ".$explodedatetime[4];
                 $bills = Bill::where([
                     ['branch_id','=',$user->employee->branch_id],
-                    ['status','=','piutang']
+                    ['status','=','utang']
                     ])
                     ->whereBetween('tanggal_nota',[$dateFrom,$dateTo])
                             ->get();

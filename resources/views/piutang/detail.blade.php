@@ -122,7 +122,7 @@
                 <td style="border: none"></td>
                 <td style="border: none"></td>
                 <td style="border: none"></td>
-                <td class="border-atas"><strong>Piutang</strong></td>
+                <td class="border-atas"><strong>Utang</strong></td>
                 <td class="border-atas  text-right"> <b>Rp</b></td>
                 <td class="border-atas text-right"> <strong><span class="harga">{{ abs($bill->kembalian_nota)}}</span> ,-</strong></td>
               </tr>

@@ -83,7 +83,7 @@
                   <th style="width:25%" class="text-center">Alamat</th>
                   <th style="width:10%" class="text-center">Telepon</th>
                   <th style="width:3%" class="text-right"></th>
-                  <th style="width:10%" class="text-center">Piutang</th>
+                  <th style="width:10%" class="text-center">Utang</th>
                 </tr>
               </thead>
               <tbody>
@@ -114,7 +114,7 @@
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>Telepon</th>
-                    <th>Piutang</th>
+                    <th>Utang</th>
                   </tr>
                 </thead>
                 <tbody>
