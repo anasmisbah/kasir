@@ -41,50 +41,38 @@
           <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <div>
-                <h4 class="card-title mb-0">Daftar Piutang</h4>
+                    <h4 class="card-title mb-0">Daftar Piutang</h4>
                 </div>
             </div>
-            <div class="col-8 pt-3 pb-3 mb-4"  style="background:#EBEBEB;">
-                <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
-                  <div class="row">
-                    <div class="col-md-5">
+
+            <form id="form-filter" action="{{route('piutang.index')}}" method="GET">
+                <div class="form-row col-8 mx-0 my-3 py-3" style="background:#EBEBEB;">
+                    <div class="col-5">
                         <label for="hari" class="">Tanggal</label>
-                    </div>
-                    @if (auth()->user()->level_id ==1)
-                    <div class="col-md-2">
-                        <label for="cabang" class="">Cabang</label>
-                    </div>
-                    @endif
-                  </div>
-                  <div class="row">
-                    <div class="col-md-5">
                         <div class="input-group">
-                          <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
-                          <div class="input-group-append">
+                            <input name="hari" type="text" value="{{Request::input('hari')}}" class="form-control form-control-sm float-right" id="tanggal">
+                            <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                          </div>
+                            </div>
                         </div>
                     </div>
-                    @if (auth()->user()->level_id == 1)
-                    <div class="col-md-4">
-                      <select class="form-control form-control-sm" name="cabang">
-                        <option value="0">Semua</option>
-                        @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                        @endforeach
-                      </select>
+                    <div class="col">
+                        <label for="cabang" class="">Cabang</label>
+                        <select class="form-control form-control-sm" name="cabang">
+                            <option value="0">Semua</option>
+                            @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    @endif
-
-                    <div class="col-md-3 text-center">
-                      <input id="downloadble" type="hidden" name="print">
-                      <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
-                      <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
-                      <a href="{{route('piutang.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
-                    </div>
+                  <div class="col" style="margin-top:28px">
+                    <input id="downloadble" type="hidden" name="print">
+                    <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                    <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                    <a href="{{route('piutang.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
                   </div>
-                </form>
-            </div>
+                </div>
+            </form>
             @if (Request::input('hari'))
             <table id="example1" style="width:100%" class="table table-sm table-striped">
               <thead>

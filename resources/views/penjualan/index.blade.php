@@ -35,10 +35,11 @@
             max-width: 30%;
         }
         .col-md-2.butn {
+            margin-top: 28px;
             max-width: 10% !important;
         }
         .col-md-1.thn{
-            min-width: 9.5% !important;
+            min-width: 10% !important;
         }
         .col-md-2.cbng {
             max-width: 16% !important;
@@ -59,117 +60,109 @@
                 <h4 class="card-title mb-0">Daftar Penjualan</h4>
                 </div>
             </div>
-            <div class="col-12 pt-3 pb-3 mb-4 mt-2" style="background:#ebebeb">
-                <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
-                  <div class="row">
+
+            <form id="form-filter" action="{{route('penjualan.index')}}" method="GET">
+                <div class="row col-md-12 mx-0 my-3 py-3" style="background:#ebebeb">
+                    {{-- GROUP 1 FILTER PER HARI --}}
                     <div class="col-md-4">
-                      <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio mb-2">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiohari" name="filter" value="hari" {{Request::input('filter') == 'hari' ?'checked':''}}>
                         <label for="radiohari" class="custom-control-label">Per Hari</label>
-                      </div>
+                        </div>
+                        <div class="input-group">
+                            <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="filter form-control form-control-sm float-right " id="tanggal">
+                            <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
                     </div>
+
+                    {{-- GROUP 2 FILTER PER BULAN --}}
                     <div class="col-md-2">
-                      <div class="custom-control custom-radio">
+                        <div class="custom-control custom-radio mb-2">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiobulan" name="filter" value="bulan" {{Request::input('filter') == 'bulan' ?'checked':''}}>
                         <label for="radiobulan" class="custom-control-label">Per Bulan</label>
-                      </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <select class="form-control form-control-sm" name="bulan">
+                                    <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Januari</option>
+                                    <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Februari</option>
+                                    <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Maret</option>
+                                    <option value="04" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '04' ?'selected':'':''}}>April</option>
+                                    <option value="05" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '05' ?'selected':'':''}}>Mei</option>
+                                    <option value="06" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '06' ?'selected':'':''}}>Juni</option>
+                                    <option value="07" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '07' ?'selected':'':''}}>Juli</option>
+                                    <option value="08" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '08' ?'selected':'':''}}>Agustus</option>
+                                    <option value="09" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '09' ?'selected':'':''}}>September</option>
+                                    <option value="10" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '10' ?'selected':'':''}}>Oktober</option>
+                                    <option value="11" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '11' ?'selected':'':''}}>November</option>
+                                    <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Desember</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="filter form-control form-control-sm" name="bulantahun">
+                                    @foreach ($tahun as $key=> $item)
+                                    <option value="{{$key}}" {{Request::input('filter') == 'bulan' ?Request::input('bulantahun') == $key ?'selected':'':''}}>{{$key}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div class="thn col-md-1 pr-0">
-                      <div class="custom-control custom-radio">
+
+                    {{-- GROUP 3 FILTER PER TAHUN --}}
+                    <div class="thn col-md-1">
+                        <div class="custom-control custom-radio mb-2">
                         <input class="custom-control-input" data-id="0" type="radio" id="radiotahun" name="filter" value="tahun" {{Request::input('filter') == 'tahun' ?'checked':''}}>
                         <label for="radiotahun" class="custom-control-label">Per Tahun</label>
-                      </div>
+                        </div>
+                        <select class="filter form-control form-control-sm" name="tahun">
+                            @foreach ($tahun as $key=> $item)
+                            <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+                    {{-- GROUP 4 FILTER PER CABANG --}}
                     @if (auth()->user()->level_id == 1)
                     <div class="cbng col-md-2">
                         <label for="radiocabang">Cabang</label>
-                    </div>
-                    <div class="col-md-1">
-                        <label for="radiostatus">Status</label>
-                    </div>
-                    @else
-                    <div class="col-md-2">
-                        <label for="radiostatus">Status</label>
-                    </div>
-                    @endif
-
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4 pr-0">
-                        <div class="input-group">
-                          <input name="hari" type="text" value="{{Request::input('filter') == 'hari' ?Request::input('hari'):''}}" class="filter form-control form-control-sm float-right " id="tanggal">
-                          <div class="input-group-append">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-1 pr-0">
-                      <select class="form-control form-control-sm" name="bulan">
-                        <option value="01" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '01' ?'selected':'':''}}>Januari</option>
-                        <option value="02" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '02' ?'selected':'':''}}>Februari</option>
-                        <option value="03" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '03' ?'selected':'':''}}>Maret</option>
-                        <option value="04" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '04' ?'selected':'':''}}>April</option>
-                        <option value="05" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '05' ?'selected':'':''}}>Mei</option>
-                        <option value="06" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '06' ?'selected':'':''}}>Juni</option>
-                        <option value="07" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '07' ?'selected':'':''}}>Juli</option>
-                        <option value="08" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '08' ?'selected':'':''}}>Agustus</option>
-                        <option value="09" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '09' ?'selected':'':''}}>September</option>
-                        <option value="10" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '10' ?'selected':'':''}}>Oktober</option>
-                        <option value="11" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '11' ?'selected':'':''}}>November</option>
-                        <option value="12" {{Request::input('filter') == 'bulan' ?Request::input('bulan') == '12' ?'selected':'':''}}>Desember</option>
-                      </select>
-                    </div>
-                    <div class="col-md-1 pr-0">
-                      <select class="filter form-control form-control-sm" name="bulantahun">
-                        @foreach ($tahun as $key=> $item)
-                        <option value="{{$key}}" {{Request::input('filter') == 'bulan' ?Request::input('bulantahun') == $key ?'selected':'':''}}>{{$key}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="thn col-md-1 pr-0">
-                      <select class="filter form-control form-control-sm" name="tahun">
-                        @foreach ($tahun as $key=> $item)
-                        <option value="{{$key}}" {{Request::input('filter') == 'tahun' ?Request::input('tahun') == $key ?'selected':'':''}}>{{$key}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    @if (auth()->user()->level_id == 1)
-                    <div class="cbng col-md-2 pr-0">
-                      <select class="form-control form-control-sm" name="cabang">
-                        <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
-                        @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="col-md-2">
-                      <select class="form-control form-control-sm" name="status">
-                        <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
-                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
-                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
-                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
-                      </select>
-                    </div>
-                    @else
-                    <div class="col-md-2">
-                      <select class="form-control form-control-sm" name="status">
-                        <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
-                        <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
-                        <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
-                        <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
-                      </select>
+                        <select class="form-control form-control-sm" name="cabang">
+                            <option value="0" {{Request::input('filter') == 'cabang' ?Request::input('cabang') == '0' ?'selected':'':''}}>Semua</option>
+                            @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     @endif
-
-                    <div class="butn col-md-2 p-0">
-                      <input id="downloadble" type="hidden" name="print">
-                      <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
-                      <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
-                      <a href="{{route('penjualan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
+                    {{-- GROUP 5 FILTER STATUS --}}
+                    <div class="col-md-2">
+                        <label for="radiostatus">Status</label>
+                        <select class="form-control form-control-sm" name="status">
+                            <option value="0" {{Request::input('status') == '0' ?'selected':''}}>Semua</option>
+                            <option value="lunas" {{Request::input('status') == 'lunas' ?'selected':''}}>Lunas</option>
+                            <option value="piutang" {{Request::input('status') == 'piutang' ?'selected':''}}>Utang</option>
+                            <option value="pelunasan" {{Request::input('status') == 'pelunasan' ?'selected':''}}>Pelunasan</option>
+                        </select>
                     </div>
-                  </div>
-                </form>
-            </div>
+
+                    {{-- GROUP 6 BUTTON FILTER --}}
+                    <div class="butn col-md-2">
+                        <input id="downloadble" type="hidden" name="print">
+                        <div class="form-row">
+                            <div class="col p-0">
+                                <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                            </div>
+                            <div class="col p-0">
+                                <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                            </div>
+                            <div class="col p-0">
+                                <a href="{{route('penjualan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
           @if ( Request::input('filter') == "hari")
           <table id="example1" style="width:100%" class="table table-sm table-striped display compact">
             <thead>

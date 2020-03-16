@@ -43,71 +43,65 @@
                     <a class="btn btn-primary"  href="{{ route('stok.tambah') }}"><i class="fa fa-plus"></i></a>
                     @endif
                 </div>
-              </div>
-          <form id="form-filter" action="{{route('stok.index')}}" method="GET">
+            </div>
             @if (auth()->user()->level_id == 1)
-                    <div class="col-5 pt-3 pb-3 mb-4" style="background:#EBEBEB">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label for="cabang" class="">Cabang</label>
-                            </div>
+                <form id="form-filter" action="{{route('stok.index')}}" method="GET">
+                    <div class="form-row col-5 mx-0 my-3 py-3" style="background:#EBEBEB;">
+                        <div class="col-8">
+                        <label for="cabang" class="">Cabang</label>
+                        <select class="form-control form-control-sm" name="cabang">
+                            <option value="0">Semua</option>
+                            @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                            @endforeach
+                        </select>
                         </div>
-                        <div class="row">
-                          <div class="col-md-8">
-                            <select class="form-control form-control-sm " name="cabang">
-                              <option value="0">Semua</option>
-                              @foreach ($branches as $branch)
-                              <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                              @endforeach
-                            </select>
-                          </div>
-                          <div class="col-md-4">
-                            <input id="downloadble" type="hidden" name="print">
-                            <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
-                            <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
-                            <a href="{{route('stok.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
-                          </div>
+                        <div class="col-4" style="margin-top:28px">
+                        <input id="downloadble" type="hidden" name="print">
+                        <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
+                        <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                        <a href="{{route('stok.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
                         </div>
                     </div>
+                </form>
             @endif
-          </form>
-          <table id="example1" style="width:100%" class="table table-sm table-striped compact">
-            <thead>
-              <tr>
-                <th style="width: 5%" >No.</th>
-                <th style="width: 30%">Nama Barang</th>
-                <th style="width: 15%" >Cabang</th>
-                <th style="width: 10%" >Stok (Kg)</th>
-                <th></th>
-                <th style="min-width: 10%">Harga Pusat</th>
-                <th></th>
-                <th style="min-width: 10%">Harga Cabang</th>
-                <th></th>
-                <th style="min-width: 5%">Selisih</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($supplies as $supply)
-              <tr>
-                <td  class="text-center">{{ $loop->iteration }}</td>
-                <td  class="text-left"><a  href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
-                <td  class="text-center"><a  href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
-                <td  class="text-center">{{$supply->stok}}</td>
-                <td class="text-right">Rp</td>
-                <td  class="text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
-                <td class="text-right">Rp</td>
-                <td  class="text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
-                <td class="text-right">Rp</td>
-                <td  class="text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
-              </tr>
-              @endforeach
-            </tbody>
-            <tfoot>
+            <table id="example1" style="width:100%" class="table table-sm table-striped compact">
+                <thead>
                 <tr>
-                    <td class="border-atas p-0" colspan="10"></td>
+                    <th style="width: 5%" >No.</th>
+                    <th style="width: 30%">Nama Barang</th>
+                    <th style="width: 15%" >Cabang</th>
+                    <th style="width: 10%" >Stok (Kg)</th>
+                    <th></th>
+                    <th style="min-width: 10%">Harga Pusat</th>
+                    <th></th>
+                    <th style="min-width: 10%">Harga Cabang</th>
+                    <th></th>
+                    <th style="min-width: 5%">Selisih</th>
                 </tr>
-            </tfoot>
-          </table>
+                </thead>
+                <tbody>
+                @foreach ($supplies as $supply)
+                <tr>
+                    <td  class="text-center">{{ $loop->iteration }}</td>
+                    <td  class="text-left"><a  href="{{route('stok.detail', $supply->id)}}">{{$supply->item->nama}}</a></td>
+                    <td  class="text-center"><a  href="{{route('cabang.detail', $supply->branch->id)}}">{{$supply->branch->nama}}</a></td>
+                    <td  class="text-center">{{$supply->stok}}</td>
+                    <td class="text-right">Rp</td>
+                    <td  class="text-right"><span class="harga">{{$supply->item->harga}}</span>,-</td>
+                    <td class="text-right">Rp</td>
+                    <td  class="text-right"><span class="harga">{{$supply->harga_cabang}}</span>,-</td>
+                    <td class="text-right">Rp</td>
+                    <td  class="text-right"><span class="harga">{{$supply->harga_selisih}}</span>,-</td>
+                </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="border-atas p-0" colspan="10"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         <!-- /.card-body -->
       </div>

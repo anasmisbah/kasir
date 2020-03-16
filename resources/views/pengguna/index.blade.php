@@ -43,60 +43,56 @@
                     <a class="btn btn-primary"  href="{{ route('pengguna.tambah') }}"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
-            <div class="col-5 pt-3 pb-3 mb-4" style="background:#EBEBEB">
-                <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label for="cabang" class="">Cabang</label>
-                        </div>
-                      </div>
-                    <div class="row">
-                      <div class="col-md-8">
+            @if (auth()->user()->level_id == 1)
+            <form id="form-filter" action="{{route('pengguna.index')}}" method="GET">
+                <div class="form-row col-5 mx-0 my-3 py-3" style="background:#EBEBEB;">
+                    <div class="col-8">
+                        <label for="cabang" class="">Cabang</label>
                         <select class="form-control form-control-sm" name="cabang">
-                          <option value="0">Semua</option>
-                          @foreach ($branches as $branch)
-                          <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
-                          @endforeach
+                            <option value="0">Semua</option>
+                            @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}" {{Request::input('cabang') == $branch->id ?'selected':''}}>{{$branch->nama}}</option>
+                            @endforeach
                         </select>
-                      </div>
-                      <div class="col-md-4">
+                    </div>
+                    <div class="col-4" style="margin-top:28px">
                         <input id="downloadble" type="hidden" name="print">
                         <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
-                        <button id="btn-print" type="submit" class="btn btn-sm btn-primary" ><i class="fa fa-print"></i></button>
-                        <a href="javascript:void(0)" onClick="window.location.reload();" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
-                      </div>
+                        <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
+                        <a href="{{route('pengguna.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
                     </div>
-                </form>
-            </div>
-          <table id="example1" style="width:100%" class="table table-sm table-striped display compact">
-            <thead>
-              <tr>
-                <th class="py-2">No</th>
-                <th class="py-2">Nama Pengguna</th>
-                <th class="py-2">Nama Lengkap</th>
-                <th class="py-2">Email</th>
-                <th class="py-2">Level</th>
-                <th class="py-2">Cabang</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($users as $user)
-                    <tr>
-                        <td class="text-center">{{$loop->iteration}}</td>
-                        <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
-                        <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
-                        <td class="text-center">{{ $user->email }}</td>
-                        <td class="text-center">{{ $user->level->nama }}</td>
-                        <td class="text-center"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
-                    </tr>
-              @endforeach
-            </tbody>
-            <tfoot>
+                </div>
+            </form>
+            @endif
+            <table id="example1" style="width:100%" class="table table-sm table-striped display compact">
+                <thead>
                 <tr>
-                    <td class="border-atas p-0" colspan="6"></td>
+                    <th class="py-2">No</th>
+                    <th class="py-2">Nama Pengguna</th>
+                    <th class="py-2">Nama Lengkap</th>
+                    <th class="py-2">Email</th>
+                    <th class="py-2">Level</th>
+                    <th class="py-2">Cabang</th>
                 </tr>
-            </tfoot>
-          </table>
+                </thead>
+                <tbody>
+                @foreach ($users as $user)
+                        <tr>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td><a href="{{route('pengguna.detail',$user->id)}}">{{ $user->username }}</a></td>
+                            <td><a href="{{route('karyawan.detail',$user->employee->id)}}">{{ $user->employee->nama }}</a></td>
+                            <td class="text-center">{{ $user->email }}</td>
+                            <td class="text-center">{{ $user->level->nama }}</td>
+                            <td class="text-center"><a href="{{route('cabang.detail',$user->employee->branch->id)}}">{{ $user->employee->branch->nama }}</a></td>
+                        </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="border-atas p-0" colspan="6"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         <!-- /.card-body -->
       </div>
