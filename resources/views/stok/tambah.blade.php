@@ -59,7 +59,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Cabang</label>
-                    <div class="col-sm-10"><input type="text" value="{{ old('harga_cabang')}}"  id="harga_cabang" disabled class="form-control  form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang {{$branch->nama}}">
+                    <div class="col-sm-10"><input type="text" value="{{ old('harga_cabang')}}"  id="harga_cabang" disabled class="form-control  form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Harga Cabang">
                         <div class="invalid-feedback">
                             {{$errors->first('harga_cabang')}}
                         </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Selisih</label>
-                    <div class="col-sm-10"><input type="text" id="selisih" disabled class="form-control  form-control-sm inputharga" name="harga_selisih" placeholder="selisih"></div>
+                    <div class="col-sm-10"><input type="text" id="selisih" disabled class="form-control  form-control-sm inputharga" name="harga_selisih" placeholder="Selisih harga"></div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Stok (Kg)</label>
@@ -107,16 +107,16 @@ $(document).on('change', '#barang', function () {
         success: function (data) {
             //Menampilkan Error
             $('#harga_pusat').val(data.data.harga)
-            $("#harga_cabang").removeAttr('disabled')
+            $("#selisih").removeAttr('disabled')
         },
     });
 });
 
-$("#harga_cabang").keyup(function(){
+$("#selisih").keyup(function(){
   let hargaPusat = $('#harga_pusat').val()
-  let hargaCabang = $(this).val()
-  let selisih = hargaCabang - hargaPusat
-  $("#selisih").val(selisih)
+  let selisih = $(this).val()
+  let hargaCabang = parseInt(selisih) + parseInt(hargaPusat)
+  $("#harga_cabang").val(hargaCabang)
 });
 </script>
 <script>

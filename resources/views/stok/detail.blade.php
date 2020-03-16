@@ -24,17 +24,19 @@
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                     @if (auth()->user()->level_id == 2)
-                    <a href="{{route('stok.ubah',$supply->id)}}" class="btn mr-2 btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('stok.ubah',$supply->id)}}" class="btn btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
                     @endif
                     <form class="d-inline" id="form-delete" action="{{route('stok.hapus', $supply->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
                     </form>
-                    <button type="submit" id="delete" class="btn mr-5 btn-warning" style="width: 78px !important;">
-                      <i class="fa fa-trash"></i>
-                    </button>
+                    @if (auth()->user()->level_id == 1)
+                        <button type="submit" id="delete" class="btn ml-2 btn-warning" style="width: 78px !important;">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                    @endif
 
-                    <a class="btn btn-danger"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
+                    <a class="btn btn-danger ml-5"  href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
             </div>
             <table class="table table-sm table-striped">
