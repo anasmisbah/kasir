@@ -41,7 +41,12 @@
     <div class="container">
         <div class="row" style="padding-top:10px" >
             <div class="text-center title">DAFTAR KARYAWAN</div>
-            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
+            <div class="text-center title">
+                {{ strtoupper($app->toko) }}
+                @if ($filter_cabang != '0')
+                    {{ strtoupper($branch->nama) }}
+                @endif
+            </div>
             <div class="text-center title">PER TANGGAL {{$date->day.' '.strtoupper($date->monthName).' '.$date->year}}</div>
             <br>
             <br>

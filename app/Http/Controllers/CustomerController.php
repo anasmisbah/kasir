@@ -16,6 +16,7 @@ class CustomerController extends Controller
         $branches = Branch::all();
         $app = Application::first();
         $branch = $user->employee->branch;
+        $filter_cabang = $request->cabang;
         if ($user->level_id == 1) {
             if($request->all()){
                 if($request->cabang === "0"){
@@ -26,7 +27,7 @@ class CustomerController extends Controller
                 }
                 if ($request->print) {
                     $date=Carbon::now();
-                    return view('print.pelanggan',compact('customers','branch','app','date','user'));
+                    return view('print.pelanggan',compact('customers','branch','app','date','user','filter_cabang'));
                 }
             }else{
                 $customers = Customer::all();

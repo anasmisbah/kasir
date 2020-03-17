@@ -22,6 +22,7 @@ class EmployeeController extends Controller
         $branches = Branch::all();
         $app = Application::first();
         $branch = $user->employee->branch;
+        $filter_cabang = $request->cabang;
         if ($user->level_id == 1 ) {
             if ($request->all()) {
                 if ($request->cabang == "0") {
@@ -32,7 +33,7 @@ class EmployeeController extends Controller
                 }
                 if ($request->print) {
                         $date=Carbon::now();
-                    return view('print.karyawan',compact('employees','branch','app','date','user'));
+                    return view('print.karyawan',compact('employees','branch','app','date','user','filter_cabang'));
                 }
             }else{
                 $employees = Employee::all();

@@ -27,6 +27,7 @@ class BillController extends Controller
         $tahun =[];
         $bills = [];
         $dateNow = Carbon::now();
+        $filter_cabang = $request->cabang;
         foreach ($billForDate as $key => $bill) {
             $tanggal[$bill->tanggal_nota->format('Y-m-d')] = $bill->tanggal_nota->format('Y-m-d');
             $bulan[$bill->tanggal_nota->month] =$bill->tanggal_nota->localeMonth;
@@ -57,7 +58,7 @@ class BillController extends Controller
                         $from = Carbon::create($explodeddateFrom[2],$explodeddateFrom[0],$explodeddateFrom[1]);
                         $to = Carbon::create($explodeddateTo[2],$explodeddateTo[0],$explodeddateTo[1]);
                         $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
-                        return view('print.penjualan_hari',compact('bills','app','dateNow','branch','range','user'));
+                        return view('print.penjualan_hari',compact('bills','app','dateNow','branch','range','user','filter_cabang'));
                     }
                 }else if($request->filter === "bulan"){
                     if ($request->cabang == "0" && $request->status == "0") {
@@ -117,7 +118,7 @@ class BillController extends Controller
                     }
                     $month = Carbon::now()->month($request->bulan);
                     if($request->print){
-                        return view('print.penjualan_bulan',compact('app','dateNow','branch','data','month','user'));
+                        return view('print.penjualan_bulan',compact('app','dateNow','branch','data','month','user','filter_cabang'));
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun','filter'));
                 }else if($request->filter === "tahun"){
@@ -181,7 +182,7 @@ class BillController extends Controller
                     $year = Carbon::now()->year($request->tahun);
                     if($request->print){
 
-                        return view('print.penjualan_tahun',compact('app','dateNow','branch','data','year','user'));
+                        return view('print.penjualan_tahun',compact('app','dateNow','branch','data','year','user','filter_cabang'));
                     }
                     return view('penjualan.index',compact('data','branches','bulan','tahun'));
 
@@ -349,6 +350,7 @@ class BillController extends Controller
         $app = Application::first();
         $branch = $user->employee->branch;
         $dateNow = Carbon::now();
+        $filter_cabang = $request->cabang;
         if ($user->level_id == 1) {
             if ($request->hari) {
                 $explodedatetime = explode(' ',$request->hari);
@@ -372,7 +374,7 @@ class BillController extends Controller
                 $from = Carbon::create($explodeddateFrom[2],$explodeddateFrom[0],$explodeddateFrom[1]);
                         $to = Carbon::create($explodeddateTo[2],$explodeddateTo[0],$explodeddateTo[1]);
                         $range = $from->day.' '.strtoupper($from->monthName).' '.$from->year.' - '.$to->day.' '.strtoupper($to->monthName).' '.$to->year;
-                return view('print.piutang',compact('bills','app','dateNow','branch','range','user'));
+                return view('print.piutang',compact('bills','app','dateNow','branch','range','user','filter_cabang'));
             }
         }else{
             if ($request->hari) {

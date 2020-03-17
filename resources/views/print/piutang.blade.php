@@ -41,7 +41,12 @@
     <div class="container">
         <div class="row" >
             <div class="text-center title">LAPORAN PIUTANG</div>
-            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
+            <div class="text-center title">
+                {{ strtoupper($app->toko) }}
+                @if ($filter_cabang != '0')
+                    {{ strtoupper($branch->nama) }}
+                @endif
+            </div>
             <div class="text-center title">TANGGAL {{$range}}</div>
             <br>
             <br>

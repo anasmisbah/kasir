@@ -41,7 +41,12 @@
     <div class="container">
         <div class="row" style="padding-top:10px">
             <div class="text-center title">DAFTAR PELANGGAN</div>
-            <div class="text-center title">{{ strtoupper($app->toko) }} {{ strtoupper($branch->nama) }}</div>
+            <div class="text-center title">
+                {{ strtoupper($app->toko) }}
+                @if ($filter_cabang != '0')
+                    {{ strtoupper($branch->nama) }}
+                @endif
+            </div>
             <br>
             <br>
             <table class="table text-center">
