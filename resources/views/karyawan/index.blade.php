@@ -69,9 +69,10 @@
                 <thead>
                 <tr>
                     <th style="width:5%">No</th>
+                    <th style="width:7%">Kode</th>
                     <th style="width:15%">Nama</th>
                     <th style="width:13%">Jabatan</th>
-                    <th style="width:44%">Alamat</th>
+                    <th style="width:37%">Alamat</th>
                     <th style="width:10%">Telepon</th>
                     <th style="width:13%">Cabang</th>
                 </tr>
@@ -80,6 +81,7 @@
                 @foreach ($employees as $employee)
                         <tr>
                             <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$employee->kode}}</td>
                             <td><a  href="{{route('karyawan.detail',$employee->id)}}">{{$employee->nama}}</a></td>
                             <td class="text-center">{{$employee->jabatan}}</td>
                             <td>{{$employee->alamat}}</td>

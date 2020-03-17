@@ -46,6 +46,10 @@
             <td><img src="{{asset("/uploads/".$employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo"></td>
           </tr>
           <tr>
+            <td style="width:10%">Kode</td>
+            <td><b>{{$employee->kode}}</b></td>
+          </tr>
+          <tr>
             <td style="width:10%">Nama</td>
             <td><b>{{$employee->nama}}</b></td>
           </tr>

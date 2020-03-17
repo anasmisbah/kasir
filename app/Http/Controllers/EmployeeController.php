@@ -97,6 +97,11 @@ class EmployeeController extends Controller
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
+
+        $branch = Branch::findOrFail($request->branch_id);
+        $kode = $branch->kode.''.str_pad(($newEmployee->id),2,'0',STR_PAD_LEFT);
+        $newEmployee->kode = $kode;
+        $newEmployee->save();
         return redirect()->route('karyawan.index');
     }
 
@@ -141,6 +146,14 @@ class EmployeeController extends Controller
 
             $updateEmployee->update([
                 'foto'=> $foto
+            ]);
+        }
+
+        if ($request->branch_id != $updateEmployee->branch_id) {
+            $branch = Branch::findOrFail($request->branch_id);
+            $kode = $branch->kode.''.str_pad(($updateEmployee->id),2,'0',STR_PAD_LEFT);
+            $updateEmployee->update([
+                'kode'=>$kode,
             ]);
         }
 
