@@ -20,7 +20,8 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
     <!-- Main styles for this application-->
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
    <link href="{{asset('/adminlte/css/style.css')}}" rel="stylesheet">
     <style>
         body {
@@ -178,17 +179,27 @@
                 {{-- <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi" style="margin-right:10px"> CABANG {{ strtoupper(auth()->user()->employee->branch->nama) }} --}}
 
             </a>
-            <div class="c-header-nav ml-auto px-3">
+            <div class="c-header-nav ml-auto">
                 <span class="c-header-nav-item text-light">Selamat datang,</span>
                 <a class="c-header-nav-item c-header-nav-link" href="#">{{auth()->user()->employee->nama}}</a>
-                <div class="c-header-nav-item c-header-nav-link">
-                    <img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar">
+                <div class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="c-avatar"><img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar"></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right pt-0">
+                        <div class="dropdown-header bg-light border-bottom py-2"><strong>Settings</strong></div>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user mr-2"></i> Profile
+                        </a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
                 </div>
-                <a class="c-header-nav-item c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             </div>
           <div class="c-subheader px-3">
             <!-- Breadcrumb-->

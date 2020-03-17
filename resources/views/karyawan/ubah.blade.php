@@ -132,7 +132,7 @@
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('h:i:s A')}} | <a  href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('h:i:s')}} WIB | <a  href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
+                <strong>Dibuat pada: </strong>{{  $employee->created_at->dayName." | ".$employee->created_at->day." ".$employee->created_at->monthName." ".$employee->created_at->year}} | {{$employee->created_at->format('H:i:s')}} WIB | <a  href="{{route('karyawan.detail',$employee->createdBy->employee->id)}}">{{$employee->createdBy->employee->nama}}</a> / <strong>Diubah pada: </strong>{{  $employee->updated_at->dayName." | ".$employee->updated_at->day." ".$employee->updated_at->monthName." ".$employee->updated_at->year}} | {{$employee->updated_at->format('H:i:s')}} WIB | <a  href="{{route('karyawan.detail',$employee->updatedBy->employee->id)}}">{{$employee->updatedBy->employee->nama}}</a>
             </span>
         </div>
     </div>

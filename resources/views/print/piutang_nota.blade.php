@@ -137,8 +137,8 @@
             <div style="padding-left:20px" class="column-7">
                 <div style="margin-top:0px;" class="title">NOTA BON</div>
                 <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
-                <div style="margin-top:5px">{{$app->alamat}}, {{$app->kecamatan}}, {{$app->kota}}, {{$app->provinsi}}</div>
-                <div>{{$app->telepon}}</div>
+                <div style="margin-top:5px">{{$bill->branch->alamat}}, {{$bill->branch->kecamatan}}, {{$bill->branch->kota}}, {{$bill->branch->provinsi}}</div>
+                <div>{{$bill->branch->telepon}}</div>
 
             </div>
             <div class="column-1" style="text-align:right">
@@ -149,7 +149,7 @@
             </div>
             <div class="column-3" style="margin-left:10px">
                 <div>{{$bill->no_nota_kas}}</div>
-                <div>{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year.' | '.$bill->tanggal_nota->format('h:i:s')}} WIB</div>
+                <div>{{$bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year.' | '.$bill->tanggal_nota->format('H:i:s')}} WIB</div>
                 <div>{{$bill->customer->nama}}</div>
                 <div>{{$bill->customer->alamat}}
                 </div>
@@ -189,7 +189,7 @@
                         </tr>
                         <tr class="text-center">
                             <td colspan="2" class="text-left">Status: <strong> <i> {{strtoupper($bill->status)}}</strong></i></td>
-                            <td class="text-left"><span>Hormat Kami,</span></td>
+                            <td class="text-center"><span>Hormat Kami,</span></td>
                             <td class="border-bawah">Uang Muka</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{$bill->jumlah_uang_nota}}</span>,-</td>
@@ -205,7 +205,7 @@
                         <tr class="text-center">
                             <td style="border: none"></td>
                             <td style="border: none"></td>
-                            <td style="border: none;" class="text-left"><b> {{$bill->user->employee->nama}} </b></td>
+                            <td style="border: none;" class="text-center"><b> {{$bill->user->employee->nama}} </b></td>
                             <td class="border-bawah">Pembayaran</td>
                             <td class="border-bawah text-right">Rp</td>
                             <td class="border-bawah text-right"><span class="harga">{{abs($bill->kembalian_nota)}}</span>,-</td>

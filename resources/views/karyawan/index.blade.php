@@ -60,7 +60,7 @@
                             <input id="downloadble" type="hidden" name="print">
                             <button type="submit" id="btn-filter" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>
                             <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
-                            <a href="{{route('karyawan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
+                            <a href="{{route('karyawan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-sync"></i></a>
                         </div>
                     </div>
                 </form>

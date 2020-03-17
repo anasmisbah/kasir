@@ -157,7 +157,7 @@
                                 <button id="btn-print" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></button>
                             </div>
                             <div class="col p-0">
-                                <a href="{{route('penjualan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i></a>
+                                <a href="{{route('penjualan.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-sync"></i></a>
                             </div>
                         </div>
                     </div>

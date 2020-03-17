@@ -30,9 +30,6 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
-  <div class="row">
-    <!-- left column -->
     <div class="col-md-12">
       <!-- general form elements -->
       <div class="card">
@@ -61,7 +58,7 @@
               </tr>
               <tr>
                 <td>Tanggal</td>
-                <td>{{ $bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year." | ".$bill->tanggal_nota->format('h:i:s')}} WIB</td>
+                <td>{{ $bill->tanggal_nota->day." ".$bill->tanggal_nota->monthName." ".$bill->tanggal_nota->year." | ".$bill->tanggal_nota->format('H:i:s')}} WIB</td>
               </tr>
               <tr>
                 <td>Cabang</td>
@@ -214,13 +211,11 @@
 
         <div class="card-footer text-right">
           <span style="font-size: 12px">
-            <strong>Dibuat pada: </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}}  | {{$bill->created_at->format('h:i:s')}} WIB | <a  href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
+            <strong>Dibuat pada: </strong>{{  $bill->created_at->dayName." | ".$bill->created_at->day." ".$bill->created_at->monthName." ".$bill->created_at->year}}  | {{$bill->created_at->format('H:i:s')}} WIB | <a  href="{{route('karyawan.detail',$bill->createdBy->employee->id)}}">{{$bill->createdBy->employee->nama}}</a>
           </span>
         </div>
       </div>
     </div>
-  </div>
-</div>
 @endsection
 
 @push('script')
