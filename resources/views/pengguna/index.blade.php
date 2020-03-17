@@ -113,7 +113,12 @@
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Indonesian.json"
         }
     });
-
+    $('#btn-filter').click((e)=>{
+        e.preventDefault()
+        $('#downloadble').val('')
+        $('#form-filter').attr('target','_self')
+        $('#form-filter').submit()
+    });
     $('#btn-print').click((e)=>{
         e.preventDefault()
         $('#downloadble').val('bill')

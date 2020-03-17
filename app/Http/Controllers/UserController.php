@@ -20,6 +20,7 @@ class UserController extends Controller
         $branches = Branch::all();
         $app = Application::first();
         $branch = $user->employee->branch;
+        $filter_cabang = $request->cabang;
         if ($request->all()) {
             if ($request->cabang == "0") {
                 $users = User::all();
@@ -30,7 +31,7 @@ class UserController extends Controller
             }
             if ($request->print) {
                     $dateNow=Carbon::now();
-                return view('print.pengguna',compact('users','branch','app','dateNow','user'));
+                return view('print.pengguna',compact('users','branch','app','dateNow','user','filter_cabang'));
             }
         }else{
             $users = User::all();
