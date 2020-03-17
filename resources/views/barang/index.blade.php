@@ -48,7 +48,8 @@
             <thead>
               <tr>
                 <th style="width: 5%">No.</th>
-                <th style="width: 60%">Nama Barang</th>
+                <th style="width: 10%">Kode Barang</th>
+                <th style="width: 50%">Nama Barang</th>
                 <th style="width: 20%">Jenis</th>
                 <th class="text-right" style="width: 3%"></th>
                 <th style="min-width: 10%">Harga</th>
@@ -58,6 +59,7 @@
               @foreach ($items as $item)
               <tr>
                 <td  class="text-center">{{ $loop->iteration }}</td>
+                <td  class="text-center">{{ $item->kode }}</td>
                 <td  class=""><a  href="{{route('barang.detail',$item->id)}}">{{$item->nama}}</a></td>
                 <td class="text-center"><a  href="{{route('jenis.detail',$item->category->id)}}">{{$item->category->nama}}</a></td>
                 <td class="text-right">Rp</td>

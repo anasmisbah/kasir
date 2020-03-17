@@ -55,6 +55,10 @@ class ItemController extends Controller
             'updated_by'=>Auth::user()->id,
         ]);
 
+        $category = Category::findOrFail($request->category_id);
+        $kode = $category->kode.''.str_pad(($newItem->id),2,'0',STR_PAD_LEFT);
+        $newItem->kode = $kode;
+        $newItem->save();
         return redirect()->route('barang.index');
     }
 
@@ -75,12 +79,22 @@ class ItemController extends Controller
 
         $updatedItem = Item::findOrFail($request->id);
 
+        if ($request->category_id != $updatedItem->category_id) {
+            $category = Category::findOrFail($request->category_id);
+            $kode = $category->kode.''.str_pad(($updatedItem->id),2,'0',STR_PAD_LEFT);
+            $updatedItem->update([
+                'kode'=>$kode,
+            ]);
+        }
+
         $updatedItem->update([
             'nama'=>$request->nama,
             'harga'=>$request->harga,
             'category_id'=>$request->category_id,
             'updated_by'=>Auth::user()->id,
         ]);
+
+
 
         return redirect()->route('barang.index');
     }

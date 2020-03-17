@@ -39,6 +39,10 @@
         <table class="table table-sm table-striped">
             <tbody>
             <tr>
+                <td style="width:10%">Kode</td>
+                <td><strong>{{$item->kode}}</strong></td>
+            </tr>
+            <tr>
                 <td style="width:10%">Nama</td>
                 <td><strong>{{$item->nama}}</strong></td>
             </tr>

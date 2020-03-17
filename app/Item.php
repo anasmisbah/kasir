@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $fillable = [
-        'nama', 'harga','category_id','created_by','updated_by'
+        'nama', 'harga','category_id','created_by','updated_by','kode'
     ];
 
     public function supply()
