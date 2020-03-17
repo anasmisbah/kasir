@@ -128,6 +128,11 @@ Route::middleware(['auth'])->group(function (){
 
         Route::get('/pelanggan/fetchpelanggan','CustomerController@getdatajson')->name('pelanggan.datajson');
         Route::get('/stok/fetchbarang','SupplyItemController@getdatajson')->name('barang.datajson');
+
+        // Pengguna Kasir
+        Route::get('/kasir/pengguna','CashierController@userlogin')->name('kasir.pengguna');
+        Route::get('/kasir/edit/pengguna','CashierController@edit')->name('kasir.ubah');
+        Route::put('/kasir/pengguna','CashierController@update')->name('kasir.perbarui');
     });
 
 });
