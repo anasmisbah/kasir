@@ -480,6 +480,9 @@ class BillController extends Controller
     {
         $user = Auth::user();
         $tanggal_nota = Carbon::now();
+        $branch = Auth::user()->employee->branch;
+        $lastBill = Bill::select('id')->where('branch_id',$branch->id)->whereDate('tanggal_nota',$tanggal_nota)->count();
+        $formatnnk = $branch->kode."".$tanggal_nota->format('ymd')."".str_pad(($lastBill+1),3,'0',STR_PAD_LEFT);
         $newBill = Bill::create([
             'user_id'=>$user->id,
             'tanggal_nota'=>$tanggal_nota,
@@ -490,7 +493,7 @@ class BillController extends Controller
             'status'=>strtolower($request->data['status']),
             'branch_id'=>$user->employee->branch_id,
             'customer_id'=>$request->data['customer_id'],
-            'no_nota_kas'=>$request->data['no_nota_kas'],
+            'no_nota_kas'=>$formatnnk,
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
