@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
+use File;
+use Illuminate\Support\Facades\Hash;
 class CashierController extends Controller
 {
 
@@ -76,13 +78,14 @@ class CashierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $updatedUser = Auth::user();
         $updateEmployee = Auth::user()->employee;
         $request->validate([
             'username'=>'required',
             'email'=>'required|email|unique:users,email,'.$updatedUser->id,
+            'foto'=>'mimes:jpeg,bmp,png,jpg,ico |max:2000'
         ]);
 
 
@@ -95,21 +98,15 @@ class CashierController extends Controller
         $updatedUser->update([
             'username' => $request->username,
             'email'=>$request->email,
-            'level_id'=>$request->level_id,
-            'employee_id'=>$request->employee_id,
             'updated_by'=>Auth::user()->id,
         ]);
 
         if ($request->file('foto')) {
-            $request->validate([
-                'foto'=>'mimes:jpeg,bmp,png,jpg,ico',
-            ]);
-            if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists('uploads/'.$updateEmployee->foto)) {
-                File::delete('uploads/'.$updateEmployee->foto);
-            }
-            $foto = 'fotos/'.time().Str::slug($updateEmployee->nama).'.'.$request->file('foto')->getClientOriginalExtension();
+                if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists('uploads/'.$updateEmployee->foto)) {
+                    File::delete('uploads/'.$updateEmployee->foto);
+                }
+                $foto = 'fotos/'.time().Str::slug($updateEmployee->nama).'.'.$request->file('foto')->getClientOriginalExtension();
             $request->file('foto')->move('uploads/fotos', $foto);
-
             $updateEmployee->update([
                 'foto'=> $foto
             ]);

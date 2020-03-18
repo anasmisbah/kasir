@@ -118,19 +118,28 @@
     <!-- Header -->
     <header class="c-header c-sticky-top c-header-dark px-3">
         <a class="c-header-brand" href="#">
-            <img src="{{asset('/uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi">
+            <img src="../../assets/img/logo-typobw.png" height="30px" alt="Nama Aplikasi">
         </a>
         <div class="c-header-nav ml-auto">
             <span class="c-header-nav-item text-light">Selamat datang,</span>
             <a class="c-header-nav-item c-header-nav-link" href="#">{{auth()->user()->employee->nama}}</a>
-            <div class="c-header-nav-item c-header-nav-link">
-                <img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar">
+            <div class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="c-avatar"><img class="rounded-circle" src="{{asset('/uploads/'.$user->employee->foto)}}" height="40px" alt="Avatar"></div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right pt-0">
+                    <div class="dropdown-header bg-light border-bottom py-2"><strong>Settings</strong></div>
+                     <a class="dropdown-item" href="{{route('kasir.ubah')}}">
+                        <i class="fas fa-user mr-2"></i> Profile
+                    </a>
+                <form method="POST" action="{{route('logout')}}">
+                    @csrf
+                        <button  class="dropdown-item">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </button>
+                </form>
+                </div>
             </div>
-            <a class="c-header-nav-item c-header-nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();"><i class="fas fa-power-off"></i></a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
         </div>
     </header>
     <!-- End of header -->
