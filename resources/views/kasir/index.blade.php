@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+
     <!--
             [if lt IE 9]>
                 <script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
@@ -160,15 +162,12 @@
         </div>
         <!-- Pelanggan -->
         <div class="col-md-2 border rounded bg-white border-kanan-kiri ">
-            <div class="form-group mt-3">
+            <div class="form-group mt-3" style="margin-bottom:14px">
                 <label for="">Nama Pelanggan</label>
                 <div class="input-group">
-                    <input type="text" id="searchpelanggan" class="form-control" placeholder="Nama pelanggan">
-                    <div class="position-absolute scrollable-list card" style="z-index:999;margin-top:40px;border:none;width:90%">
-                        <div class="list-group list-group-flush position-relative" id="list-pelanggan">
-                        </div>
-                    </div>
-                    <div class="input-group-append">
+                    <select id="selectpengguna" class="form-control" name="state" placeholder="Cari pelanggan">
+                    </select>
+                    <div class="input-group-append" style="height:33px">
                         <button class="btn btn-primary" type="button" id="tambahpelanggan" >
                             <i class="fas fa-plus my-0"></i>
                         </button>
@@ -217,11 +216,8 @@
                             </td>
                             <td width="32%">
                                 <label for="">Nama Barang</label>
-                                <input disabled type="text" id="searchbarang" class="form-control" placeholder="Nama barang">
-                                <div class="position-absolute list-group-flush card scrollable-list" style="z-index:999; width:32%">
-                                    <div class="list-group position-relative" id="list-barang">
-                                    </div>
-                                </div>
+                                <select id="selectbarang" class="form-control" name="state" placeholder="Cari barang">
+                                </select>
                             </td>
                             <td width="15%">
                                 <label for="">Harga</label>
@@ -379,6 +375,7 @@
     <!-- jQuery -->
     <script src="/adminlte/plugins/number-divider.min.js"></script>
     <script src="/adminlte/plugins/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" ></script>
     <script>
 
         // =================== NUMBER FORMAT DIVIDER
@@ -405,17 +402,59 @@
                 divideThousand: true
             });
         }
-        // ==================END FORMAT
+        // ==================END FORMAT========
 
-        // PART  PELANGGAN
+        // ==============PART  PELANGGAN===========
 
         let pelanggan ={}
+        let slectbarang = null
+        let slectpengguna = null
+
+        let $selectPengguna = $('#selectpengguna').selectize({
+                persist: false,
+                valueField: 'id',
+                labelField: 'nama',
+                searchField: ['nama'],
+                preload:true,
+                options: [],
+                create: false,
+                render: {
+                    option: function(item, escape) {
+                        return  '<option class="list-group-item list-group-item-action" value="'+item.id+'">' +
+                            (item.nama ?  escape(item.nama)   : '') +
+                        '</option>';
+                    }
+                },
+                load: function(query, callback) {
+                    $.ajax({
+                        url: "{{ route('pelanggan.datajson') }}",
+                        type: 'GET',
+                        data: {
+                            'keyword': query,
+                        },
+                        error: function() {
+                            callback();
+                        },
+                        success: function(res) {
+                            callback(res);
+                        }
+                    });
+                },
+                onChange : function(id){
+                    if (!id) {
+                        clearPelanggan();
+                    } else {
+                        getpelanggan(id)
+                    }
+                }
+            });
+
+        slectpengguna = $selectPengguna[0].selectize;
 
         function getpelanggan(id) {
             let url = "{{ route('pelanggan.data') }}"
             const containerlist = $('#list-pelanggan')
             containerlist.html('')
-
             $.ajax({
                 type: 'get',
                 url: url,
@@ -425,11 +464,8 @@
                 success: function(data) {
                     $('#alamatpelanggan').val(data.customer.alamat)
                     $('#teleponpelanggan').val(data.customer.telepon)
-                    $('#searchpelanggan').val(data.customer.nama)
-
                     $('#idpelanggan').val(data.customer.id)
-                    $('#searchbarang').removeAttr('disabled')
-
+                    slectbarang.enable()
                     pelanggan = {
                         id:data.customer.id,
                         nama:data.customer.nama,
@@ -440,62 +476,13 @@
             });
         }
 
-
-        $("#searchpelanggan").keyup(function() {
-            let keyword = $(this).val()
-            let url = "{{ route('pelanggan.datajson') }}"
-            const containerlist = $('#list-pelanggan')
-            containerlist.html('')
-            if (keyword != '') {
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    data: {
-                        'keyword': keyword,
-                    },
-                    success: function(data) {
-                        containerlist.html('')
-                        if (data.length != 0) {
-                            var list = data.map((item) => {
-                                return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
-                            })
-                            list.forEach((item) => {
-                                containerlist.append(item)
-                            })
-                        } else {
-                            containerlist.append(`<li class="list-group-item" >Pelanggan tidak ditemukan</li>`)
-                        }
-
-
-
-                    },
-                });
-            }
-        });
-
-        // $("#searchpelanggan").focus(function() {
-
-        //     let keyword = $(this).val()
-        //     let url = "{{ route('pelanggan.datajson') }}"
-        //     const containerlist = $('#list-pelanggan')
-        //     containerlist.html('')
-        //     $.ajax({
-        //         type: 'get',
-        //         url: url,
-        //         data: {
-        //             'keyword': keyword,
-        //         },
-        //         success: function(data) {
-        //             var list = data.map((item) => {
-        //                 return `<li class="list-group-item list-group-item-action" onclick="getpelanggan('${item.id}')">${item.nama}</li>`
-        //             })
-        //             list.forEach((item) => {
-        //                 containerlist.append(item)
-        //             })
-
-        //         },
-        //     });
-        // })
+        function clearPelanggan(){
+            $('#alamatpelanggan').val('')
+            $('#teleponpelanggan').val('')
+            $('#idpelanggan').val('')
+            slectbarang.disable()
+            pelanggan = {}
+        }
 
         $(document).on('click', '#tambahpelanggan', function() {
             $('#pelangganModal').modal('show');
@@ -514,18 +501,17 @@
                 contentType: false,
                 success: function(data) {
                     $('#pelangganModal').modal('hide');
-                    $('#searchpelanggan').val(data.customer.nama)
                     $('#alamatpelanggan').html(data.customer.alamat)
                     $('#teleponpelanggan').val(data.customer.telepon)
-
-                    $('#searchbarang').removeAttr('disabled')
-
+                    slectbarang.enable()
                     pelanggan = {
                         id:data.customer.id,
                         nama:data.customer.nama,
                         telepon:data.customer.telepon,
                         alamat:data.customer.alamat
                     }
+                    slectpengguna.addOption(pelanggan)
+                    slectpengguna.setValue(pelanggan.id,false)
                 },
             });
 
@@ -536,6 +522,47 @@
 
     let barang = {}
 
+    let select_barang =  $('#selectbarang').selectize({
+                persist: false,
+                valueField: 'id',
+                labelField: 'nama',
+                searchField: ['nama'],
+                preload:true,
+                options: [
+                ],
+                create: false,
+                render: {
+                    option: function(item, escape) {
+                        return  '<option class="list-group-item list-group-item-action" value="'+item.id+'">' +
+                            (item.nama ?  escape(item.nama)   : '') +
+                        '</option>';
+                    }
+                },
+                load: function(query, callback) {
+                    $.ajax({
+                        url: "{{ route('barang.datajson') }}",
+                        type: 'GET',
+                        data: {
+                            'keyword': query,
+                        },
+                        error: function() {
+                            callback();
+                        },
+                        success: function(res) {
+                            callback(res);
+                        }
+                    });
+                },
+                onChange : function(id){
+                    if(!id){
+                        clearBarang();
+                    }else{
+                        getbarang(id)
+                    }
+                }
+            });
+    slectbarang  = select_barang[0].selectize;
+    slectbarang.disable()
     function getbarang(id) {
         let url = "{{ route('stok.data') }}"
         const containerlist = $('#list-barang')
@@ -552,10 +579,8 @@
                 $('#hargabarang').val('Rp '+data.supply.harga_cabang.toLocaleString(['ban', 'id'])+',-')
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
-                $("#searchbarang").val(data.supply.item.nama)
                 $('#stok').val(data.supply.stok);
                 numberformat();
-
                 barang = {
                     id: data.supply.id,
                     nama:data.supply.item.nama,
@@ -566,64 +591,16 @@
         });
     }
 
-    $("#searchbarang").keyup(function() {
-        let keyword = $(this).val()
-        let url = "{{ route('barang.datajson') }}"
-        const containerlist = $('#list-barang')
-        containerlist.html('')
-        if (keyword != '') {
-            $.ajax({
-                type: 'get',
-                url: url,
-                data: {
-                    'keyword': keyword,
-                },
-                success: function(data) {
-                    containerlist.html('')
-                    if (data.length != 0) {
-                        var list = data.map((item) => {
-                            return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
-                        })
-                        list.forEach((item) => {
-                            containerlist.append(item)
-                        })
-                    } else {
-                        containerlist.append(`<li class="list-group-item">Barang tidak ditemukan</li>`)
-                    }
-
-
-
-                },
-            });
-        }
-    });
-    // $("#searchbarang").focus(function() {
-    //     let keyword = $(this).val()
-    //     let url = "{{ route('barang.datajson') }}"
-    //     const containerlist = $('#list-barang')
-    //     containerlist.html('')
-    //     $.ajax({
-    //         type: 'get',
-    //         url: url,
-    //         data: {
-    //             'keyword': keyword,
-    //         },
-    //         success: function(data) {
-    //             var list = data.map((item) => {
-    //                 return `<li class="list-group-item list-group-item-action" onclick="getbarang('${item.id}')">${item.nama}</li>`
-    //             })
-    //             list.forEach((item) => {
-    //                 containerlist.append(item)
-    //             })
-
-    //         },
-    //     });
-    // });
-    // $( "#searchbarang" ).focusout(function(){
-    //     const containerlist = $('#list-barang')
-    //     containerlist.html('')
-
-    // })
+    function clearBarang() {
+        $('#kodebarang').val('')
+        $('#hargabarang').val('Rp 0,-')
+        $("#qtybarang").attr('disabled','disabled')
+        $("#tambahbarang").attr('disabled','disabled')
+        $("#searchbarang").val('')
+        $('#stok').val('');
+        numberformat();
+        barang = {}
+    }
 
     //======== END PART BARANG ===========
 
@@ -683,6 +660,7 @@
 
                 barang = {}
                 $("#tambahbarang").attr('disabled','disabled')
+                slectbarang.clear()
             }
         } else {
             alert("masukkan jumlah Kuantitas barang Terlebih Dahulu")
@@ -733,21 +711,25 @@
 
     function showNominal(){
         $("#subtotal").html(subTotalPembayaran.toLocaleString(['ban', 'id']))
-        $('#uangkembali').val('Rp '+uangkembalian.toLocaleString(['ban', 'id'])+',-')
+
         $(".totalpembayaran").html(totalPembayaran.toLocaleString(['ban', 'id']))
         $("#totalan").val('Rp '+totalPembayaran.toLocaleString(['ban', 'id'])+',-')
+
+        if (uangkembalian < 0) {
+            let temp = Math.abs(uangkembalian)
+            $('#uangkembali').val('Rp ('+temp.toLocaleString(['ban', 'id'])+'),-')
+        } else {
+            $('#uangkembali').val('Rp '+uangkembalian.toLocaleString(['ban', 'id'])+',-')
+        }
+
         numberformat()
     }
 
     $("#uangmuka").focusin(()=>{
-        // let uang = $("#uangmuka").val()
-        // uang = uang.split(" ")
-        // uang = uang[1].split(",")[0]
         $("#uangmuka").val(uangMuka)
     })
 
     $("#uangmuka").focusout(()=>{
-        // uang = "Rp "+uang.toLocaleString(['ban', 'id'])+",-"
         $("#uangmuka").val('Rp '+uangMuka.toLocaleString(['ban', 'id'])+',-')
     })
 
@@ -830,9 +812,6 @@
     }
 
 
-
-
-
     $(document).on('click', '#cetaknota', function() {
         const total_nota = totalPembayaran
         let diskon = $('#diskon').val();
@@ -853,24 +832,6 @@
                     total_harga:item.total
                     }
         })
-
-        // const $lastRow = $('table tbody tr:last');
-        // const lastNo = $lastRow.find('td').eq(0).text();
-        // for (let index = 1; index <= lastNo; index++) {
-        //     const $findRow = $('table tbody tr[data-id="' + index + '"]');
-        //     const no_urut = $findRow.find('td').eq(0).text()
-        //     const supply_id = $findRow.find('td').eq(1).text()
-        //     const kuantitas = $findRow.find('td').eq(4).text()
-        //     const total_harga = $findRow.find('td').eq(5).text()
-        //     items.push({
-        //         no_urut,
-        //         supply_id,
-        //         kuantitas,
-        //         total_harga
-        //     })
-        // }
-
-
 
         var data = {
             total_nota,
@@ -896,15 +857,14 @@
                 window.open(printurl, '_blank');
                 if (data.status) {
                     swal({
-                            title: "Berhasil Menambahkan Transaksi",
-                            text: "",
-                            icon: "success",
-                        })
-                        .then(function() {
-                            location.reload()
-                        });
+                        title: "Berhasil Menambahkan Transaksi",
+                        text: "",
+                        icon: "success",
+                    })
+                    .then(function() {
+                        location.reload()
+                    });
                 }
-
             },
         });
 
