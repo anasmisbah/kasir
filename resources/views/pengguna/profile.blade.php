@@ -16,18 +16,17 @@
 @endpush
 @section('breadcumb')
 <li class="breadcrumb-item">Beranda</li>
-<li class="breadcrumb-item">Pengguna</li>
-<li class="breadcrumb-item active"><a href="#" >Memperbarui</a></li>
+<li class="breadcrumb-item active"><a href="#" >Pengguna</a></li>
 @endsection
 
 @section('content')
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <form role="form" action="{{route('pengguna.perbarui',$user->id)}}" method="POST">
+            <form role="form" action="{{route('pengguna.profile.perbarui')}}" method="POST">
                 <div class="d-flex justify-content-between mb-3">
                     <div>
-                        <h4 class="card-title mb-0 text-bold">Memperbarui Pengguna</h4>
+                        <h4 class="card-title mb-0 text-bold">Pengguna</h4>
                     </div>
                     <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
                         <button type="submit" class="btn btn-primary mr-5" style="width: 78px !important;"><i class="fa fa-save"></i></button>
@@ -46,9 +45,6 @@
                     <label class="col-sm-2 col-form-label">Nama Karyawan</label>
                     <div class="col-sm-10"><select disabled class="form-control form-control-sm select2" id="selectkaryawan" name="employee_id">
                         <option value="{{$user->employee->id}}" selected>{{$user->employee->nama}}</option>
-                        @foreach ($employees as $employee)
-                            <option value="{{$employee->id}}" {{ $employee->id === $user->employee_id?"selected":"" }}>{{$employee->nama}}</option>
-                        @endforeach
                     </select></div>
                 </div>
                 <div class="form-group row">
@@ -74,9 +70,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Level</label>
                     <div class="col-sm-10"><select disabled class="form-control form-control-sm" name="level_id">
-                        @foreach ($levels as $level)
-                            <option value="{{$level->id}}" {{ $level->id === $user->level_id?"selected":"" }}>{{$level->nama}}</option>
-                        @endforeach
+                            <option value="{{$user->level->id}}" >{{$user->level->nama}}</option>
                     </select></div>
                 </div>
                 <div class="form-group row">

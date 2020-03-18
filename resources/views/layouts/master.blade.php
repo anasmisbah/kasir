@@ -188,7 +188,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pt-0">
                         <div class="dropdown-header bg-light border-bottom py-2"><strong>Settings</strong></div>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{route('pengguna.profile')}}">
                             <i class="fas fa-user mr-2"></i> Profile
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

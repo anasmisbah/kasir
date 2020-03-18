@@ -115,6 +115,8 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/barang', 'ItemController@index')->name('barang.index');
         Route::get('/barang/print','ItemController@print')->name('barang.print');
 
+        Route::get('/pengguna/profile','UserController@profile')->name('pengguna.profile');
+        Route::put('/profile','UserController@profileupdate')->name('pengguna.profile.perbarui');
     });
 
     Route::middleware(['kasir'])->group(function (){

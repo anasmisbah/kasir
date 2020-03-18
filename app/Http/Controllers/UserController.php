@@ -140,4 +140,37 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('pengguna.index');
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $levels = Level::all();
+        $employeesAll = Employee::all();
+        $employees = [];
+        return view('pengguna.profile',compact('user','levels','employees'));
+    }
+
+    public function profileupdate(Request $request)
+    {
+        
+        $updatedUser = Auth::user();
+        $request->validate([
+            'username'=>'required|unique:users,username,'.$updatedUser->id,
+            'email'=>'required|email|unique:users,email,'.$updatedUser->id
+        ]);
+
+
+        if ($request->password) {
+            $updatedUser->update([
+                'password'=>Hash::make($request->password),
+            ]);
+        }
+
+        $updatedUser->update([
+            'username' => $request->username,
+            'email'=>$request->email,
+            'updated_by'=>Auth::user()->id,
+        ]);
+        return redirect()->route('pengguna.profile');
+    }
 }
