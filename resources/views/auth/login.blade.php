@@ -11,9 +11,9 @@
     <!-- App Desc -->
     <meta name="description" content="Halaman Login" />
     <meta name="author" content="tukangkode.id" />
-    <title>Login | {{$app->nama}}</title>
+    <title>Masuk | {{$app->nama}}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon" />
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <!-- Icon -->
@@ -62,13 +62,30 @@
             padding: 10px;
             font-size: 16px;
         }
+
+        .modal-body .form-control {
+            height: auto;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 16px;
+        }
+
+        h2,
+        h3,
+        h4,
+        p {
+            color: #1f2833;
+        }
     </style>
 </head>
 <body class="c-app text-center">
+    <!-- Form login -->
     <form class="form-signin" action="{{ route('login') }}" method="post">
         @csrf
+        <!-- Head -->
         <img class="mb-5" src="{{asset('/uploads/'.$app->logo)}}" height="40px" alt="Nama Aplikasi">
-        <h2 class="mb-3 font-weight-normal" style="color: #000;">Silahkan login</h2>
+        <h4 class="mb-3">Silahkan masuk ke akun Anda</h4>
+        <!-- Input group -->
         <div class="input-group mb-3">
             <input type="text" id="inputUser" class="form-control" name="username" placeholder="Username">
             <div class="input-group-append">
@@ -81,27 +98,41 @@
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">LOGIN</button>
-        <p class="mt-5 text-muted" style="font-size: 12px;">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Masuk</button>
+        <button class="btn btn-link mt-3 px-0" type="button" data-toggle="modal" data-target="#resetModal">Lupa password?</button>
+        <!-- Copyright -->
+        <p class="mt-5 small">
             &copy; 2020 | Developed with
             <span style="color:#b71c1c"><i class="fas fa-heart"></i></span>
             by
             <a href="#"><img src="{{asset('img/logo-dev.png')}}" height="12px" alt="tukangkode.id"></a>
         </p>
     </form>
+    <!-- End of form login -->
+    <!-- Modal pelanggan -->
+    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content col-md-8 offset-md-2">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="mt-4"><i class="fa fa-lock fa-4x"></i></h3>
+                    <h2 class="mt-3">Lupa password?</h2>
+                    <p>Silahkan masukkan email akun Anda di sini.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-lg btn-primary btn-block mb-4">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
-    <!-- jQuery -->
-    <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
-    <script src="/adminlte/plugins/sweetalert.min.js"></script>
-    <script>
-        $(function(){
-            var error = '{{ $errors->first() }}'
-            if (error) {
-               swal("Login Failed!", error, "error");
-            }
-        })
-    </script>
 </body>
 </html>
