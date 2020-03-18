@@ -579,7 +579,9 @@
                 'id': id,
             },
             success: function(data) {
-                $('#kodebarang').val(data.supply.id)
+                console.log(data);
+
+                $('#kodebarang').val(data.supply.item.kode)
                 $('#hargabarang').val('Rp '+data.supply.harga_cabang.toLocaleString(['ban', 'id'])+',-')
                 $("#qtybarang").removeAttr('disabled')
                 $("#tambahbarang").removeAttr('disabled')
@@ -590,6 +592,7 @@
                     nama:data.supply.item.nama,
                     stok:data.supply.stok,
                     harga_cabang:data.supply.harga_cabang,
+                    kode:data.supply.item.kode
                 }
             },
         });
@@ -645,6 +648,7 @@
                     harga:barang.harga_cabang,
                     qty:qty,
                     total:jumlah,
+                    kode:barang.kode
                 })
                 refreshDataTableBarang();
                 tambahTotalPembayaran();
@@ -765,7 +769,7 @@
         var list = arrayBarang.map((item,key) => {
                     return '<tr data-id=' + key + '>\
                                     <td width="4%" class="text-center">' + (key+1) + '</td>\
-                                    <td width="15%" class="text-center">' + item.id + '</td>\
+                                    <td width="15%" class="text-center">' + item.kode + '</td>\
                                     <td width="31%">' + item.nama + '</td>\
                                     <td width="14%" class="text-center">Rp <span class="harga">' + item.harga + '</span>,-</td>\
                                     <td width="9%" class="text-center">' + item.qty + '</td>\
