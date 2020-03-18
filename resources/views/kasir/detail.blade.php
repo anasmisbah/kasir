@@ -23,15 +23,15 @@
                     </tr>
                     <tr>
                         <td>Nama Karyawan</td>
-                        <td><strong>David Beckham</strong></td>
+                        <td><strong>{{$user->employee->nama}}</strong></td>
                     </tr>
                     <tr>
                         <td>Nama Pengguna</td>
-                        <td>kasircabang</td>
+                        <td>{{$user->username}}</td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td>kasir@cabang.com</td>
+                    <td>{{$user->email}}</td>
                     </tr>
                     <tr>
                         <td>Sandi</td>
