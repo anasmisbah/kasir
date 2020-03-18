@@ -6,7 +6,7 @@
             max-width: 120px;
             height: 35px;
             content: attr(title)"asasa";
-            background-color: #3399fe !important;
+            background-color: #321fdb !important;
             color: #fff;
             overflow: hidden;
             border-radius: 5px;
@@ -39,7 +39,7 @@
                     <h4 class="card-title mb-0 text-bold">Memperbarui Pengguna</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <button type="submit" class="btn  btn-info mr-5" style="width: 78px !important;"><i
+                    <button type="submit" class="btn  btn-primary mr-5" style="width: 78px !important;"><i
                             class="fa fa-save"></i></button>
                     <a class="btn btn-danger" href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>

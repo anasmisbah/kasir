@@ -9,7 +9,7 @@
                     <h4 class="card-title mb-0 text-bold">Detail Pengguna</h4>
                 </div>
                 <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                    <a class="btn btn-info mr-5" style="width: 78px !important;" href="{{route('kasir.ubah')}}" id="delete"><i
+                    <a class="btn btn-primary mr-5" style="width: 78px !important;" href="{{route('kasir.ubah')}}" id="delete"><i
                             class=" fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="javascript:void(0)" onclick="history.back();"><i class="fa fa-times"></i></a>
                 </div>
@@ -43,17 +43,22 @@
                     </tr>
                     <tr>
                         <td>Cabang</td>
-                        <td> <a class="text-info" href="http://project03.test/cabang/detail/1">Pusat</a></td>
+                        <td> <a href="#">Pusat</a></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat pada: </strong>Selasa | 25 Februari 2020 | 11:27:35 WIB | <a class="text-info"
-                    href="http://project03.test/karyawan/detail/1">David Beckham</a> / <strong>Diubah pada: </strong>Senin | 9
-                Maret 2020 | 01:16:20 WIB | <a class="text-info" href="http://project03.test/karyawan/detail/1">David
-                    Beckham</a>
+                <strong>Dibuat pada:
+                </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}}
+                | {{$user->created_at->format('H:i:s')}} WIB | <a
+                    href="#"
+                >{{$user->createdBy->employee->nama}}</a> / <strong>Diubah pada:
+                </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}}
+                | {{$user->updated_at->format('H:i:s')}} WIB | <a
+                    href="#"
+                >{{$user->updatedBy->employee->nama}}</a>
             </span>
         </div>
     </div>
