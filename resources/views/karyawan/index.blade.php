@@ -93,7 +93,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="border-atas p-0" colspan="6"></td>
+                        <td class="border-atas p-0" colspan="7"></td>
                     </tr>
                 </tfoot>
             </table>

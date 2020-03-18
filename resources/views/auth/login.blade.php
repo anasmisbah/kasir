@@ -114,19 +114,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content col-md-8 offset-md-2">
                 <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="mt-4"><i class="fa fa-lock fa-4x"></i></h3>
-                    <h2 class="mt-3">Lupa password?</h2>
-                    <p>Silahkan masukkan email akun Anda di sini.</p>
-                    <div class="input-group mb-3">
-                        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <form action="{{ route('password.email') }}" method="POST">
+                        @csrf
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="mt-4"><i class="fa fa-lock fa-4x"></i></h3>
+                        <h2 class="mt-3">Lupa password?</h2>
+                        <p>Silahkan masukkan email akun Anda di sini.</p>
+                        <div class="input-group mb-3">
+                            <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn btn-lg btn-primary btn-block mb-4">Kirim</button>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Kirim</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -134,5 +137,16 @@
     <!-- Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
+        <!-- jQuery -->
+        <script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+        <script src="/adminlte/plugins/sweetalert.min.js"></script>
+        <script>
+            $(function(){
+                var error = '{{ $errors->first() }}'
+                if (error) {
+                   swal("Login Failed!", error, "error");
+                }
+            })
+        </script>
 </body>
 </html>

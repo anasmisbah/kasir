@@ -36,14 +36,14 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Foto</label>
+                    <label class="col-sm-2 col-form-label">Avatar</label>
                     <div class="col-sm-10">
                         <img src="{{asset("/uploads/".$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Karyawan</label>
-                    <div class="col-sm-10"><select disabled class="form-control form-control-sm select2" id="selectkaryawan" name="employee_id">
+                    <div class="col-sm-10"><select disabled class="form-control form-control-sm" id="selectkaryawan" name="employee_id">
                         <option value="{{$user->employee->id}}" selected>{{$user->employee->nama}}</option>
                     </select></div>
                 </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Password</label>
+                    <label class="col-sm-2 col-form-label">Sandi</label>
                     <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password" placeholder="**********"></div>
                 </div>
                 <div class="form-group row">
