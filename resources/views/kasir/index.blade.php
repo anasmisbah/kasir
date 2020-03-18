@@ -13,6 +13,7 @@
     <meta name="author" content="tukangkode.id" />
     <title>Kasir | {{$app->nama}}</title>
     <!-- Favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
     <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon" />
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
@@ -21,7 +22,6 @@
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons@1.0.0/css/all.min.css" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/css/coreui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
 
     <!--
             [if lt IE 9]>
@@ -113,6 +113,10 @@
         }
         .btn-warning:hover{
             color: #fff
+        }
+        .selectize-input.focus{
+            border-color: #321fdb;
+            box-shadow: 0 0 0 0.2rem rgba(50,31,219,.25)
         }
     </style>
 </head>
@@ -318,7 +322,7 @@
             </div>
             <br>
             <div class="my-3">
-                <button type="button" class="btn btn-danger btn-block font-weight-bold">Reset</button>
+                <a href="javascript:void(0)" onclick="window.location.reload()" class="btn btn-danger btn-block font-weight-bold text-white">Reset</a>
             </div>
         </div>
     </div>
