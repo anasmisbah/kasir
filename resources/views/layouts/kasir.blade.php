@@ -56,7 +56,7 @@
             background-color: rgb(197, 198, 199);
         }
     </style>
-    @yield('css')
+    @stack('css')
 </head>
 <body>
     <!-- Header -->
@@ -69,19 +69,20 @@
             <a class="c-header-nav-item c-header-nav-link" href="#">{{auth()->user()->employee->nama}}</a>
             <div class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
-                    <div class="c-avatar"><img class="rounded-circle" src="{{asset('/uploads/'.$user->employee->foto)}}" height="40px" alt="Avatar"></div>
+                    <div class="c-avatar"><img class="rounded-circle" src="{{asset("/uploads/".auth()->user()->employee->foto)}}" height="40px" alt="Avatar"></div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right pt-0">
                     <div class="dropdown-header bg-light border-bottom py-2"><strong>Settings</strong></div>
-                         <a class="dropdown-item" href="{{route('kasir.ubah')}}">
-                                <i class="fas fa-user mr-2"></i> Profile
-                            </a>
-                        <form method="POST" action="{{route('logout')}}">
-                            @csrf
-                                <button  class="dropdown-item">
-                                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                                </button>
-                        </form>
+                    <a class="dropdown-item" href="{{route('pengguna.profile')}}">
+                        <i class="fas fa-user mr-2"></i> Profile
+                    </a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
@@ -105,15 +106,14 @@
             &copy; 2020 | Developed with
             <span style="color:#b71c1c"><i class="fas fa-heart"></i></span>
             by
-            <a href="#"><img src="../../assets/img/logo-dev.png" height="12px" alt="tukangkode.id"></a>
+            <a href="#"><img src="{{asset('img/logo-dev.png')}}" height="12px" alt="tukangkode.id"></a>
         </p>
     </footer>
     <!-- End of footer -->
     <!-- Script -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://unpkg.com/@coreui/coreui@3.0.0-rc.0/dist/js/coreui.min.js"></script>
-    
+
     @stack('js')
-    @yield('js')
 </body>
 </html>

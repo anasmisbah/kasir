@@ -1,28 +1,28 @@
 @extends('layouts.kasir')
 
-@section('css')
-<style>
-    div.custom-input {
-        max-width: 120px;
-        height: 35px;
-        content: attr(title)"asasa";
-        background-color: #3399fe !important;
-        color: #fff;
-        overflow: hidden;
-        border-radius: 5px;
-    }
+@push('css')
+    <style>
+        div.custom-input {
+            max-width: 120px;
+            height: 35px;
+            content: attr(title)"asasa";
+            background-color: #3399fe !important;
+            color: #fff;
+            overflow: hidden;
+            border-radius: 5px;
+        }
 
 
-    .custom-input input {
-        margin-top: 0px;
-        display: block !important;
-        width: 120px !important;
-        height: 35px !important;
-        opacity: 0 !important;
-        overflow: hidden !important;
-    }
-</style>
-@endsection
+        .custom-input input {
+            margin-top: 0px;
+            display: block !important;
+            width: 120px !important;
+            height: 35px !important;
+            opacity: 0 !important;
+            overflow: hidden !important;
+        }
+    </style>
+@endpush
 
 @section('content')
 <div class="col-md-8 offset-md-2">
@@ -45,20 +45,18 @@
                 </div>
             </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Avatar</label>
-
-                        <div class="col-sm-3">
-                            <img src="{{asset('/uploads/'.$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="logo">
+                    <label class="col-sm-2 col-form-label">Avatar</label><br>
+                    <div class="ml-3">
+                        <img src="{{asset('/uploads/'.$user->employee->foto)}}" id="img_foto" class="block" width="125px" style="margin-bottom:3px" alt="">
+                    </div>
+                    <div class="col-2 pt-5 pl-2">
+                        <div class="custom-input text-center" style="font-size:12px">
+                                <input type="file" id="foto" name="foto">
+                                <p style="z-index:9999; margin-top:-28px">
+                                        Unggah Foto
+                                    </p>
                         </div>
-                            <div class="col-2 pt-5 pl-2">
-                                    <div class="custom-input text-center" style="font-size:12px">
-                                            <input type="file" id="foto" name="foto">
-                                            <p style="z-index:9999; margin-top:-28px">
-                                                    Unggah Logo
-                                                </p>
-                                    </div>
-                                </div>
-
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Karyawan</label>
@@ -87,7 +85,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Sandi</label>
                     <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password"
-                            placeholder="Masukkan sandi">
+                            placeholder="*******">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -108,10 +106,15 @@
         </div>
         <div class="card-footer text-right" style="background:#C5C6C7">
             <span style="font-size: 12px">
-                <strong>Dibuat pada: </strong>Selasa | 25 Februari 2020 | 11:27:35 AM | <a class="text-info"
-                    href="http://project03.test/karyawan/detail/1">David Beckham</a> / <strong>Diubah pada: </strong>Senin | 9
-                Maret 2020 | 01:09:45 WIB | <a class="text-info" href="http://project03.test/karyawan/detail/1">David
-                    Beckham</a>
+                <strong>Dibuat pada:
+                </strong>{{  $user->created_at->dayName." | ".$user->created_at->day." ".$user->created_at->monthName." ".$user->created_at->year}}
+                | {{$user->created_at->format('H:i:s')}} WIB | <a
+                    href="#"
+                >{{$user->createdBy->employee->nama}}</a> / <strong>Diubah pada:
+                </strong>{{  $user->updated_at->dayName." | ".$user->updated_at->day." ".$user->updated_at->monthName." ".$user->updated_at->year}}
+                | {{$user->updated_at->format('H:i:s')}} WIB | <a
+                    href="#"
+                >{{$user->updatedBy->employee->nama}}</a>
             </span>
         </div>
     </div>
