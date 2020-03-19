@@ -103,7 +103,7 @@
               @endphp
               @endforeach
               <tr>
-                <td class="text-center"><a href="{{route('penjualan.detail',$bill->id)}}">{{$bill->no_nota_kas}}</a></td>
+                <td class="text-center">{{$bill->no_nota_kas}}</td>
                 <td width="40%" class="text-center">{{$bill->tanggal_nota->format('d F Y')}}</td>
                 <td class="text-center">Rp <span class="harga">{{$subtotal}}</span>,-</td>
                 <td class="text-center" width="15%">Rp <span class="harga">{{$subtotal-$bill->total_nota}}</span>,-</td>

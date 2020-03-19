@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="shortcut icon" href="{{asset('/img/favico.png')}}" type="image/x-icon">
-    <title>Barang Cetak | {{$app->nama}}</title>
+    <title>Cetak | {{$app->nama}}</title>
     <style>
         .border{
             border-top: 1px solid black !important;
