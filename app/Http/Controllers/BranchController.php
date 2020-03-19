@@ -30,9 +30,9 @@ class BranchController extends Controller
         $request->validate([
             'nama'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required',
+            'telepon'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'pimpinan'=>'required',
-            'kode'=>'required',
+            'kode'=>'required|min:2|max:2|regex:/^[a-zA-Z]+$/u|unique:branches',
             'provinsi'=>'required',
             'kecamatan'=>'required',
             'kota'=>'required',
@@ -43,7 +43,7 @@ class BranchController extends Controller
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
-            'kode'=>$request->kode,
+            'kode'=>strtoupper($request->kode),
             'provinsi'=>$request->provinsi,
             'kecamatan'=>$request->kecamatan,
             'kota'=>$request->kota,
@@ -63,25 +63,25 @@ class BranchController extends Controller
 
     public function update(Request $request)
     {
+        $updatedBranch = Branch::findOrFail($request->id);
         $request->validate([
             'nama'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required',
+            'telepon'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'pimpinan'=>'required',
-            'kode'=>'required',
+            'kode'=>'required|min:2|max:2|regex:/^[a-zA-Z]+$/u|unique:branches,kode,'.$updatedBranch->id,
             'provinsi'=>'required',
             'kecamatan'=>'required',
             'kota'=>'required'
         ]);
 
-        $updatedBranch = Branch::findOrFail($request->id);
 
         $updatedBranch->update([
             'nama'=>$request->nama,
             'alamat'=>$request->alamat,
             'telepon'=>$request->telepon,
             'pimpinan'=>$request->pimpinan,
-            'kode'=>$request->kode,
+            'kode'=>strtoupper($request->kode),
             'provinsi'=>$request->provinsi,
             'kecamatan'=>$request->kecamatan,
             'kota'=>$request->kota,
