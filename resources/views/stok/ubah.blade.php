@@ -41,10 +41,8 @@
                 @method('PUT')
                 <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Barang</label>
-                        <div class="col-sm-10"><select disabled id="barang" class="form-control form-control-sm select2" name="item_id">
-                            @foreach ($items as $item)
-                                <option value="{{$item->id}}" {{$item->id == $supply->item_id?"selected":""}}>{{$item->nama}}</option>
-                            @endforeach
+                        <div class="col-sm-10"><select disabled id="barang" class="form-control form-control-sm">
+                                <option value="{{$supply->item_id}}" selected>{{$supply->item->nama}}</option>
                         </select></div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +56,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Harga Cabang</label>
-                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_cabang}}" id="harga_cabang" class="form-control form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang {{$supply->branch->nama}}">
+                    <div class="col-sm-10"><input type="text" disabled value="{{old('harga_cabang')?old('harga_cabang'):$supply->harga_cabang}}" id="harga_cabang" class="form-control form-control-sm {{ $errors->first('harga_cabang')?'is-invalid':'' }} inputharga" name="harga_cabang" placeholder="Masukkan Harga Cabang {{$supply->branch->nama}}">
                         <div class="invalid-feedback">
                             {{$errors->first('harga_cabang')}}
                         </div>
@@ -66,12 +64,14 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Selisih</label>
-                    <div class="col-sm-10"><input type="text" value="{{$supply->harga_selisih}}" id="selisih" disabled class="form-control form-control-sm inputharga" name="harga_selisih" placeholder="selisih"></div>
-
+                    <div class="col-sm-10"><input type="text" value="{{old('harga_selisih')?old('harga_selisih'):$supply->harga_selisih}}" id="selisih" class="form-control form-control-sm {{ $errors->first('harga_selisih')?'is-invalid':'' }} inputharga" name="harga_selisih" placeholder="selisih"></div>
+                    <div class="invalid-feedback">
+                        {{$errors->first('harga_selisih')}}
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Stok</label>
-                    <div class="col-sm-10"><input type="number" step="0.01" value="{{$supply->stok}}" class="form-control form-control-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
+                    <div class="col-sm-10"><input type="number" step="0.01" value="{{ old('stok')?old('stok'):$supply->stok}}" class="form-control form-control-sm {{ $errors->first('stok')?'is-invalid':'' }}" name="stok" placeholder="Masukkan Stok Barang">
                         <div class="invalid-feedback">
                             {{$errors->first('stok')}}
                         </div>
@@ -94,11 +94,6 @@
 <script src="/adminlte/plugins/number-divider.min.js"></script>
 <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
-$(function () {
-    $('.select2').select2()
-});
-</script>
-<script>
 $(document).on('change', '#barang', function () {
     let url = "{{ route('barang.data') }}"
     $.ajax({
@@ -117,11 +112,14 @@ $(document).on('change', '#barang', function () {
     });
 });
 
-$("#harga_cabang").keyup(function(){
+$("#selisih").keyup(function(){
   let hargaPusat = $('#harga_pusat').val()
-  let hargaCabang = $(this).val()
-  let selisih = hargaCabang - hargaPusat
-  $("#selisih").val(selisih)
+  let selisih = $(this).val()
+  if (selisih == '') {
+    selisih = 0;
+  }
+  let hargaCabang = parseInt(selisih) + parseInt(hargaPusat)
+  $("#harga_cabang").val(hargaCabang)
 });
 </script>
 <script>

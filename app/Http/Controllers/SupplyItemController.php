@@ -109,7 +109,6 @@ class SupplyItemController extends Controller
             'harga_selisih' => 'required',
             'harga_cabang'=>'required',
             'stok'=>'required',
-            'item_id'=>'required',
             'branch_id'=>'required',
         ]);
         $updatedSupplyItem = Supply::findOrFail($request->id);
@@ -117,7 +116,6 @@ class SupplyItemController extends Controller
             'harga_selisih' => $request->harga_selisih,
             'harga_cabang'=>$request->harga_cabang,
             'stok'=>$request->stok,
-            'item_id'=>$request->item_id,
             'branch_id'=>$request->branch_id,
             'updated_by'=>Auth::user()->id,
         ]);

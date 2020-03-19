@@ -115,6 +115,9 @@ $(document).on('change', '#barang', function () {
 $("#selisih").keyup(function(){
   let hargaPusat = $('#harga_pusat').val()
   let selisih = $(this).val()
+  if (selisih == '') {
+    selisih = 0;
+  }
   let hargaCabang = parseInt(selisih) + parseInt(hargaPusat)
   $("#harga_cabang").val(hargaCabang)
 });
