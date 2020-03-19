@@ -62,9 +62,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username'=>'required',
+            'username'=>'required|unique:users',
             'email'=>'required|email|unique:users',
-            'password'=>'required',
+            'password'=>'required|min:8',
             'level_id'=>'required',
             'employee_id'=>'required'
         ]);
@@ -152,7 +152,7 @@ class UserController extends Controller
 
     public function profileupdate(Request $request)
     {
-        
+
         $updatedUser = Auth::user();
         $request->validate([
             'username'=>'required|unique:users,username,'.$updatedUser->id,
@@ -161,6 +161,9 @@ class UserController extends Controller
 
 
         if ($request->password) {
+            $request->validate([
+                'password'=>'min:8',
+            ]);
             $updatedUser->update([
                 'password'=>Hash::make($request->password),
             ]);
