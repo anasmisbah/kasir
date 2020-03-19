@@ -13,32 +13,17 @@ class BranchSeed extends Seeder
     {
         DB::table('branches')->insert([
             [
-                'nama' => 'samarinda',
+                'nama' => 'Pusat',
                 'alamat'=>'jl samarinda',
+                'kode'=>'PT',
+                'kecamatan'=>'Sempaja',
+                'kota'=>'Samarinda',
+                'provinsi'=>'Kalimantan Timur',
                 'telepon'=>'085253456545',
-                'pimpinan'=>'ahmad',
-
+                'pimpinan'=>'Direktur',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
-            [
-                'nama' => 'balikpapan',
-                'alamat'=>'jl balikpapan',
-                'telepon'=>'085253456545',
-                'pimpinan'=>'tello',
-
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'nama' => 'tenggarong',
-                'alamat'=>'jl tenggarong',
-                'telepon'=>'085253456545',
-                'pimpinan'=>'adi',
-
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
         ]);
     }
 }

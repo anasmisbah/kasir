@@ -14,8 +14,8 @@ class UserSeed extends Seeder
     {
         DB::table('users')->insert([
             [
-                'username' => 'adminutama',
-                'email'=>'adminutama@admin.com',
+                'username' => 'admin',
+                'email'=>'admin@pusat.com',
                 'password'=>Hash::make("123123"),
                 'level_id'=>1,
                 'employee_id'=>1,
@@ -24,28 +24,6 @@ class UserSeed extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ],
-            [
-                'username' => 'admincabang',
-                'email'=>'admincabang@admin.com',
-                'password'=>Hash::make("123123"),
-                'level_id'=>2,
-                'employee_id'=>2,
-                'created_by'=>1,
-                'updated_by'=>1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ],
-            [
-                'username' => 'kasircabang',
-                'email'=>'kasircabang@admin.com',
-                'password'=>Hash::make("123123"),
-                'level_id'=>3,
-                'employee_id'=>3,
-                'created_by'=>1,
-                'updated_by'=>1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
         ]);
     }
 }

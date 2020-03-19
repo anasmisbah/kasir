@@ -13,12 +13,15 @@ class ApplicationSeeder extends Seeder
     {
         DB::table('applications')->insert([
             [
-                'nama' => 'bedu',
-                'toko'=>'cici bedu jaya',
+                'nama' => 'Default',
+                'toko'=>'Default',
                 'alamat'=>'jl samarinda',
                 'telepon'=>'085252525223',
                 'created_by'=>1,
                 'updated_by'=>1,
+                'kecamatan'=>'Sempaja',
+                'kota'=>'Samarinda',
+                'provinsi'=>'Kalimantan Timur',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]
