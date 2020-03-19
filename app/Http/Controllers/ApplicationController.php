@@ -55,7 +55,7 @@ class ApplicationController extends Controller
             'nama'=>'required',
             'toko'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required',
+            'telepon'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'provinsi'=>'required',
             'kecamatan'=>'required',
             'kota'=>'required'
@@ -75,7 +75,7 @@ class ApplicationController extends Controller
         ]);
         if ($request->file('logo')) {
             $request->validate([
-                'logo'=>'mimes:jpeg,bmp,png,jpg,ico',
+                'logo'=>'mimes:jpeg,bmp,png,jpg,ico|max:2000',
             ]);
             if (!($app->logo == "logos/default.jpg") && file_exists('uploads/'.$app->logo)) {
                 File::delete('uploads/'.$app->logo);

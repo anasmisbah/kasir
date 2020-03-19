@@ -18,6 +18,11 @@
         overflow: hidden;
         border-radius: 5px;
     }
+    div.custom-input:hover{
+        background-color: #2a1ab9 !important;
+        border-color:#2819ae;
+        cursor: pointer !important;
+    }
 
 
     .custom-input input {
@@ -27,6 +32,9 @@
         height: 35px !important;
         opacity: 0 !important;
         overflow: hidden !important;
+    }
+    .custom-input input:hover {
+        cursor: pointer !important;
     }
 
 </style>
