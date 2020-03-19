@@ -69,7 +69,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password" placeholder="**********"></div>
+                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm  {{ $errors->first('password')?'is-invalid':'' }}" name="password" placeholder="**********">
+                        <div class="invalid-feedback">
+                            {{$errors->first('password')}}
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Level</label>

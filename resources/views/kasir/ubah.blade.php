@@ -21,6 +21,14 @@
             opacity: 0 !important;
             overflow: hidden !important;
         }
+        div.custom-input:hover{
+            background-color: #2a1ab9 !important;
+            border-color:#2819ae;
+            cursor: pointer !important;
+        }
+        .custom-input input:hover {
+            cursor: pointer !important;
+        }
     </style>
 @endpush
 
@@ -66,26 +74,29 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Nama Pengguna</label>
-                <div class="col-sm-10"><input type="text" value="{{$user->username}}" class="form-control form-control-sm "
+                <div class="col-sm-10"><input type="text" value="{{ old('username')?old('username'):$user->username }}" class="form-control form-control-sm {{ $errors->first('username')?'is-invalid':'' }}"
                             name="username" placeholder="Masukkan Nama Pengguna">
-                        <div class="invalid-feedback">
-
-                        </div>
+                            <div class="invalid-feedback">
+                                {{$errors->first('username')}}
+                            </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10"><input type="email" value="{{$user->email}}" class="form-control form-control-sm  "
+                <div class="col-sm-10"><input type="email" value="{{ old('email')?old('email'):$user->email }}" class="form-control form-control-sm  {{ $errors->first('email')?'is-invalid':'' }}"
                             name="email" placeholder="Masukkan Email Karyawan">
-                        <div class="invalid-feedback">
-
-                        </div>
+                            <div class="invalid-feedback">
+                                {{$errors->first('email')}}
+                            </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Sandi</label>
-                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm" name="password"
+                    <div class="col-sm-10"><input type="password" class="form-control form-control-sm {{ $errors->first('password')?'is-invalid':'' }}" name="password"
                             placeholder="*******">
+                            <div class="invalid-feedback">
+                                {{$errors->first('password')}}
+                            </div>
                     </div>
                 </div>
                 <div class="form-group row">

@@ -13,7 +13,7 @@
     <meta name="author" content="tukangkode.id" />
     <title>Pengguna | {{$app->nama}}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{asset('img/favico.png')}}" type="image/x-icon" />
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <!-- Icon -->
@@ -65,8 +65,8 @@
 <body>
     <!-- Header -->
     <header class="c-header c-header-fixed c-header-dark px-3">
-        <a class="c-header-brand" href="#">
-            <img src="../../uploads/logos/1584062395kasirku.png" height="30px" alt="Nama Aplikasi">
+        <a class="c-header-brand" href="{{route('kasir.index')}}">
+            <img src="{{asset('uploads/'.$app->logo)}}" height="30px" alt="Nama Aplikasi">
         </a>
         <div class="c-header-nav ml-auto">
             <span class="c-header-nav-item text-light">Selamat datang,</span>

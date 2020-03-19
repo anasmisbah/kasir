@@ -100,7 +100,7 @@ class UserController extends Controller
     {
         $updatedUser = User::findOrFail($request->id);
         $request->validate([
-            'username'=>'required',
+            'username'=>'required|unique:users,username,'.$updatedUser->id,
             'email'=>'required|email|unique:users,email,'.$updatedUser->id,
             'level_id'=>'required',
             'employee_id'=>'required'

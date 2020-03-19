@@ -123,7 +123,7 @@
 <body>
     <!-- Header -->
     <header class="c-header c-sticky-top c-header-dark px-3">
-        <a class="c-header-brand" href="#">
+        <a class="c-header-brand" href="{{route('kasir.index')}}">
             <img src="{{asset("/uploads/".$app->logo)}}" height="30px" alt="Nama Aplikasi">
         </a>
         <div class="c-header-nav ml-auto">

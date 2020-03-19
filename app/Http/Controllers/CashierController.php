@@ -83,13 +83,16 @@ class CashierController extends Controller
         $updatedUser = Auth::user();
         $updateEmployee = Auth::user()->employee;
         $request->validate([
-            'username'=>'required',
+            'username'=>'required|unique:users,username,'.$updatedUser->id,
             'email'=>'required|email|unique:users,email,'.$updatedUser->id,
-            'foto'=>'mimes:jpeg,bmp,png,jpg,ico |max:2000'
+            'foto'=>'mimes:jpeg,bmp,png,jpg,ico |max:2000',
         ]);
 
 
         if ($request->password) {
+            $request->validate([
+                'password'=>'string|min:8',
+            ]);
             $updatedUser->update([
                 'password'=>Hash::make($request->password),
             ]);
@@ -100,8 +103,10 @@ class CashierController extends Controller
             'email'=>$request->email,
             'updated_by'=>Auth::user()->id,
         ]);
-
         if ($request->file('foto')) {
+            $request->validate([
+                'foto'=>'mimes:jpeg,bmp,png,jpg,ico |max:2000',
+            ]);
                 if (!($updateEmployee->foto == "fotos/default.jpg") && file_exists('uploads/'.$updateEmployee->foto)) {
                     File::delete('uploads/'.$updateEmployee->foto);
                 }
