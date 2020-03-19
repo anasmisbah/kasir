@@ -14,7 +14,7 @@ return [
     */
 
     'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
+    'sent' => 'Kami telah mengirim e-mail tautan atur ulang kata sandi Anda!',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "Email yang Anda masukkan tidak terdaftar",

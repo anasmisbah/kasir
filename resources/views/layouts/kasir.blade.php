@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    @php
+    use App\Application;
+    $app = Application::first();
+    @endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +11,7 @@
     <!-- App Desc -->
     <meta name="description" content="Halaman Kasir" />
     <meta name="author" content="tukangkode.id" />
-    <title>Pengguna | App</title>
+    <title>Pengguna | {{$app->nama}}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="../../assets/favicon/favicon.ico" type="image/x-icon" />
     <!-- Font -->

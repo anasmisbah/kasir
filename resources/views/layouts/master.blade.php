@@ -219,7 +219,8 @@
           </div>
         </main>
         <footer class="c-footer c-footer-fixed">
-            <div class="m-auto" style="font-size:12px">&copy; {{ now()->year }} | Developed with <span style="color:#b71c1c">&hearts;</span> by <img src="{{asset('/img/logo-dev.png')}}" alt="logo-dev" height="10px"></div>
+            <div class="m-auto" style="font-size:12px">&copy; {{ now()->year }} | Developed with
+                <span style="color:#b71c1c">&hearts;</span> by <img src="{{asset('/img/logo-dev.png')}}" alt="tukangkode.id" height="10px"></div>
         </footer>
       </div>
     </div>

@@ -146,6 +146,11 @@
                 if (error) {
                    swal("Login Failed!", error, "error");
                 }
+
+                var status = "{{ session('status') }}"
+                if (status) {
+                   swal("Sukses", status, "success");
+                }
             })
         </script>
 </body>

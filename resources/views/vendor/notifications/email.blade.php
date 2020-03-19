@@ -51,8 +51,8 @@ Sistem Admin
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "Jika Anda mengalami kesulitan mengklik tombol \":actionText\", salin dan tempel URL di bawah ini \n ".
-'ke dalam browser web Anda: (:actionURL)',
+    "Jika Anda mengalami kesulitan mengklik tombol \":actionText\", salin dan tempel URL di bawah ini\n ".
+    'ke dalam browser web Anda: [:actionURL](:actionURL)',
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,
