@@ -25,8 +25,8 @@
                 <h4 class="card-title mb-0 text-bold">Detail Karyawan</h4>
             </div>
             <div class="btn-toolbar d-none d-md-block" role="toolbar" aria-label="Toolbar with buttons">
-                @if (auth()->user()->level_id == 1)
                 <a href="{{route('karyawan.ubah',$employee->id)}}" class="btn btn-primary" style="width: 78px !important;"><i class="fa fa-edit"></i></a>
+                @if (auth()->user()->level_id == 1)
 
                     <form class="d-inline" id="form-delete"  action="{{route('karyawan.hapus', $employee->id)}}" method="POST">
                         @csrf

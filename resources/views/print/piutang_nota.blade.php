@@ -134,15 +134,15 @@
     <div class="container">
 
         <div class="row">
-            <div style="padding-left:20px" class="column-7">
-                <div style="margin-top:0px;" class="title">NOTA BON</div>
+            <div style="padding-left:20px" class="column-6">
+                <div style="margin-top:0px;" class="title">NOTA {{ $bill->status == "utang"?'BON': 'KAS'}}</div>
                 <div style="margin-top:5px" style="text-transform:uppercase"><b>{{ $app->toko}}</b></div>
                 <div style="margin-top:5px">{{$bill->branch->alamat}}, {{$bill->branch->kecamatan}}, {{$bill->branch->kota}}, {{$bill->branch->provinsi}}</div>
                 <div>{{$bill->branch->telepon}}</div>
 
             </div>
-            <div class="column-1" style="text-align:right">
-                <div>No. Nota Bon:</div>
+            <div class="column-2" style="text-align:right">
+                <div>No. Nota Kas:</div>
                 <div>Tanggal:</div>
                 <div>divelanggan:</div>
                 <div>Alamat:</div>
