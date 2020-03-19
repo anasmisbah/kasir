@@ -30,12 +30,12 @@ class CategoryController extends Controller
     {
         $request->validate([
             'nama'=>'required',
-            'kode'=>'required'
+            'kode'=>'required|min:2|max:2|regex:/^[a-zA-Z]+$/u|unique:categories'
         ]);
 
         $newCategory = Category::create([
             'nama'=>$request->nama,
-            'kode'=>$request->kode,
+            'kode'=>strtoupper($request->kode),
             'created_by'=>Auth::user()->id,
             'updated_by'=>Auth::user()->id
         ]);
@@ -52,14 +52,14 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
+        $updatedCategory = Category::findOrFail($request->id);
         $request->validate([
             'nama'=>'required',
-            'kode'=>'required'
+            'kode'=>'required|min:2|max:2|regex:/^[a-zA-Z]+$/u|unique:categories,kode,'.$updatedCategory->id
         ]);
-        $updatedCategory = Category::findOrFail($request->id);
         $updatedCategory->update([
             'nama'=>$request->nama,
-            'kode'=>$request->kode,
+            'kode'=>strtoupper($request->kode),
             'updated_by'=>Auth::user()->id
         ]);
         return redirect()->route('jenis.index');

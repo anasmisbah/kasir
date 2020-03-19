@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <label for="kode" class="col-sm-2 col-form-label">Kode</label>
                         <div class="col-sm-10">
-                            <input type="text"  name="kode" class="form-control form-control-sm {{ $errors->first('kode')?'is-invalid':'' }}" id="kode" placeholder="kode">
+                            <input type="text" value="{{old('kode')}}"  name="kode" class="form-control form-control-sm {{ $errors->first('kode')?'is-invalid':'' }}" id="kode" placeholder="kode">
                             <div class="invalid-feedback">
                                 {{$errors->first('kode')}}
                             </div>
@@ -45,7 +45,7 @@
                     <div class="form-group row">
                         <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
-                            <input type="text"  name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="nama" placeholder="Nama">
+                            <input type="text" value="{{old('nama')}}"  name="nama" class="form-control form-control-sm {{ $errors->first('nama')?'is-invalid':'' }}" id="nama" placeholder="Nama">
                             <div class="invalid-feedback">
                                 {{$errors->first('nama')}}
                             </div>
