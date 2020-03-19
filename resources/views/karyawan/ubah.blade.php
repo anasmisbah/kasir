@@ -31,6 +31,15 @@
         opacity: 0 !important;
         overflow: hidden !important;
     }
+
+    div.custom-input:hover{
+        background-color: #2a1ab9 !important;
+        border-color:#2819ae;
+        cursor: pointer !important;
+    }
+    .custom-input input:hover {
+        cursor: pointer !important;
+    }
 </style>
 @endpush
 @section('breadcumb')
@@ -115,7 +124,7 @@
                 @if (auth()->user()->level_id == 1)
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Cabang</label>
-                    <div class="col-sm-10"><select class="form-control form-control-sm {{ $errors->first('branch_id')?'is-invalid':'' }}" name="branch_id">
+                    <div class="col-sm-10"><select disabled class="form-control form-control-sm {{ $errors->first('branch_id')?'is-invalid':'' }}" name="branch_id">
                             @foreach ($branches as $branch)
                                 <option value="{{$branch->id}}" {{$employee->branch_id == $branch->id?"selected":""}} >{{$branch->nama}}</option>
                             @endforeach

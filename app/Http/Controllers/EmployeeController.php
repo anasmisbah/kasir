@@ -74,7 +74,7 @@ class EmployeeController extends Controller
             'jabatan'=>'required',
             'branch_id'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required'
+            'telepon'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
         ]);
 
         $foto='fotos/default.jpg';
@@ -121,7 +121,7 @@ class EmployeeController extends Controller
             'jabatan'=>'required',
             'branch_id'=>'required',
             'alamat'=>'required',
-            'telepon'=>'required'
+            'telepon'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
         ]);
 
         $updateEmployee = Employee::findOrFail($request->id);
